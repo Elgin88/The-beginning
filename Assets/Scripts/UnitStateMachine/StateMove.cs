@@ -1,17 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class StateMove : State
 {
     private Coroutine _move;
 
-    private IEnumerator Move()
-    {
-        yield return null;
-    }
-
-    private void StartMove()
+    public override void StartState()
     {
         if (_move == null)
         {
@@ -19,12 +13,24 @@ public class StateMove : State
         }
     }
 
-    private void StopMove()
+    public override void StopState()
     {
         if (_move != null)
         {
             StopCoroutine(_move);
             _move = null;
         }
+    }
+
+    public override void GetNextTransition()
+    {
+    }
+
+    private IEnumerator Move()
+    {
+        while (true)
+        {
+            yield return null;
+        }        
     }
 }
