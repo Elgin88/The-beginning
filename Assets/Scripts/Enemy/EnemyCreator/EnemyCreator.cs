@@ -11,11 +11,12 @@ namespace Game.Enemy
         [SerializeField] private float _maxRadiusSpawn;
 
         private float _spawnPoinPositionX;
-        private float _spawnPoinPositionY = 0;
+        private float _spawnPoinPositionY;
         private float _spawnPoinPositionZ;
 
         private void Start()
         {
+            _spawnPoinPositionY = _enemyMelee.transform.position.y;
             StartCoroutine(CreateEnemies());
         }
 
@@ -41,8 +42,7 @@ namespace Game.Enemy
 
             while (isWork)
             {
-                SetPositionX();
-                SetPositionZ();
+                SetSpawnPointPosition();
 
                 float deltaX = _playerMainBilding.transform.position.x - _spawnPoinPositionX;
                 float deltaY = _playerMainBilding.transform.position.y - _spawnPoinPositionY;
@@ -54,13 +54,9 @@ namespace Game.Enemy
             }
         }
 
-        private void SetPositionX()
+        private void SetSpawnPointPosition()
         {
             _spawnPoinPositionX = Random.Range(_playerMainBilding.gameObject.transform.position.x - _maxRadiusSpawn, _playerMainBilding.gameObject.transform.position.x + _maxRadiusSpawn);
-        }
-
-        private void SetPositionZ()
-        {
             _spawnPoinPositionZ = Random.Range(_playerMainBilding.gameObject.transform.position.z - _maxRadiusSpawn, _playerMainBilding.gameObject.transform.position.z + _maxRadiusSpawn);
         }
     }
