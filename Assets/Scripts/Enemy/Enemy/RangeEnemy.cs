@@ -1,6 +1,6 @@
 namespace Game.Enemy
 {
-    public class EnemyMelee : Enemy
+    public class RangeEnemy : Enemy
     {
     }
 }

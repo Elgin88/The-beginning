@@ -6,7 +6,7 @@ namespace Game.Enemy
     public class EnemyCreator : MonoBehaviour
     {
         [SerializeField] private GameObject _playerMainBilding;
-        [SerializeField] private EnemyMelee _enemyMelee;
+        [SerializeField] private MeleeEnemy _enemyMelee;
         [SerializeField] private float _minRadiusSpawn;
         [SerializeField] private float _maxRadiusSpawn;
 
