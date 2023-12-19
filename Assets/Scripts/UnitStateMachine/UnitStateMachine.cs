@@ -1,5 +1,8 @@
 using UnityEngine;
 
-public class UnitStateMachine : MonoBehaviour
+namespace Game.UnitStateMachine
 {
+    public class UnitStateMachine : MonoBehaviour
+    {
+    }
 }

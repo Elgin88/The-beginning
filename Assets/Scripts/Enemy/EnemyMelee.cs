@@ -1,3 +1,6 @@
-public class EnemyMelee : Enemy
+namespace Game.Enemy
 {
+    public class EnemyMelee : Enemy
+    {
+    }
 }

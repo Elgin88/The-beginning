@@ -1,13 +1,16 @@
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+namespace Game.Enemy
 {
-    [SerializeField] private float _speed;
-
-    private float _currentSpeed;
-
-    private void Start()
+    public class Enemy : MonoBehaviour
     {
-        _currentSpeed = _speed;
+        [SerializeField] private float _speed;
+
+        private float _currentSpeed;
+
+        private void Start()
+        {
+            _currentSpeed = _speed;
+        }
     }
 }

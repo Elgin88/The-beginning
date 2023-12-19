@@ -1,36 +1,39 @@
 using System.Collections;
 using UnityEngine;
 
-public class StateMove : State
+namespace Game.UnitStateMachine
 {
-    private Coroutine _move;
-
-    public override void StartState()
+    public class StateMove : State
     {
-        if (_move == null)
+        private Coroutine _move;
+
+        public override void StartState()
         {
-            _move = StartCoroutine(Move());
+            if (_move == null)
+            {
+                _move = StartCoroutine(Move());
+            }
         }
-    }
 
-    public override void StopState()
-    {
-        if (_move != null)
+        public override void StopState()
         {
-            StopCoroutine(_move);
-            _move = null;
+            if (_move != null)
+            {
+                StopCoroutine(_move);
+                _move = null;
+            }
         }
-    }
 
-    public override void GetNextTransition()
-    {
-    }
-
-    private IEnumerator Move()
-    {
-        while (true)
+        public override void GetNextTransition()
         {
-            yield return null;
-        }        
+        }
+
+        private IEnumerator Move()
+        {
+            while (true)
+            {
+                yield return null;
+            }
+        }
     }
 }
