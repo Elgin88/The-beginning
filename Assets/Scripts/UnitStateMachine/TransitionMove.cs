@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class TransitionMove : Transition
+namespace Scripts.UnitStateMachine
 {
+    public class TransitionMove : Transition
+    {
+    }
 }

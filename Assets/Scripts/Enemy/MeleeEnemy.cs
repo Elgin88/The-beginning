@@ -1,4 +1,4 @@
-namespace Game.Enemy
+namespace Scripts.Enemy
 {
     public class MeleeEnemy : Enemy
     {
