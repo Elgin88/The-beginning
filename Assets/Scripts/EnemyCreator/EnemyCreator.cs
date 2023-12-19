@@ -73,13 +73,8 @@ namespace Scripts.Enemy
             float mainBildingZ = _playerMainBilding.gameObject.transform.position.z;
 
             _spawnPoinPositionY = _enemy.gameObject.transform.position.y;
-
             _spawnPoinPositionX = Random.Range(mainBildingX - _maxRadiusSpawn, mainBildingX + _maxRadiusSpawn);
-            Debug.Log(_spawnPoinPositionX);
-
             _spawnPoinPositionZ = Random.Range(mainBildingZ - _maxRadiusSpawn, mainBildingZ + _maxRadiusSpawn);
-            Debug.Log(_spawnPoinPositionZ);
-            Debug.Log("================");
         }
     }
 }
