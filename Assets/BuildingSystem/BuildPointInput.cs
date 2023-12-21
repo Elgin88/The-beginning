@@ -25,9 +25,9 @@ public class BuildPointInput : MonoBehaviour
             OnClicked?.Invoke();
         }
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))   //пока всё на старой системе ввода и с использованием мышки - доработать с нормальным управлением
         {
-            OnCancel?.Invoke();
+            OnCancel?.Invoke();   
         }
     }
 

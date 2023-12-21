@@ -6,7 +6,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "BuildingSystem/BuildingsContainer")]
 public class BuildingsContainer : ScriptableObject
 {
-    public List<BuildingInfo> BuildingInfo;
+    public List<BuildingInfo> BuildingInformation;
 }
 
 [Serializable]
