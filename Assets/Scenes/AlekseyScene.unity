@@ -141,12 +141,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 434889902}
+      objectReference: {fileID: 443499512}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -211,6 +211,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -360,12 +364,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 1794741702}
+      objectReference: {fileID: 931882172}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -430,6 +434,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -474,12 +482,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 1794741702}
+      objectReference: {fileID: 1907313306}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -544,6 +552,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -657,12 +669,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 434889902}
+      objectReference: {fileID: 246668006}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -727,6 +739,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -750,7 +766,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
@@ -820,6 +836,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1050,12 +1070,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 434889902}
+      objectReference: {fileID: 2038132881}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -1120,6 +1140,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1321,7 +1345,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
@@ -1391,6 +1415,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1483,12 +1511,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 1794741702}
+      objectReference: {fileID: 112955165}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -1553,6 +1581,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1576,12 +1608,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 1794741702}
+      objectReference: {fileID: 1341562876}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -1646,6 +1678,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1740,12 +1776,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.size
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[0]
       value: 
-      objectReference: {fileID: 434889902}
+      objectReference: {fileID: 581734578}
     - target: {fileID: 1782918176487641301, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: _transitions.Array.data[1]
       value: 
@@ -1810,6 +1846,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7032817760494187967, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+      propertyPath: _playerMainBilding
+      value: 
+      objectReference: {fileID: 46471393}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
