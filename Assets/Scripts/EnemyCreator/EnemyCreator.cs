@@ -15,6 +15,7 @@ namespace Scripts.Enemy
         private float _spawnPoinPositionZ;
         private float _playerMainBildingPositionX => _playerMainBilding.gameObject.transform.position.x;
         private float _playerMainBildingPositionZ => _playerMainBilding.gameObject.transform.position.z;
+        private float _currentRadiusSpawn;
 
         private GameObject _enemy;
 
@@ -35,46 +36,41 @@ namespace Scripts.Enemy
                     yield break;
                 }
 
-                CreateEnemy();
+                CreateFirstEnemy();
 
                 yield return new WaitForSeconds(0.5f);
             }
         }
 
-        private void CreateEnemy()
+        private void CreateFirstEnemy()
         {
-            CalculatePositionXZSpawnPoint();
+            CalculatePositionSpawnPointFirstEnemy();
 
             _enemy.transform.position = new Vector3(_spawnPoinPositionX, _spawnPoinPositionY, _spawnPoinPositionZ);
         }
 
-        private void CalculatePositionXZSpawnPoint()
+        private void CalculatePositionSpawnPointFirstEnemy()
         {
             bool isWork = true;
 
             while (isWork)
             {
-                SetSpawnPointPosition();
+                SetSpawnPointPositionFirstEnemy();
 
-                float deltaX = _spawnPoinPositionX - _playerMainBildingPositionX;
-                float deltaZ = _spawnPoinPositionZ - _playerMainBildingPositionZ;
-                float radius = Mathf.Sqrt(Mathf.Pow(deltaX, 2) + Mathf.Pow(deltaZ, 2));
+                _currentRadiusSpawn = Mathf.Sqrt(Mathf.Pow(_spawnPoinPositionX - _playerMainBildingPositionX, 2) + Mathf.Pow(_spawnPoinPositionZ - _playerMainBildingPositionZ, 2));
 
-                if (radius >= _minRadiusSpawn & radius <= _maxRadiusSpawn)
+                if (_currentRadiusSpawn >= _minRadiusSpawn & _currentRadiusSpawn <= _maxRadiusSpawn)
                 {
                     isWork = false;
                 }
             }
         }
 
-        private void SetSpawnPointPosition()
+        private void SetSpawnPointPositionFirstEnemy()
         {
-            float mainBildingX = _playerMainBilding.gameObject.transform.position.x;
-            float mainBildingZ = _playerMainBilding.gameObject.transform.position.z;
-
             _spawnPoinPositionY = _enemy.gameObject.transform.position.y;
-            _spawnPoinPositionX = Random.Range(mainBildingX - _maxRadiusSpawn, mainBildingX + _maxRadiusSpawn);
-            _spawnPoinPositionZ = Random.Range(mainBildingZ - _maxRadiusSpawn, mainBildingZ + _maxRadiusSpawn);
+            _spawnPoinPositionX = Random.Range(_playerMainBildingPositionX - _maxRadiusSpawn, _playerMainBildingPositionX + _maxRadiusSpawn);
+            _spawnPoinPositionZ = Random.Range(_playerMainBildingPositionZ - _maxRadiusSpawn, _playerMainBildingPositionZ + _maxRadiusSpawn);
         }
     }
 }
