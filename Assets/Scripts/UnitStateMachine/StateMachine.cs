@@ -2,23 +2,17 @@ using System.Collections;
 using UnityEngine;
 
 namespace Scripts.UnitStateMachine
-{
-    [RequireComponent(typeof(NextTargetFinder))]
-    [RequireComponent(typeof(StateMove))]
-    [RequireComponent(typeof(TransitionMove))]
-
-    public class StateMachine : MonoBehaviour
+{public class StateMachine : MonoBehaviour
     {
         [SerializeField] private State _startState;
-        [SerializeField] private NextTargetFinder _nextTargetFinder;
 
         private State _currentState = null;
         private Coroutine _startTrySetNextState;
 
-        public NextTargetFinder NextTargetFinder => _nextTargetFinder;
-
-        private void Start()
+        private IEnumerator Start()
         {
+            yield return null;
+
             _currentState = _startState;
 
             StartCurrentState();

@@ -3,14 +3,13 @@ using UnityEngine;
 
 namespace Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(StateMachine))]
+    [RequireComponent(typeof(NextTargetFinder))]
 
     public class StateMove : State
     {
-        [SerializeField] private float _speed;
-        [SerializeField] private GameObject _playerBilding;
-
+        private float _speed = 2;
         private Coroutine _move;
+        private NextTargetFinder _nextTargetFinder;
 
         public override void StartState()
         {
@@ -38,11 +37,16 @@ namespace Scripts.UnitStateMachine
         {
         }
 
+        private void Start()
+        {
+            _nextTargetFinder = GetComponent<NextTargetFinder>();
+        }
+
         private IEnumerator Move()
         {
             while (true)
             {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, _playerBilding.transform.position, _speed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(gameObject.transform.position, _nextTargetFinder.NextTarget.transform.position, _speed * Time.deltaTime);
 
                 yield return null;
             }
