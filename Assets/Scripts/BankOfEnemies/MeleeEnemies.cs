@@ -12,7 +12,7 @@ namespace Scripts.Enemy
         {
             foreach (GameObject enemy in _meleeEnemies)
             {
-                if (enemy.activeSelf == false)
+                if (enemy.activeSelf == false & enemy != null)
                 {
                     enemy.gameObject.SetActive(true);
                     return enemy;
