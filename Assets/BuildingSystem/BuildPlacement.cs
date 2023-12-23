@@ -5,21 +5,22 @@ using UnityEngine;
 
 public class BuildPlacement : MonoBehaviour
 {
-    [SerializeField] private GameObject _spotToBuildIndicator, _cellIndicator;
+    [SerializeField] private GameObject _spotToBuildIndicator; 
     [SerializeField] private BuildPointInput _inputedPoint;
     [SerializeField] private Grid _grid;
     [SerializeField] private BuildingsContainer _buildingContainer;
     [SerializeField] private List<GameObject> _gridVisualisations;
+    [SerializeField] private PreviewBuilding _previewBuilding;
 
     private Vector3 _inputPosition;
     private Vector3Int _gridCellPosition;
     private int _selectedBuildIndex = -1;
-    private GameObject _selectedBuilding;
+    private GameObject _selectedBuilding; 
     private GridData _groundData, _buildingData;
-    private Renderer _previewRenderer;
     private bool _placementValidity;
     private GridData _selectedGridData;
     private List<GameObject> _placedBuildings = new();
+    private Vector3Int _lastSettedPosition = Vector3Int.zero;
 
 
     private void Start()
@@ -28,7 +29,6 @@ public class BuildPlacement : MonoBehaviour
 
         _groundData = new();
         _buildingData = new();
-        _previewRenderer = _cellIndicator.GetComponentInChildren<Renderer>();
     }
 
     private void Update()
@@ -46,14 +46,15 @@ public class BuildPlacement : MonoBehaviour
         _inputPosition = _inputedPoint.DetermineSpotToBuild();
         _gridCellPosition = _grid.WorldToCell(_inputPosition);
 
-        _placementValidity = CheckPlacementValidity(_inputPosition, _gridCellPosition, _selectedBuildIndex);
-        _previewRenderer.material.color = _placementValidity ? Color.white : Color.red;
+        if(_lastSettedPosition != _gridCellPosition)
+        {
+            _placementValidity = CheckPlacementValidity(_inputPosition, _gridCellPosition, _selectedBuildIndex);
 
-        _spotToBuildIndicator.transform.position = _inputPosition;
-        _cellIndicator.transform.position = _grid.CellToWorld(_gridCellPosition);
+            _spotToBuildIndicator.transform.position = _inputPosition;
+            _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(_gridCellPosition), _placementValidity);
+            _lastSettedPosition = _gridCellPosition;
+        }    
     }
-
-
 
     private bool CheckPlacementValidity(Vector3 inputPosition, Vector3Int gridCellPosition, int selectedBuildIndex)
     {
@@ -70,7 +71,8 @@ public class BuildPlacement : MonoBehaviour
             _gridVisualisations[i].SetActive(true);
         }
         
-        _cellIndicator.SetActive(true);
+        _previewBuilding.StartShowBuildPreview(_buildingContainer.BuildingInformation[_selectedBuildIndex].Prefab,
+            _buildingContainer.BuildingInformation[_selectedBuildIndex].Size);
     }
 
     private void TurnVisualisationOff()
@@ -80,13 +82,13 @@ public class BuildPlacement : MonoBehaviour
             _gridVisualisations[i].SetActive(false);
         }
        
-        _cellIndicator.SetActive(false);
+        _previewBuilding.StopShowBuildPreview();
     }
 
     private void PlaceStruture()
     {
         int correctionNumber = 1;
-
+        bool unableToPlace = false;
 
         if (_inputedPoint.IsPointerOverUI())
         {
@@ -94,7 +96,6 @@ public class BuildPlacement : MonoBehaviour
         }
             _inputPosition = _inputedPoint.DetermineSpotToBuild();
             _gridCellPosition = _grid.WorldToCell(_inputPosition);
-        //звук постройки
 
         _placementValidity = CheckPlacementValidity(_inputPosition, _gridCellPosition, _selectedBuildIndex);
 
@@ -112,6 +113,8 @@ public class BuildPlacement : MonoBehaviour
             _buildingContainer.BuildingInformation[_selectedBuildIndex].Size,
             _buildingContainer.BuildingInformation[_selectedBuildIndex].Id, 
             _placedBuildings.Count - correctionNumber);
+       
+        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(_gridCellPosition), unableToPlace);
     }
 
     private void StopPlacement()
@@ -120,6 +123,7 @@ public class BuildPlacement : MonoBehaviour
 
         TurnVisualisationOff();
         UnSubscribeOnInpudActions();
+        _lastSettedPosition = Vector3Int.zero;
     }
 
     private void SubscribeOnInpudActions()

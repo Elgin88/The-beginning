@@ -1,31 +1,40 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class GridData
 {
     private Dictionary<Vector3Int, PlacementInfo> _placedBuildings = new();
-
     private List<Vector3Int> _positionToOccupy = new();
 
+    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int buildingSize)
+    {
+        List<Vector3Int> returnValueOfPosition = new();
+
+        for (int x = 0; x < buildingSize.x; x++)
+        {
+            for (int y = 0; y < buildingSize.y; y++)
+            {
+                returnValueOfPosition.Add(gridPosition + new Vector3Int(x, 0, y));
+            }
+        }
+        return returnValueOfPosition;
+    }
 
     public void AddBuilding(Vector3Int gridPosition, Vector2Int buildingSize, int id, int placedBuildingIndex)
-    {       
-
-      _positionToOccupy = CalculatePositions(gridPosition, buildingSize);
-      PlacementInfo placementInfo = new PlacementInfo(_positionToOccupy, id, placedBuildingIndex);
+    {
+        _positionToOccupy = CalculatePositions(gridPosition, buildingSize);
+       
+        PlacementInfo placementInfo = new PlacementInfo(_positionToOccupy, id, placedBuildingIndex);
 
         foreach (var position in _positionToOccupy)
         {
             if (_placedBuildings.ContainsKey(position))
             {
                 throw new Exception($"Dictionary already contains this cell position {position}");
-            }
-            else
-            {
-                _placedBuildings[position] = placementInfo;
-            }
+            }      
+            
+            _placedBuildings[position] = placementInfo;
         }
     }
 
@@ -41,20 +50,6 @@ public class GridData
             }
         }
         return true;
-    }
-
-    private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int buildingSize)
-    {
-        List<Vector3Int> returnValue = new();
-
-        for(int x = 0; x < buildingSize.x; x++)
-        {
-            for (int y = 0; y < buildingSize.y; y++)
-            {
-                returnValue.Add(gridPosition + new Vector3Int(x, 0, y));
-            }
-        }
-        return returnValue;       
     }
 }
 
