@@ -5,7 +5,7 @@ using UnityEngine;
 public class GridData
 {
     private Dictionary<Vector3Int, PlacementInfo> _placedBuildings = new();
-    private List<Vector3Int> _positionToOccupy = new();
+    private List<Vector3Int> _positionToPlace = new();
 
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int buildingSize)
     {
@@ -23,11 +23,11 @@ public class GridData
 
     public void AddBuilding(Vector3Int gridPosition, Vector2Int buildingSize, int id, int placedBuildingIndex)
     {
-        _positionToOccupy = CalculatePositions(gridPosition, buildingSize);
+        _positionToPlace = CalculatePositions(gridPosition, buildingSize);
        
-        PlacementInfo placementInfo = new PlacementInfo(_positionToOccupy, id, placedBuildingIndex);
+        PlacementInfo placementInfo = new PlacementInfo(_positionToPlace, id, placedBuildingIndex);
 
-        foreach (var position in _positionToOccupy)
+        foreach (var position in _positionToPlace)
         {
             if (_placedBuildings.ContainsKey(position))
             {
@@ -40,9 +40,9 @@ public class GridData
 
     public bool CanPlaceBuilding(Vector3Int gridPosition, Vector2Int buildingSize)
     {
-        _positionToOccupy = CalculatePositions(gridPosition, buildingSize);
+        _positionToPlace = CalculatePositions(gridPosition, buildingSize);
 
-        foreach (var position in _positionToOccupy)
+        foreach (var position in _positionToPlace)
         {
             if (_placedBuildings.ContainsKey(position))
             {
@@ -55,14 +55,14 @@ public class GridData
 
 public class PlacementInfo
 {
-    public List<Vector3Int> OccuiedPositions;
+    public List<Vector3Int> PlacedPositions;
 
     public int Id { get; private set; }
     public int PlacedBuildingIndex { get; private set; }
 
-    public PlacementInfo(List<Vector3Int> occuiedPositions, int id, int placedBuildingIndex)
+    public PlacementInfo(List<Vector3Int> placedPositions, int id, int placedBuildingIndex)
     {
-        OccuiedPositions = occuiedPositions;
+        PlacedPositions = placedPositions;
         Id = id;
         PlacedBuildingIndex = placedBuildingIndex;
     }

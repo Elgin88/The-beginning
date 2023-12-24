@@ -10,7 +10,7 @@ public class BuildPanel : MonoBehaviour
     [SerializeField] private Button _resourceBuildingButton;
     [SerializeField] private Button _barracksButton;
     [SerializeField] private BuildingButtonsIndexesContainer _buildingButtonsIndexesContainer;
-    [SerializeField] private BuildPlacement _buildPlacement;
+    [SerializeField] private PlacementSystem _buildPlacement;
 
 
 
