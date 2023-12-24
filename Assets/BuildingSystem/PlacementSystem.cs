@@ -119,7 +119,15 @@ public class PlacementSystem : MonoBehaviour
     {
         StopPlacement();
         TurnVisualisationOn();
-        _buildingState = new PlacementState(id, _grid, _previewBuilding, _buildingContainer, _groundData, _buildingData, _buildingPlacer);
+        _buildingState = new PlaceBuildingState(id, _grid, _previewBuilding, _buildingContainer, _groundData, _buildingData, _buildingPlacer);
+        SubscribeOnInpudActions();
+    }
+
+    public void RemoveBuilding()
+    {
+        StopPlacement();
+        TurnVisualisationOn();
+        _buildingState = new RemoveBuildingState(_grid,_previewBuilding,_groundData,_buildingData,_buildingPlacer);
         SubscribeOnInpudActions();
     }
 }

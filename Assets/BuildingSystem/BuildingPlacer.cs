@@ -15,4 +15,17 @@ public class BuildingPlacer : MonoBehaviour
         _placedBuildings.Add(selectedBuilding);
         return _placedBuildings.Count - correctionNumber;
     }
+
+    internal void RemoveBuilding(int indexToRemove)
+    {
+        if(_placedBuildings.Count <= indexToRemove || _placedBuildings[indexToRemove] == null)
+        {
+            return;
+        }
+        else
+        {
+            Destroy(_placedBuildings[indexToRemove]);
+            _placedBuildings[indexToRemove] = null;
+        }
+    }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PreviewBuilding : MonoBehaviour
@@ -10,6 +7,8 @@ public class PreviewBuilding : MonoBehaviour
     
     private GameObject _previewBuilding;
     private SpriteRenderer _previewRenderer;
+    private int _defautlValueOfSize = 1;
+    private Vector2Int _defaultSize;
 
     private void Start()
     {
@@ -17,7 +16,7 @@ public class PreviewBuilding : MonoBehaviour
         _previewRenderer = _cellIndicator.GetComponentInChildren<SpriteRenderer>();
     }
 
-    private void SetCellColor(bool validity)
+    private void SetCellIndicatorColor(bool validity)
     {
         _previewRenderer.material.color = validity ? Color.white : Color.red;
     }
@@ -32,33 +31,49 @@ public class PreviewBuilding : MonoBehaviour
         _previewBuilding.transform.position = new Vector3(position.x, position.y + priviewYOffset, position.z);
     }
 
-    private void _ChangeCellIndicaterSize(Vector2Int size)
-    {
+    private void _ChangeCellIndicatorSize(Vector2Int size)
+    {   
         if (size.x > 0 || size.y > 0)
         {
-            _cellIndicator.transform.localScale = new Vector3(size.x, 1, size.y);
+            _cellIndicator.transform.localScale = new Vector3(size.x, _defautlValueOfSize, size.y);
             _previewRenderer.material.mainTextureScale = size;
         }
+    }
+
+    public void StartShowRemovePreview()
+    {
+        _defaultSize = new Vector2Int(_defautlValueOfSize, _defautlValueOfSize);
+        _cellIndicator.SetActive(true);
+        _ChangeCellIndicatorSize(_defaultSize);
+        SetCellIndicatorColor(false);
     }
 
     public void StartShowBuildPreview(GameObject prefab, Vector2Int size)
     {
         _previewBuilding = Instantiate(prefab);
-        _ChangeCellIndicaterSize(size);
+        _ChangeCellIndicatorSize(size);
         _cellIndicator.SetActive(true);
     }
 
     public void StopShowBuildPreview()
     {
         _cellIndicator.SetActive(false);
-        Destroy(_previewBuilding);
+
+        if (_previewBuilding != null)
+        {
+            Destroy(_previewBuilding);
+        } 
     }
 
     public void UpdatePositionOfPreview(Vector3 position, bool validity)
     {
-        MovePreview(position);
+       if(_previewBuilding != null)
+        {
+            MovePreview(position);
+        }
+       
         MoveCellInndicator(position);
-        SetCellColor(validity);
+        SetCellIndicatorColor(validity);
     }
 }
 

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlacementState : IBuildingState
+public class PlaceBuildingState : IBuildingState
 {
     private static int _defaultValueOfSelectedBuildIndex = -1;
 
@@ -18,15 +18,8 @@ public class PlacementState : IBuildingState
     private bool _unableToPlace = false;
     private int _indexOfBuildToPlace;
 
-    public PlacementState(int id,
-                          Grid grid,
-                          PreviewBuilding previewBuilding,
-                          BuildingsContainer buildingContainer,
-                          GridData groundData,
-                          GridData buildingData,
-                          BuildingPlacer buildingPlacer)
+    public PlaceBuildingState(int id, Grid grid, PreviewBuilding previewBuilding, BuildingsContainer buildingContainer, GridData groundData, GridData buildingData, BuildingPlacer buildingPlacer)
     {
-
         _id = id;
         _grid = grid;
         _previewBuilding = previewBuilding;
@@ -55,13 +48,12 @@ public class PlacementState : IBuildingState
 
     public void OnAction(Vector3Int gridPosition)
     {
-        _placementValidity = CheckPlacementValidity(gridPosition, _selectedBuildIndex);
+        _placementValidity = IsPlaceReady(gridPosition, _selectedBuildIndex);
 
         if (_placementValidity == false)
         {
             return;
         }
-
 
         _indexOfBuildToPlace = _buildingPlacer.PlaceBuilding(_buildingContainer.BuildingInformation[_selectedBuildIndex].Prefab, _grid.CellToWorld(gridPosition));
         _selectedGridData = _buildingContainer.BuildingInformation[_selectedBuildIndex].Id == 0 ? _groundData : _buildingData;
@@ -74,7 +66,7 @@ public class PlacementState : IBuildingState
         _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition), _unableToPlace);
     }
 
-    private bool CheckPlacementValidity(Vector3Int gridCellPosition, int selectedBuildIndex)
+    private bool IsPlaceReady(Vector3Int gridCellPosition, int selectedBuildIndex)
     {
         _selectedGridData = _buildingContainer.BuildingInformation[_selectedBuildIndex].Id == 0 ? _groundData : _buildingData;
 
@@ -83,9 +75,7 @@ public class PlacementState : IBuildingState
 
     public void UpdateState(Vector3Int gridPosition)
     {
-        _placementValidity = CheckPlacementValidity(gridPosition, _selectedBuildIndex);
+        _placementValidity = IsPlaceReady(gridPosition, _selectedBuildIndex);
         _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition), _previewBuilding);
     }
-
-
 }

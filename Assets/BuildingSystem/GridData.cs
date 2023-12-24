@@ -6,6 +6,7 @@ public class GridData
 {
     private Dictionary<Vector3Int, PlacementInfo> _placedBuildings = new();
     private List<Vector3Int> _positionToPlace = new();
+    private int _defaultValueOfBuildIndex = -1;
 
     private List<Vector3Int> CalculatePositions(Vector3Int gridPosition, Vector2Int buildingSize)
     {
@@ -50,6 +51,26 @@ public class GridData
             }
         }
         return true;
+    }
+
+    public int GetIndexOfBuildingToRemove(Vector3Int gridPosition)
+    {
+        if(_placedBuildings.ContainsKey(gridPosition) == false)
+        {
+            return _defaultValueOfBuildIndex;
+        }
+        else
+        {
+            return _placedBuildings[gridPosition].PlacedBuildingIndex;
+        }
+    }
+
+    public void RemoveBuilding(Vector3Int gridPosition)
+    {
+        foreach(var position in _placedBuildings[gridPosition].PlacedPositions)
+        {
+            _placedBuildings.Remove(position);
+        }
     }
 }
 
