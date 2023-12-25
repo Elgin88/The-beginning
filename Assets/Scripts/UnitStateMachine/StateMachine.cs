@@ -2,7 +2,8 @@ using System.Collections;
 using UnityEngine;
 
 namespace Scripts.UnitStateMachine
-{public class StateMachine : MonoBehaviour
+{
+    public class StateMachine : MonoBehaviour
     {
         [SerializeField] private State _startState;
 
