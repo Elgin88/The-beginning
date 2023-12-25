@@ -41,6 +41,13 @@ public class PlaceBuildingState : IBuildingState
         }
     }
 
+    private bool IsPlaceReady(Vector3Int gridCellPosition, int selectedBuildIndex)
+    {
+        _selectedGridData = _buildingContainer.BuildingInformation[_selectedBuildIndex].Id == 0 ? _groundData : _buildingData;
+
+        return _selectedGridData.CanPlaceBuilding(gridCellPosition, _buildingContainer.BuildingInformation[selectedBuildIndex].Size);
+    }
+
     public void EndState()
     {
         _previewBuilding.StopShowBuildPreview();
@@ -63,19 +70,14 @@ public class PlaceBuildingState : IBuildingState
             _buildingContainer.BuildingInformation[_selectedBuildIndex].Id,
             _indexOfBuildToPlace);
 
-        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition), _unableToPlace);
-    }
-
-    private bool IsPlaceReady(Vector3Int gridCellPosition, int selectedBuildIndex)
-    {
-        _selectedGridData = _buildingContainer.BuildingInformation[_selectedBuildIndex].Id == 0 ? _groundData : _buildingData;
-
-        return _selectedGridData.CanPlaceBuilding(gridCellPosition, _buildingContainer.BuildingInformation[selectedBuildIndex].Size);
+        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition));
+        _previewBuilding.SetCellIndicatorColor(_unableToPlace);
     }
 
     public void UpdateState(Vector3Int gridPosition)
     {
         _placementValidity = IsPlaceReady(gridPosition, _selectedBuildIndex);
-        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition), _previewBuilding);
+        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition));
+        _previewBuilding.SetCellIndicatorColor(_placementValidity);
     }
 }

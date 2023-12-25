@@ -36,7 +36,7 @@ public class BuildPointInput : MonoBehaviour
         return EventSystem.current.IsPointerOverGameObject();
     }
 
-    public Vector3 DetermineSpotToBuild()
+    public Vector3 DetermineSpot()
     {
         Vector3 mousePosition = Input.mousePosition;  //пока всё на старой системе ввода и с использованием мышки - доработать с нормальным управлением
         mousePosition.z = _sceneCamera.nearClipPlane;

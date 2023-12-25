@@ -16,7 +16,7 @@ public class BuildingPlacer : MonoBehaviour
         return _placedBuildings.Count - correctionNumber;
     }
 
-    internal void RemoveBuilding(int indexToRemove)
+    public void RemoveBuilding(int indexToRemove)
     {
         if(_placedBuildings.Count <= indexToRemove || _placedBuildings[indexToRemove] == null)
         {

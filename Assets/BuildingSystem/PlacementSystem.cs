@@ -14,15 +14,11 @@ public class PlacementSystem : MonoBehaviour
 
     private Vector3 _inputPosition;
     private Vector3Int _gridCellPosition;
-   // private GameObject _selectedBuilding; 
     private GridData _groundData, _buildingData;
-   // private bool _placementValidity;
-   // private GridData _selectedGridData;
+
     private Vector3Int _lastSettedPosition = Vector3Int.zero;
     private IBuildingState _buildingState;
     
-
-
     private void Start()
     {
         StopPlacement();
@@ -43,7 +39,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        _inputPosition = _inputedPoint.DetermineSpotToBuild();
+        _inputPosition = _inputedPoint.DetermineSpot();
         _gridCellPosition = _grid.WorldToCell(_inputPosition);
 
         if(_lastSettedPosition != _gridCellPosition)
@@ -52,14 +48,6 @@ public class PlacementSystem : MonoBehaviour
             _lastSettedPosition = _gridCellPosition;
         }    
     }
-
-    //private bool CheckPlacementValidity(Vector3 inputPosition, Vector3Int gridCellPosition, int selectedBuildIndex)
-    //{
-    //    _selectedGridData = _buildingContainer.BuildingInformation[_selectedBuildIndex].Id == 0 ? _groundData : _buildingData;
-
-    //    return _selectedGridData.CanPlaceBuilding(gridCellPosition, _buildingContainer.BuildingInformation[_selectedBuildIndex].Size);
-    //}
-
 
     private void TurnVisualisationOn()
     {
@@ -83,7 +71,7 @@ public class PlacementSystem : MonoBehaviour
         {
             return;
         }
-            _inputPosition = _inputedPoint.DetermineSpotToBuild();
+            _inputPosition = _inputedPoint.DetermineSpot();
             _gridCellPosition = _grid.WorldToCell(_inputPosition);
 
         _buildingState.OnAction(_gridCellPosition);

@@ -6,19 +6,15 @@ public class PreviewBuilding : MonoBehaviour
     [SerializeField] private GameObject _cellIndicator;
     
     private GameObject _previewBuilding;
-    private SpriteRenderer _previewRenderer;
     private int _defautlValueOfSize = 1;
     private Vector2Int _defaultSize;
+    private SpriteRenderer _cellIndicatorRenderer;
+    private Color _currentCellIndicatorColor;
 
     private void Start()
     {
         _cellIndicator.SetActive(false);
-        _previewRenderer = _cellIndicator.GetComponentInChildren<SpriteRenderer>();
-    }
-
-    private void SetCellIndicatorColor(bool validity)
-    {
-        _previewRenderer.material.color = validity ? Color.white : Color.red;
+        _cellIndicatorRenderer = _cellIndicator.GetComponentInChildren<SpriteRenderer>();
     }
 
     private void MoveCellInndicator(Vector3 position)
@@ -36,8 +32,16 @@ public class PreviewBuilding : MonoBehaviour
         if (size.x > 0 || size.y > 0)
         {
             _cellIndicator.transform.localScale = new Vector3(size.x, _defautlValueOfSize, size.y);
-            _previewRenderer.material.mainTextureScale = size;
         }
+    }
+
+    public void SetCellIndicatorColor(bool validity)
+    {
+        _currentCellIndicatorColor = validity ? Color.white : Color.red;
+        _currentCellIndicatorColor.a = 0.5f;
+
+
+        _cellIndicatorRenderer.material.color = _currentCellIndicatorColor;
     }
 
     public void StartShowRemovePreview()
@@ -45,7 +49,6 @@ public class PreviewBuilding : MonoBehaviour
         _defaultSize = new Vector2Int(_defautlValueOfSize, _defautlValueOfSize);
         _cellIndicator.SetActive(true);
         _ChangeCellIndicatorSize(_defaultSize);
-        SetCellIndicatorColor(false);
     }
 
     public void StartShowBuildPreview(GameObject prefab, Vector2Int size)
@@ -65,7 +68,7 @@ public class PreviewBuilding : MonoBehaviour
         } 
     }
 
-    public void UpdatePositionOfPreview(Vector3 position, bool validity)
+    public void UpdatePositionOfPreview(Vector3 position)
     {
        if(_previewBuilding != null)
         {
@@ -73,7 +76,6 @@ public class PreviewBuilding : MonoBehaviour
         }
        
         MoveCellInndicator(position);
-        SetCellIndicatorColor(validity);
     }
 }
 

@@ -16,10 +16,7 @@ public class RemoveBuildingState : IBuildingState
     private Vector2Int _defaultSize;
     private int _defautlValueOfSize = 1;
     private Vector3 _currentGridCellPosition;
-    private bool _placementValidity;
-    //private bool _unableToPlace = false;
-    //private int _indexOfBuildToPlace;
-
+    
     public RemoveBuildingState(Grid grid, PreviewBuilding previewBuilding, GridData groundData, GridData buildingData, BuildingPlacer buildingPlacer)
     {
         _grid = grid;
@@ -30,8 +27,6 @@ public class RemoveBuildingState : IBuildingState
 
         _previewBuilding.StartShowRemovePreview();
     }
-
-   
 
     public void EndState()
     {
@@ -55,9 +50,13 @@ public class RemoveBuildingState : IBuildingState
 
         if(_selectedGridData == null)
         {
+            throw new System.Exception("Unable to remove.");
+        }
+        else
+        {     
             _buildIndexToRemove = _selectedGridData.GetIndexOfBuildingToRemove(gridPosition);
 
-            if(_buildIndexToRemove == _defaultValueBuildIndexToRemove)
+            if (_buildIndexToRemove == _defaultValueBuildIndexToRemove)
             {
                 return;
             }
@@ -67,21 +66,13 @@ public class RemoveBuildingState : IBuildingState
                 _buildingPlacer.RemoveBuilding(_buildIndexToRemove);
             }
         }
-        
+
         _currentGridCellPosition = _grid.CellToWorld(gridPosition);
-        _previewBuilding.UpdatePositionOfPreview(_currentGridCellPosition, IsPlaceValid(gridPosition));
-
-    }
-
-    private bool IsPlaceValid(Vector3Int gridPosition)
-    {
-        return !(_buildingData.CanPlaceBuilding(gridPosition, _defaultSize) &&
-            _groundData.CanPlaceBuilding(gridPosition, _defaultSize));
+        _previewBuilding.UpdatePositionOfPreview(_currentGridCellPosition);
     }
 
     public void UpdateState(Vector3Int gridPosition)
     {
-        _placementValidity = IsPlaceValid(gridPosition);
-        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition), _placementValidity);
+        _previewBuilding.UpdatePositionOfPreview(_grid.CellToWorld(gridPosition));
     }
 }
