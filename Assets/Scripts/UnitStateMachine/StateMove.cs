@@ -46,7 +46,10 @@ namespace Scripts.UnitStateMachine
         {
             while (true)
             {
-                transform.position = Vector3.MoveTowards(gameObject.transform.position, _nextTargetFinder.NextTarget.transform.position, _speed * Time.deltaTime);
+                Vector3 currentPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
+                Vector3 targetPosition = new Vector3(_nextTargetFinder.NextTarget.transform.position.x, gameObject.transform.position.y, _nextTargetFinder.NextTarget.transform.position.z);
+
+                transform.position = Vector3.MoveTowards(currentPosition, targetPosition, _speed * Time.deltaTime);
 
                 yield return null;
             }
