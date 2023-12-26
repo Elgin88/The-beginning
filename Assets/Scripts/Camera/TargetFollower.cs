@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
+using Zenject;
+using Assets.Scripts.PlayerComponents;
 
 namespace Assets.Scripts.Camera
 {
     internal class TargetFollower : MonoBehaviour
     {
-        [SerializeField] private Transform _targetTransform;
+        private Player _player;
 
         private Vector3 _cameraOffset;
 
@@ -15,8 +17,14 @@ namespace Assets.Scripts.Camera
 
         private void LateUpdate()
         {
-            Vector3 newPosition = _targetTransform.position + _cameraOffset;
+            Vector3 newPosition = _player.transform.position + _cameraOffset;
             transform.position = newPosition;
+        }
+
+        [Inject]
+        private void Construct(Player player)
+        {
+            _player = player;
         }
     }
 }
