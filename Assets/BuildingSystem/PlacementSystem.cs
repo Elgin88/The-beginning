@@ -19,9 +19,10 @@ public class PlacementSystem : MonoBehaviour
     private Vector3Int _lastSettedPosition = Vector3Int.zero;
     private IBuildingState _buildingState;
     
+   
     private void Start()
     {
-        StopPlacement();
+        EndStateAction();
 
         _groundData = new();
         _buildingData = new();
@@ -30,6 +31,18 @@ public class PlacementSystem : MonoBehaviour
     private void Update()
     {
         SelectSpotToBuild();
+    }
+
+    private void OnEnable()
+    {
+        PanelButton.PanelActivated += TurnVisualisationOn;
+        PanelButton.PanelDeActivated += EndStateAction;
+    }
+
+    private void OnDisable()
+    {
+        PanelButton.PanelActivated -= TurnVisualisationOn;
+        PanelButton.PanelDeActivated -= EndStateAction;
     }
 
     private void SelectSpotToBuild()
@@ -65,7 +78,7 @@ public class PlacementSystem : MonoBehaviour
         }
     }
 
-    private void PlaceStruture()
+    private void StartStateAction()
     {
         if (_inputedPoint.IsPointerOverUI())
         {
@@ -77,7 +90,7 @@ public class PlacementSystem : MonoBehaviour
         _buildingState.OnAction(_gridCellPosition);
     }
 
-    private void StopPlacement()
+    private void EndStateAction()
     {
         if (_buildingState == null)
         {
@@ -93,19 +106,19 @@ public class PlacementSystem : MonoBehaviour
 
     private void SubscribeOnInpudActions()
     {
-        _inputedPoint.OnClicked += PlaceStruture;
-        _inputedPoint.OnCancel += StopPlacement;
+        _inputedPoint.OnClicked += StartStateAction;
+        _inputedPoint.OnCancel += EndStateAction;
     }
 
     private void UnSubscribeOnInpudActions()
     {
-        _inputedPoint.OnClicked -= PlaceStruture;
-        _inputedPoint.OnCancel -= StopPlacement;
+        _inputedPoint.OnClicked -= StartStateAction;
+        _inputedPoint.OnCancel -= EndStateAction;
     }
 
     public void StartPlacement(int id)
     {
-        StopPlacement();
+        EndStateAction();
         TurnVisualisationOn();
         _buildingState = new PlaceBuildingState(id, _grid, _previewBuilding, _buildingContainer, _groundData, _buildingData, _buildingPlacer);
         SubscribeOnInpudActions();
@@ -113,7 +126,7 @@ public class PlacementSystem : MonoBehaviour
 
     public void RemoveBuilding()
     {
-        StopPlacement();
+        EndStateAction();
         TurnVisualisationOn();
         _buildingState = new RemoveBuildingState(_grid,_previewBuilding,_groundData,_buildingData,_buildingPlacer);
         SubscribeOnInpudActions();
