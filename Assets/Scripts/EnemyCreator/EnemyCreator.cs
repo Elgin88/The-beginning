@@ -8,7 +8,7 @@ namespace Scripts.Enemy
         [SerializeField] private GameObject _playerMainBilding;
         [SerializeField] private float _minRadiusSpawn;
         [SerializeField] private float _maxRadiusSpawn;
-        [SerializeField] private BankOfEnemies _bankOfEnemies;
+        [SerializeField] private EnemyCollection _enemyCollectiron;
 
         private float _spawnPoinPositionX;
         private float _spawnPoinPositionY;
@@ -16,7 +16,6 @@ namespace Scripts.Enemy
         private float _playerMainBildingPositionX => _playerMainBilding.gameObject.transform.position.x;
         private float _playerMainBildingPositionZ => _playerMainBilding.gameObject.transform.position.z;
         private float _currentRadiusSpawn;
-
         private GameObject _enemy;
 
         private void Start()
@@ -28,7 +27,7 @@ namespace Scripts.Enemy
         {
             while (true)
             {
-                _enemy = _bankOfEnemies.GetMeleeEnemy();
+                _enemy = _enemyCollectiron.GetRandomEnemy();
 
                 if (_enemy == null)
                 {
