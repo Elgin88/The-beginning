@@ -2065,6 +2065,7 @@ MonoBehaviour:
   _minRadiusSpawn: 14
   _maxRadiusSpawn: 15
   _enemyCollectiron: {fileID: 427049687}
+  _enemyCreatorSpawn: {fileID: 1340286918}
 --- !u!4 &1340286917
 Transform:
   m_ObjectHideFlags: 0
@@ -2092,10 +2093,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f1aa2c84172d7438da09f65b965d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnRange: 0
-  _maxSpawnRange: 0
-  _enemyCount: 0
-  _enemyCollection: {fileID: 0}
+  _minSpawnRange: 1
+  _maxSpawnRange: 2
+  _enemyCount: 4
+  _enemyCollection: {fileID: 427049687}
 --- !u!1 &1435782875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 869905696999793707, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}

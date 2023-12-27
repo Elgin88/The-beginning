@@ -9,6 +9,7 @@ namespace Scripts.Enemy
         [SerializeField] private float _minRadiusSpawn;
         [SerializeField] private float _maxRadiusSpawn;
         [SerializeField] private EnemyCollection _enemyCollectiron;
+        [SerializeField] private EnemyCreatorSpawn _enemyCreatorSpawn;
 
         private float _spawnPoinPositionX;
         private float _spawnPoinPositionY;
@@ -36,6 +37,7 @@ namespace Scripts.Enemy
                 }
 
                 CreateFirstEnemy();
+                _enemyCreatorSpawn.CreateMinorEnemies(gameObject.transform.position);
 
                 yield return new WaitForSeconds(0.5f);
             }
