@@ -9,7 +9,5 @@ namespace Assets.Scripts.PlayerComponents
         public float RotationSpeed { get; }
 
         public Transform Transform { get; }
-
-        public Rigidbody Rigidbody { get; }
     }
 }
