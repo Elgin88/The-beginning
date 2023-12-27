@@ -17,7 +17,7 @@ namespace Assets.Scripts.Camera
 
         private void LateUpdate()
         {
-            Vector3 newPosition = _player.transform.position + _cameraOffset;
+            Vector3 newPosition = new Vector3(_player.transform.position.x, 0, _player.transform.position.z) + _cameraOffset;
             transform.position = newPosition;
         }
 

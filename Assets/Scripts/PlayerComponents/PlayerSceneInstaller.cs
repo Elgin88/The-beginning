@@ -10,14 +10,15 @@ namespace Assets.Scripts.PlayerComponents
 
         public override void InstallBindings()
         {
-            Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
-
-            Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
-            Container.BindInterfacesAndSelfTo<Player>().FromInstance(player);
+            BindPlayer();
         }
 
         private void BindPlayer()
         {
+            Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
+
+            Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
+            Container.BindInterfacesAndSelfTo<Player>().FromInstance(player);
         }
     }
 }
