@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Enemy
@@ -13,14 +10,16 @@ namespace Scripts.Enemy
         [SerializeField] private EnemyCollection _enemyCollection;
 
         private GameObject _currentEnemy;
-        private Vector3 _mainEnemyPosition;
+        private Vector3 _mainEnemyInSpawnPosition;
         private float _currentEnemyPositionX;
         private float _currentEnemyPositionY;
         private float _currentEnemyPositionZ;
 
-        public void CreateMinorEnemies(Vector3 mainEnemyPosition)
+        public void CreateMinorEnemies(Vector3 mainEnemyInSpawnPosition)
         {
-            _mainEnemyPosition = mainEnemyPosition;
+            _mainEnemyInSpawnPosition = mainEnemyInSpawnPosition;
+
+            Debug.Log(_mainEnemyInSpawnPosition.x + ", " + _mainEnemyInSpawnPosition.z);
 
             for (int i = 0; i < _enemyCount; i++)
             {
@@ -28,18 +27,34 @@ namespace Scripts.Enemy
 
                 if (_currentEnemy != null)
                 {
-                    CalculateCurrentEnemyPosition();
-                    SetCurrentEnemyPosition();
+                    CalculateStartPosition();
+                    SetStartPosition();
                 }
             }
         }
 
-        private void CalculateCurrentEnemyPosition()
+        private void CalculateStartPosition()
         {
-            Debug.Log("Дописать здесь");
+            bool isWork = true;
+            float radius;
+
+            while (isWork)
+            {
+                _currentEnemyPositionX = _mainEnemyInSpawnPosition.x + Random.Range(-_maxSpawnRange, _maxSpawnRange);
+                _currentEnemyPositionZ = _mainEnemyInSpawnPosition.z + Random.Range(-_maxSpawnRange, _maxSpawnRange);
+
+                radius = Mathf.Sqrt(Mathf.Pow(_currentEnemyPositionX - _mainEnemyInSpawnPosition.x, 2) + Mathf.Pow(_currentEnemyPositionZ - _mainEnemyInSpawnPosition.z, 2));
+
+                if (radius >= _minSpawnRange & radius <= _maxSpawnRange)
+                {
+                    isWork = false;
+                }            
+            }
+
+            _currentEnemyPositionY = _mainEnemyInSpawnPosition.y;
         }
 
-        private void SetCurrentEnemyPosition()
+        private void SetStartPosition()
         {
             _currentEnemy.transform.position = new Vector3(_currentEnemyPositionX, _currentEnemyPositionY, _currentEnemyPositionZ);
         }

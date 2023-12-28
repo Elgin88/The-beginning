@@ -209,6 +209,7 @@ GameObject:
   - component: {fileID: 46471396}
   - component: {fileID: 46471395}
   - component: {fileID: 46471394}
+  - component: {fileID: 46471398}
   m_Layer: 0
   m_Name: PlayerMainBilding
   m_TagString: Untagged
@@ -302,6 +303,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!54 &46471398
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 46471393}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 126
+  m_CollisionDetection: 0
 --- !u!1 &50523975 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 869905696999793707, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
@@ -2062,10 +2090,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 46471393}
-  _minRadiusSpawn: 14
-  _maxRadiusSpawn: 15
+  _minRadiusSpawn: 25
+  _maxRadiusSpawn: 30
   _enemyCollectiron: {fileID: 427049687}
   _enemyCreatorSpawn: {fileID: 1340286918}
+  _delayBeweenSpawn: 2
 --- !u!4 &1340286917
 Transform:
   m_ObjectHideFlags: 0
@@ -2093,8 +2122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f1aa2c84172d7438da09f65b965d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnRange: 1
-  _maxSpawnRange: 2
+  _minSpawnRange: 2
+  _maxSpawnRange: 3
   _enemyCount: 4
   _enemyCollection: {fileID: 427049687}
 --- !u!1 &1435782875 stripped
