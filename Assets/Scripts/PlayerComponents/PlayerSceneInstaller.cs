@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.PlayerComponents.Weapons;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.PlayerComponents
@@ -7,9 +8,14 @@ namespace Assets.Scripts.PlayerComponents
     {
         [SerializeField] private Player _playerPrefab;
         [SerializeField] private PlayerConfig _playerConfig;
+        [SerializeField] private Weapon[] _baseWeapons;
 
         public override void InstallBindings()
         {
+            Container.Bind<Weapon[]>().FromInstance(_baseWeapons).NonLazy();
+            Container.Bind<WeaponsInventory>().FromNew().AsSingle().NonLazy();
+            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
+
             BindPlayer();
         }
 
