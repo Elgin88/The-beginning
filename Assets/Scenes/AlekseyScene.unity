@@ -1108,6 +1108,69 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
+--- !u!1 &605511343
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 605511345}
+  - component: {fileID: 605511344}
+  m_Layer: 0
+  m_Name: NavMesh Surface
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &605511344
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605511343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 0.16666667
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 613d867995ec39248b44da2fcdf0bbd8, type: 2}
+  m_BuildHeightMesh: 0
+--- !u!4 &605511345
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 605511343}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -25.371374, y: -15.584643, z: 12.5673275}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &606564359
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1356,7 +1419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735504268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -25.5, y: 0, z: -18.5}
+  m_LocalPosition: {x: -50.9, y: 0, z: -42.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2090,11 +2153,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 46471393}
-  _minRadiusSpawn: 14
-  _maxRadiusSpawn: 15
+  _minRadiusSpawn: 40
+  _maxRadiusSpawn: 45
   _enemyCollectiron: {fileID: 427049687}
   _enemyCreatorSpawn: {fileID: 1340286918}
-  _delayBeweenSpawn: 2
+  _delayBeweenSpawn: 0.5
 --- !u!4 &1340286917
 Transform:
   m_ObjectHideFlags: 0
@@ -2122,8 +2185,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93f1aa2c84172d7438da09f65b965d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _minSpawnRange: 2
-  _maxSpawnRange: 3
+  _minSpawnRange: 3
+  _maxSpawnRange: 4
   _enemyCount: 4
   _enemyCollection: {fileID: 427049687}
 --- !u!1 &1435782875 stripped

@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Scripts.UnitStateMachine
 {
@@ -7,9 +8,9 @@ namespace Scripts.UnitStateMachine
 
     public class StateMove : State
     {
-        private float _speed = 2;
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
+        private NavMeshAgent _navMeshAgent;
 
         public override void StartState()
         {
@@ -40,17 +41,14 @@ namespace Scripts.UnitStateMachine
         private void Start()
         {
             _nextTargetFinder = GetComponent<NextTargetFinder>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
         }
 
         private IEnumerator Move()
         {
             while (true)
             {
-                Vector3 currentPosition = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-                Vector3 targetPosition = new Vector3(_nextTargetFinder.NextTarget.transform.position.x, gameObject.transform.position.y, _nextTargetFinder.NextTarget.transform.position.z);
-
-                transform.position = Vector3.MoveTowards(currentPosition, targetPosition, _speed * Time.deltaTime);
-
+                
                 yield return null;
             }
         }
