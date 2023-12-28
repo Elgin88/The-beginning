@@ -19,8 +19,6 @@ namespace Scripts.Enemy
         {
             _mainEnemyInSpawnPosition = mainEnemyInSpawnPosition;
 
-            Debug.Log(_mainEnemyInSpawnPosition.x + ", " + _mainEnemyInSpawnPosition.z);
-
             for (int i = 0; i < _enemyCount; i++)
             {
                 _currentEnemy = _enemyCollection.GetRandomEnemy();

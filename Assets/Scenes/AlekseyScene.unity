@@ -2090,8 +2090,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 46471393}
-  _minRadiusSpawn: 25
-  _maxRadiusSpawn: 30
+  _minRadiusSpawn: 14
+  _maxRadiusSpawn: 15
   _enemyCollectiron: {fileID: 427049687}
   _enemyCreatorSpawn: {fileID: 1340286918}
   _delayBeweenSpawn: 2
