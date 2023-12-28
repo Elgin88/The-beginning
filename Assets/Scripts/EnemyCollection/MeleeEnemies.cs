@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 namespace Scripts.Enemy
 {
@@ -20,6 +21,11 @@ namespace Scripts.Enemy
             }
 
             return null;
+        }
+
+        private void Start()
+        {
+            
         }
     }
 }

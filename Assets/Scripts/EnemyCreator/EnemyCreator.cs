@@ -8,7 +8,9 @@ namespace Scripts.Enemy
         [SerializeField] private GameObject _playerMainBilding;
         [SerializeField] private float _minRadiusSpawn;
         [SerializeField] private float _maxRadiusSpawn;
-        [SerializeField] private BankOfEnemies _bankOfEnemies;
+        [SerializeField] private EnemyCollection _enemyCollectiron;
+        [SerializeField] private EnemyCreatorSpawn _enemyCreatorSpawn;
+        [SerializeField] private float _delayBeweenSpawn;
 
         private float _spawnPoinPositionX;
         private float _spawnPoinPositionY;
@@ -16,11 +18,13 @@ namespace Scripts.Enemy
         private float _playerMainBildingPositionX => _playerMainBilding.gameObject.transform.position.x;
         private float _playerMainBildingPositionZ => _playerMainBilding.gameObject.transform.position.z;
         private float _currentRadiusSpawn;
-
-        private GameObject _enemy;
+        private GameObject _mainEnemy;
+        private WaitForSeconds _delayWFS;
 
         private void Start()
         {
+            _delayWFS = new WaitForSeconds(_delayBeweenSpawn);
+
             StartCoroutine(CreateEnemies());
         }
 
@@ -28,17 +32,18 @@ namespace Scripts.Enemy
         {
             while (true)
             {
-                _enemy = _bankOfEnemies.GetMeleeEnemy();
+                _mainEnemy = _enemyCollectiron.GetRandomEnemy();
 
-                if (_enemy == null)
+                if (_mainEnemy == null)
                 {
                     StopCoroutine(CreateEnemies());
                     yield break;
                 }
 
                 CreateFirstEnemy();
+                _enemyCreatorSpawn.CreateMinorEnemies(_mainEnemy.transform.position);
 
-                yield return new WaitForSeconds(0.5f);
+                yield return _delayWFS;
             }
         }
 
@@ -46,7 +51,7 @@ namespace Scripts.Enemy
         {
             CalculatePositionSpawnPointFirstEnemy();
 
-            _enemy.transform.position = new Vector3(_spawnPoinPositionX, _spawnPoinPositionY, _spawnPoinPositionZ);
+            _mainEnemy.transform.position = new Vector3(_spawnPoinPositionX, _spawnPoinPositionY, _spawnPoinPositionZ);
         }
 
         private void CalculatePositionSpawnPointFirstEnemy()
@@ -68,7 +73,7 @@ namespace Scripts.Enemy
 
         private void SetSpawnPointPositionFirstEnemy()
         {
-            _spawnPoinPositionY = _enemy.gameObject.transform.position.y;
+            _spawnPoinPositionY = _mainEnemy.gameObject.transform.position.y;
             _spawnPoinPositionX = Random.Range(_playerMainBildingPositionX - _maxRadiusSpawn, _playerMainBildingPositionX + _maxRadiusSpawn);
             _spawnPoinPositionZ = Random.Range(_playerMainBildingPositionZ - _maxRadiusSpawn, _playerMainBildingPositionZ + _maxRadiusSpawn);
         }
