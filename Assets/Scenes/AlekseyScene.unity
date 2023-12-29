@@ -1419,7 +1419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735504268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -50.9, y: 0, z: -42.1}
+  m_LocalPosition: {x: 70.3, y: 0, z: -24.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2132,7 +2132,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1340286917}
   - component: {fileID: 1340286916}
-  - component: {fileID: 1340286918}
   m_Layer: 0
   m_Name: EnemyCreator
   m_TagString: Untagged
@@ -2153,11 +2152,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 46471393}
-  _minRadiusSpawn: 15.2
-  _maxRadiusSpawn: 19.9
-  _enemyCollectiron: {fileID: 427049687}
-  _enemyCreatorSpawn: {fileID: 1340286918}
-  _delayBeweenSpawn: 0.5
+  _enemyCollection: {fileID: 427049687}
+  _minRadiusSpawn: 39
+  _maxRadiusSpawn: 40
+  _delayBetweenMainSpawn: 1
+  _minMinorSpawnRange: 3
+  _maxMinorSpawnRange: 4
+  _minorEnemyCount: 4
 --- !u!4 &1340286917
 Transform:
   m_ObjectHideFlags: 0
@@ -2173,22 +2174,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1340286918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1340286915}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 93f1aa2c84172d7438da09f65b965d24, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _minSpawnRange: 3
-  _maxSpawnRange: 4
-  _enemyCount: 4
-  _enemyCollection: {fileID: 427049687}
 --- !u!1 &1435782875 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 869905696999793707, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
