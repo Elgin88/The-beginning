@@ -59,7 +59,7 @@ namespace Scripts.Enemy
 
         private void CreateMainEnemy()
         {
-            CalculatePositionAroundPoint();
+            CalculateMainStartPosition();
             SetMainStartPosition();
         }
 
@@ -77,7 +77,7 @@ namespace Scripts.Enemy
             }
         }
 
-        private void CalculatePositionAroundPoint()
+        private void CalculateMainStartPosition()
         {
             bool isWork = true;
             float currentRadiusSpawn;
