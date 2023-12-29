@@ -843,7 +843,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4359850290903348131, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 4359850290903348131, guid: 54f8fa11786bc47869c2aedcf5403aa7, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1016,7 +1016,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &525216660
 Transform:
   m_ObjectHideFlags: 0
@@ -1241,7 +1241,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 613d867995ec39248b44da2fcdf0bbd8, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: a8440b57a305f434393fccf06c32e8fc, type: 2}
   m_BuildHeightMesh: 0
 --- !u!4 &605511345
 Transform:
@@ -1506,7 +1506,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 735504268}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 70.3, y: 0, z: -24.2}
+  m_LocalPosition: {x: -50.9, y: 0, z: -49.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2062,7 +2062,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1068072336}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -119.1, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2161,7 +2161,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1167511805
 Transform:
   m_ObjectHideFlags: 0
@@ -2327,7 +2327,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 46471393}
   _enemyCollection: {fileID: 427049687}
-  _maxMainEnemyRadiusSpawn: 15
+  _maxMainEnemyRadiusSpawn: 45
   _delayBetweenMainEnemySpawn: 1
   _maxMinorEnemySpawnRange: 2
   _minorEnemyCount: 3
@@ -2820,7 +2820,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1672509425
 Transform:
   m_ObjectHideFlags: 0
@@ -3329,7 +3329,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2039204340
 Transform:
   m_ObjectHideFlags: 0
