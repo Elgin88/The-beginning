@@ -1,7 +1,5 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Scripts.Enemy
 {
@@ -9,23 +7,19 @@ namespace Scripts.Enemy
     {
         [SerializeField] private List<GameObject> _meleeEnemies;
 
-        public GameObject GetMeleeEnemy()
+        public GameObject GetEnemy()
         {
             foreach (GameObject enemy in _meleeEnemies)
             {
-                if (enemy.activeSelf == false & enemy != null)
+                if (enemy.gameObject.activeSelf == false)
                 {
                     enemy.gameObject.SetActive(true);
+
                     return enemy;
                 }
             }
 
             return null;
-        }
-
-        private void Start()
-        {
-            
         }
     }
 }
