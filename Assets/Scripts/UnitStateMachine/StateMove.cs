@@ -48,7 +48,13 @@ namespace Scripts.UnitStateMachine
         {
             while (true)
             {
-                
+                yield return null;
+
+                if (gameObject.activeSelf == true)
+                {
+                    //_navMeshAgent.destination = _nextTargetFinder.NextTarget.transform.position;
+                }
+
                 yield return null;
             }
         }

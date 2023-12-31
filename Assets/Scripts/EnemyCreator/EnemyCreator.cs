@@ -12,6 +12,8 @@ namespace Scripts.Enemy
         [SerializeField] private float _maxMinorEnemySpawnRange;
         [SerializeField] private float _minorEnemyCount;
 
+        private SpawnPoint[] _spawnPoints;
+        private SpawnPoint _currentSpawnPoint;
         private GameObject _currentMainEnemy;
         private GameObject _currentMinorEnemy;
         private float _currentMainEnemyPositionX;
@@ -32,6 +34,8 @@ namespace Scripts.Enemy
 
             _delayBetweenMainEnemySpawnWFS = new WaitForSeconds(_delayBetweenMainEnemySpawn);
             _createAllEnemies = StartCoroutine(CreateAllEnemies());
+
+            _spawnPoints = GetComponentsInChildren<SpawnPoint>();
         }
 
         private IEnumerator CreateAllEnemies()
@@ -40,6 +44,8 @@ namespace Scripts.Enemy
 
             while (isWork)
             {
+                yield return null;
+
                 _currentMainEnemy = _enemyCollection.GetRandomEnemy();
 
                 if (_currentMainEnemy == null)
@@ -59,7 +65,7 @@ namespace Scripts.Enemy
 
         private void CreateMainEnemy()
         {
-            CalculateMainStartPosition();
+            ChooseSpawnPoint();
             SetMainStartPosition();
         }
 
@@ -77,28 +83,11 @@ namespace Scripts.Enemy
             }
         }
 
-        private void CalculateMainStartPosition()
+        private void ChooseSpawnPoint()
         {
-            bool isWork = true;
-            float currentRadiusSpawn;
-            
-            _currentMainEnemyPositionY = _currentMainEnemy.transform.position.y;            
+            int index = Random.Range(0, _spawnPoints.Length - 1);
 
-            while (isWork)
-            {
-                _currentMainEnemyPositionX = _playerMainBilding.transform.position.x + Random.Range(- _maxMainEnemyRadiusSpawn, _maxMainEnemyRadiusSpawn);
-                _currentMainEnemyPositionZ = _playerMainBilding.transform.position.z + Random.Range(-_maxMainEnemyRadiusSpawn, _maxMainEnemyRadiusSpawn);
-                
-                currentRadiusSpawn = Mathf.Sqrt(Mathf.Pow((_currentMainEnemyPositionX - _playerMainBilding.gameObject.transform.position.x), 2) + Mathf.Pow((_currentMainEnemyPositionZ - _playerMainBilding.gameObject.transform.position.z), 2));
-
-                if (currentRadiusSpawn >= _minMainEnemyRadiusSpawn)
-                {
-                    if (currentRadiusSpawn <= _maxMainEnemyRadiusSpawn)
-                    {
-                        isWork = false;
-                    }
-                }
-            }
+            _currentSpawnPoint = _spawnPoints[index];
         }
         
         private void CalculateMinorStartPosition()
@@ -124,7 +113,7 @@ namespace Scripts.Enemy
 
         private void SetMainStartPosition()
         {
-            _currentMainEnemy.transform.position = new Vector3(_currentMainEnemyPositionX, _currentMainEnemyPositionY, _currentMainEnemyPositionZ);
+            _currentMainEnemy.transform.position = new Vector3(_currentSpawnPoint.transform.position.x, _currentSpawnPoint.transform.position.y, _currentSpawnPoint.transform.position.z);
         }
 
         private void SetMinorStartPosition()
