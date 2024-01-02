@@ -18,6 +18,7 @@ GameObject:
   - component: {fileID: 4134732036131635327}
   - component: {fileID: 7032817760494187967}
   - component: {fileID: 6492183350018304201}
+  - component: {fileID: 6415274043360687229}
   m_Layer: 0
   m_Name: EnemyRange
   m_TagString: Untagged
@@ -204,3 +205,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb59048355b304a2ea09e15bc0afa954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!195 &6415274043360687229
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 10
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 3
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 1
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
