@@ -11,6 +11,7 @@ namespace Scripts.UnitStateMachine
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
         private NavMeshAgent _navMeshAgent;
+        
 
         public override void StartState()
         {
@@ -48,12 +49,7 @@ namespace Scripts.UnitStateMachine
         {
             while (true)
             {
-                yield return null;
-
-                if (gameObject.activeSelf == true)
-                {
-                    //_navMeshAgent.destination = _nextTargetFinder.NextTarget.transform.position;
-                }
+                _navMeshAgent.destination = _nextTargetFinder.NextTarget.transform.position;
 
                 yield return null;
             }
