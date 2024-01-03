@@ -70,7 +70,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _damage: 2
-  _attackSpeed: 2
+  _attackSpeed: 1
   _radius: 10
   _shootPoint: {x: 0, y: 0, z: 0}
   _arrowPrefab: {fileID: 2153399597230017778, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
