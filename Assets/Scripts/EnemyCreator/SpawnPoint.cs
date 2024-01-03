@@ -1,13 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using Scripts;
-using Scripts.Enemy;
-using Scripts.UnitStateMachine;
 
-namespace Scripts.Enemy
+namespace Assets.Scripts.Enemy
 {
-    public class SpawnPoint: MonoBehaviour
+    internal class SpawnPoint: MonoBehaviour
     {
     }
 }

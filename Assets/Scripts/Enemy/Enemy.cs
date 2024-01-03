@@ -1,12 +1,12 @@
 using UnityEngine;
-using Scripts.UnitStateMachine;
+using Assets.Scripts.UnitStateMachine;
 
-namespace Scripts.Enemy
+namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NextTargetFinder))]
 
-    public class Enemy : MonoBehaviour
+    internal class Enemy : MonoBehaviour
     {
     }
 }

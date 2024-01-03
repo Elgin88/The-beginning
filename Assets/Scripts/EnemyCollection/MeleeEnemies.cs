@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Scripts.Enemy
+namespace Assets.Scripts.Enemy
 {
-    public class MeleeEnemies : MonoBehaviour
+    internal class MeleeEnemies : MonoBehaviour
     {
         [SerializeField] private MeleeEnemy[] _meleeEnemies;
 
