@@ -31,7 +31,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &7801421568384710925
 SphereCollider:
@@ -66,8 +66,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee046271b41f424caf63bbc8583ab4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
-  _attackSpeed: 0
-  _radius: 0
+  LayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  _damage: 2
+  _attackSpeed: 2
+  _radius: 10
   _shootPoint: {x: 0, y: 0, z: 0}
-  _markPrefab: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}
+  _arrowPrefab: {fileID: 2153399597230017778, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
+  _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}

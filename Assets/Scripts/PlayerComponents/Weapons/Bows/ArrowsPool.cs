@@ -20,8 +20,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons.Bows
         {
             foreach (var arrow in _pool)
             {
-                if (arrow.gameObject.activeSelf)
+                if (arrow.gameObject.activeSelf == false)
                 {
+                    arrow.gameObject.SetActive(true);
+
                     return arrow;
                 }
             }

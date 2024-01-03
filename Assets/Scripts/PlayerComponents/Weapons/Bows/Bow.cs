@@ -1,5 +1,5 @@
-﻿using Scripts.Enemy;
-using System;
+﻿using Assets.Scripts.PlayerComponents.Weapons.Bows;
+using Scripts.Enemy;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
@@ -9,18 +9,21 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private float _radius;
         [SerializeField] private Vector3 _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
-        [SerializeField] private Mark _markPrefab;
+        [SerializeField] private Mark _mark;
 
+        private ArrowsPool _pool;
         private Enemy _closestTarget;
 
         private void Awake()
         {
-            _markPrefab.gameObject.SetActive(false);
+            _pool = new ArrowsPool(_arrowPrefab);
+
+            _mark.Init();
         }
 
         private void FixedUpdate()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _radius, _layerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _radius, LayerMask);
 
             if (hitColliders.Length > 0)
             {
@@ -45,26 +48,33 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                     Mark(target);
                 }
             }
-
-            UnMark();
+            else
+            {
+                UnMark();
+            }
         }
 
         public override void Attack()
         {
-            if (_closestTarget != null)
+            if (_closestTarget != null && CanAttack == true)
             {
+                Arrow arrow = _pool.GetArrow();
 
+                arrow.transform.position = transform.position + new Vector3(0, 2, 0);
+                arrow.Fly(_closestTarget.transform);
+
+                base.Attack();
             }
         }
 
         private void Mark(Enemy enemy)
         {
-            _markPrefab.MarkEnemy(enemy);
+            _mark.MarkEnemy(enemy);
         }
 
         private void UnMark()
         {
-            _markPrefab.UnMarkEnemy();
+            _mark.UnMarkEnemy();
         }
     }
 }

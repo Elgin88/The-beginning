@@ -8,23 +8,25 @@ namespace Assets.Scripts.PlayerComponents
     {
         [SerializeField] private Player _playerPrefab;
         [SerializeField] private PlayerConfig _playerConfig;
-        [SerializeField] private Weapon[] _baseWeapons;
+        [SerializeField] private WeaponsInventory _weaponInventory;
 
         public override void InstallBindings()
         {
-            Container.Bind<Weapon[]>().FromInstance(_baseWeapons).NonLazy();
-            Container.Bind<WeaponsInventory>().FromNew().AsSingle().NonLazy();
-            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
-
             BindPlayer();
         }
 
         private void BindPlayer()
         {
+            WeaponsInventory inventory = Container.InstantiatePrefabForComponent<WeaponsInventory>(_weaponInventory);
+            Container.Bind<WeaponsInventory>().FromInstance(inventory).AsSingle().NonLazy();
+            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
+
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
 
             Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
             Container.BindInterfacesAndSelfTo<Player>().FromInstance(player);
+
+            inventory.transform.parent = player.transform;
         }
     }
 }

@@ -44,6 +44,8 @@ namespace Assets.Scripts.Input
         private void Construct(PlayerAttacker attacker)
         {
             _playerAttacker = attacker;
+
+            attacker.ChangeWeapon();
         }
 
         private void OnMoveInput(Vector2 direction)

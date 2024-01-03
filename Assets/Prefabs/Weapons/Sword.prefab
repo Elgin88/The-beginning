@@ -68,3 +68,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _damage: 0
   _attackSpeed: 0
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64

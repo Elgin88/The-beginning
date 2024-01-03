@@ -1,28 +1,18 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
-    internal class WeaponsInventory
+    internal class WeaponsInventory : MonoBehaviour
     {
-        private List<Weapon> _weapons = new List<Weapon>();
+        [SerializeField] private List<Weapon> _weapons;
 
         public int GetWeaponsCount() => _weapons.Count;
 
-        public WeaponsInventory(Weapon[] baseWeapons) 
-        {
-            foreach (var weapon in baseWeapons)
-            {
-                AddWeapon(weapon);
-            }
-
-            foreach (var weapon in _weapons)
-            {
-                weapon.gameObject.SetActive(false);
-            }
-        }
-
         public Weapon ChangeWeapon(int index)
         {
+            DisableWeapons();
+
             _weapons[index].gameObject.SetActive(true);
 
             return _weapons[index];
@@ -31,6 +21,14 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         public void AddWeapon(Weapon weapon)
         {
             _weapons.Add(weapon);
+        }
+
+        private void DisableWeapons()
+        {
+            foreach (var weapon in _weapons)
+            {
+                weapon.gameObject.SetActive(false);
+            }
         }
     }
 }

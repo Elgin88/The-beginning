@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.PlayerComponents.Weapons;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents
 {
@@ -9,15 +10,18 @@ namespace Assets.Scripts.PlayerComponents
         private Weapon _currentWeapon;
 
         public PlayerAttacker(WeaponsInventory inventory) 
-        { 
+        {
             _inventory = inventory;
-
-            _currentWeapon = inventory.ChangeWeapon(0);
         }
 
         public void Attack()
         {
             _currentWeapon.Attack();
+        }
+
+        public void ChangeWeapon()
+        {
+            _currentWeapon = _inventory.ChangeWeapon(1);
         }
     }
 }
