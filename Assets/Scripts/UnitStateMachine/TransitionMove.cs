@@ -1,6 +1,6 @@
-namespace Assets.Scripts.UnitStateMachine
+namespace Scripts.UnitStateMachine
 {
-    internal class TransitionMove : Transition
+    public class TransitionMove : Transition
     {
     }
 }

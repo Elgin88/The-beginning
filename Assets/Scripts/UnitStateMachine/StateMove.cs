@@ -2,11 +2,11 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Scripts.UnitStateMachine
+namespace Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(NextTargetFinder))]
 
-    internal class StateMove : State
+    public class StateMove : State
     {
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;

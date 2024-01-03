@@ -1,9 +1,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Scripts.Enemy
 {
-    internal class EnemyCreator : MonoBehaviour
+    public class EnemyCreator : MonoBehaviour
     {
         [SerializeField] private GameObject _playerMainBilding;
         [SerializeField] private EnemyCollection _enemyCollection;

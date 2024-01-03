@@ -1,9 +1,8 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Assets.Scripts.UnitStateMachine
-{
-    internal class StateMachine : MonoBehaviour
+namespace Scripts.UnitStateMachine
+{public class StateMachine : MonoBehaviour
     {
         [SerializeField] private State _startState;
 

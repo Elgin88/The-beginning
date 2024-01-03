@@ -1,6 +1,9 @@
-namespace Assets.Scripts.Enemy
+using UnityEngine;
+
+namespace Scripts.Enemy
 {
-    internal class MeleeEnemy : Enemy
+    public class MeleeEnemy : Enemy
     {
+        
     }
 }

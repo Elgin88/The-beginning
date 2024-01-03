@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.UnitStateMachine
+namespace Scripts.UnitStateMachine
 {
-    internal class NextTargetFinder : MonoBehaviour
+    public class NextTargetFinder : MonoBehaviour
     {
         [SerializeField] private GameObject _playerMainBilding;
 

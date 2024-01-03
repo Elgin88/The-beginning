@@ -1,6 +1,6 @@
-namespace Assets.Scripts.Enemy
+namespace Scripts.Enemy
 {
-    internal class RangeEnemy : Enemy
+    public class RangeEnemy : Enemy
     {
     }
 }

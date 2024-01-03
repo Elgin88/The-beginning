@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Scripts.Enemy
 {
-    internal class RangeEnemies : MonoBehaviour
+    public class RangeEnemies : MonoBehaviour
     {
         [SerializeField] private GameObject[] _rangeEnemies;
   
