@@ -6,71 +6,119 @@ namespace Scripts.Enemy
     public class EnemyCreator : MonoBehaviour
     {
         [SerializeField] private GameObject _playerMainBilding;
-        [SerializeField] private float _minRadiusSpawn;
-        [SerializeField] private float _maxRadiusSpawn;
-        [SerializeField] private BankOfEnemies _bankOfEnemies;
+        [SerializeField] private EnemyCollection _enemyCollection;
+        [SerializeField] private float _maxMainEnemyRadiusSpawn;
+        [SerializeField] private float _delayBetweenMainEnemySpawn;
+        [SerializeField] private float _maxMinorEnemySpawnRange;
+        [SerializeField] private float _minorEnemyCount;
 
-        private float _spawnPoinPositionX;
-        private float _spawnPoinPositionY;
-        private float _spawnPoinPositionZ;
-        private float _playerMainBildingPositionX => _playerMainBilding.gameObject.transform.position.x;
-        private float _playerMainBildingPositionZ => _playerMainBilding.gameObject.transform.position.z;
-        private float _currentRadiusSpawn;
-
-        private GameObject _enemy;
+        private SpawnPoint[] _spawnPoints;
+        private SpawnPoint _currentSpawnPoint;
+        private GameObject _currentMainEnemy;
+        private GameObject _currentMinorEnemy;
+        private float _currentMainEnemyPositionX;
+        private float _currentMainEnemyPositionY;
+        private float _currentMainEnemyPositionZ;
+        private float _currentMinorEnemyPositionX;
+        private float _currentMinorEnemyPositionY;
+        private float _currentMinorEnemyPositionZ;
+        private float _minMainEnemyRadiusSpawn;
+        private float _minMinorEnemySpawnRange;
+        private WaitForSeconds _delayBetweenMainEnemySpawnWFS;
+        private Coroutine _createAllEnemies;
 
         private void Start()
         {
-            StartCoroutine(CreateEnemies());
+            _minMainEnemyRadiusSpawn = _maxMainEnemyRadiusSpawn - 0.5f;
+            _minMinorEnemySpawnRange = _maxMinorEnemySpawnRange - 0.5f;
+
+            _delayBetweenMainEnemySpawnWFS = new WaitForSeconds(_delayBetweenMainEnemySpawn);
+            _createAllEnemies = StartCoroutine(CreateAllEnemies());
+
+            _spawnPoints = GetComponentsInChildren<SpawnPoint>();
         }
 
-        private IEnumerator CreateEnemies()
-        {
-            while (true)
-            {
-                _enemy = _bankOfEnemies.GetMeleeEnemy();
-
-                if (_enemy == null)
-                {
-                    StopCoroutine(CreateEnemies());
-                    yield break;
-                }
-
-                CreateFirstEnemy();
-
-                yield return new WaitForSeconds(0.5f);
-            }
-        }
-
-        private void CreateFirstEnemy()
-        {
-            CalculatePositionSpawnPointFirstEnemy();
-
-            _enemy.transform.position = new Vector3(_spawnPoinPositionX, _spawnPoinPositionY, _spawnPoinPositionZ);
-        }
-
-        private void CalculatePositionSpawnPointFirstEnemy()
+        private IEnumerator CreateAllEnemies()
         {
             bool isWork = true;
 
             while (isWork)
             {
-                SetSpawnPointPositionFirstEnemy();
+                yield return null;
 
-                _currentRadiusSpawn = Mathf.Sqrt(Mathf.Pow(_spawnPoinPositionX - _playerMainBildingPositionX, 2) + Mathf.Pow(_spawnPoinPositionZ - _playerMainBildingPositionZ, 2));
+                _currentMainEnemy = _enemyCollection.GetRandomEnemy();
 
-                if (_currentRadiusSpawn >= _minRadiusSpawn & _currentRadiusSpawn <= _maxRadiusSpawn)
+                if (_currentMainEnemy == null)
+                {
+                    isWork = false;
+                    StopCoroutine(_createAllEnemies);
+
+                    yield break;
+                }
+
+                CreateMainEnemy();
+                CreateMinorEnemies();
+
+                yield return _delayBetweenMainEnemySpawnWFS;
+            }
+        }
+
+        private void CreateMainEnemy()
+        {
+            ChooseSpawnPoint();
+            SetMainStartPosition();
+        }
+
+        public void CreateMinorEnemies()
+        {
+            for (int i = 0; i < _minorEnemyCount; i++)
+            {
+                _currentMinorEnemy = _enemyCollection.GetRandomEnemy();
+
+                if (_currentMinorEnemy != null)
+                {
+                    CalculateMinorStartPosition();
+                    SetMinorStartPosition();
+                }
+            }
+        }
+
+        private void ChooseSpawnPoint()
+        {
+            int index = Random.Range(0, _spawnPoints.Length - 1);
+
+            _currentSpawnPoint = _spawnPoints[index];
+        }
+        
+        private void CalculateMinorStartPosition()
+        {
+            bool isWork = true;
+            float radius;
+
+            _currentMinorEnemyPositionY = _currentMinorEnemy.transform.position.y;
+
+            while (isWork)
+            {
+                _currentMinorEnemyPositionX = _currentMainEnemy.transform.position.x + Random.Range(-_maxMinorEnemySpawnRange, _maxMinorEnemySpawnRange);
+                _currentMinorEnemyPositionZ = _currentMainEnemy.transform.position.z + Random.Range(-_maxMinorEnemySpawnRange, _maxMinorEnemySpawnRange);
+
+                radius = Mathf.Sqrt(Mathf.Pow(_currentMinorEnemyPositionX - _currentMainEnemy.transform.position.x, 2) + Mathf.Pow(_currentMinorEnemyPositionZ - _currentMainEnemy.transform.position.z, 2));
+
+                if (radius >= _minMinorEnemySpawnRange & radius <= _maxMinorEnemySpawnRange)
                 {
                     isWork = false;
                 }
             }
         }
 
-        private void SetSpawnPointPositionFirstEnemy()
+        private void SetMainStartPosition()
         {
-            _spawnPoinPositionY = _enemy.gameObject.transform.position.y;
-            _spawnPoinPositionX = Random.Range(_playerMainBildingPositionX - _maxRadiusSpawn, _playerMainBildingPositionX + _maxRadiusSpawn);
-            _spawnPoinPositionZ = Random.Range(_playerMainBildingPositionZ - _maxRadiusSpawn, _playerMainBildingPositionZ + _maxRadiusSpawn);
+            _currentMainEnemy.transform.position = new Vector3(_currentSpawnPoint.transform.position.x, _currentSpawnPoint.transform.position.y, _currentSpawnPoint.transform.position.z);
+        }
+
+        private void SetMinorStartPosition()
+        {
+            _currentMinorEnemy.transform.position = new Vector3(_currentMinorEnemyPositionX, _currentMinorEnemyPositionY, _currentMinorEnemyPositionZ);
         }
     }
 }
