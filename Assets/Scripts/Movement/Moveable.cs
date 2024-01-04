@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.PlayerComponents
+namespace Assets.Scripts.Movement
 {
-    internal class PlayerMover 
+    internal class Moveable 
     {
         private float _moveSpeed;
         private float _rotationSpeed;
@@ -13,7 +13,7 @@ namespace Assets.Scripts.PlayerComponents
         private float _desiredHeight = 1.05f;
         private float _rayDistance = 5f;
 
-        public PlayerMover(IMovable target, LayerMask mask)
+        public Moveable(IMoveable target, LayerMask mask)
         {
             _transform = target.Transform;
             _moveSpeed = target.Speed;
@@ -40,7 +40,7 @@ namespace Assets.Scripts.PlayerComponents
             {
                 if (hit.distance > _desiredHeight)
                 {
-                    _transform.position = Vector3.Lerp(_transform.position, hit.point, _alignmentSpeed * Time.deltaTime);
+                    _transform.position = Vector3.Lerp(_transform.position, hit.point, _alignmentSpeed * Time.fixedDeltaTime);
                 }
 
                 Rotate(movementVector, hit.normal);
@@ -56,7 +56,7 @@ namespace Assets.Scripts.PlayerComponents
 
                 Quaternion combinedRotation = surfaceAlignmentRotation * directionRotation;
 
-                _transform.rotation = Quaternion.Slerp(_transform.rotation, combinedRotation, _rotationSpeed * Time.deltaTime);
+                _transform.rotation = Quaternion.Slerp(_transform.rotation, combinedRotation, _rotationSpeed * Time.fixedDeltaTime);
             }
         }
     }

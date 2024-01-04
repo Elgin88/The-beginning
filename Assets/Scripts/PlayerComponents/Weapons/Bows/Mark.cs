@@ -1,5 +1,5 @@
-﻿using Scripts.Enemy;
-using UnityEngine;
+﻿using UnityEngine;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
@@ -15,9 +15,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             _mark.Stop();
         }
 
-        public void MarkEnemy(Enemy enemy)
+        public void MarkEnemy(IDamageable enemy)
         {
-            _mark.transform.position = enemy.transform.position;
+            _mark.transform.position = enemy.Transform.position;
 
             if (_mark.isStopped)
                 _mark.Play();

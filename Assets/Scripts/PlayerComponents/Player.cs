@@ -1,9 +1,10 @@
 using UnityEngine;
+using Assets.Scripts.Movement;
 using Zenject;
 
 namespace Assets.Scripts.PlayerComponents
 {
-    internal class Player : MonoBehaviour, IMovable
+    internal class Player : MonoBehaviour, IMoveable
     {
         public float Speed {get; private set;}
 
