@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.PlayerComponents.Weapons.Bows;
-using Scripts.Enemy;
-using UnityEngine;
+﻿using UnityEngine;
+using Assets.Scripts.GameLogic.Damageable;
+using Assets.Scripts.PlayerComponents.Weapons.Bows;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
@@ -12,7 +12,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private Mark _mark;
 
         private ArrowsPool _pool;
-        private Enemy _closestTarget;
+        private IDamageable _closestTarget;
 
         private void Awake()
         {
@@ -42,7 +42,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                     }
                 }
 
-                if (closerstCollider.TryGetComponent<Enemy>(out Enemy target))
+                if (closerstCollider.TryGetComponent<IDamageable>(out IDamageable target))
                 {
                     _closestTarget = target;
                     Mark(target);
@@ -50,6 +50,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             }
             else
             {
+                _closestTarget = null;
                 UnMark();
             }
         }
@@ -61,13 +62,13 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                 Arrow arrow = _pool.GetArrow();
 
                 arrow.transform.position = transform.position + new Vector3(0, 2, 0);
-                arrow.Fly(_closestTarget.transform);
+                arrow.Fly(_closestTarget.Transform);
 
                 base.Attack();
             }
         }
 
-        private void Mark(Enemy enemy)
+        private void Mark(IDamageable enemy)
         {
             _mark.MarkEnemy(enemy);
         }

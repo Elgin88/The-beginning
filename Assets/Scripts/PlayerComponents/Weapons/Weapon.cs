@@ -39,7 +39,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             AttackCoroutine =  StartCoroutine(AttackDelay(_attackSpeed));
         }
 
-        protected IEnumerator AttackDelay(float attackSpeed)
+        private IEnumerator AttackDelay(float attackSpeed)
         {
             CanAttack = false;
 

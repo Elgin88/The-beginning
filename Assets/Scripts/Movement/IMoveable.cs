@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.PlayerComponents
+namespace Assets.Scripts.Movement
 {
-    internal interface IMovable
+    internal interface IMoveable
     {
         public float Speed { get; }
 

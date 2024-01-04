@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using Assets.Scripts.PlayerComponents;
+using Assets.Scripts.Movement;
 using Zenject;
 
 namespace Assets.Scripts.Input
@@ -12,7 +13,7 @@ namespace Assets.Scripts.Input
         private InputActions _inputActions;
 
         private Player _player;
-        private PlayerMover _playerMover;
+        private Moveable _playerMover;
         private PlayerAttacker _playerAttacker;
 
         private Vector2 _moveDirection;
@@ -22,7 +23,7 @@ namespace Assets.Scripts.Input
             _player = GetComponent<Player>();
 
             _inputActions = new InputActions();
-            _playerMover = new PlayerMover(_player, _layerMask);
+            _playerMover = new Moveable(_player, _layerMask);
 
             _inputActions.Enable();
         }
