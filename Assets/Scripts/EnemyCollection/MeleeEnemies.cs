@@ -1,31 +1,24 @@
-using System;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
 namespace Scripts.Enemy
 {
     public class MeleeEnemies : MonoBehaviour
     {
-        [SerializeField] private List<GameObject> _meleeEnemies;
+        [SerializeField] private MeleeEnemy[] _meleeEnemies;
 
-        public GameObject GetMeleeEnemy()
+        public GameObject GetEnemy()
         {
-            foreach (GameObject enemy in _meleeEnemies)
+            foreach (MeleeEnemy enemy in _meleeEnemies)
             {
-                if (enemy.activeSelf == false & enemy != null)
+                if (enemy.gameObject.activeSelf == false)
                 {
                     enemy.gameObject.SetActive(true);
-                    return enemy;
+
+                    return enemy.gameObject;
                 }
             }
 
             return null;
-        }
-
-        private void Start()
-        {
-            
         }
     }
 }

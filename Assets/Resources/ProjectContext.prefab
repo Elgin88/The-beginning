@@ -76,6 +76,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 6941801348115223550, guid: 2e1fc2b361a79a944853c3bfdbbb4643, type: 3}
   _playerConfig: {fileID: 11400000, guid: ded69eba618df4c4a80ed4d2e11e7ef6, type: 2}
-  _layerMask:
-    serializedVersion: 2
-    m_Bits: 16
+  _weaponInventory: {fileID: 2869036795432324402, guid: f6fbce4547b17d340af7104adbc4aaf7, type: 3}

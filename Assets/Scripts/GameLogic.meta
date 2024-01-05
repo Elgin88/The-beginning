@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Plugins/Zenject/Source/Zenject.csproj.meta
+guid: 097b8d441957f674e956adbb0e089d63
+========
+guid: aa5725a073c547a468d2b586dad8ee9d
+folderAsset: yes
+>>>>>>>> player-ATTACK:Assets/Scripts/GameLogic.meta
+DefaultImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

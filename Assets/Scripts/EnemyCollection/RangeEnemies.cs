@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Scripts.Enemy
@@ -7,15 +6,15 @@ namespace Scripts.Enemy
     {
         [SerializeField] private GameObject[] _rangeEnemies;
   
-        public GameObject GetRangeEnemy()
+        public GameObject GetEnemy()
         {
-            foreach (var rangeEnemy in _rangeEnemies)
+            foreach (GameObject enemy in _rangeEnemies)
             {
-                if (rangeEnemy.gameObject.activeSelf == false)
+                if (enemy.gameObject.activeSelf == false)
                 {
-                    rangeEnemy.gameObject.SetActive(true);
+                    enemy.gameObject.SetActive(true);
 
-                    return rangeEnemy;
+                    return enemy;
                 }
             }
 

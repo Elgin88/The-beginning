@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.PlayerComponents;
+using Assets.Scripts.Movement;
+using Zenject;
 
 namespace Assets.Scripts.Input
 {
@@ -11,7 +13,7 @@ namespace Assets.Scripts.Input
         private InputActions _inputActions;
 
         private Player _player;
-        private PlayerMover _playerMover;
+        private Moveable _playerMover;
         private PlayerAttacker _playerAttacker;
 
         private Vector2 _moveDirection;
@@ -21,8 +23,7 @@ namespace Assets.Scripts.Input
             _player = GetComponent<Player>();
 
             _inputActions = new InputActions();
-            _playerAttacker = new PlayerAttacker();
-            _playerMover = new PlayerMover(_player, _layerMask);
+            _playerMover = new Moveable(_player, _layerMask);
 
             _inputActions.Enable();
         }
@@ -30,6 +31,7 @@ namespace Assets.Scripts.Input
         private void FixedUpdate()
         {
             _moveDirection = _inputActions.Player.Move.ReadValue<Vector2>();
+            _inputActions.Player.Attack.performed += ctx => OnAttackInput();
 
             OnMoveInput(_moveDirection);
         }
@@ -39,9 +41,22 @@ namespace Assets.Scripts.Input
             _inputActions.Disable();
         }
 
+        [Inject]
+        private void Construct(PlayerAttacker attacker)
+        {
+            _playerAttacker = attacker;
+
+            attacker.ChangeWeapon();
+        }
+
         private void OnMoveInput(Vector2 direction)
         {
             _playerMover.Move(direction);
+        }
+
+        private void OnAttackInput()
+        {
+            _playerAttacker.Attack();
         }
     }
 }
