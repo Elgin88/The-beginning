@@ -123,6 +123,27 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &1105314876 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3650522769419338771, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
+  m_PrefabInstance: {fileID: 1864427962445412270}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1105314878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1105314876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bfb2c6f94f9287489bd57f30ebd06bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sceneCamera: {fileID: 1775832453}
+  _placeToBuild:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &1193890147
 GameObject:
   m_ObjectHideFlags: 0
@@ -451,6 +472,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3650522769419338771, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
+      propertyPath: m_Name
+      value: BuildingHandler
+      objectReference: {fileID: 0}
     - target: {fileID: 3710238540886736181, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
       propertyPath: m_AnchoredPosition.x
       value: -860.5
@@ -479,6 +504,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -379.07358
       objectReference: {fileID: 0}
+    - target: {fileID: 4346349799357276855, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
+      propertyPath: _buildingHandler
+      value: 
+      objectReference: {fileID: 1105314878}
     - target: {fileID: 4476762323962562056, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
       propertyPath: m_IsActive
       value: 1
@@ -544,6 +573,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7173572152471826858, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7173572152471826858, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
       propertyPath: _sceneCamera
       value: 
       objectReference: {fileID: 1775832453}
@@ -578,5 +611,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3650522769419338771, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1105314878}
   m_SourcePrefab: {fileID: 100100000, guid: 38950459dcb1acf46aa0c67e840e6dbd, type: 3}
