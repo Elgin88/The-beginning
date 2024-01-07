@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Scripts.UnitStateMachine
+namespace Assets.Scripts.UnitStateMachine
 {
-    public class Transition : MonoBehaviour
+    internal class Transition : MonoBehaviour
     {
     }
 }
