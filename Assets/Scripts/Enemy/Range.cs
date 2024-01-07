@@ -1,10 +1,10 @@
 using UnityEngine;
 
-namespace Scripts.Enemy
+namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(Enemy))]
 
-    public class MeleeEnemy : Enemy
+    internal class Range : Enemy
     {
     }
 }
