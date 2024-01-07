@@ -10,8 +10,7 @@ namespace Scripts.UnitStateMachine
     {
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
-        private NavMeshAgent _navMeshAgent;
-        
+        private NavMeshAgent _navMeshAgent;        
 
         public override void StartState()
         {
@@ -49,7 +48,7 @@ namespace Scripts.UnitStateMachine
         {
             while (true)
             {
-                _navMeshAgent.destination = _nextTargetFinder.NextTarget.transform.position;
+                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBildingPosition;
 
                 yield return null;
             }
