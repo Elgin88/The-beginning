@@ -5,7 +5,7 @@ namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(Enemy))]
 
-    internal class Melee : Enemy
+    internal class MeleeEnemy : Enemy
     {
     }
 }

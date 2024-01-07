@@ -8,6 +8,6 @@ namespace Assets.Scripts.UnitStateMachine
     {
         [Inject] private PlayerMainBilding _playerMainBilding;
 
-        public Vector3 PlayerMainBildingPosition => _playerMainBilding.transform.position;
+        public PlayerMainBilding PlayerMainBilding => _playerMainBilding;
     }
 }

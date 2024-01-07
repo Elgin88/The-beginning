@@ -48,7 +48,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBildingPosition;
+                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBilding.transform.position;
 
                 yield return null;
             }
