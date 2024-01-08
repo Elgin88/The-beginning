@@ -7,7 +7,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
     {
         public override void Attack()
         {
-            throw new NotImplementedException();
+            
         }
     }
 }

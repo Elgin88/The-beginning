@@ -74,6 +74,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1292201ea26dac4c8e4e670baf076d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerPrefab: {fileID: 6941801348115223550, guid: 2e1fc2b361a79a944853c3bfdbbb4643, type: 3}
+  _playerPrefab: {fileID: -2132320540369820289, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
+  _playerInput: {fileID: 7767014089020145184, guid: ba64e974c8fe44847a99348e16c3f64c, type: 3}
   _playerConfig: {fileID: 11400000, guid: ded69eba618df4c4a80ed4d2e11e7ef6, type: 2}
+  _playerAnimator: {fileID: 7936983417069384191, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
+  _animator: {fileID: 11256372411677511, guid: b1e9a0e50cbe08a45863e124dded310e, type: 3}
   _weaponInventory: {fileID: 2869036795432324402, guid: f6fbce4547b17d340af7104adbc4aaf7, type: 3}

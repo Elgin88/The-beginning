@@ -4,23 +4,30 @@ namespace Assets.Scripts.PlayerComponents
 {
     internal class PlayerAttacker
     {
-        private WeaponsInventory _inventory;
+        private PlayerAnimator _animator;
 
+        private WeaponsInventory _inventory;
         private Weapon _currentWeapon;
 
-        public PlayerAttacker(WeaponsInventory inventory) 
+        public PlayerAttacker(WeaponsInventory inventory, PlayerAnimator animator)
         {
             _inventory = inventory;
+            _animator = animator;
+
+            _inventory.Init();
+            ChangeWeapon();
         }
 
         public void Attack()
         {
+            _animator.SetAnimatorAttackTrigger(_currentWeapon);
+
             _currentWeapon.Attack();
         }
 
         public void ChangeWeapon()
         {
-            _currentWeapon = _inventory.ChangeWeapon(1);
+            _currentWeapon = _inventory.ChangeWeapon();
         }
     }
 }
