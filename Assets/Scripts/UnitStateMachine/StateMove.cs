@@ -38,7 +38,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
         }
 
-        private void Start()
+        private void Awake()
         {
             _nextTargetFinder = GetComponent<NextTargetFinder>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
@@ -48,7 +48,11 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBildingPosition;
+                Debug.Log(_navMeshAgent.destination);
+                Debug.Log(_nextTargetFinder.PlayerMainBilding.transform.position);
+
+
+                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBilding.transform.position;
 
                 yield return null;
             }
