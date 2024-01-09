@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scripts.UnitStateMachine
+namespace Assets.Scripts.UnitStateMachine
 {
-    public abstract class State : MonoBehaviour
+    internal abstract class State : MonoBehaviour
     {
         [SerializeField] private List<Transition> _transitions;
 

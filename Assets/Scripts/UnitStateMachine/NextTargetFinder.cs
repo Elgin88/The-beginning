@@ -1,18 +1,13 @@
+using Assets.Scripts.Bildings;
 using UnityEngine;
+using Zenject;
 
-namespace Scripts.UnitStateMachine
+namespace Assets.Scripts.UnitStateMachine
 {
-    public class NextTargetFinder : MonoBehaviour
+    internal class NextTargetFinder : MonoBehaviour
     {
-        [SerializeField] private GameObject _playerMainBilding;
+        [Inject] private PlayerMainBilding _playerMainBilding;
 
-        private GameObject _nextTarget;
-
-        public GameObject NextTarget => _nextTarget;
-
-        private void Start()
-        {
-            _nextTarget = _playerMainBilding;
-        }
+        public Vector3 PlayerMainBildingPosition => _playerMainBilding.transform.position;
     }
 }

@@ -1,41 +1,33 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Scripts.Enemy
+namespace Assets.Scripts.Enemy
 {
-    public class EnemyCreator : MonoBehaviour
+    internal class EnemyCreator : MonoBehaviour
     {
-        [SerializeField] private GameObject _playerMainBilding;
-        [SerializeField] private EnemyCollection _enemyCollection;
-        [SerializeField] private float _maxMainEnemyRadiusSpawn;
-        [SerializeField] private float _delayBetweenMainEnemySpawn;
-        [SerializeField] private float _maxMinorEnemySpawnRange;
+        [SerializeField] private float _delayBetweenEnemySpawn;
+        [SerializeField] private float _minorEnemySpawnRangeMax;
         [SerializeField] private float _minorEnemyCount;
 
+        private WaitForSeconds _delayBetweenMainEnemySpawnWFS;
         private SpawnPoint[] _spawnPoints;
         private SpawnPoint _currentSpawnPoint;
         private GameObject _currentMainEnemy;
         private GameObject _currentMinorEnemy;
-        private float _currentMainEnemyPositionX;
-        private float _currentMainEnemyPositionY;
-        private float _currentMainEnemyPositionZ;
+        private Coroutine _createAllEnemies;
         private float _currentMinorEnemyPositionX;
         private float _currentMinorEnemyPositionY;
         private float _currentMinorEnemyPositionZ;
-        private float _minMainEnemyRadiusSpawn;
-        private float _minMinorEnemySpawnRange;
-        private WaitForSeconds _delayBetweenMainEnemySpawnWFS;
-        private Coroutine _createAllEnemies;
+        private float _minorEnemySpawnRangeMin;
 
         private void Start()
         {
-            _minMainEnemyRadiusSpawn = _maxMainEnemyRadiusSpawn - 0.5f;
-            _minMinorEnemySpawnRange = _maxMinorEnemySpawnRange - 0.5f;
-
-            _delayBetweenMainEnemySpawnWFS = new WaitForSeconds(_delayBetweenMainEnemySpawn);
-            _createAllEnemies = StartCoroutine(CreateAllEnemies());
-
             _spawnPoints = GetComponentsInChildren<SpawnPoint>();
+            _delayBetweenMainEnemySpawnWFS = new WaitForSeconds(_delayBetweenEnemySpawn);
+
+            _minorEnemySpawnRangeMin = _minorEnemySpawnRangeMax - 0.5f;
+
+            _createAllEnemies = StartCoroutine(CreateAllEnemies());
         }
 
         private IEnumerator CreateAllEnemies()
@@ -46,13 +38,10 @@ namespace Scripts.Enemy
             {
                 yield return null;
 
-                _currentMainEnemy = _enemyCollection.GetRandomEnemy();
-
                 if (_currentMainEnemy == null)
                 {
                     isWork = false;
                     StopCoroutine(_createAllEnemies);
-
                     yield break;
                 }
 
@@ -69,12 +58,10 @@ namespace Scripts.Enemy
             SetMainStartPosition();
         }
 
-        public void CreateMinorEnemies()
+        private void CreateMinorEnemies()
         {
             for (int i = 0; i < _minorEnemyCount; i++)
             {
-                _currentMinorEnemy = _enemyCollection.GetRandomEnemy();
-
                 if (_currentMinorEnemy != null)
                 {
                     CalculateMinorStartPosition();
@@ -99,12 +86,12 @@ namespace Scripts.Enemy
 
             while (isWork)
             {
-                _currentMinorEnemyPositionX = _currentMainEnemy.transform.position.x + Random.Range(-_maxMinorEnemySpawnRange, _maxMinorEnemySpawnRange);
-                _currentMinorEnemyPositionZ = _currentMainEnemy.transform.position.z + Random.Range(-_maxMinorEnemySpawnRange, _maxMinorEnemySpawnRange);
+                _currentMinorEnemyPositionX = _currentMainEnemy.transform.position.x + Random.Range(-_minorEnemySpawnRangeMax, _minorEnemySpawnRangeMax);
+                _currentMinorEnemyPositionZ = _currentMainEnemy.transform.position.z + Random.Range(-_minorEnemySpawnRangeMax, _minorEnemySpawnRangeMax);
 
                 radius = Mathf.Sqrt(Mathf.Pow(_currentMinorEnemyPositionX - _currentMainEnemy.transform.position.x, 2) + Mathf.Pow(_currentMinorEnemyPositionZ - _currentMainEnemy.transform.position.z, 2));
 
-                if (radius >= _minMinorEnemySpawnRange & radius <= _maxMinorEnemySpawnRange)
+                if (radius >= _minorEnemySpawnRangeMin & radius <= _minorEnemySpawnRangeMax)
                 {
                     isWork = false;
                 }

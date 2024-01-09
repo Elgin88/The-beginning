@@ -2,16 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Scripts.UnitStateMachine
+namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(NextTargetFinder))]
 
-    public class StateMove : State
+    internal class StateMove : State
     {
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
-        private NavMeshAgent _navMeshAgent;
-        
+        private NavMeshAgent _navMeshAgent;        
 
         public override void StartState()
         {
@@ -49,7 +48,7 @@ namespace Scripts.UnitStateMachine
         {
             while (true)
             {
-                _navMeshAgent.destination = _nextTargetFinder.NextTarget.transform.position;
+                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBildingPosition;
 
                 yield return null;
             }
