@@ -526,6 +526,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerMainBilding
       objectReference: {fileID: 0}
+    - target: {fileID: 3725113220734701761, guid: a2cd18dd70fc6534d874c65ad6097f8c, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9195945105789166198, guid: a2cd18dd70fc6534d874c65ad6097f8c, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -583,6 +587,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2545940667423566284, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
+      propertyPath: m_NavMeshData
+      value: 
+      objectReference: {fileID: 23800000, guid: 626a08da869e84374a08e705f649b409, type: 2}
     - target: {fileID: 4363802104849498181, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
       propertyPath: m_Name
       value: NavMeshSurface
