@@ -38,7 +38,7 @@ namespace Assets.Scripts.Enemy
 
             while (isWork)
             {
-                CreateMainEnemy();
+                CreateMainEnemyInWave();
                 CreateMinorEnemies();
 
                 yield return _delayBetweenWavesEnemyWFS;
@@ -47,7 +47,7 @@ namespace Assets.Scripts.Enemy
             StopCoroutine(_createAllEnemies);
         }
 
-        private void CreateMainEnemy()
+        private void CreateMainEnemyInWave()
         {
             ChooseSpawnPoint();            
             _enemyFactory.SpawnRandom(_currentSpawnPoint.transform.position);
