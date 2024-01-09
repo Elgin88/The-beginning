@@ -8,6 +8,7 @@ namespace Assets.Scripts.Movement
         private static LayerMask _groundMask = LayerMask.GetMask("Water");
 
         private float _moveSpeed;
+        private float _slowSpeed;
         private float _rotationSpeed;
         private Transform _transform;
         private PlayerAnimator _animator;
@@ -22,14 +23,27 @@ namespace Assets.Scripts.Movement
             _rotationSpeed = player.RotationSpeed;
             _transform = player.transform;
             _animator = animator;
+
+            _slowSpeed = _moveSpeed;
         }
 
         public void Move(Vector2 direction)
         {
+            if (_animator.IsPlayingAttackSword)
+            {
+                _moveSpeed = 0;
+                Debug.Log(_moveSpeed);
+            }
+            else
+            {
+                _moveSpeed = _slowSpeed;
+
+            }
+
             float scaledMoveSpeed = _moveSpeed * Time.fixedDeltaTime;
             Vector3 movementVector = new Vector3(direction.x, 0, direction.y);
             _animator.SetAnimatorSpeed(movementVector, _moveSpeed);
-
+            
             _transform.position += movementVector * scaledMoveSpeed;
 
             SurfaceAlignment(movementVector);

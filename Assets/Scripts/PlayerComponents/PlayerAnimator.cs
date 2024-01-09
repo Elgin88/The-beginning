@@ -26,6 +26,17 @@ namespace Assets.Scripts.PlayerComponents
             _animator.SetTrigger(weapon.Name + AnimatorHash.Attack);
         }
 
+        public void SwordAttackAnimationStart()
+        {
+            IsPlayingAttackSword = true;
+        }
+        
+        public void SwordAttackAnimationEnd()
+        {
+            IsPlayingAttackSword = false;
+            Debug.Log("1");
+        }
+
         private void StartCoroutine()
         {
             if (_animation != null)
@@ -33,12 +44,17 @@ namespace Assets.Scripts.PlayerComponents
                 StopCoroutine(_animation);
             }
 
-            _animation = StartCoroutine(Animation(1));
+            _animation = StartCoroutine(Animation());
         }
 
-        private IEnumerator Animation(float time)
+        private IEnumerator Animation()
         {
-            return null;
+            IsPlayingAttackSword = true;
+
+            while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
+                yield return null;
+
+            IsPlayingAttackSword = false;
         }
     }
 }
