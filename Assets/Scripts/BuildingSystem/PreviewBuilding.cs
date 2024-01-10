@@ -1,20 +1,28 @@
 using UnityEngine;
+using Zenject;
 
 public class PreviewBuilding : MonoBehaviour
 {
-    [SerializeField] private float priviewYOffset = 0.08f;
-    [SerializeField] private GameObject _cellIndicator;
-    
-    private GameObject _previewBuilding;
+    private GameObject _cellIndicator;
+    private GameObject _preview;
     private int _defautlValueOfSize = 1;
     private Vector2Int _defaultSize;
     private SpriteRenderer _cellIndicatorRenderer;
     private Color _currentCellIndicatorColor;
+    private float priviewYOffset = 0.08f;
+
+    [Inject]
+    private void Construct(GameObject cellIndicator)
+    {
+        _cellIndicator = cellIndicator;
+        Debug.Log("превью инжект");
+    }
 
     private void Start()
     {
         _cellIndicator.SetActive(false);
         _cellIndicatorRenderer = _cellIndicator.GetComponentInChildren<SpriteRenderer>();
+        Debug.Log("превью старт");
     }
 
     private void MoveCellInndicator(Vector3 position)
@@ -24,7 +32,7 @@ public class PreviewBuilding : MonoBehaviour
 
     private void MovePreview(Vector3 position)
     {
-        _previewBuilding.transform.position = new Vector3(position.x, position.y + priviewYOffset, position.z);
+        _preview.transform.position = new Vector3(position.x, position.y + priviewYOffset, position.z);
     }
 
     private void _ChangeCellIndicatorSize(Vector2Int size)
@@ -53,7 +61,7 @@ public class PreviewBuilding : MonoBehaviour
 
     public void StartShowBuildPreview(GameObject prefab, Vector2Int size)
     {
-        _previewBuilding = Instantiate(prefab);
+        _preview = Instantiate(prefab);
         _ChangeCellIndicatorSize(size);
         _cellIndicator.SetActive(true);
     }
@@ -62,15 +70,15 @@ public class PreviewBuilding : MonoBehaviour
     {
         _cellIndicator.SetActive(false);
 
-        if (_previewBuilding != null)
+        if (_preview != null)
         {
-            Destroy(_previewBuilding);
+            Destroy(_preview);
         } 
     }
 
     public void UpdatePositionOfPreview(Vector3 position)
     {
-       if(_previewBuilding != null)
+       if(_preview != null)
         {
             MovePreview(position);
         }

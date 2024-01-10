@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54da34518e11b18429af3d97246b8441, type: 3}
+  m_Name: Building System Config
+  m_EditorClassIdentifier: 
+  <CurrentCamera>k__BackingField: {fileID: 0}
+  <BuildingLayerMask>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 0
+  <BuildingHandler>k__BackingField: {fileID: 4852821026968969570, guid: 555ea56dddb214945a42640f6347ed9d, type: 3}
+  <CellIndicator>k__BackingField: {fileID: 0}
+  <BuildingContainer>k__BackingField: {fileID: 11400000, guid: 251f29d6bdf625e46b45352b1b2ca8d4, type: 2}
+  <GridVisualisations>k__BackingField:
+  - {fileID: 0}
+  <PreviewBuilding>k__BackingField: {fileID: 0}
+  <BuildingPlacer>k__BackingField: {fileID: 0}
+  <PlacementSystem>k__BackingField: {fileID: 0}

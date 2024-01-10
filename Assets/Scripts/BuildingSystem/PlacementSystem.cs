@@ -2,15 +2,17 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Zenject;
 
 public class PlacementSystem : MonoBehaviour
 {
-    [SerializeField] private BuildingHandler _buildingHandler;
-    [SerializeField] private Grid _grid;
-    [SerializeField] private BuildingsContainer _buildingContainer;
+    private BuildingHandler _buildingHandler;
+    private Grid _grid;
+    private BuildingsContainer _buildingContainer;
     [SerializeField] private List<GameObject> _gridVisualisations;
-    [SerializeField] private PreviewBuilding _previewBuilding;
-    [SerializeField] private BuildingPlacer _buildingPlacer;
+    private PreviewBuilding _previewBuilding;
+    private BuildingPlacer _buildingPlacer;
+    private Transform _gridTransform;
 
     private Vector3 _inputPosition;
     private Vector3Int _gridCellPosition;
@@ -18,11 +20,26 @@ public class PlacementSystem : MonoBehaviour
 
     private Vector3Int _lastSettedPosition = Vector3Int.zero;
     private IBuildingState _buildingState;
-    
-   
+
+    [Inject]
+    private void Construct(BuildingHandler buildingHandler, Grid grid, BuildingsContainer buildingContainer, List<GameObject> gridVisualisations,
+                                                                                PreviewBuilding previewBuilding, BuildingPlacer buildingPlacer) //Transform gridTransform
+    {
+        _buildingHandler = buildingHandler;
+        _grid = grid;
+        _buildingContainer = buildingContainer;
+        _gridVisualisations = gridVisualisations;
+        _previewBuilding = previewBuilding;
+        _buildingPlacer = buildingPlacer;
+        //_gridTransform = gridTransform;
+    }
+
+
     private void Start()
     {
         EndStateAction();
+
+        Debug.Log("система стартанула");
 
         _groundData = new();
         _buildingData = new();
@@ -66,7 +83,13 @@ public class PlacementSystem : MonoBehaviour
     {
         for (int i = 0; i < _gridVisualisations.Count; i++)
         {
+            
+            //if( _gridVisualisations[i] != null)
+            //{
+            //    Instantiate(_gridVisualisations[i], _gridTransform);
+            //}
             _gridVisualisations[i].SetActive(true);
+            //Instantiate(_gridVisualisations[i],);
         }
     }
 

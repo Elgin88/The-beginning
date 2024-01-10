@@ -9,8 +9,6 @@ public class PanelButton : MonoBehaviour
     [SerializeField] private Button _button;
     [SerializeField] private Button _closeButton;
     [SerializeField] private GameObject _buildPanel;
-    //[SerializeField] private GameObject _buildSystem;
-
 
     public static Action PanelActivated;
     public static Action PanelDeActivated;
@@ -32,13 +30,11 @@ public class PanelButton : MonoBehaviour
     {
         _buildPanel.SetActive(true);
         PanelActivated?.Invoke();
-       // _buildSystem.SetActive(true);
     }
 
     public void OnCloseButtonClicked()
     {
         _buildPanel.SetActive(false);
         PanelDeActivated?.Invoke();
-       // _buildSystem.SetActive(false);
     }
 }

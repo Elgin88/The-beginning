@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BuildingPlacer : MonoBehaviour
 {
-    [SerializeField] private List<GameObject> _placedBuildings = new();
+    private List<GameObject> _placedBuildings = new();
 
     public int PlaceBuilding(GameObject prefab, Vector3 position)
     {

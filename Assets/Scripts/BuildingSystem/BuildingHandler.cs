@@ -2,13 +2,21 @@ using System;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.InputSystem;
+using Zenject;
 
 
-[RequireComponent(typeof(InputActions))]
+//[RequireComponent(typeof(InputActions))]
 public class BuildingHandler : MonoBehaviour
 {
-    [SerializeField] private Camera _sceneCamera;
-    [SerializeField] private LayerMask _placeToBuild;
+    private Camera _sceneCamera;
+    private LayerMask _placeToBuild;
+
+    [Inject]
+    private void Construct(Camera sceneCamera, LayerMask placeToBuild)
+    {
+        _sceneCamera = sceneCamera;
+        _placeToBuild = placeToBuild;
+    }
 
     private Vector2 _inputPosition;
     private Vector3 _lastPosition;
@@ -21,7 +29,8 @@ public class BuildingHandler : MonoBehaviour
 
     private void Awake()
     {
-        _inputActions = new InputActions();    
+        _inputActions = new InputActions();
+        Debug.Log("хендлер стартанул");
     }
 
     private void OnEnable()
@@ -37,8 +46,7 @@ public class BuildingHandler : MonoBehaviour
     private void Update()
     {
         _inputActions.BuildingSystem.PlaceBuilding.performed += OnPlace;
-        _inputPosition = _inputActions.BuildingSystem.DeterminePosition.ReadValue<Vector2>();
-      
+        _inputPosition = _inputActions.BuildingSystem.DeterminePosition.ReadValue<Vector2>();     
     }
 
     private void OnPlace(InputAction.CallbackContext context)  
