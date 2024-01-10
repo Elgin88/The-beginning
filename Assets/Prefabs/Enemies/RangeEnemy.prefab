@@ -12,15 +12,14 @@ GameObject:
   - component: {fileID: 7486498519799053306}
   - component: {fileID: 3675599283457465597}
   - component: {fileID: 1721022974191160471}
-  - component: {fileID: 6890653168282878942}
-  - component: {fileID: 8705730019688036525}
+  - component: {fileID: 8937344966503328155}
+  - component: {fileID: 6492183350018304201}
   - component: {fileID: 4880319856371633147}
-  - component: {fileID: 1782918176487641301}
-  - component: {fileID: 4134732036131635327}
   - component: {fileID: 7032817760494187967}
-  - component: {fileID: 3161414368038216669}
+  - component: {fileID: 1782918176487641301}
+  - component: {fileID: 6415274043360687229}
   m_Layer: 6
-  m_Name: Melee
+  m_Name: RangeEnemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -69,7 +68,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: d7a14fdd33ecb1e4a932c17c599120fb, type: 2}
+  - {fileID: 2100000, guid: 047b19c2baa6c9447a868d5bcce3404b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,7 +113,7 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
---- !u!54 &6890653168282878942
+--- !u!54 &8937344966503328155
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -141,7 +140,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
---- !u!114 &8705730019688036525
+--- !u!114 &6492183350018304201
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -150,7 +149,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 869905696999793707}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ef7bc45fe5144989a7b343728d138f, type: 3}
+  m_Script: {fileID: 11500000, guid: cb59048355b304a2ea09e15bc0afa954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4880319856371633147
@@ -166,6 +165,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _startState: {fileID: 1782918176487641301}
+--- !u!114 &7032817760494187967
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a76590fd6da9a42c7becd95ee238c35a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1782918176487641301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,33 +190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _transitions:
-  - {fileID: 4134732036131635327}
---- !u!114 &4134732036131635327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869905696999793707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 81932cd6ee17443faaa1d3a2f44e3ba3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &7032817760494187967
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 869905696999793707}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a76590fd6da9a42c7becd95ee238c35a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerMainBilding: {fileID: 0}
---- !u!195 &3161414368038216669
+  - {fileID: 0}
+--- !u!195 &6415274043360687229
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

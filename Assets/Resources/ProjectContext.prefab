@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 420052519652444982}
   - component: {fileID: -2243326136001347608}
   - component: {fileID: 4776504476979238173}
+  - component: {fileID: 349030465839691679}
   m_Layer: 0
   m_Name: ProjectContext
   m_TagString: Untagged
@@ -50,6 +51,7 @@ MonoBehaviour:
   _monoInstallers:
   - {fileID: -2243326136001347608}
   - {fileID: 4776504476979238173}
+  - {fileID: 349030465839691679}
   _installerPrefabs: []
   _parentNewObjectsUnderContext: 1
   _editorReflectionBakingCoverageMode: 0
@@ -95,3 +97,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerMainBilding: {fileID: 6612789319109849959, guid: a2cd18dd70fc6534d874c65ad6097f8c, type: 3}
+--- !u!114 &349030465839691679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3103034419950224572}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30ac128b749630f4eaebe05cec88130f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _enemyFactory: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+  _meleeEnemy: {fileID: 4346107256368719568, guid: 2ed31e53ce441df40b127c0a917c5fd5, type: 3}
+  _rangeEnemy: {fileID: 6492183350018304201, guid: d76560c8ebe7820488a141824560cf6d, type: 3}

@@ -22,7 +22,7 @@ namespace Assets.Scripts.Movement
         {
             if (collision.gameObject.TryGetComponent<IMoveable>(out IMoveable moveable))
             {
-                if (this.gameObject.TryGetComponent<Melee>(out Melee enemy))
+                if (this.gameObject.TryGetComponent<MeleeEnemy>(out MeleeEnemy enemy))
                     return;
 
                 Vector3 direction = collision.contacts[0].point - transform.position;
