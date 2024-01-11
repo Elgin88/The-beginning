@@ -1,11 +1,14 @@
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NextTargetFinder))]
+    [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(Rigidbody))]
 
     internal class Enemy : MonoBehaviour, IDamageable
     {

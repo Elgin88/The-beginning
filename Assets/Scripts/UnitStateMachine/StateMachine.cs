@@ -3,11 +3,14 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
+    [RequireComponent(typeof(StateMove))]
+    [RequireComponent(typeof(TransitionMove))]
+
     internal class StateMachine : MonoBehaviour
     {
         [SerializeField] private State _startState;
 
-        private State _currentState = null;
+        private State _currentState;
         private Coroutine _startTrySetNextState;
 
         private IEnumerator Start()
@@ -43,7 +46,9 @@ namespace Assets.Scripts.UnitStateMachine
                 if (_currentState != null & _currentState.IsNeedSetNextState)
                 {
                     StopCurrentState();
+
                     _currentState = _currentState.GetNextState();
+
                     StartCurrentState();
                 }
 
