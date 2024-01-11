@@ -6,16 +6,23 @@ namespace Assets.Scripts.PlayerComponents.Weapons
     [RequireComponent(typeof(Collider))]
     internal abstract class Weapon : MonoBehaviour
     {
-        [SerializeField] protected LayerMask LayerMask;
-
         [SerializeField] private float _damage;
         [SerializeField] private float _attackSpeed;
+        [SerializeField] private string _name;
+
+        [SerializeField] protected LayerMask LayerMask;
+
+        private Collider _weaponCollider;
 
         protected Coroutine AttackCoroutine;
         protected bool CanAttack = true;
         protected float TimePast;
 
-        private Collider _weaponCollider;
+        public string Name => _name;
+
+        public float Damage => _damage;
+
+        public float AttackSpeed => _attackSpeed;
 
         private void Start()
         {
@@ -23,10 +30,6 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
             _weaponCollider.enabled = false;
         }
-
-        public float Damage => _damage;
-
-        public float AttackSpeed => _attackSpeed;
 
         public virtual void Attack()
         {

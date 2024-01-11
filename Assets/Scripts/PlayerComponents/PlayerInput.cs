@@ -1,29 +1,21 @@
 ﻿using UnityEngine;
-using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.Movement;
 using Zenject;
 
-namespace Assets.Scripts.Input
+namespace Assets.Scripts.PlayerComponents
 {
-    [RequireComponent(typeof(Player))]
     internal class PlayerInput : MonoBehaviour
     {
-        [SerializeField] private LayerMask _layerMask;
-
         private InputActions _inputActions;
 
-        private Player _player;
-        private Moveable _playerMover;
+        private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
 
         private Vector2 _moveDirection;
 
         private void Start()
         {
-            _player = GetComponent<Player>();
-
             _inputActions = new InputActions();
-            _playerMover = new Moveable(_player, _layerMask);
 
             _inputActions.Enable();
         }
@@ -32,6 +24,7 @@ namespace Assets.Scripts.Input
         {
             _moveDirection = _inputActions.Player.Move.ReadValue<Vector2>();
             _inputActions.Player.Attack.performed += ctx => OnAttackInput();
+            _inputActions.Player.ChangeWeapon.performed += ctx => OnChangeWeaponInput();
 
             OnMoveInput(_moveDirection);
         }
@@ -39,14 +32,6 @@ namespace Assets.Scripts.Input
         private void OnDisable()
         {
             _inputActions.Disable();
-        }
-
-        [Inject]
-        private void Construct(PlayerAttacker attacker)
-        {
-            _playerAttacker = attacker;
-
-            attacker.ChangeWeapon();
         }
 
         private void OnMoveInput(Vector2 direction)
@@ -57,6 +42,18 @@ namespace Assets.Scripts.Input
         private void OnAttackInput()
         {
             _playerAttacker.Attack();
+        }
+        
+        private void OnChangeWeaponInput()
+        {
+            _playerAttacker.ChangeWeapon();
+        }
+
+        [Inject]
+        private void Construct(PlayerMovement movement, PlayerAttacker attacker)
+        {
+            _playerMover = movement;
+            _playerAttacker = attacker;
         }
     }
 }
