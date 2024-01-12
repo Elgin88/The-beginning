@@ -2353,7 +2353,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8076804215856804845}
   - component: {fileID: 5538255215729447699}
-  - component: {fileID: 4875278941520822296}
   - component: {fileID: 5549773251676875182}
   - component: {fileID: 529700466918893106}
   - component: {fileID: -7027626033592967101}
@@ -2406,33 +2405,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &4875278941520822296
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  serializedVersion: 4
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 112
-  m_CollisionDetection: 0
 --- !u!136 &5549773251676875182
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -2452,10 +2424,10 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.74653745
-  m_Height: 3.9421644
+  m_Radius: 2
+  m_Height: 5.36
   m_Direction: 1
-  m_Center: {x: 0, y: 1.963428, z: 0.24653745}
+  m_Center: {x: 0, y: 2.24, z: 0.24653745}
 --- !u!195 &529700466918893106
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2465,12 +2437,12 @@ NavMeshAgent:
   m_GameObject: {fileID: 6517527388443274768}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 0.5
-  m_Speed: 3.5
+  m_Radius: 2
+  m_Speed: 5
   m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 120
-  m_StoppingDistance: 0
+  m_StoppingDistance: 10
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1

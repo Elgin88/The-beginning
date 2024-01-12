@@ -8,7 +8,6 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NextTargetFinder))]
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(CapsuleCollider))]
 
     internal class Enemy : MonoBehaviour, IDamageable
