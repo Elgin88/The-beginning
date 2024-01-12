@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemy
 
         [Inject] private DiContainer _currentEnemyDI;
 
-        public void SpawnRandom(Vector3 position)
+        internal void SpawnRandom(Vector3 position)
         {
             switch (Random.Range(1, 3))
             {

@@ -50,6 +50,8 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 _navMeshAgent.destination = _nextTargetFinder.PlayerMainBilding.transform.position;
 
+                gameObject.transform.rotation = Quaternion.LookRotation(_nextTargetFinder.PlayerMainBilding.transform.position - gameObject.transform.position, Vector3.up);
+
                 yield return null;
             }
         }
