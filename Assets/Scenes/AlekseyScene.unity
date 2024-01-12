@@ -510,7 +510,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7671195749959868275, guid: c764c585b88a9454c9328db6d5dfd3f2, type: 3}
+    - {fileID: 4377390440670016986, guid: c764c585b88a9454c9328db6d5dfd3f2, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c764c585b88a9454c9328db6d5dfd3f2, type: 3}
@@ -698,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9040862911161240251, guid: b4d4f02336174c149ac912348adb3381, type: 3}
       propertyPath: m_Name
-      value: System
+      value: Zenject
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

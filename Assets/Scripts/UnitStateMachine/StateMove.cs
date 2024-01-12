@@ -10,7 +10,6 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMove : State
     {
-        private Animator _animator;
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
         private NavMeshAgent _navMeshAgent;
@@ -43,7 +42,6 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
-            _animator = GetComponent<Animator>();
             _nextTargetFinder = GetComponent<NextTargetFinder>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
