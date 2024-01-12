@@ -9,7 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private bool _isNeedNextState = false;
 
-        public bool IsNeedSetNextState => _isNeedNextState;
+        public bool IsNeedNextState => _isNeedNextState;
 
         public abstract void StartState();
 

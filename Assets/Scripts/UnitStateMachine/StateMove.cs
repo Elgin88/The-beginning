@@ -1,16 +1,19 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
+using Scripts.Static;
 
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(NextTargetFinder))]
+    [RequireComponent(typeof(Animator))]
 
     internal class StateMove : State
     {
+        private Animator _animator;
         private Coroutine _move;
         private NextTargetFinder _nextTargetFinder;
-        private NavMeshAgent _navMeshAgent;        
+        private NavMeshAgent _navMeshAgent;
 
         public override void StartState()
         {
@@ -40,6 +43,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
+            _animator = GetComponent<Animator>();
             _nextTargetFinder = GetComponent<NextTargetFinder>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
         }
@@ -49,8 +53,6 @@ namespace Assets.Scripts.UnitStateMachine
             while (true)
             {
                 _navMeshAgent.destination = _nextTargetFinder.PlayerMainBilding.transform.position;
-
-                gameObject.transform.rotation = Quaternion.LookRotation(_nextTargetFinder.PlayerMainBilding.transform.position - gameObject.transform.position, Vector3.up);
 
                 yield return null;
             }
