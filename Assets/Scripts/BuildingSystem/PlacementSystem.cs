@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class PlacementSystem : MonoBehaviour
 {
-    [SerializeField] private BuildPointInput _inputedPoint;
+    [SerializeField] private BuildingHandler _buildingHandler;
     [SerializeField] private Grid _grid;
     [SerializeField] private BuildingsContainer _buildingContainer;
     [SerializeField] private List<GameObject> _gridVisualisations;
@@ -52,7 +52,7 @@ public class PlacementSystem : MonoBehaviour
             return;
         }
 
-        _inputPosition = _inputedPoint.DetermineSpot();
+        _inputPosition = _buildingHandler.DetermineSpot();
         _gridCellPosition = _grid.WorldToCell(_inputPosition);
 
         if(_lastSettedPosition != _gridCellPosition)
@@ -80,11 +80,11 @@ public class PlacementSystem : MonoBehaviour
 
     private void StartStateAction()
     {
-        if (_inputedPoint.IsPointerOverUI())
+        if (_buildingHandler.IsPointerOverUI())
         {
             return;
         }
-            _inputPosition = _inputedPoint.DetermineSpot();
+            _inputPosition = _buildingHandler.DetermineSpot();
             _gridCellPosition = _grid.WorldToCell(_inputPosition);
 
         _buildingState.OnAction(_gridCellPosition);
@@ -106,14 +106,14 @@ public class PlacementSystem : MonoBehaviour
 
     private void SubscribeOnInpudActions()
     {
-        _inputedPoint.OnClicked += StartStateAction;
-        _inputedPoint.OnCancel += EndStateAction;
+        _buildingHandler.OnPlaced += StartStateAction;
+       // _buildingHandler.OnCancel += EndStateAction;
     }
 
     private void UnSubscribeOnInpudActions()
     {
-        _inputedPoint.OnClicked -= StartStateAction;
-        _inputedPoint.OnCancel -= EndStateAction;
+        _buildingHandler.OnPlaced -= StartStateAction;
+        //_buildingHandler.OnCancel -= EndStateAction;
     }
 
     public void StartPlacement(int id)
