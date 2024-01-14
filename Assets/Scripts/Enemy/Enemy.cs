@@ -14,7 +14,7 @@ namespace Assets.Scripts.Enemy
     {
         public Transform Transform => gameObject.transform;
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
             throw new System.NotImplementedException();
         }
