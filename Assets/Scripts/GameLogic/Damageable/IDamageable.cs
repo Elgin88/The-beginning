@@ -6,6 +6,9 @@ namespace Assets.Scripts.GameLogic.Damageable
     {
         public Transform Transform { get; }
 
-        public void TakeDamage();
+        public void TakeDamage(int damage);
     }
+
+    
+
 }

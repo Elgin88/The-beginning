@@ -12,7 +12,7 @@ namespace Assets.Scripts.Sample
 
         public float RotationSpeed => 1;
 
-        public void TakeDamage()
+        public void TakeDamage(int damage)
         {
         }
     }

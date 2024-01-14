@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -18,6 +16,11 @@ public class BuildPointInput : MonoBehaviour
         DeterminePlayersInput();
     }
 
+    public bool IsPointerOverUI()
+    {
+        return EventSystem.current.IsPointerOverGameObject();
+    }
+
     private void DeterminePlayersInput()  //пока всё на старой системе ввода и с использованием мышки - доработать с нормальным управлением
     {
         if (Input.GetMouseButtonDown(0))
@@ -27,19 +30,14 @@ public class BuildPointInput : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))   //пока всё на старой системе ввода и с использованием мышки - доработать с нормальным управлением
         {
-            OnCancel?.Invoke();   
+            OnCancel?.Invoke();
         }
-    }
-
-    public bool IsPointerOverUI()
-    {
-        return EventSystem.current.IsPointerOverGameObject();
     }
 
     public Vector3 DetermineSpot()
     {
         Vector3 mousePosition = Input.mousePosition;  //пока всё на старой системе ввода и с использованием мышки - доработать с нормальным управлением
-        mousePosition.z = _sceneCamera.nearClipPlane;
+        //mousePosition.z = _sceneCamera.nearClipPlane;
 
         Ray ray = _sceneCamera.ScreenPointToRay(mousePosition);
         RaycastHit hit;

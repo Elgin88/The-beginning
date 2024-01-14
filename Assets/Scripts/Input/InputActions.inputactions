@@ -112,6 +112,76 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "BuildingSystem",
+            "id": "2a085236-acaa-40d5-9c42-8fa5532071d7",
+            "actions": [
+                {
+                    "name": "PlaceBuilding",
+                    "type": "Button",
+                    "id": "4d78500c-6472-418e-8865-1517dc33d2a7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "DeterminePosition",
+                    "type": "Value",
+                    "id": "0eec7b75-8153-4a0e-8f7b-dc68a10a7217",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "e0f4df95-7353-444c-b807-2f59119f31e6",
+                    "path": "<Mouse>/press",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "PlaceBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2cabb0e2-205a-49ed-a7a1-96c22168db30",
+                    "path": "<Touchscreen>/touch2/tap",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "PlaceBuilding",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "24dc149f-84e2-469c-a527-e1ccf778b46d",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard and Mouse",
+                    "action": "DeterminePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "dab23ef7-91b4-47fa-a8c4-bb4ab45e61b0",
+                    "path": "<Touchscreen>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Mobile",
+                    "action": "DeterminePosition",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [
@@ -130,6 +200,11 @@
                     "isOR": false
                 }
             ]
+        },
+        {
+            "name": "Mobile",
+            "bindingGroup": "Mobile",
+            "devices": []
         }
     ]
 }
