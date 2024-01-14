@@ -8,12 +8,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
 namespace Assets.Scripts.Tests
 {
     internal class TestMover : MonoBehaviour
     {
-        [SerializeField] private GameObject _target;
+        [Inject] private PlayerMainBilding _playerMainBildin;
 
         private NavMeshAgent _navMeshAgent;
 
@@ -24,7 +25,9 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            _navMeshAgent.destination = _target.transform.position;
+            Debug.Log(_playerMainBildin.transform.position);
+          
+            _navMeshAgent.destination = _playerMainBildin.transform.position;
         }
     }
 }
