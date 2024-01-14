@@ -20,14 +20,19 @@ namespace Assets.Scripts.PlayerComponents
 
         public void Attack()
         {
-            _animator.SetAnimatorAttackTrigger(_currentWeapon);
+            if (_currentWeapon.CanAttack)
+            {
+                _animator.SetAnimatorAttackTrigger(_currentWeapon);
 
-            _currentWeapon.Attack();
+                _currentWeapon.Attack();
+            }
         }
 
         public void ChangeWeapon()
         {
             _currentWeapon = _inventory.ChangeWeapon();
+
+            _animator.SetAnimatorChangeWeaponTrigger(_currentWeapon);
         }
     }
 }

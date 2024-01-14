@@ -121,7 +121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 0
-  _attackSpeed: 0
+  _attackSpeed: 2
   _name: Sword
   LayerMask:
     serializedVersion: 2
