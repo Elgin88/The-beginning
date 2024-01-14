@@ -55,9 +55,14 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             }
         }
 
+        private void OnDisable()
+        {
+            _mark.UnMarkEnemy();
+        }
+
         public override void Attack()
         {
-            if (_closestTarget != null && CanAttack == true)
+            if (_closestTarget != null)
             {
                 Arrow arrow = _pool.GetArrow();
 

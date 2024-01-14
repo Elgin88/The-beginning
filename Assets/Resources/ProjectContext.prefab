@@ -82,8 +82,7 @@ MonoBehaviour:
   _playerInput: {fileID: 7767014089020145184, guid: ba64e974c8fe44847a99348e16c3f64c, type: 3}
   _playerConfig: {fileID: 11400000, guid: ded69eba618df4c4a80ed4d2e11e7ef6, type: 2}
   _playerAnimator: {fileID: 7936983417069384191, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
-  _animator: {fileID: 11256372411677511, guid: b1e9a0e50cbe08a45863e124dded310e, type: 3}
-  _weaponInventory: {fileID: 2869036795432324402, guid: f6fbce4547b17d340af7104adbc4aaf7, type: 3}
+  _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}
 --- !u!114 &4776504476979238173
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,5 +109,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyFactory: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
-  _meleeEnemy: {fileID: 4346107256368719568, guid: 2ed31e53ce441df40b127c0a917c5fd5, type: 3}
-  _rangeEnemy: {fileID: 6492183350018304201, guid: d76560c8ebe7820488a141824560cf6d, type: 3}
