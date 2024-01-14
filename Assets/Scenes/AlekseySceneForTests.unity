@@ -501,17 +501,16 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 935170830}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.12465445, y: 4.715969, z: -11.190053}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 705507995}
   - {fileID: 90989968}
   - {fileID: 456251078}
-  - {fileID: 963194228}
   - {fileID: 15194262}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &963194225
 GameObject:
@@ -599,12 +598,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.3767093, y: -0, z: -0, w: 0.9263316}
-  m_LocalPosition: {x: -20, y: 16.21, z: -8.64}
+  m_LocalPosition: {x: -20, y: 10, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 935170831}
-  m_RootOrder: -1
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 44.26, y: 0, z: 0}
 --- !u!114 &963194229
 MonoBehaviour:
@@ -2823,7 +2822,7 @@ Transform:
   - {fileID: 3424252943572640615}
   - {fileID: 6451339526841776169}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!1 &6012672452774655186
 GameObject:
@@ -2932,8 +2931,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5995899389230478329}
   - component: {fileID: 420411939905972611}
-  - component: {fileID: 6376646369471375685}
   - component: {fileID: 6376646369471375684}
+  - component: {fileID: 6376646369471375685}
   m_Layer: 0
   m_Name: EnemyOrc
   m_TagString: Untagged
@@ -2951,8 +2950,8 @@ NavMeshAgent:
   m_Enabled: 1
   m_AgentTypeID: 0
   m_Radius: 0.5
-  m_Speed: 3.5
-  m_Acceleration: 8
+  m_Speed: 6
+  m_Acceleration: 100
   avoidancePriority: 50
   m_AngularSpeed: 120
   m_StoppingDistance: 0

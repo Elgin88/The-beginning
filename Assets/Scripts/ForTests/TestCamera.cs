@@ -18,7 +18,7 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            transform.position = new Vector3(_orc.transform.position.x, 20, _orc.transform.position.z - 20);
+            transform.position = new Vector3(_orc.transform.position.x, 10, _orc.transform.position.z - 12);
         }
     }
 }
