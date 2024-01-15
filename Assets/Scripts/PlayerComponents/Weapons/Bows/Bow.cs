@@ -57,7 +57,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnDisable()
         {
-            _mark.UnMarkEnemy();
+            if (_mark != null)
+            {
+                _mark.UnMarkEnemy();
+            }
         }
 
         public override void Attack()
