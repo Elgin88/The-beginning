@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private EnemyMeleeOrcGreen _enemyMeleeOrc;
+        [SerializeField] private EnemyMeleeOgreGreen _enemyMeleeOrc;
         [SerializeField] private EnemyRange _rangeEneny;
         [SerializeField] private float _delayBetweenWavesEnemy;
         [SerializeField] private float _minorEnemySpawnRangeMax;
