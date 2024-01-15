@@ -15,8 +15,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         private Collider _weaponCollider;
 
         protected Coroutine AttackCoroutine;
-        protected bool CanAttack = true;
         protected float TimePast;
+
+        public bool CanAttack { protected set; get; }
 
         public string Name => _name;
 
@@ -29,24 +30,21 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             _weaponCollider = GetComponent<Collider>();
 
             _weaponCollider.enabled = false;
+
+            CanAttack = true;
         }
 
         public virtual void Attack()
         {
-            if (AttackCoroutine != null)
-            {
-                TimePast = 0;
-                StopCoroutine(AttackCoroutine);
-            }
-
-            AttackCoroutine =  StartCoroutine(AttackDelay(_attackSpeed));
+            if (CanAttack)
+                AttackCoroutine = StartCoroutine(AttackDelay(_attackSpeed));
         }
 
         private IEnumerator AttackDelay(float attackSpeed)
         {
             CanAttack = false;
 
-            var attackDelay = new WaitForSeconds(attackSpeed);
+            WaitForSeconds attackDelay = new(attackSpeed);
 
             yield return attackDelay;
 

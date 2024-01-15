@@ -87,14 +87,14 @@ ModelImporter:
       curves: []
       events:
       - time: 0
-        functionName: SwordAttackAnimationStart
+        functionName: SwordAttackAnimationStart()
         data: 
         objectReferenceParameter: {fileID: 170511074636822116, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
       - time: 1
-        functionName: SwordAttackAnimationEnd
+        functionName: SwordAttackAnimationEnd()
         data: 
         objectReferenceParameter: {fileID: 170511074636822116, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
         floatParameter: 0

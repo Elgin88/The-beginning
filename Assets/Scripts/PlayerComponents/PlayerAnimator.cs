@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.ConStants;
 using Assets.Scripts.PlayerComponents.Weapons;
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents
@@ -8,11 +7,6 @@ namespace Assets.Scripts.PlayerComponents
     internal class PlayerAnimator : MonoBehaviour
     {
         [SerializeField] private Animator _animator;
-
-        private Coroutine _animation;
-
-        public bool IsPlayingAttackSword { get; private set; }
-        public bool IsPlayingAttackBow { get; private set; }
 
         public void SetAnimatorSpeed(Vector3 movementVector, float moveSpeed)
         {
@@ -23,38 +17,18 @@ namespace Assets.Scripts.PlayerComponents
 
         public void SetAnimatorAttackTrigger(Weapon weapon)
         {
-            _animator.SetTrigger(weapon.Name + AnimatorHash.Attack);
+            if (weapon is Bow)
+                _animator.SetTrigger(AnimatorHash.BowAttack);
+            else
+                _animator.SetTrigger(AnimatorHash.SwordAttack);
         }
 
-        public void SwordAttackAnimationStart()
+        public void SetAnimatorChangeWeaponTrigger(Weapon weapon)
         {
-            IsPlayingAttackSword = true;
-        }
-        
-        public void SwordAttackAnimationEnd()
-        {
-            IsPlayingAttackSword = false;
-            Debug.Log("1");
-        }
-
-        private void StartCoroutine()
-        {
-            if (_animation != null)
-            {
-                StopCoroutine(_animation);
-            }
-
-            _animation = StartCoroutine(Animation());
-        }
-
-        private IEnumerator Animation()
-        {
-            IsPlayingAttackSword = true;
-
-            while (_animator.GetCurrentAnimatorStateInfo(0).normalizedTime < 1.0f)
-                yield return null;
-
-            IsPlayingAttackSword = false;
+            if (weapon is Bow)
+                _animator.SetTrigger(AnimatorHash.EquipBow);
+            else
+                _animator.SetTrigger(AnimatorHash.EquipSword);
         }
     }
 }

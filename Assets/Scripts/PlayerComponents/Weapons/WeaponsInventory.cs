@@ -21,10 +21,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                 {
                     int weaponIndex = i;
 
-                    if (weaponIndex < _weapons.Count)
-                        _currentWeapon = _weapons[weaponIndex++];
-                    else
-                        _currentWeapon = _weapons[0];
+                    _currentWeapon = weaponIndex < _weapons.Count - 1 ? _weapons[++weaponIndex] : _weapons[0];
 
                     _currentWeapon.gameObject.SetActive(true);
 
