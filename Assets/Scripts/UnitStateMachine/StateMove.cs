@@ -12,8 +12,8 @@ namespace Assets.Scripts.UnitStateMachine
     {
         [Inject] private PlayerMainBilding _playerMainBilding;
 
-        private Coroutine _move;
         private NavMeshAgent _navMeshAgent;
+        private Coroutine _move;
         private Vector3 _currentTargetPosition;
         private Vector3 _startTargetPosition;
 
