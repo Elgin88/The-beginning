@@ -8,7 +8,8 @@ public class PlayerMainBildingInstaller : MonoInstaller
 
     public override void InstallBindings()
     {
-        Container.Bind<PlayerMainBilding>().FromInstance(_playerMainBilding).AsSingle();
-        Container.QueueForInject(_playerMainBilding);
+        PlayerMainBilding playerMainBilding = Container.InstantiatePrefabForComponent<PlayerMainBilding>(_playerMainBilding, _playerMainBilding.transform.position, Quaternion.identity, null);
+
+        Container.Bind<PlayerMainBilding>().FromInstance(playerMainBilding).AsSingle().NonLazy();
     }
 }

@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-    internal class SpawnPoint: MonoBehaviour
+    internal class EnemySpawnPoint: MonoBehaviour
     {
     }
 }

@@ -6,7 +6,6 @@ using UnityEngine.AI;
 namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(StateMachine))]
-    [RequireComponent(typeof(NextTargetFinder))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(CapsuleCollider))]
 

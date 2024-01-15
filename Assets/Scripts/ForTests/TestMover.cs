@@ -25,8 +25,6 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            Debug.Log(_playerMainBildin.transform.position);
-          
             _navMeshAgent.destination = _playerMainBildin.transform.position;
         }
     }

@@ -1,18 +1,21 @@
 using System.Collections;
+using Assets.Scripts.Bildings;
 using UnityEngine;
 using UnityEngine.AI;
-using Scripts.Static;
+using Zenject;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(NextTargetFinder))]
     [RequireComponent(typeof(Animator))]
 
     internal class StateMove : State
     {
+        [Inject] private PlayerMainBilding _playerMainBilding;
+
         private Coroutine _move;
-        private NextTargetFinder _nextTargetFinder;
         private NavMeshAgent _navMeshAgent;
+        private Vector3 _currentTargetPosition;
+        private Vector3 _startTargetPosition;
 
         public override void StartState()
         {
@@ -42,15 +45,17 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
-            _nextTargetFinder = GetComponent<NextTargetFinder>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            _startTargetPosition = _playerMainBilding.transform.position;
+            _currentTargetPosition = _startTargetPosition;
         }
 
         private IEnumerator Move()
         {
             while (true)
             {
-                _navMeshAgent.destination = _nextTargetFinder.PlayerMainBilding.transform.position;
+                _navMeshAgent.destination = _currentTargetPosition;
 
                 yield return null;
             }
