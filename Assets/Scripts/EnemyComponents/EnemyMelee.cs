@@ -1,10 +1,6 @@
-using UnityEngine;
-
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(Enemy))]
-
-    internal class EnemyMelee : Enemy
+    internal abstract class EnemyMelee : Enemy
     {
     }
 }

@@ -2355,12 +2355,13 @@ GameObject:
   - component: {fileID: 5538255215729447699}
   - component: {fileID: 5549773251676875182}
   - component: {fileID: 529700466918893106}
-  - component: {fileID: -7174189944906993861}
   - component: {fileID: -3228283824888894521}
   - component: {fileID: -963228721103223142}
   - component: {fileID: -4093611054570065152}
+  - component: {fileID: 5430675260899835263}
+  - component: {fileID: 6106297887006264949}
   m_Layer: 0
-  m_Name: OrcBossGreen
+  m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2449,19 +2450,6 @@ NavMeshAgent:
   m_BaseOffset: 0
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &-7174189944906993861
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7ef7bc45fe5144989a7b343728d138f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
 --- !u!114 &-3228283824888894521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,6 +2488,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81932cd6ee17443faaa1d3a2f44e3ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &5430675260899835263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1c4fcb17c5842e88c5b0bea10f8454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6106297887006264949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
 --- !u!1 &6583875623457425539
 GameObject:
   m_ObjectHideFlags: 0

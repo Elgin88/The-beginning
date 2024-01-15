@@ -16,14 +16,13 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private int _health;
 
         private NavMeshAgent _navMeshAgent;
-        private Animator _animator;
         private float _currentSpeed;
 
         Transform IDamageable.Transform => gameObject.transform;
 
         internal NavMeshAgent NavMeshAgent => _navMeshAgent;
 
-        internal Animator Animator => _animator;
+        
 
         internal float CurrentSpeed => _currentSpeed;
 
@@ -40,7 +39,6 @@ namespace Assets.Scripts.Enemy
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
 
             _currentSpeed = _navMeshAgent.speed;
         }

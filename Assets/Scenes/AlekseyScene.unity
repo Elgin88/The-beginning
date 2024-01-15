@@ -551,6 +551,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFactory
       objectReference: {fileID: 0}
+    - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: _enemyMeleeOrc
+      value: 
+      objectReference: {fileID: 6106297887006264949, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
+    - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: _minorEnemyCount
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: _delayBetweenWavesEnemy
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6003494519045427129, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
       propertyPath: m_LocalPosition.x
       value: -21.6
