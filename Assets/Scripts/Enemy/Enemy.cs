@@ -13,9 +13,14 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private int _health;
 
-        public Transform Transform => gameObject.transform;
+        private float _currentSpeed;
+        private NavMeshAgent _navMeshAgent;
 
-        public void TakeDamage(int damage)
+        Transform IDamageable.Transform => gameObject.transform;
+
+        public float CurrentSpeed => _currentSpeed;
+
+        void IDamageable.TakeDamage(int damage)
         {
             _health += damage;
 
@@ -23,6 +28,13 @@ namespace Assets.Scripts.Enemy
             {
                 Destroy(gameObject);
             }
+        }
+
+        private void Awake()
+        {
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            _currentSpeed = _navMeshAgent.speed;
         }
     }
 }
