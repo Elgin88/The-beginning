@@ -30,7 +30,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public void UnMarkEnemy()
         {
-            _mark.Stop();
+            if (_mark != null)
+            {
+                _mark.Stop();
+            }
         }
     }
 }
