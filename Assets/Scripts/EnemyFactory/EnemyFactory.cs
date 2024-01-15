@@ -62,7 +62,7 @@ namespace Assets.Scripts.Enemy
 
         private void ChooseSpawnPoint()
         {
-            int index = Random.Range(0, _spawnPoints.Length - 1);
+            int index = Random.Range(0, _spawnPoints.Length);
 
             _currentSpawnPoint = _spawnPoints[index];
         }
