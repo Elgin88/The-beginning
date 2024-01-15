@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Scripts.Bildings;
 using UnityEngine;
 using Zenject;
 
@@ -7,8 +6,8 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private MeleeEnemy _orcBossGreen;
-        [SerializeField] private RangeEnemy _rangeEneny;
+        [SerializeField] private EnemyMelee _orcBossGreen;
+        [SerializeField] private EnemyRange _rangeEneny;
         [SerializeField] private float _delayBetweenWavesEnemy;
         [SerializeField] private float _minorEnemySpawnRangeMax;
         [SerializeField] private float _minorEnemyCount;
