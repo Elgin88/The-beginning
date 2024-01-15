@@ -11,11 +11,18 @@ namespace Assets.Scripts.Enemy
 
     internal class Enemy : MonoBehaviour, IDamageable
     {
+        [SerializeField] private int _health;
+
         public Transform Transform => gameObject.transform;
 
         public void TakeDamage(int damage)
         {
-            throw new System.NotImplementedException();
+            _health += damage;
+
+            if (_health <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -1,4 +1,3 @@
-using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
@@ -7,5 +6,6 @@ namespace Assets.Scripts.Enemy
 
     internal class MeleeEnemy : Enemy
     {
+
     }
 }
