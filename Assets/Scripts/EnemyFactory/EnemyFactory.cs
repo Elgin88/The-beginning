@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private EnemyMelee _orcBossGreen;
+        [SerializeField] private EnemyMeleeOrcGreen _enemyMeleeOrc;
         [SerializeField] private EnemyRange _rangeEneny;
         [SerializeField] private float _delayBetweenWavesEnemy;
         [SerializeField] private float _minorEnemySpawnRangeMax;
@@ -106,7 +106,7 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnMeleeEnemy()
         {
-            _currentEnemyDI.InstantiatePrefab(_orcBossGreen, _currentEnemyPosition, Quaternion.identity, null);
+            _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.identity, null);
         }
 
         private void SpawnRangeEnemy()

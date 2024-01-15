@@ -1,6 +1,6 @@
 namespace Scripts.Static
 {
-    public class AnimatorParameters
+    public class EnemyAnimatorParameters
     {
         private static string _isRun = "IsRun";
 

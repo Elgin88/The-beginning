@@ -5,22 +5,26 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
+    [RequireComponent(typeof(EnemyAnimationController))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(Animator))]
 
-    internal class Enemy : MonoBehaviour, IDamageable
+    internal abstract class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private int _health;
 
-        private Animator _animator;
-        private float _currentSpeed;
         private NavMeshAgent _navMeshAgent;
+        private float _currentSpeed;
 
         Transform IDamageable.Transform => gameObject.transform;
 
-        public float CurrentSpeed => _currentSpeed;
+        internal NavMeshAgent NavMeshAgent => _navMeshAgent;
+
+        
+
+        internal float CurrentSpeed => _currentSpeed;
 
         void IDamageable.TakeDamage(int damage)
         {
@@ -35,7 +39,6 @@ namespace Assets.Scripts.Enemy
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
 
             _currentSpeed = _navMeshAgent.speed;
         }
