@@ -8,14 +8,13 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMachine : MonoBehaviour
     {
-        [SerializeField] private State _startState;
-
-        private State _currentState;
         private Coroutine _startTrySetNextState;
+        private State _currentState;
+        private State _startState;
 
-        private IEnumerator Start()
+        private void Awake()
         {
-            yield return null;
+            _startState = GetComponent<StateMove>();
 
             _currentState = _startState;
 

@@ -9,6 +9,7 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
+    [RequireComponent(typeof(EnemyVision))]
     [RequireComponent(typeof(Animator))]
 
     internal abstract class Enemy : MonoBehaviour, IDamageable
