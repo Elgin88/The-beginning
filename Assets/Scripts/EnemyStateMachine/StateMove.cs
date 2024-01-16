@@ -1,5 +1,4 @@
 using System.Collections;
-using Assets.Scripts.Bildings;
 using UnityEngine;
 using UnityEngine.AI;
 using Zenject;
@@ -10,7 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMove : State
     {
-        [Inject] private PlayerMainBilding _playerMainBilding;
+        [Inject] private MainBuilding _playerMainBilding;
 
         private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
