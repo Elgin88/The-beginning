@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6102005954400849097}
   - component: {fileID: 9778135439408878}
   - component: {fileID: 9118153004117024156}
-  - component: {fileID: 6612789319109849959}
+  - component: {fileID: -3225580608731754665}
   m_Layer: 0
-  m_Name: PlayerMainBilding
+  m_Name: MainBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6612789319109849959
+--- !u!114 &-3225580608731754665
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,6 +115,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 3725113220734701761}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60be8ad8ca077d448b12067eda7e9beb, type: 3}
+  m_Script: {fileID: 11500000, guid: ba17c1020db7bd646a054359acdce012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Cost: 0
+  Strength: 0
+  EffectOfDestroying: {fileID: 0}
+  PrafabOfruins: {fileID: 0}
