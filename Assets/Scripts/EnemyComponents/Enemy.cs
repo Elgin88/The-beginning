@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimationController))]
+    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
