@@ -445,7 +445,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3725113220734701761, guid: a2cd18dd70fc6534d874c65ad6097f8c, type: 3}
       propertyPath: m_Name
-      value: PlayerMainBilding
+      value: MainBilding
       objectReference: {fileID: 0}
     - target: {fileID: 3725113220734701761, guid: a2cd18dd70fc6534d874c65ad6097f8c, type: 3}
       propertyPath: m_IsActive
