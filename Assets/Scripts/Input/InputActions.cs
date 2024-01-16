@@ -134,6 +134,76 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 }
             ]
+        },
+        {
+            ""name"": ""BuildingSystem"",
+            ""id"": ""2a085236-acaa-40d5-9c42-8fa5532071d7"",
+            ""actions"": [
+                {
+                    ""name"": ""PlaceBuilding"",
+                    ""type"": ""Button"",
+                    ""id"": ""4d78500c-6472-418e-8865-1517dc33d2a7"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""DeterminePosition"",
+                    ""type"": ""Value"",
+                    ""id"": ""0eec7b75-8153-4a0e-8f7b-dc68a10a7217"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                }
+            ],
+            ""bindings"": [
+                {
+                    ""name"": """",
+                    ""id"": ""e0f4df95-7353-444c-b807-2f59119f31e6"",
+                    ""path"": ""<Mouse>/press"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""PlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2cabb0e2-205a-49ed-a7a1-96c22168db30"",
+                    ""path"": ""<Touchscreen>/touch2/tap"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""PlaceBuilding"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""24dc149f-84e2-469c-a527-e1ccf778b46d"",
+                    ""path"": ""<Mouse>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard and Mouse"",
+                    ""action"": ""DeterminePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""dab23ef7-91b4-47fa-a8c4-bb4ab45e61b0"",
+                    ""path"": ""<Touchscreen>/position"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Mobile"",
+                    ""action"": ""DeterminePosition"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                }
+            ]
         }
     ],
     ""controlSchemes"": [
@@ -152,6 +222,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""Mobile"",
+            ""bindingGroup"": ""Mobile"",
+            ""devices"": []
         }
     ]
 }");
@@ -160,6 +235,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
+        // BuildingSystem
+        m_BuildingSystem = asset.FindActionMap("BuildingSystem", throwIfNotFound: true);
+        m_BuildingSystem_PlaceBuilding = m_BuildingSystem.FindAction("PlaceBuilding", throwIfNotFound: true);
+        m_BuildingSystem_DeterminePosition = m_BuildingSystem.FindAction("DeterminePosition", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -279,6 +358,60 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
     }
     public PlayerActions @Player => new PlayerActions(this);
+
+    // BuildingSystem
+    private readonly InputActionMap m_BuildingSystem;
+    private List<IBuildingSystemActions> m_BuildingSystemActionsCallbackInterfaces = new List<IBuildingSystemActions>();
+    private readonly InputAction m_BuildingSystem_PlaceBuilding;
+    private readonly InputAction m_BuildingSystem_DeterminePosition;
+    public struct BuildingSystemActions
+    {
+        private @InputActions m_Wrapper;
+        public BuildingSystemActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public InputAction @PlaceBuilding => m_Wrapper.m_BuildingSystem_PlaceBuilding;
+        public InputAction @DeterminePosition => m_Wrapper.m_BuildingSystem_DeterminePosition;
+        public InputActionMap Get() { return m_Wrapper.m_BuildingSystem; }
+        public void Enable() { Get().Enable(); }
+        public void Disable() { Get().Disable(); }
+        public bool enabled => Get().enabled;
+        public static implicit operator InputActionMap(BuildingSystemActions set) { return set.Get(); }
+        public void AddCallbacks(IBuildingSystemActions instance)
+        {
+            if (instance == null || m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Add(instance);
+            @PlaceBuilding.started += instance.OnPlaceBuilding;
+            @PlaceBuilding.performed += instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled += instance.OnPlaceBuilding;
+            @DeterminePosition.started += instance.OnDeterminePosition;
+            @DeterminePosition.performed += instance.OnDeterminePosition;
+            @DeterminePosition.canceled += instance.OnDeterminePosition;
+        }
+
+        private void UnregisterCallbacks(IBuildingSystemActions instance)
+        {
+            @PlaceBuilding.started -= instance.OnPlaceBuilding;
+            @PlaceBuilding.performed -= instance.OnPlaceBuilding;
+            @PlaceBuilding.canceled -= instance.OnPlaceBuilding;
+            @DeterminePosition.started -= instance.OnDeterminePosition;
+            @DeterminePosition.performed -= instance.OnDeterminePosition;
+            @DeterminePosition.canceled -= instance.OnDeterminePosition;
+        }
+
+        public void RemoveCallbacks(IBuildingSystemActions instance)
+        {
+            if (m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Remove(instance))
+                UnregisterCallbacks(instance);
+        }
+
+        public void SetCallbacks(IBuildingSystemActions instance)
+        {
+            foreach (var item in m_Wrapper.m_BuildingSystemActionsCallbackInterfaces)
+                UnregisterCallbacks(item);
+            m_Wrapper.m_BuildingSystemActionsCallbackInterfaces.Clear();
+            AddCallbacks(instance);
+        }
+    }
+    public BuildingSystemActions @BuildingSystem => new BuildingSystemActions(this);
     private int m_KeyboardandMouseSchemeIndex = -1;
     public InputControlScheme KeyboardandMouseScheme
     {
@@ -288,10 +421,24 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             return asset.controlSchemes[m_KeyboardandMouseSchemeIndex];
         }
     }
+    private int m_MobileSchemeIndex = -1;
+    public InputControlScheme MobileScheme
+    {
+        get
+        {
+            if (m_MobileSchemeIndex == -1) m_MobileSchemeIndex = asset.FindControlSchemeIndex("Mobile");
+            return asset.controlSchemes[m_MobileSchemeIndex];
+        }
+    }
     public interface IPlayerActions
     {
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+    }
+    public interface IBuildingSystemActions
+    {
+        void OnPlaceBuilding(InputAction.CallbackContext context);
+        void OnDeterminePosition(InputAction.CallbackContext context);
     }
 }

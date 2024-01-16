@@ -150,5 +150,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 0
-  Strength: 0
+  Cost: 50
+  Strength: 70
+  EffectOfDestroying: {fileID: 0}
+  PrafabOfruins: {fileID: 0}

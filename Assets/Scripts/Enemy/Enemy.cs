@@ -7,7 +7,7 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NextTargetFinder))]
 
-    internal class Enemy : MonoBehaviour, IDamageable
+    internal class Enemy : MonoBehaviour //, IDamageable
     {
         public Transform Transform => gameObject.transform;
 

@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MainBuilding : Building
+namespace Assets.Scripts.BuildingSystem.Buildings
 {
+    internal class MainBuilding : Building
+    {
 
+    }
 }

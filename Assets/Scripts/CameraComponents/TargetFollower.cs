@@ -2,7 +2,7 @@
 using Zenject;
 using Assets.Scripts.PlayerComponents;
 
-namespace Assets.Scripts.Camera
+namespace Assets.Scripts.CameraComponents
 {
     internal class TargetFollower : MonoBehaviour
     {
