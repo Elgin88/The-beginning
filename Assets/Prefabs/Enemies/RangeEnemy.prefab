@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: 6415274043360687229}
   - component: {fileID: 1398000030247844361}
   - component: {fileID: 4372585566394524378}
+  - component: {fileID: 5503757062595354568}
   m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -236,3 +237,15 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5503757062595354568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e1c4fcb17c5842e88c5b0bea10f8454, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

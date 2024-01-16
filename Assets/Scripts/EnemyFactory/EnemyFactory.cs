@@ -6,7 +6,7 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private EnemyMeleeOrcGreen _enemyMeleeOrc;
+        [SerializeField] private EnemyMeleeOgreGreen _enemyMeleeOrc;
         [SerializeField] private EnemyRange _rangeEneny;
         [SerializeField] private float _delayBetweenWavesEnemy;
         [SerializeField] private float _minorEnemySpawnRangeMax;
@@ -62,7 +62,7 @@ namespace Assets.Scripts.Enemy
 
         private void ChooseSpawnPoint()
         {
-            int index = Random.Range(0, _spawnPoints.Length - 1);
+            int index = Random.Range(0, _spawnPoints.Length);
 
             _currentSpawnPoint = _spawnPoints[index];
         }

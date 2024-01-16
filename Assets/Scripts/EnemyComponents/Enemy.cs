@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimationController))]
+    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(CapsuleCollider))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
@@ -15,16 +15,11 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private int _health;
 
-        private NavMeshAgent _navMeshAgent;
-        private float _currentSpeed;
-
         Transform IDamageable.Transform => gameObject.transform;
 
-        internal NavMeshAgent NavMeshAgent => _navMeshAgent;
+        internal abstract NavMeshAgent NavMeshAgent { get; set; }
 
-        
-
-        internal float CurrentSpeed => _currentSpeed;
+        internal abstract float CurrentSpeed { get; set; }
 
         void IDamageable.TakeDamage(int damage)
         {
@@ -34,13 +29,6 @@ namespace Assets.Scripts.Enemy
             {
                 Destroy(gameObject);
             }
-        }
-
-        private void Awake()
-        {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            _currentSpeed = _navMeshAgent.speed;
         }
     }
 }
