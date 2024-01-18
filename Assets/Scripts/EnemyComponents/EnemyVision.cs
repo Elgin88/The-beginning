@@ -11,6 +11,7 @@ namespace Assets.Scripts.Enemy
         private Coroutine _changeVisionPointRotation = null;
         private float _leftViewVisionPoint = -160;
         private float _righttViewVisionPoint = 160;
+        private float _rangeOfVision = 20;
         private bool _isRightTurnVisionPoint = true;
         private Ray _ray;
 
@@ -45,6 +46,10 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
+                Collider[] colliders = Physics.OverlapSphere(transform.position, _rangeOfVision);
+
+                Debug.Log(colliders[0].gameObject.name);
+
                 Debug.DrawRay(_enemyVisionPoint.transform.position, _enemyVisionPoint.transform.forward * 20, Color.red);
 
                 yield return null;
