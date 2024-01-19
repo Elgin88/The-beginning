@@ -3,6 +3,7 @@ using System.Collections;
 using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.Tests;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {
@@ -10,6 +11,7 @@ namespace Assets.Scripts.Enemy
     {
         private EnemyRayPoint _enemyRayPoint;
         private Coroutine _vision;
+        private GameObject _target;
         private float _visionAngle = 160;
         private float _visionRange = 20;
         private float _startVisionEulerRotationY => 90 - _visionAngle / 2;
@@ -18,6 +20,8 @@ namespace Assets.Scripts.Enemy
         private RaycastHit _raycastHit;
         private Ray _ray;
         private int _rayCount = 40;
+
+        public GameObject Target => _target;
 
         internal void StartVision()
         {
@@ -47,8 +51,6 @@ namespace Assets.Scripts.Enemy
         private IEnumerator Vision()
         {
             int currentRayNumber;
-            Ray ray;
-
 
             while (true)
             {
@@ -58,12 +60,11 @@ namespace Assets.Scripts.Enemy
 
                 while (currentRayNumber < _rayCount + 1)
                 {
-                    SetDataRaycastHit();                         // Не сделано
+                    SetDataRaycastHit();
 
                     _ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
-                    Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * 20, Color.red, 0.5f);
 
-                    SetNextRayPointPosition();                   // Не сделано
+                    SetNextRayPointPosition();
 
                     currentRayNumber++;
                 }
@@ -88,15 +89,16 @@ namespace Assets.Scripts.Enemy
         {
             Physics.Raycast(_ray, out _raycastHit);
 
-            if (_raycastHit.collider != null)
+            if (_raycastHit.collider != null & _raycastHit.distance <= _visionRange)
             {
                 if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
                 {
-                    if (_raycastHit.distance <= _visionRange)
-                    {
-                        Debug.Log(_raycastHit.collider.gameObject.name);
-                    }
+                    _target = _raycastHit.collider.gameObject;
                 }
+            }
+            else
+            {
+                _target = null;
             }
         }
     }
