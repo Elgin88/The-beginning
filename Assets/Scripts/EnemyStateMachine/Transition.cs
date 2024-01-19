@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    internal class Transition : MonoBehaviour
+    internal abstract class Transition : MonoBehaviour
     {
     }
 }

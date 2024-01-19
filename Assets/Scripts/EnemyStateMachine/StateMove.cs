@@ -13,6 +13,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
+        private float _distanceToTarget;
         private Vector3 _currentTargetPosition;
         private Vector3 _startTargetPosition;
 
