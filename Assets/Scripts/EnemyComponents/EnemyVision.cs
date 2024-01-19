@@ -8,28 +8,31 @@ namespace Assets.Scripts.Enemy
     {
         private EnemyVisionPoint _enemyVisionPoint;
         private RaycastHit _raycastHit;
-        private Coroutine _changeVisionPointRotation = null;
-        private float _leftViewVisionPoint = -160;
-        private float _righttViewVisionPoint = 160;
-        private float _rangeOfVision = 20;
-        private bool _isRightTurnVisionPoint = true;
+        private Coroutine _vision;
+        private float _visionAngle = 160;
+        private float _visionRange = 20;
+        private float _startVisionRotationY => -1 * _visionAngle / 2;
+        private float _currentVisonRotationY;
+        private float _finishVisionRotationY => _visionAngle / 2;
+        private float _stepOfRotationY => _visionAngle / _rayCount;
         private Ray _ray;
+        private int _rayCount = 20;
 
-        internal void StartChangeVisionPointRotation()
+        internal void StartVision()
         {
-            if (_changeVisionPointRotation == null)
+            if (_vision == null)
             {
-                _changeVisionPointRotation = StartCoroutine(ChangeVisionPointRotation());
+                _vision = StartCoroutine(Vision());
             }
         }
 
-        internal void StopChangeVisionPointRotation()
+        internal void StopVision()
         {
-            if (_changeVisionPointRotation != null)
+            if (_vision != null)
             {
-                StopCoroutine(_changeVisionPointRotation);
+                StopCoroutine(_vision);
 
-                _changeVisionPointRotation = null;
+                _vision = null;
             }
         }
 
@@ -37,20 +40,21 @@ namespace Assets.Scripts.Enemy
         {
             _enemyVisionPoint = GetComponentInChildren<EnemyVisionPoint>();
 
-            _ray = new Ray(_enemyVisionPoint.transform.position, _enemyVisionPoint.transform.forward);
-
-            StartChangeVisionPointRotation();
+            StartVision();
         }
 
-        private IEnumerator ChangeVisionPointRotation()
+        private IEnumerator Vision()
         {
+            int currentRayNumber;
+
             while (true)
             {
-                Collider[] colliders = Physics.OverlapSphere(transform.position, _rangeOfVision);
+                currentRayNumber = 0;
 
-                Debug.Log(colliders[0].gameObject.name);
-
-                Debug.DrawRay(_enemyVisionPoint.transform.position, _enemyVisionPoint.transform.forward * 20, Color.red);
+                while (currentRayNumber < _rayCount + 1)
+                {
+                    currentRayNumber++;
+                }
 
                 yield return null;
             }
