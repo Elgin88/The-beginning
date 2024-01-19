@@ -54,6 +54,11 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
+                if (_navMeshAgent == null || _currentTargetPosition == null)
+                {
+                    yield return null;
+                }
+
                 _navMeshAgent.destination = _currentTargetPosition;
 
                 yield return null;

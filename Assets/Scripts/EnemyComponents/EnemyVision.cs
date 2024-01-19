@@ -1,53 +1,104 @@
+using System;
 using System.Collections;
+using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.Tests;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
-        private EnemyVisionPoint _enemyVisionPoint;
+        private EnemyRayPoint _enemyRayPoint;
+        private Coroutine _vision;
+        private GameObject _target;
+        private float _visionAngle = 160;
+        private float _visionRange = 20;
+        private float _startVisionEulerRotationY => 90 - _visionAngle / 2;
+        private float _finishVisionRotationY;
+        private float _stepOfRotationY => _visionAngle / _rayCount;
         private RaycastHit _raycastHit;
-        private Coroutine _changeVisionPointRotation = null;
-        private float _leftViewVisionPoint = -160;
-        private float _righttViewVisionPoint = 160;
-        private bool _isRightTurnVisionPoint = true;
         private Ray _ray;
+        private int _rayCount = 40;
 
-        internal void StartChangeVisionPointRotation()
+        public GameObject Target => _target;
+
+        internal void StartVision()
         {
-            if (_changeVisionPointRotation == null)
+            if (_vision == null)
             {
-                _changeVisionPointRotation = StartCoroutine(ChangeVisionPointRotation());
+                _vision = StartCoroutine(Vision());
             }
         }
 
-        internal void StopChangeVisionPointRotation()
+        internal void StopVision()
         {
-            if (_changeVisionPointRotation != null)
+            if (_vision != null)
             {
-                StopCoroutine(_changeVisionPointRotation);
+                StopCoroutine(_vision);
 
-                _changeVisionPointRotation = null;
+                _vision = null;
             }
         }
 
         private void Awake()
         {
-            _enemyVisionPoint = GetComponentInChildren<EnemyVisionPoint>();
+            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
-            _ray = new Ray(_enemyVisionPoint.transform.position, _enemyVisionPoint.transform.forward);
-
-            StartChangeVisionPointRotation();
+            StartVision();
         }
 
-        private IEnumerator ChangeVisionPointRotation()
+        private IEnumerator Vision()
         {
+            int currentRayNumber;
+
             while (true)
             {
-                Debug.DrawRay(_enemyVisionPoint.transform.position, _enemyVisionPoint.transform.forward * 20, Color.red);
+                currentRayNumber = 0;
+
+                SetStartRayPointPositon();
+
+                while (currentRayNumber < _rayCount + 1)
+                {
+                    SetDataRaycastHit();
+
+                    _ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
+
+                    SetNextRayPointPosition();
+
+                    currentRayNumber++;
+                }
+
+
 
                 yield return null;
+            }
+        }
+
+        private void SetStartRayPointPositon()
+        {
+            _enemyRayPoint.transform.rotation = Quaternion.Euler(_enemyRayPoint.transform.rotation.eulerAngles.x, _startVisionEulerRotationY, _enemyRayPoint.transform.rotation.eulerAngles.z);
+        }
+
+        private void SetNextRayPointPosition()
+        {
+            _enemyRayPoint.transform.rotation = Quaternion.Euler(_enemyRayPoint.transform.rotation.eulerAngles.x, _enemyRayPoint.transform.rotation.eulerAngles.y + _stepOfRotationY, _enemyRayPoint.transform.rotation.eulerAngles.z);
+        }
+
+        private void SetDataRaycastHit()
+        {
+            Physics.Raycast(_ray, out _raycastHit);
+
+            if (_raycastHit.collider != null & _raycastHit.distance <= _visionRange)
+            {
+                if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
+                {
+                    _target = _raycastHit.collider.gameObject;
+                }
+            }
+            else
+            {
+                _target = null;
             }
         }
     }

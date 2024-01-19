@@ -10,7 +10,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Tests
 {
-    internal class EnemyVisionPoint: MonoBehaviour
+    internal class EnemyRayPoint: MonoBehaviour
     {
     }
 }
