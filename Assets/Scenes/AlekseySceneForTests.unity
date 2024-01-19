@@ -2953,7 +2953,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2633041355845911071, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_Name
-      value: EnemyVisionPoint
+      value: EnemyRayPoint
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_RootOrder
@@ -2973,11 +2973,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.99965733
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.026176924
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_LocalRotation.y
@@ -2989,7 +2989,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: -3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
