@@ -1,4 +1,4 @@
-using Assets.Scripts.Camera;
+using Assets.Scripts.CameraComponents;
 using Assets.Scripts.ConStants;
 using Assets.Scripts.Enemy;
 using Assets.Scripts.UnitStateMachine;

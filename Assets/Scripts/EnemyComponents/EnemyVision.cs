@@ -91,10 +91,10 @@ namespace Assets.Scripts.Enemy
 
             if (_raycastHit.collider != null & _raycastHit.distance <= _visionRange)
             {
-                if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
-                {
-                    _target = _raycastHit.collider.gameObject;
-                }
+                //if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
+                //{
+                //    _target = _raycastHit.collider.gameObject;
+                //}
             }
             else
             {

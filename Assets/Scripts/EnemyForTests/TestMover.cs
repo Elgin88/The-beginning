@@ -6,7 +6,7 @@ namespace Assets.Scripts.Tests
 {
     internal class TestMover : MonoBehaviour
     {
-        [Inject] private MainBuilding _mainBuilding;
+       // [Inject] private MainBuilding _mainBuilding;
 
         private NavMeshAgent _navMeshAgent;
 
@@ -17,7 +17,7 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            _navMeshAgent.destination = _mainBuilding.transform.position;
+           // _navMeshAgent.destination = _mainBuilding.transform.position;
         }
     }
 }

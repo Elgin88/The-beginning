@@ -153,7 +153,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Cost: 100
-  Strength: 100
+  Strength: 1000
   EffectOfDestroying: {fileID: 0}
   PrafabOfruins: {fileID: 0}
 --- !u!1 &4336448230078439010
