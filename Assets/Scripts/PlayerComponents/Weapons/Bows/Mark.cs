@@ -9,6 +9,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private ParticleSystem _mark;
 
+        private IDamageable _target;
+
+        public Transform Target => _target.Transform;
+
         public void Init()
         {
             _mark = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
@@ -17,7 +21,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public void MarkEnemy(IDamageable enemy)
         {
-            _mark.transform.position = enemy.Transform.position;
+            _target = enemy;
+            _mark.transform.position = _target.Transform.position;
 
             if (_mark.isStopped)
                 _mark.Play();
@@ -25,7 +30,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public void UnMarkEnemy()
         {
-            _mark.Stop();
+            if (_mark != null)
+            {
+                _mark.Stop();
+            }
         }
     }
 }

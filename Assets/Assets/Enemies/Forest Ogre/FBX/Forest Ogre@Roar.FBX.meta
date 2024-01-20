@@ -1,0 +1,219 @@
+fileFormatVersion: 2
+guid: 22027fcd41ee5524f9f46affe4ca1381
+timeCreated: 1517562403
+licenseType: Store
+ModelImporter:
+  serializedVersion: 21
+  fileIDToRecycleName:
+    100000: Base HumanHeadGizmo
+    100002: Base HumanLEarGizmo
+    100004: Base HumanLForearmGizmo
+    100006: Base HumanLJawGizmo
+    100008: Base HumanLPalmGizmo
+    100010: Base HumanLUpperarmGizmo
+    100012: Base HumanPelvisGizmo
+    100014: Base HumanREarGizmo
+    100016: Base HumanRForearmGizmo
+    100018: Base HumanRibcageGizmo
+    100020: Base HumanRPalmGizmo
+    100022: Base HumanRUpperarmGizmo
+    100024: //RootNode
+    100026: forest_ogre
+    100028: forest_ogre_weapon
+    100030: Rig
+    100032: RigHead
+    100034: RigLCalf
+    100036: RigLCollarbone
+    100038: RigLEar
+    100040: RigLFoot
+    100042: RigLForearm
+    100044: RigLIndex1
+    100046: RigLIndex2
+    100048: RigLIndex3
+    100050: RigLJaw
+    100052: RigLPalm
+    100054: RigLPinky1
+    100056: RigLPinky2
+    100058: RigLPinky3
+    100060: RigLPlatform
+    100062: RigLThigh
+    100064: RigLThumb1
+    100066: RigLThumb2
+    100068: RigLThumb3
+    100070: RigLToes1
+    100072: RigLToes2
+    100074: RigLUpperarm
+    100076: RigNeck1
+    100078: RigNeck2
+    100080: RigPelvis
+    100082: RigRCalf
+    100084: RigRCollarbone
+    100086: RigREar
+    100088: RigRFoot
+    100090: RigRForearm
+    100092: RigRibcage
+    100094: RigRIndex1
+    100096: RigRIndex2
+    100098: RigRIndex3
+    100100: RigRPalm
+    100102: RigRPinky1
+    100104: RigRPinky2
+    100106: RigRPinky3
+    100108: RigRPlatform
+    100110: RigRThigh
+    100112: RigRThumb1
+    100114: RigRThumb2
+    100116: RigRThumb3
+    100118: RigRToes1
+    100120: RigRToes2
+    100122: RigRUpperarm
+    100124: RigSpine1
+    100126: RigSpine2
+    100128: RigSpine3
+    400000: Base HumanHeadGizmo
+    400002: Base HumanLEarGizmo
+    400004: Base HumanLForearmGizmo
+    400006: Base HumanLJawGizmo
+    400008: Base HumanLPalmGizmo
+    400010: Base HumanLUpperarmGizmo
+    400012: Base HumanPelvisGizmo
+    400014: Base HumanREarGizmo
+    400016: Base HumanRForearmGizmo
+    400018: Base HumanRibcageGizmo
+    400020: Base HumanRPalmGizmo
+    400022: Base HumanRUpperarmGizmo
+    400024: //RootNode
+    400026: forest_ogre
+    400028: forest_ogre_weapon
+    400030: Rig
+    400032: RigHead
+    400034: RigLCalf
+    400036: RigLCollarbone
+    400038: RigLEar
+    400040: RigLFoot
+    400042: RigLForearm
+    400044: RigLIndex1
+    400046: RigLIndex2
+    400048: RigLIndex3
+    400050: RigLJaw
+    400052: RigLPalm
+    400054: RigLPinky1
+    400056: RigLPinky2
+    400058: RigLPinky3
+    400060: RigLPlatform
+    400062: RigLThigh
+    400064: RigLThumb1
+    400066: RigLThumb2
+    400068: RigLThumb3
+    400070: RigLToes1
+    400072: RigLToes2
+    400074: RigLUpperarm
+    400076: RigNeck1
+    400078: RigNeck2
+    400080: RigPelvis
+    400082: RigRCalf
+    400084: RigRCollarbone
+    400086: RigREar
+    400088: RigRFoot
+    400090: RigRForearm
+    400092: RigRibcage
+    400094: RigRIndex1
+    400096: RigRIndex2
+    400098: RigRIndex3
+    400100: RigRPalm
+    400102: RigRPinky1
+    400104: RigRPinky2
+    400106: RigRPinky3
+    400108: RigRPlatform
+    400110: RigRThigh
+    400112: RigRThumb1
+    400114: RigRThumb2
+    400116: RigRThumb3
+    400118: RigRToes1
+    400120: RigRToes2
+    400122: RigRUpperarm
+    400124: RigSpine1
+    400126: RigSpine2
+    400128: RigSpine3
+    2300000: forest_ogre_weapon
+    3300000: forest_ogre_weapon
+    4300000: forest_ogre
+    4300002: forest_ogre_weapon
+    7400000: Take 001
+    9500000: //RootNode
+    13700000: forest_ogre
+  materials:
+    importMaterials: 0
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

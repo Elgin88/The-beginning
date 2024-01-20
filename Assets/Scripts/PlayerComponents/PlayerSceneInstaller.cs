@@ -11,6 +11,7 @@ namespace Assets.Scripts.PlayerComponents
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private PlayerAnimator _playerAnimator;
+        [SerializeField] private Mark _mark;
 
         public override void InstallBindings()
         {
@@ -19,6 +20,8 @@ namespace Assets.Scripts.PlayerComponents
 
         private void BindPlayer()
         {
+            Container.Bind<Mark>().FromInstance(_mark).AsSingle().NonLazy();
+
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
             Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
             Container.BindInterfacesAndSelfTo<Player>().FromInstance(player);
