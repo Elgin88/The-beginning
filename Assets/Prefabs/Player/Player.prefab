@@ -310,6 +310,37 @@ Transform:
   m_Father: {fileID: 9158555852068462238}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &392024042521892884
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8841447842545000901}
+  m_Layer: 0
+  m_Name: Shoot Point
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8841447842545000901
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 392024042521892884}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.00237, y: 0.00671, z: -0.00006}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8168773357788024185}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &461742798114663132
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +1920,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 0
-  _attackSpeed: 2
+  _attackSpeed: 1
   _name: Sword
   LayerMask:
     serializedVersion: 2
@@ -2377,7 +2408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6716750734881168333
 Transform:
   m_ObjectHideFlags: 0
@@ -3453,9 +3484,10 @@ Transform:
   m_GameObject: {fileID: 8797360459994961859}
   m_LocalRotation: {x: -0.025547825, y: 0.868594, z: -0.37935022, w: -0.31778166}
   m_LocalPosition: {x: -0.1, y: -4.5, z: 6.2}
-  m_LocalScale: {x: 6000, y: 6000, z: 6000}
+  m_LocalScale: {x: 6500, y: 6500, z: 6500}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 8841447842545000901}
   m_Father: {fileID: 4932919047355183787}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 42.473, y: 226.233, z: 15.468}
@@ -3545,15 +3577,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
-  _attackSpeed: 1
+  _attackSpeed: 2
   _name: 
   LayerMask:
     serializedVersion: 2
     m_Bits: 64
   _radius: 10
-  _shootPoint: {x: 0, y: 0, z: 0}
+  _shootPoint: {fileID: 8841447842545000901}
   _arrowPrefab: {fileID: 4306390963386993369, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
   _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}
+  _attack: {fileID: 1687150108939030565, guid: d2e81e7fb98c99149a64b9f87f88a84e, type: 2}
 --- !u!1 &8950715178592391206
 GameObject:
   m_ObjectHideFlags: 0

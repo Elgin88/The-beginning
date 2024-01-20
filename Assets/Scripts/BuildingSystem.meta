@@ -1,6 +1,10 @@
 fileFormatVersion: 2
 <<<<<<<< HEAD:Assets/Scripts/Bildings.meta
+<<<<<<< Updated upstream
 guid: 9a93360059b2e6b499359bda87ea548f
+=======
+guid: 0ed8dac1b6aa7cd4d89a59618a07db72
+>>>>>>> Stashed changes
 ========
 guid: 7a9b7bb46346ed44facedfa11ab0dd61
 >>>>>>>> BuildingSystem:Assets/Scripts/BuildingSystem.meta

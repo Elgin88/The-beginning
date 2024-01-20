@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
+using Assets.Scripts.AnimatorScripts.Player;
+using System.Collections;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
     internal class Bow : Weapon
     {
         [SerializeField] private float _radius;
-        [SerializeField] private Vector3 _shootPoint;
+        [SerializeField] private Transform _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Mark _mark;
+        [SerializeField] private PlayerBowAttack _attack;
 
+        private bool _isAnimating;
+        private Coroutine _attackCoroutine;
         private ArrowsPool _pool;
         private IDamageable _closestTarget;
 
@@ -19,6 +24,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             _pool = new ArrowsPool(_arrowPrefab);
 
             _mark.Init();
+        }
+
+        private void OnEnable()
+        {
+            _attack.AnimationFinished += IsAnimating;
         }
 
         private void FixedUpdate()
@@ -61,6 +71,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             {
                 _mark.UnMarkEnemy();
             }
+
+            _attack.AnimationFinished -= IsAnimating;
         }
 
         public override void Attack()
@@ -69,11 +81,24 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             {
                 Arrow arrow = _pool.GetArrow();
 
-                arrow.transform.position = transform.position + new Vector3(0, 2, 0);
+                arrow.transform.position = _shootPoint.position;
                 arrow.Fly(_closestTarget.Transform);
 
                 base.Attack();
             }
+        }
+
+        private IEnumerator AttackCorouite()
+        {
+            while (_isAnimating)
+            {
+                yield return null;
+            }
+        }
+
+        private void IsAnimating(bool isAnimating)
+        {
+            _isAnimating = isAnimating;
         }
 
         private void Mark(IDamageable enemy)

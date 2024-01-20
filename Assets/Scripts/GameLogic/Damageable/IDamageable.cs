@@ -8,7 +8,4 @@ namespace Assets.Scripts.GameLogic.Damageable
 
         public void TakeDamage(int damage);
     }
-
-    
-
 }

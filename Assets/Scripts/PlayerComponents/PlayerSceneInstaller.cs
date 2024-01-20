@@ -29,8 +29,8 @@ namespace Assets.Scripts.PlayerComponents
             Container.Bind<PlayerAnimator>().FromComponentOn(player.gameObject).AsSingle().NonLazy();
             Container.Bind<WeaponsInventory>().FromComponentOn(player.gameObject).AsSingle().NonLazy();
             
-            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
             Container.Bind<PlayerMovement>().FromNew().AsSingle().NonLazy();
+            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
             PlayerInput input = Container.InstantiatePrefabForComponent<PlayerInput>(_playerInput);
 
             input.transform.parent = player.transform;

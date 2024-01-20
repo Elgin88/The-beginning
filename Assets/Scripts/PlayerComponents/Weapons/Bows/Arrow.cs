@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameLogic.Damageable;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
@@ -12,6 +13,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            {
+                target.TakeDamage(5);
+            }
+
             ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
             Destroy(hitEffect.gameObject, 1f);
             gameObject.SetActive(false);
