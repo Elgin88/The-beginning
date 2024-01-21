@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Scripts.Tests
+namespace Assets.Scripts.Enemy
 {
     internal class EnemyRayPoint: MonoBehaviour
     {
