@@ -1,9 +1,8 @@
-using System;
-using System.Collections;
+using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.Tests;
+using System.Collections;
 using UnityEngine;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {
@@ -91,10 +90,10 @@ namespace Assets.Scripts.Enemy
 
             if (_raycastHit.collider != null & _raycastHit.distance <= _visionRange)
             {
-                //if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
-                //{
-                //    _target = _raycastHit.collider.gameObject;
-                //}
+                if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
+                {
+                    _target = _raycastHit.collider.gameObject;
+                }
             }
             else
             {
