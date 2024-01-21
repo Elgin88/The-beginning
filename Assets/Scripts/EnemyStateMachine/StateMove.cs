@@ -9,7 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMove : State
     {
-        [Inject] private MainBuilding _playerMainBilding;
+      //  [Inject] private MainBuilding _playerMainBilding;
 
         private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
@@ -47,7 +47,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
 
-            _startTargetPosition = _playerMainBilding.transform.position;
+           // _startTargetPosition = _playerMainBilding.transform.position;
             _currentTargetPosition = _startTargetPosition;
         }
 

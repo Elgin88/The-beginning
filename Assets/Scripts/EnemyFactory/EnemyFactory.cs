@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private float _minorEnemyCount;
 
         [Inject] private DiContainer _currentEnemyDI;
-        [Inject] private MainBuilding _mainBuilding; 
+       // [Inject] private MainBuilding _mainBuilding; 
         
         private EnemySpawnPoint[] _spawnPoints;
         private EnemySpawnPoint _currentSpawnPoint;
@@ -107,7 +107,7 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnMeleeEnemy()
         {
-            _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+           // _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
         }
 
         private void SpawnRangeEnemy()

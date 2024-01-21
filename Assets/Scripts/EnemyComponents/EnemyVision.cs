@@ -3,91 +3,98 @@ using System.Collections;
 using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.Tests;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
-        private GameObject _target;
         private EnemyRayPoint _enemyRayPoint;
-        private float _visionAngle = 180;
+        private Coroutine _vision;
+        private GameObject _target;
+        private float _visionAngle = 160;
         private float _visionRange = 20;
-        private float _stepOfRotation => _visionAngle / _rayCount;
-        private int _rayCount = 10;
+        private float _startVisionEulerRotationY => 90 - _visionAngle / 2;
+        private float _finishVisionRotationY;
+        private float _stepOfRotationY => _visionAngle / _rayCount;
+        private RaycastHit _raycastHit;
+        private Ray _ray;
+        private int _rayCount = 40;
 
         public GameObject Target => _target;
+
+        internal void StartVision()
+        {
+            if (_vision == null)
+            {
+                _vision = StartCoroutine(Vision());
+            }
+        }
+
+        internal void StopVision()
+        {
+            if (_vision != null)
+            {
+                StopCoroutine(_vision);
+
+                _vision = null;
+            }
+        }
 
         private void Awake()
         {
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
-            StartCoroutine(Vision());
+            StartVision();
         }
 
         private IEnumerator Vision()
         {
+            int currentRayNumber;
+
             while (true)
             {
-                int numberOfRay = 1;
+                currentRayNumber = 0;
 
-                SetStartRaypointRotation();
+                SetStartRayPointPositon();
 
-                while (numberOfRay <= _rayCount)
+                while (currentRayNumber < _rayCount + 1)
                 {
-                    //SetCurrentRayPointRotation(numberOfRay);
-                    CreateAndShowRay(out Ray ray);
-                    GetDataRaycastHit(ray);
-                    numberOfRay++;
+                    SetDataRaycastHit();
+
+                    _ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
+
+                    SetNextRayPointPosition();
+
+                    currentRayNumber++;
                 }
-                
+
+
+
                 yield return null;
             }
         }
 
-        private void SetStartRaypointRotation()
+        private void SetStartRayPointPositon()
         {
-            _enemyRayPoint.transform.localRotation = Quaternion.Euler(
-                transform.localRotation.x,
-                transform.localRotation.y,
-                transform.localRotation.z);
+            _enemyRayPoint.transform.rotation = Quaternion.Euler(_enemyRayPoint.transform.rotation.eulerAngles.x, _startVisionEulerRotationY, _enemyRayPoint.transform.rotation.eulerAngles.z);
         }
 
-        private void SetCurrentRayPointRotation(int numberOfRay)
+        private void SetNextRayPointPosition()
         {
-            _enemyRayPoint.transform.rotation = Quaternion.Euler(
-                transform.rotation.x,
-                transform.rotation.y + _stepOfRotation * numberOfRay,
-                transform.rotation.z);
+            _enemyRayPoint.transform.rotation = Quaternion.Euler(_enemyRayPoint.transform.rotation.eulerAngles.x, _enemyRayPoint.transform.rotation.eulerAngles.y + _stepOfRotationY, _enemyRayPoint.transform.rotation.eulerAngles.z);
         }
 
-
-
-
-
-
-
-
-
-
-
-        private void CreateAndShowRay(out Ray ray)
+        private void SetDataRaycastHit()
         {
-            ray = new Ray(_enemyRayPoint.transform.position, transform.forward) ;
-            Debug.DrawRay(_enemyRayPoint.transform.position, transform.forward * _visionRange, Color.red, 0.3f);
-        }
+            Physics.Raycast(_ray, out _raycastHit);
 
-        private void GetDataRaycastHit(Ray ray)
-        {
-            Physics.Raycast(ray, out RaycastHit raycastHit);
-
-            if (raycastHit.collider != null & raycastHit.distance <= _visionRange)
+            if (_raycastHit.collider != null & _raycastHit.distance <= _visionRange)
             {
-                if (raycastHit.collider.GetComponent<MainBuilding>() != null || raycastHit.collider.GetComponent<Player>() != null)
-                {
-                    _target = raycastHit.collider.gameObject;
-
-                    Debug.Log(_target.name);
-                }
+                //if (_raycastHit.collider.GetComponent<MainBuilding>() != null || _raycastHit.collider.GetComponent<Player>() != null)
+                //{
+                //    _target = _raycastHit.collider.gameObject;
+                //}
             }
             else
             {

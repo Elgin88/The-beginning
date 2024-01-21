@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Barracks : Building
+namespace Assets.Scripts.BuildingSystem.Buildings
 {
+    internal class Barracks : Building
+    {
 
+    }
 }
