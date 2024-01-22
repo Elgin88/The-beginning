@@ -120,12 +120,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 2
-  _attackSpeed: 1
+  _attackSpeed: 5
   _name: Bow
   LayerMask:
     serializedVersion: 2
     m_Bits: 64
   _radius: 10
-  _shootPoint: {x: 0, y: 0, z: 0}
+  _shootPoint: {fileID: 0}
   _arrowPrefab: {fileID: 4306390963386993369, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
   _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}

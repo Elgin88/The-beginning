@@ -1,29 +1,34 @@
-﻿using UnityEngine;
-using Assets.Scripts.GameLogic.Damageable;
+﻿using System.Collections;
+using UnityEngine;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
+using Assets.Scripts.AnimatorScripts.Player;
+using Assets.Scripts.EnemyComponents;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
     internal class Bow : Weapon
     {
         [SerializeField] private float _radius;
-        [SerializeField] private Vector3 _shootPoint;
+        [SerializeField] private Transform _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Mark _mark;
+        [SerializeField] private PlayerBowAttack _attack;
+        [SerializeField] private LayerMask _layerMask;
 
+        private Coroutine _attackCoroutine;
         private ArrowsPool _pool;
-        private IDamageable _closestTarget;
+        private IEnemy _closestTarget;
 
         private void Awake()
         {
-            _pool = new ArrowsPool(_arrowPrefab);
+            _pool = new ArrowsPool(_arrowPrefab, Damage);
 
             _mark.Init();
         }
 
         private void FixedUpdate()
         {
-            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _radius, LayerMask);
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position, _radius, _layerMask);
 
             if (hitColliders.Length > 0)
             {
@@ -42,7 +47,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                     }
                 }
 
-                if (closerstCollider.TryGetComponent<IDamageable>(out IDamageable target))
+                if (closerstCollider.TryGetComponent<IEnemy>(out IEnemy target))
                 {
                     _closestTarget = target;
                     Mark(target);
@@ -65,18 +70,30 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public override void Attack()
         {
+            if (_attackCoroutine != null)
+            {
+                StopCoroutine(_attackCoroutine);
+            }
+
+            _attackCoroutine = StartCoroutine(AttackDelay(AttackSpeed));
+        }
+
+        private IEnumerator AttackDelay(float attackSpeed)
+        {
+            base.Attack();
+
+            yield return new WaitForSeconds(attackSpeed - 0.65f);
+
             if (_closestTarget != null)
             {
                 Arrow arrow = _pool.GetArrow();
 
-                arrow.transform.position = transform.position + new Vector3(0, 2, 0);
-                arrow.Fly(_closestTarget.Transform);
-
-                base.Attack();
+                arrow.transform.position = _shootPoint.position;
+                arrow.Fly(_closestTarget.Position);
             }
         }
 
-        private void Mark(IDamageable enemy)
+        private void Mark(IEnemy enemy)
         {
             _mark.MarkEnemy(enemy);
         }
