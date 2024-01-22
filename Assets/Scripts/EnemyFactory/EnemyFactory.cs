@@ -1,3 +1,4 @@
+using Assets.Scripts.BuildingSystem.Buildings;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -37,6 +38,7 @@ namespace Assets.Scripts.Enemy
 
             while (isWork)
             {
+                ChooseSpawnPoint();
                 CreateMainEnemyInWave();
                 CreateMinorEnemiesInWave();
 
@@ -48,8 +50,7 @@ namespace Assets.Scripts.Enemy
 
         private void CreateMainEnemyInWave()
         {
-            ChooseSpawnPoint();
-            SpawnRandom();
+            SpawnRandomEnemy();
         }
 
         private void CreateMinorEnemiesInWave()
@@ -57,7 +58,7 @@ namespace Assets.Scripts.Enemy
             for (int i = 0; i < _minorEnemyCount; i++)
             {
                 CalculateMinorUnitStartPosition();
-                SpawnRandom();
+                SpawnRandomEnemy();
             }
         }
 
@@ -88,7 +89,7 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        private void SpawnRandom()
+        private void SpawnRandomEnemy()
         {
             switch (Random.Range(1, 3))
             {
@@ -107,12 +108,18 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnMeleeEnemy()
         {
-            _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+            if (_currentEnemyPosition != null || _currentEnemyPosition == new Vector3(0,0,0))
+            {
+                _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+            }
         }
 
         private void SpawnRangeEnemy()
         {
-            _currentEnemyDI.InstantiatePrefab(_rangeEneny, _currentEnemyPosition, Quaternion.identity, null);
+            if (_currentEnemyPosition != null || _currentEnemyPosition == new Vector3(0, 0, 0))
+            {
+                _currentEnemyDI.InstantiatePrefab(_rangeEneny, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+            }
         }
     }
 }

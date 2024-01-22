@@ -1,0 +1,156 @@
+﻿
+BEGIN_OPTIONS
+   Name "Hidden/MicroVerse/LitDev"
+   Stackable "False"
+END_OPTIONS
+
+// Put any properties you have between the begin/end property blocks
+BEGIN_PROPERTIES
+   [BetterHeader(Lit)]
+   _MainTex("Albedo/Height", 2D) = "white" {}
+	_Tint ("Tint", Color) = (1, 1, 1, 1)
+   [Toggle(_ALPHACUT)] _AlphaCut("Alpha Cut", Float) = 0
+   [Toggle(_DITHERFADE)] _DitherFadeKeyword("Dither Fade", Float) = 0
+   _DitherFade("Dither Fade Start/Distance", Vector) = (50, 50, 0, 0)
+   _AlphaThreshold("Alpha Threshold", Float) = 0.5
+   [Normal][NoScaleOffset]_NormalMap("Normal", 2D) = "bump" {}
+   _NormalStrength("Normal Strength", Range(0,2)) = 1
+
+   [Toggle(_MASKMAP)] _UseMaskMap ("Use Mask Map", Float) = 0
+   [NoScaleOffset]_MaskMap("Mask Map", 2D) = "black" {}
+
+   [Toggle(_EMISSION)] _UseEmission ("Use Emission Map", Float) = 0
+   [NoScaleOffset]_EmissionMap("Emission Map", 2D) = "black" {}
+   _EmissionStrength("Emission Strength", Range(0, 4)) = 1
+
+   [Toggle(_DETAIL)] _UseDetail("Use Detail Map", Float) = 0
+   _DetailMap("Detail Map", 2D) = "bump" {}
+   _DetailAlbedoStrength("Detail Albedo Strength", Range(0, 2)) = 1
+   _DetailNormalStrength("Detail Normal Strength", Range(0, 2)) = 1
+   _DetailSmoothnessStrength("Detail Smoothness Strength", Range(0, 2)) = 1
+
+END_PROPERTIES
+
+
+// Any variables you want to have in the per material CBuffer go here.
+BEGIN_CBUFFER
+   half4 _Tint;
+   float4 _MainTex_ST;
+   float4 _DetailMap_ST;
+   half _NormalStrength;
+   half _EmissionStrength;
+   half _DetailAlbedoStrength;
+   half _DetailNormalStrength;
+   half _DetailSmoothnessStrength;
+   half _AlphaThreshold;
+   float2 _DitherFade;
+END_CBUFFER
+
+
+
+BEGIN_DEFINES
+   #pragma shader_feature_local_fragment _ _MASKMAP
+   #pragma shader_feature_local_fragment _ _DETAIL
+   #pragma shader_feature_local_fragment _ _EMISSION
+   #pragma shader_feature_local_fragment _ _ALPHACUT
+   #pragma shader_feature_local_fragment _ _DITHERFADE
+END_DEFINES
+
+
+// All code goes here
+
+BEGIN_CODE
+
+void DitheredAlpha(half alpha, float2 screenUV)
+{
+    #if defined(_DITHERFADE)
+        float DITHER_THRESHOLDS[16] =
+        {
+            1.0 / 17.0,  9.0 / 17.0,  3.0 / 17.0, 11.0 / 17.0,
+            13.0 / 17.0,  5.0 / 17.0, 15.0 / 17.0,  7.0 / 17.0,
+            4.0 / 17.0, 12.0 / 17.0,  2.0 / 17.0, 10.0 / 17.0,
+            16.0 / 17.0,  8.0 / 17.0, 14.0 / 17.0,  6.0 / 17.0
+        };
+   
+        float2 uv = screenUV.xy;
+        uint index = (uint(uv.x) % 4) * 4 + uint(uv.y) % 4;
+
+        clip(alpha - DITHER_THRESHOLDS[index]);
+    #endif
+ 
+}
+
+
+   half3 LitBlendDetailNormal(half3 n1, half3 n2)
+   {
+      return normalize(half3(n1.xy + n2.xy, n1.z*n2.z));
+   }
+
+   // We share samplers with the albedo - which free's up more for stacking.
+   // Note that you can use surface shader style texture/sampler declarations here as well.
+   // They have been emulated in HDRP/URP, however, I think using these is nicer than the
+   // old surface shader methods.
+
+   TEXTURE2D(_MainTex);
+   SAMPLER(sampler_MainTex);   // naming this way associates it with the sampler properties from the albedo map
+   TEXTURE2D(_NormalMap);
+   SAMPLER(sampler_NormalMap); 
+   TEXTURE2D(_MaskMap);
+   TEXTURE2D(_EmissionMap);
+   TEXTURE2D(_DetailMap);
+
+
+	void SurfaceFunction(inout Surface o, inout ShaderData d)
+	{
+      float2 uv = d.texcoord0.xy * _MainTex_ST.xy + _MainTex_ST.zw;
+
+      half4 c = SAMPLE_TEXTURE2D(_MainTex, sampler_MainTex, uv);
+      #if _ALPHACUT
+         
+         #if _DITHERFADE
+            float fadeDist = distance(GetCameraWorldPosition(), d.worldSpacePosition);
+            fadeDist -= _DitherFade.x;
+            fadeDist = 1.0 - saturate(fadeDist/max(_DitherFade.y, 0.001));
+            DitheredAlpha(c.a * fadeDist, d.screenUV);
+            d.worldSpaceNormal = lerp(d.worldSpaceNormal, float3(0,1,0), 0.5);
+            d.TBNMatrix = float3x3(d.worldSpaceTangent, cross(d.worldSpaceNormal, d.worldSpaceTangent), d.worldSpaceNormal);
+         #else
+            clip(c.a - _AlphaThreshold);
+         #endif
+
+      #endif
+
+      o.Albedo = c.rgb * _Tint.rgb;
+      o.Height = c.a;
+      o.Normal = UnpackScaleNormal(SAMPLE_TEXTURE2D(_NormalMap, sampler_NormalMap, uv), _NormalStrength);
+      o.Normal *= saturate(c.a + 999);
+      half detailMask = 1; 
+      #if _MASKMAP
+          // Unity mask map format (R) Metallic, (G) Occlusion, (B) Detail Mask (A) Smoothness
+         half4 mask = SAMPLE_TEXTURE2D(_MaskMap, sampler_MainTex, uv);
+         o.Metallic = mask.r;
+         o.Occlusion = mask.g;
+         o.Smoothness = mask.a;
+         detailMask = mask.b;
+      #endif // separate maps
+
+
+      half3 emission = 0;
+      #if defined(_EMISSION)
+         o.Emission = SAMPLE_TEXTURE2D(_EmissionMap, sampler_MainTex, uv).rgb * _EmissionStrength;
+      #endif
+
+      #if defined(_DETAIL)
+         float2 detailUV = uv * _DetailMap_ST.xy + _DetailMap_ST.zw;
+         half4 detailSample = SAMPLE_TEXTURE2D(_DetailMap, sampler_MainTex, detailUV);
+         o.Normal = LitBlendDetailNormal(o.Normal, UnpackScaleNormal(detailSample, _DetailNormalStrength * detailMask));
+         o.Albedo = lerp(o.Albedo, o.Albedo * 2 * detailSample.x,  detailMask * _DetailAlbedoStrength);
+         o.Smoothness = lerp(o.Smoothness, o.Smoothness * 2 * detailSample.z, detailMask * _DetailSmoothnessStrength);
+      #endif
+
+
+		o.Alpha = c.a;
+	}
+
+END_CODE
+

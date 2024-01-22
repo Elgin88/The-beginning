@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[RequireComponent(typeof(Collider))]
-
-public class MainBuilding : Building
+namespace Assets.Scripts.BuildingSystem.Buildings
 {
-
+    internal class MainBuilding : Building
+    {
+    }
 }
