@@ -4,12 +4,12 @@ using Zenject;
 
 public class PlayerMainBildingInstaller : MonoInstaller
 {
-    [SerializeField] private MainBuilding _playerMainBilding;
+    [SerializeField] private MainBuilding _playerMainBiulding;
 
     public override void InstallBindings()
     {
-        MainBuilding playerMainBilding = Container.InstantiatePrefabForComponent<MainBuilding>(_playerMainBilding, _playerMainBilding.transform.position, Quaternion.identity, null);
+        MainBuilding playerMainBuilding = Container.InstantiatePrefabForComponent<MainBuilding>(_playerMainBiulding, _playerMainBiulding.transform.position, Quaternion.identity, null);
 
-        Container.Bind<MainBuilding>().FromInstance(_playerMainBilding).AsSingle().NonLazy();
+        Container.Bind<MainBuilding>().FromInstance(_playerMainBiulding).AsSingle().NonLazy();
     }
 }
