@@ -1,21 +1,17 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 
 public abstract class Building : MonoBehaviour, IDamageable
 {
     public int Cost;
-    public int Strength;
+    public float Strength;
     public ParticleSystem EffectOfDestroying;
     public GameObject PrafabOfruins;
 
     public Action OnDestroyed;
 
-    public Transform Transform => this.transform;
-
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
        if(Strength > 0 && damage > 0)
         {

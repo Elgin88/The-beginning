@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using Assets.Scripts.GameLogic.Damageable;
+using Assets.Scripts.EnemyComponents;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
@@ -9,9 +9,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private ParticleSystem _mark;
 
-        private IDamageable _target;
+        private IEnemy _target;
 
-        public Transform Target => _target.Transform;
+        public Transform Target => _target.Position;
 
         public void Init()
         {
@@ -19,10 +19,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             _mark.Stop();
         }
 
-        public void MarkEnemy(IDamageable enemy)
+        public void MarkEnemy(IEnemy enemy)
         {
             _target = enemy;
-            _mark.transform.position = _target.Transform.position;
+            _mark.transform.position = _target.Position.position;
 
             if (_mark.isStopped)
                 _mark.Play();

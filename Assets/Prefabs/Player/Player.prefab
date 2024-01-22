@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 7936983417069384191}
   - component: {fileID: 9027805575987077364}
   - component: {fileID: 361136690892505369}
+  - component: {fileID: -434474296401398925}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -279,6 +280,18 @@ MonoBehaviour:
   _weapons:
   - {fileID: 7074407505586110123}
   - {fileID: 2254243264041936596}
+--- !u!114 &-434474296401398925
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 170511074636822116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeb6ff6016f80274a9dc5542f89152e4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &388500578688246048
 GameObject:
   m_ObjectHideFlags: 0
@@ -1826,14 +1839,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4608920177351997607}
-  m_LocalRotation: {x: -0.70883423, y: -0.700937, z: -0.05620158, w: -0.05552216}
-  m_LocalPosition: {x: 38.9, y: 1.4, z: -10.4}
+  m_LocalRotation: {x: -0.69570154, y: -0.6879575, z: -0.14698283, w: -0.14529239}
+  m_LocalPosition: {x: 45.9, y: 1.4, z: -9.9}
   m_LocalScale: {x: 8000, y: 8000, z: 8000}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1947528534202501673}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: -179.996, y: -9.062012, z: -89.358}
+  m_LocalEulerAnglesHint: {x: -179.996, y: -23.85498, z: -89.358}
 --- !u!33 &221282499027627448
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -1901,7 +1914,7 @@ BoxCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
@@ -1919,12 +1932,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2902e535722ced47b014ba49c74bbe7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 0
-  _attackSpeed: 1
-  _name: Sword
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
+  _damage: 10
+  _attackSpeed: 3
 --- !u!1 &4836414644642149677
 GameObject:
   m_ObjectHideFlags: 0
@@ -3576,17 +3585,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aee046271b41f424caf63bbc8583ab4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _damage: 2
+  _damage: 5
   _attackSpeed: 2
-  _name: 
-  LayerMask:
-    serializedVersion: 2
-    m_Bits: 64
   _radius: 10
   _shootPoint: {fileID: 8841447842545000901}
   _arrowPrefab: {fileID: 4306390963386993369, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
   _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}
   _attack: {fileID: 1687150108939030565, guid: d2e81e7fb98c99149a64b9f87f88a84e, type: 2}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &8950715178592391206
 GameObject:
   m_ObjectHideFlags: 0

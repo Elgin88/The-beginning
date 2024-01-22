@@ -9,13 +9,15 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private ParticleSystem _hitEffect;
         [SerializeField] private float _speed;
 
+        private float _damage;
+
         private Coroutine _flying;
 
         private void OnTriggerEnter(Collider other)
         {
             if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
             {
-                target.TakeDamage(5);
+                target.TakeDamage(_damage);
             }
 
             ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
@@ -31,6 +33,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             }
                 
             _flying = StartCoroutine(Flying(target));
+        }
+
+        public void Init(float damage)
+        {
+            _damage = damage;
         }
 
         private IEnumerator Flying(Transform target)

@@ -1,7 +1,6 @@
-﻿using Assets.Scripts.PlayerComponents;
+﻿using UnityEngine;
+using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
-using System;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.AnimatorScripts.Player
@@ -12,12 +11,9 @@ namespace Assets.Scripts.AnimatorScripts.Player
         private Mark _mark;
         private Vector3 _rotationOffset = new Vector3(0, 75, 0);
 
-        public event Action<bool> AnimationFinished;
-
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _movement.StopMove();
-            AnimationFinished?.Invoke(true);
         }
 
         public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
@@ -28,7 +24,6 @@ namespace Assets.Scripts.AnimatorScripts.Player
         public override void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {
             _movement.StartMove();
-            AnimationFinished?.Invoke(false);
         }
 
         [Inject]

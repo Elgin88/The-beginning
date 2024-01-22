@@ -1,5 +1,4 @@
-﻿using Assets.Scripts.Movement;
-using Assets.Scripts.PlayerComponents.Weapons;
+﻿using Assets.Scripts.PlayerComponents.Weapons;
 using UnityEngine;
 using Zenject;
 
