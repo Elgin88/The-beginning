@@ -54,7 +54,7 @@ namespace Assets.Scripts.Enemy
         {
             ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
 
-            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.red, 0.01f);
+            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.yellow, 0.01f);
         }
 
         private void SetDataRaycastHit(Ray ray)
