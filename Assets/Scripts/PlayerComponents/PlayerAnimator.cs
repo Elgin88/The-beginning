@@ -16,7 +16,7 @@ namespace Assets.Scripts.PlayerComponents
         private float _currentClipLength;
         private float _animationUpdateTime = 0.5f;
 
-        private Coroutine _test;
+        private Coroutine _animatorUpdate;
 
         public void SetAnimatorSpeed(Vector3 movementVector, float moveSpeed)
         {
@@ -27,12 +27,12 @@ namespace Assets.Scripts.PlayerComponents
 
         public void SetAnimatorAttackTrigger(Weapon weapon)
         {
-            if (_test != null)
+            if (_animatorUpdate != null)
             {
-                StopCoroutine(_test);
+                StopCoroutine(_animatorUpdate);
             }
 
-            _test = StartCoroutine(Test(weapon));
+            _animatorUpdate = StartCoroutine(AnimatorUpdate(weapon));
         }
 
         public void SetAnimatorChangeWeaponTrigger(Weapon weapon)
@@ -40,7 +40,7 @@ namespace Assets.Scripts.PlayerComponents
             _animator.SetTrigger(_triggerConfig.GetChangeWeaponTrigger(weapon.GetType()));
         }
 
-        private IEnumerator Test(Weapon weapon)
+        private IEnumerator AnimatorUpdate(Weapon weapon)
         {
             _animator.SetTrigger(_triggerConfig.GetAttackTrigger(weapon.GetType()));
 
