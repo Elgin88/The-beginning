@@ -16,6 +16,7 @@ namespace Assets.Scripts.Enemy
     {
         [Inject] private MainBuilding _mainBuilding;
 
+        private Coroutine _findTarget;
         private EnemyVision _enemyVision;
         private GameObject _nextTarget;
 
@@ -27,7 +28,17 @@ namespace Assets.Scripts.Enemy
 
             _nextTarget = _mainBuilding.gameObject;
 
-            StartCoroutine(FindTarget());
+            StartFindTarget();
+        }
+
+        public void StartFindTarget()
+        {
+            _findTarget = StartCoroutine(FindTarget());
+        }
+
+        public void StopFindTarget()
+        {
+            StopCoroutine(_findTarget);
         }
 
         private IEnumerator FindTarget()
@@ -36,23 +47,22 @@ namespace Assets.Scripts.Enemy
             {
                 if (_enemyVision.Target == null)
                 {
-                    Debug.Log("1");
                     _nextTarget = _mainBuilding.gameObject;
                 }
-                else if(_enemyVision.Target.gameObject.TryGetComponent<Player>(out Player player))
+                else if (_enemyVision.Target.gameObject.TryGetComponent<Player>(out Player player))
                 {
                     _nextTarget = _enemyVision.Target;
+                    StopFindTarget();
                 }
                 else if (_enemyVision.Target.gameObject.TryGetComponent<Building>(out Building building))
                 {
                     _nextTarget = _enemyVision.Target;
+                    StopFindTarget();
                 }
                 else
                 {
                     _nextTarget = _mainBuilding.gameObject;
                 }
-
-                Debug.Log(_nextTarget.name);
 
                 yield return null;
             }
