@@ -2,7 +2,7 @@
 using UnityEngine;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
 using Assets.Scripts.AnimatorScripts.Player;
-using Assets.Scripts.EnemyComponents;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
@@ -17,7 +17,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private Coroutine _attackCoroutine;
         private ArrowsPool _pool;
-        private IEnemy _closestTarget;
+        private IDamageable _closestTarget;
 
         private void Awake()
         {
@@ -47,7 +47,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                     }
                 }
 
-                if (closerstCollider.TryGetComponent<IEnemy>(out IEnemy target))
+                if (closerstCollider.TryGetComponent<IDamageable>(out IDamageable target))
                 {
                     _closestTarget = target;
                     Mark(target);
@@ -89,11 +89,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                 Arrow arrow = _pool.GetArrow();
 
                 arrow.transform.position = _shootPoint.position;
-                arrow.Fly(_closestTarget.Position);
+                arrow.Fly(_closestTarget.Transform);
             }
         }
 
-        private void Mark(IEnemy enemy)
+        private void Mark(IDamageable enemy)
         {
             _mark.MarkEnemy(enemy);
         }

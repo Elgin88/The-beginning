@@ -15,6 +15,10 @@ namespace Assets.Scripts.PlayerComponents
 
         public float Value => _value;
 
+        public bool IsPlayerObject => true;
+
+        public Transform Transform => transform;
+
         private void Start()
         {
             _playerCollider = GetComponent<Collider>();

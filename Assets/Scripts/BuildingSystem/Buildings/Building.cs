@@ -15,6 +15,8 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
         public Transform Transform => transform;
 
+        public abstract bool IsPlayerObject { get; }
+
         public void TakeDamage(float damage)
         {
             if (Strength > 0 && damage > 0)

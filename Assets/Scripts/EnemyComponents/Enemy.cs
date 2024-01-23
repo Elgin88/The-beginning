@@ -1,4 +1,3 @@
-using Assets.Scripts.EnemyComponents;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
@@ -13,11 +12,13 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(EnemyVision))]
     [RequireComponent(typeof(Animator))]
 
-    internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
+    internal abstract class Enemy : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _health;
 
-        public Transform Position => transform;
+        public Transform Transform => transform;
+
+        public bool IsPlayerObject => false;
 
         internal abstract NavMeshAgent NavMeshAgent { get; set; }
 

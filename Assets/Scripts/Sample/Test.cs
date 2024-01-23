@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.Movement;
-using Assets.Scripts.EnemyComponents;
 
 namespace Assets.Scripts.Sample
 {
-    internal class Test : MonoBehaviour, IDamageable, IMoveable, IEnemy
+    internal class Test : MonoBehaviour, IDamageable, IMoveable
     {
         [SerializeField] private float _health;
 
@@ -13,9 +12,9 @@ namespace Assets.Scripts.Sample
 
         public float RotationSpeed => 1;
 
-        public Transform Position => transform;
-
         public Transform Transform => transform;
+
+        public bool IsPlayerObject => false;
 
         public void TakeDamage(float damage)
         {
