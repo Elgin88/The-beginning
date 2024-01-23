@@ -1,4 +1,5 @@
 using Assets.Scripts.BuildingSystem.Buildings;
+using Assets.Scripts.Enemy;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
@@ -10,12 +11,9 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMove : State
     {
-        [Inject] private MainBuilding _playerMainBilding;
-
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
         private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
-        private Vector3 _currentTargetPosition;
-        private Vector3 _startTargetPosition;
 
         public override void StartState()
         {
@@ -46,21 +44,17 @@ namespace Assets.Scripts.UnitStateMachine
         private void Awake()
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
-
-            _startTargetPosition = _playerMainBilding.transform.position;
-            _currentTargetPosition = _startTargetPosition;
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
         }
 
         private IEnumerator Move()
         {
             while (true)
             {
-                if (_navMeshAgent == null || _currentTargetPosition == null)
+                if (_navMeshAgent != null & _enemyNextTargetFinder != null)
                 {
-                    yield return null;
+                    _navMeshAgent.destination = _enemyNextTargetFinder.NextTarget.transform.position;
                 }
-
-                _navMeshAgent.destination = _currentTargetPosition;
 
                 yield return null;
             }

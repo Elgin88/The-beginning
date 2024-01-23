@@ -4,6 +4,7 @@ using Assets.Scripts.Tests;
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Enemy
 {
