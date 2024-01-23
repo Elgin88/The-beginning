@@ -1,6 +1,6 @@
-﻿using Assets.Scripts.PlayerComponents;
+﻿using UnityEngine;
+using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
-using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.AnimatorScripts.Player
@@ -9,7 +9,7 @@ namespace Assets.Scripts.AnimatorScripts.Player
     {
         private PlayerMovement _movement;
         private Mark _mark;
-        private Vector3 _rotationOffset = new Vector3(0, 200, 0);
+        private Vector3 _rotationOffset = new Vector3(0, 75, 0);
 
         public override void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
         {

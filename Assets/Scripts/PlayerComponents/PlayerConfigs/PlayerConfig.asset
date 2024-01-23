@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Speed>k__BackingField: 4.5
   <RotationSpeed>k__BackingField: 5
+  <RecoverTime>k__BackingField: 1
+  <Health>k__BackingField: 100

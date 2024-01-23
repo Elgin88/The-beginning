@@ -1,3 +1,4 @@
+using Assets.Scripts.EnemyComponents;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
@@ -13,17 +14,17 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(EnemyVision))]
     [RequireComponent(typeof(Animator))]
 
-    internal abstract class Enemy : MonoBehaviour, IDamageable
+    internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
-        [SerializeField] private int _health;
+        [SerializeField] private float _health;
 
-        Transform IDamageable.Transform => gameObject.transform;
+        public Transform Position => transform;
 
         internal abstract NavMeshAgent NavMeshAgent { get; set; }
 
         internal abstract float CurrentSpeed { get; set; }
 
-        void IDamageable.TakeDamage(int damage)
+        void IDamageable.TakeDamage(float damage)
         {
             _health -= damage;
 
