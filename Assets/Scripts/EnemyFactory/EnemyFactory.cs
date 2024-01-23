@@ -94,31 +94,20 @@ namespace Assets.Scripts.Enemy
             switch (Random.Range(1, 3))
             {
                 case 1:
-                    SpawnMeleeEnemy();
+                    SpawnEnemy(_enemyMeleeOrc.gameObject);
                     break;
 
                 case 2:
-                    SpawnRangeEnemy();
-                    break;
-
-                default:
+                    SpawnEnemy(_rangeEneny.gameObject);
                     break;
             }
         }
 
-        private void SpawnMeleeEnemy()
+        private void SpawnEnemy(GameObject gameObject)
         {
-            if (_currentEnemyPosition != null || _currentEnemyPosition == new Vector3(0,0,0))
+            if (_currentEnemyPosition.x != _mainBuilding.transform.position.x)
             {
-                _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
-            }
-        }
-
-        private void SpawnRangeEnemy()
-        {
-            if (_currentEnemyPosition != null || _currentEnemyPosition == new Vector3(0, 0, 0))
-            {
-                _currentEnemyDI.InstantiatePrefab(_rangeEneny, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
             }
         }
     }

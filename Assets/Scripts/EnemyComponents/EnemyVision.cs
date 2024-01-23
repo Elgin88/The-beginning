@@ -4,6 +4,7 @@ using Assets.Scripts.Tests;
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.Enemy
 {
@@ -12,9 +13,9 @@ namespace Assets.Scripts.Enemy
         private EnemyRayPoint _enemyRayPoint;
         private GameObject _target;
         private float _visionAngle = 160;
-        private float _visionRange = 20;
+        private float _visionRange = 30;
         private float _stepOfRotationY => _visionAngle / _rayCount;
-        private int _rayCount = 40;
+        private int _rayCount = 100;
 
         public GameObject Target => _target;
 
@@ -53,7 +54,7 @@ namespace Assets.Scripts.Enemy
         {
             ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
 
-            Debug.DrawRay(transform.position + new Vector3(0,0.5f,0), ray.direction * _visionRange, Color.red, 0.05f);
+            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.red, 0.01f);
         }
 
         private void SetDataRaycastHit(Ray ray)
@@ -64,11 +65,10 @@ namespace Assets.Scripts.Enemy
 
             if (raycastHit.collider != null & raycastHit.distance <= _visionRange)
             {
-                _target = raycastHit.collider.gameObject;
-            }
-            else
-            {
-                _target = null;
+                if (raycastHit.collider.gameObject.TryGetComponent<Terrain>(out Terrain terrain) == false)
+                {
+                    _target = raycastHit.collider.gameObject;
+                }
             }
         }
     }
