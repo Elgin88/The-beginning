@@ -3,6 +3,7 @@ using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.PlayerComponents;
 using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.Enemy
 {
@@ -39,20 +40,15 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
-                bool isPlayerGroup = false;
-
                 foreach (GameObject nextTarget in _enemyVision.Targets)
                 {
+                    nextTarget.TryGetComponent<IDamageable>(out IDamageable idamageable);
+
                     if (_enemyVision.Targets.Count == 0)
                     {
                         _currentTarget = _mainBuilding.gameObject;
                     }
-                    else if (nextTarget.TryGetComponent<PlayerGroup>(out PlayerGroup playerGroup))
-                    {
-                        _currentTarget = nextTarget;
-                        isPlayerGroup = true;
-                    }
-                    else if (nextTarget.TryGetComponent<Building>(out Building building) & isPlayerGroup == false)
+                    else if (idamageable.IsPlayerObject)
                     {
                         if (Vector3.Distance(transform.position, _currentTarget.transform.position) > Vector3.Distance(transform.position, nextTarget.transform.position))
                         {
