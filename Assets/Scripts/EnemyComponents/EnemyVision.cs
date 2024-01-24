@@ -1,27 +1,25 @@
-using Assets.Scripts.BuildingSystem.Buildings;
-using Assets.Scripts.PlayerComponents;
-using Assets.Scripts.Tests;
-using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
         private EnemyRayPoint _enemyRayPoint;
-        private GameObject _target;
+        private List<GameObject> _targets;
         private float _visionAngle = 160;
         private float _visionRange = 30;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
-        public GameObject Target => _target;
+        public List<GameObject> Targets => _targets;
 
         private void Awake()
         {
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
+
+            _targets = new List<GameObject>();
 
             StartCoroutine(Vision());
         }
@@ -31,6 +29,8 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 int currentRayNumber = 0;
+
+                _targets = new List<GameObject>();
 
                 while (currentRayNumber <= _rayCount)
                 {
@@ -53,8 +53,6 @@ namespace Assets.Scripts.Enemy
         private void CreateRay(out Ray ray)
         {
             ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
-
-            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.yellow, 0.01f);
         }
 
         private void SetDataRaycastHit(Ray ray)
@@ -63,13 +61,36 @@ namespace Assets.Scripts.Enemy
 
             Physics.Raycast(ray, out raycastHit);
 
-            if (raycastHit.collider != null & raycastHit.distance <= _visionRange)
+            if (raycastHit.collider != null)
             {
-                if (raycastHit.collider.gameObject.TryGetComponent<Terrain>(out Terrain terrain) == false)
+                if (raycastHit.collider.gameObject.TryGetComponent<Terrain>(out Terrain terrain) == false & raycastHit.distance <= _visionRange)
                 {
-                    _target = raycastHit.collider.gameObject;
+                    AddTargetInList(raycastHit.collider.gameObject);
                 }
             }
+        }
+
+        private void AddTargetInList(GameObject gameObject)
+        {
+            if (CheckTargetsForRepeat(gameObject) == false)
+            {
+                _targets.Add(gameObject);
+            }
+        }
+
+        private bool CheckTargetsForRepeat(GameObject gameObject)
+        {
+            bool isRepeat = false;
+
+            foreach (GameObject target in _targets)
+            {
+                if (target == gameObject)
+                {
+                    isRepeat = true;
+                }
+            }
+
+            return isRepeat;
         }
     }
 }
