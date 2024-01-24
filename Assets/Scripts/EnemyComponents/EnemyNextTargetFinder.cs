@@ -1,13 +1,7 @@
-using Assets.Scripts.ConStants;
-using Assets.Scripts.Enemy;
-using Assets.Scripts.BuildingSystem.Buildings;
-using Assets.Scripts.UnitStateMachine;
-using Assets.Scripts.Tests;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.PlayerComponents;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.Enemy
@@ -45,23 +39,32 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
-                if (_enemyVision.Target == null)
+                bool isPlayer = false;
+
+                foreach (GameObject target in _enemyVision.Targets)
                 {
-                    _nextTarget = _mainBuilding.gameObject;
-                }
-                else if (_enemyVision.Target.gameObject.TryGetComponent<Player>(out Player player))
-                {
-                    _nextTarget = _enemyVision.Target;
-                    StopFindTarget();
-                }
-                else if (_enemyVision.Target.gameObject.TryGetComponent<Building>(out Building building))
-                {
-                    _nextTarget = _enemyVision.Target;
-                    StopFindTarget();
-                }
-                else
-                {
-                    _nextTarget = _mainBuilding.gameObject;
+                    if (_enemyVision.Targets.Count == 0)
+                    {
+                        _nextTarget = _mainBuilding.gameObject;
+                    }
+                    else if (target.TryGetComponent<Player>(out Player player))
+                    {
+                        _nextTarget = target;
+                        isPlayer = true;
+                    }
+                    else if (target.TryGetComponent<Building>(out Building building) & isPlayer == false)
+                    {
+                        if (true)
+                        {
+
+                        }
+
+                        _nextTarget = target;
+                    }
+                    else
+                    {
+                        _nextTarget = _mainBuilding.gameObject;
+                    }
                 }
 
                 yield return null;
