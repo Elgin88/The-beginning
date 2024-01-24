@@ -6,6 +6,6 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 {
     internal class Tower : Building
     {
-        public override bool IsPlayerObject => throw new System.NotImplementedException();
+        public override bool IsPlayerObject => gameObject;
     }
 }

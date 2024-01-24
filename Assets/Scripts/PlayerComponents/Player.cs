@@ -4,8 +4,6 @@ using Zenject;
 
 namespace Assets.Scripts.PlayerComponents
 {
-    [RequireComponent(typeof(PlayerGroup))]
-
     internal class Player : MonoBehaviour, IMoveable
     {
         public float Speed {get; private set;}
