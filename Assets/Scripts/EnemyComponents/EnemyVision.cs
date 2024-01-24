@@ -9,7 +9,7 @@ namespace Assets.Scripts.Enemy
         private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
         private float _visionAngle = 160;
-        private float _visionRange = 30;
+        private float _visionRange = 10;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
@@ -53,6 +53,8 @@ namespace Assets.Scripts.Enemy
         private void CreateRay(out Ray ray)
         {
             ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
+
+            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.yellow, 0.1f);
         }
 
         private void SetDataRaycastHit(Ray ray)
