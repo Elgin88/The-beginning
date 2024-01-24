@@ -1,8 +1,9 @@
-﻿using Assets.Scripts.PlayerComponents.Weapons;
+﻿using Assets.Scripts.PlayerComponents;
+using Assets.Scripts.PlayerComponents.Weapons;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.PlayerComponents
+namespace Assets.Scripts.Installers
 {
     internal class PlayerSceneInstaller : MonoInstaller
     {

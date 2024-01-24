@@ -22,9 +22,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable enemy))
+            other.excludeLayers = LayerMask.NameToLayer("Player");
+
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
             {
-                enemy.TakeDamage(Damage);
+                target.TakeDamage(Damage);
             }
         }
 
