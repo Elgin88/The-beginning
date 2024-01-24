@@ -3,6 +3,7 @@ using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.PlayerComponents;
 using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.Enemy
 {
@@ -12,15 +13,15 @@ namespace Assets.Scripts.Enemy
 
         private Coroutine _findTarget;
         private EnemyVision _enemyVision;
-        private GameObject _nextTarget;
+        private GameObject _currentTarget;
 
-        public GameObject NextTarget => _nextTarget;
+        public GameObject NextTarget => _currentTarget;
 
         private void Awake()
         {
             _enemyVision = GetComponent<EnemyVision>();
 
-            _nextTarget = _mainBuilding.gameObject;
+            _currentTarget = _mainBuilding.gameObject;
 
             StartFindTarget();
         }
@@ -37,38 +38,33 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator FindTarget()
         {
-            while (true)
+            while (_currentTarget == _mainBuilding.gameObject)
             {
-                bool isPlayer = false;
-
-                foreach (GameObject target in _enemyVision.Targets)
+                foreach (GameObject nextTarget in _enemyVision.Targets)
                 {
+                    nextTarget.TryGetComponent<IDamageable>(out IDamageable idamageable);
+
                     if (_enemyVision.Targets.Count == 0)
                     {
-                        _nextTarget = _mainBuilding.gameObject;
+                        _currentTarget = _mainBuilding.gameObject;
                     }
-                    else if (target.TryGetComponent<Player>(out Player player))
+                    else if (idamageable.IsPlayerObject)
                     {
-                        _nextTarget = target;
-                        isPlayer = true;
-                    }
-                    else if (target.TryGetComponent<Building>(out Building building) & isPlayer == false)
-                    {
-                        if (true)
+                        if (Vector3.Distance(transform.position, _currentTarget.transform.position) > Vector3.Distance(transform.position, nextTarget.transform.position))
                         {
-
+                            _currentTarget = nextTarget;
                         }
-
-                        _nextTarget = target;
                     }
                     else
                     {
-                        _nextTarget = _mainBuilding.gameObject;
+                        _currentTarget = _mainBuilding.gameObject;
                     }
                 }
 
                 yield return null;
             }
+
+            StopFindTarget();
         }
     }
 }
