@@ -12,15 +12,15 @@ namespace Assets.Scripts.Enemy
 
         private Coroutine _findTarget;
         private EnemyVision _enemyVision;
-        private GameObject _nextTarget;
+        private GameObject _currentTarget;
 
-        public GameObject NextTarget => _nextTarget;
+        public GameObject NextTarget => _currentTarget;
 
         private void Awake()
         {
             _enemyVision = GetComponent<EnemyVision>();
 
-            _nextTarget = _mainBuilding.gameObject;
+            _currentTarget = _mainBuilding.gameObject;
 
             StartFindTarget();
         }
@@ -39,32 +39,35 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
-                bool isPlayer = false;
+                bool isPlayerGroup = false;
 
-                foreach (GameObject target in _enemyVision.Targets)
+                foreach (GameObject nextTarget in _enemyVision.Targets)
                 {
                     if (_enemyVision.Targets.Count == 0)
                     {
-                        _nextTarget = _mainBuilding.gameObject;
+                        _currentTarget = _mainBuilding.gameObject;
                     }
-                    else if (target.TryGetComponent<Player>(out Player player))
+                    else if (nextTarget.TryGetComponent<PlayerGroup>(out PlayerGroup playerGroup))
                     {
-                        _nextTarget = target;
-                        isPlayer = true;
+                        _currentTarget = nextTarget;
+                        isPlayerGroup = true;
                     }
-                    else if (target.TryGetComponent<Building>(out Building building) & isPlayer == false)
+                    else if (nextTarget.TryGetComponent<Building>(out Building building) & isPlayerGroup == false)
                     {
-                        if (true)
+                        if (Vector3.Distance(transform.position, _currentTarget.transform.position) > Vector3.Distance(transform.position, nextTarget.transform.position))
                         {
-
+                            _currentTarget = nextTarget;
                         }
-
-                        _nextTarget = target;
                     }
                     else
                     {
-                        _nextTarget = _mainBuilding.gameObject;
+                        _currentTarget = _mainBuilding.gameObject;
                     }
+                }
+
+                if (_currentTarget != _mainBuilding.gameObject)
+                {
+                    StopFindTarget();
                 }
 
                 yield return null;
