@@ -1,14 +1,9 @@
-using Assets.Scripts.ConStants;
-using Assets.Scripts.Enemy;
-using Assets.Scripts.BuildingSystem.Buildings;
-using Assets.Scripts.UnitStateMachine;
-using Assets.Scripts.Tests;
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.AI;
+using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.PlayerComponents;
+using UnityEngine;
 using Zenject;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.Enemy
 {
@@ -18,15 +13,15 @@ namespace Assets.Scripts.Enemy
 
         private Coroutine _findTarget;
         private EnemyVision _enemyVision;
-        private GameObject _nextTarget;
+        private GameObject _currentTarget;
 
-        public GameObject NextTarget => _nextTarget;
+        public GameObject NextTarget => _currentTarget;
 
         private void Awake()
         {
             _enemyVision = GetComponent<EnemyVision>();
 
-            _nextTarget = _mainBuilding.gameObject;
+            _currentTarget = _mainBuilding.gameObject;
 
             StartFindTarget();
         }
@@ -43,29 +38,33 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator FindTarget()
         {
-            while (true)
+            while (_currentTarget == _mainBuilding.gameObject)
             {
-                if (_enemyVision.Target == null)
+                foreach (GameObject nextTarget in _enemyVision.Targets)
                 {
-                    _nextTarget = _mainBuilding.gameObject;
-                }
-                else if (_enemyVision.Target.gameObject.TryGetComponent<Player>(out Player player))
-                {
-                    _nextTarget = _enemyVision.Target;
-                    StopFindTarget();
-                }
-                else if (_enemyVision.Target.gameObject.TryGetComponent<Building>(out Building building))
-                {
-                    _nextTarget = _enemyVision.Target;
-                    StopFindTarget();
-                }
-                else
-                {
-                    _nextTarget = _mainBuilding.gameObject;
+                    nextTarget.TryGetComponent<IDamageable>(out IDamageable idamageable);
+
+                    if (_enemyVision.Targets.Count == 0)
+                    {
+                        _currentTarget = _mainBuilding.gameObject;
+                    }
+                    else if (idamageable.IsPlayerObject)
+                    {
+                        if (Vector3.Distance(transform.position, _currentTarget.transform.position) > Vector3.Distance(transform.position, nextTarget.transform.position))
+                        {
+                            _currentTarget = nextTarget;
+                        }
+                    }
+                    else
+                    {
+                        _currentTarget = _mainBuilding.gameObject;
+                    }
                 }
 
                 yield return null;
             }
+
+            StopFindTarget();
         }
     }
 }
