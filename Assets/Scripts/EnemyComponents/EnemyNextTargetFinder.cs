@@ -38,7 +38,7 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator FindTarget()
         {
-            while (true)
+            while (_currentTarget == _mainBuilding.gameObject)
             {
                 foreach (GameObject nextTarget in _enemyVision.Targets)
                 {
@@ -61,13 +61,10 @@ namespace Assets.Scripts.Enemy
                     }
                 }
 
-                if (_currentTarget != _mainBuilding.gameObject)
-                {
-                    StopFindTarget();
-                }
-
                 yield return null;
             }
+
+            StopFindTarget();
         }
     }
 }
