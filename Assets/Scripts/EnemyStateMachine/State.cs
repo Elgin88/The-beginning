@@ -7,16 +7,12 @@ namespace Assets.Scripts.UnitStateMachine
     {
         [SerializeField] private List<Transition> _transitions;
 
-        private bool _isNeedNextState = false;
+        internal abstract bool IsNeedNextState { get; set; }
 
-        public bool IsNeedNextState => _isNeedNextState;
+        internal abstract void StartState();
 
-        public abstract void StartState();
+        internal abstract void StopState();
 
-        public abstract void StopState();
-
-        public abstract void GetNextTransition();
-
-        public abstract State GetNextState();
+        internal abstract State GetNextState();
     }
 }

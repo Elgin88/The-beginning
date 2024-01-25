@@ -1,9 +1,8 @@
 using System.Collections;
 using Assets.Scripts.BuildingSystem.Buildings;
-using Assets.Scripts.PlayerComponents;
+using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 using Zenject;
-using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.Enemy
 {
@@ -15,7 +14,7 @@ namespace Assets.Scripts.Enemy
         private EnemyVision _enemyVision;
         private GameObject _currentTarget;
 
-        public GameObject NextTarget => _currentTarget;
+        public GameObject CurrentTarget => _currentTarget;
 
         private void Awake()
         {

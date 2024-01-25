@@ -1,27 +1,64 @@
-using Assets.Scripts.Enemy;
 using System.Collections;
+using Assets.Scripts.Enemy;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
+    [RequireComponent(typeof(EnemyNextTargetFinder))]
+
     internal class TransitionMove : Transition
     {
-        private EnemyRayPoint _enemyRayPoint;
+        [SerializeField] private State _nextState;
+
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
+        private Coroutine _calculateDistance;
+        private float _currentDistanceToTarget;
         private float _minDistanceToTarget = 2;
 
-        private Coroutine _calculateDistance;
+        internal override State NextState { get ; set ; }
+
+        internal override bool IsNeedAttackState { get ; set; }
+
+        public void StartCallculateDistance()
+        {
+            _calculateDistance = StartCoroutine(CalculateDistance());
+        }
+
+        public void StopCallculateDistance()
+        {
+            StopCoroutine(_calculateDistance);
+        }
 
         private void Awake()
         {
-            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
 
-            _calculateDistance = StartCoroutine(CalculateDistance());
+            StartCallculateDistance();
         }
 
         private IEnumerator CalculateDistance()
         {
-
             yield return null;
+
+            SetDistanceToTarget();
+
+            while (_currentDistanceToTarget > _minDistanceToTarget)
+            {
+                SetDistanceToTarget();
+
+                yield return null;
+            }
+
+            IsNeedAttackState = true;
+
+            NextState = _nextState;
+
+            StopCallculateDistance();
+        }
+
+        private void SetDistanceToTarget()
+        {
+            _currentDistanceToTarget = Vector3.Distance(gameObject.transform.position, _enemyNextTargetFinder.CurrentTarget.transform.position);
         }
     }
 }

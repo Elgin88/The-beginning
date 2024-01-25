@@ -8,11 +8,24 @@ namespace Assets.Scripts.Enemy
 
     internal class EnemyAnimation : MonoBehaviour
     {
-        private static string _orcBossRunForwardSpeed = "OrcBossRunForwardSpeed";
-        private float _baseMoveSpeed = 3;
-        private float _normalizeMoveSpeed;
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
+        private string _orcBossRunForwardSpeed = "OrcBossRunForwardSpeed";
+        private string _run = "Run";
+        private string _attack = "Attack";
+        private float _baseMoveSpeed = 3;
+        private float _normalizeMoveSpeed;
+        private float _normalizeAttackSpeed;
+
+        internal void Run()
+        {
+            _animator.SetBool(_run, true);
+        }
+
+        internal void Attack()
+        {
+            _animator.SetBool(_attack, true);
+        }
 
         private void Awake()
         {
@@ -23,5 +36,7 @@ namespace Assets.Scripts.Enemy
 
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
         }
+
+
     }
 }
