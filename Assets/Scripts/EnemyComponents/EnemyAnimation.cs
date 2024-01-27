@@ -17,14 +17,24 @@ namespace Assets.Scripts.Enemy
         private float _normalizeMoveSpeed;
         private float _normalizeAttackSpeed;
 
-        internal void Run()
+        internal void StopRun()
         {
-            _animator.SetBool(_run, true);
+            _animator.SetBool(_run, false);
         }
 
-        internal void Attack()
+        internal void StartPlayAttack()
         {
             _animator.SetBool(_attack, true);
+        }
+
+        internal void StopPlayAttack()
+        {
+            _animator.SetBool(_attack, false);
+        }
+
+        internal void StartRun()
+        {
+            _animator.SetBool(_run, true);
         }
 
         private void Awake()
@@ -36,7 +46,5 @@ namespace Assets.Scripts.Enemy
 
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
         }
-
-
     }
 }

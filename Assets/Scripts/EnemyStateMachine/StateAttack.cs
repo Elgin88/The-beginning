@@ -34,6 +34,9 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 StopCoroutine(_attack);
                 _attack = null;
+
+                _enemyAnimation.StopPlayAttack();
+
             }
         }
 
@@ -48,7 +51,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                _enemyAnimation.Attack();
+                _enemyAnimation.StartPlayAttack();
                 yield return _speedOfAttackWFS;
             }
         }
