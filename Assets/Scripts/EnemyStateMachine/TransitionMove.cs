@@ -1,23 +1,29 @@
+using System;
 using System.Collections;
 using Assets.Scripts.Enemy;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(EnemyNextTargetFinder))]
+    [RequireComponent(typeof(StateAttack))]
 
     internal class TransitionMove : Transition
     {
-        [SerializeField] private State _nextState;
-
         private EnemyNextTargetFinder _enemyNextTargetFinder;
+        private EnemyRayPoint _enemyRayPoint;
+        private StateAttack _stateAttack;
+        private RaycastHit _raycastHit;
         private Coroutine _calculateDistance;
+        private State _nextState;
+        private Ray _ray;
         private float _currentDistanceToTarget;
         private float _minDistanceToTarget = 2;
 
-        internal override State NextState { get ; set ; }
+        public override State NextState { get ; set ; }
 
-        internal override bool IsNeedAttackState { get ; set; }
+        public override bool IsNeedNextState { get ; set; }
 
         public void StartCallculateDistance()
         {
@@ -32,33 +38,34 @@ namespace Assets.Scripts.UnitStateMachine
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
+            _stateAttack = GetComponent<StateAttack>();
+            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
             StartCallculateDistance();
         }
 
         private IEnumerator CalculateDistance()
         {
-            yield return null;
-
-            SetDistanceToTarget();
-
-            while (_currentDistanceToTarget > _minDistanceToTarget)
+            while (true)
             {
-                SetDistanceToTarget();
+                CalculateDistanceToTarget();
 
                 yield return null;
             }
 
-            IsNeedAttackState = true;
-
-            NextState = _nextState;
-
+            SetNextState(_stateAttack);
             StopCallculateDistance();
         }
 
-        private void SetDistanceToTarget()
+        private void SetNextState(State state)
         {
-            _currentDistanceToTarget = Vector3.Distance(gameObject.transform.position, _enemyNextTargetFinder.CurrentTarget.transform.position);
+            NextState = state;
+            IsNeedNextState = true;
+        }
+
+        private void CalculateDistanceToTarget()
+        {
+
         }
     }
 }

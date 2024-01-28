@@ -4,7 +4,7 @@ namespace Assets.Scripts.UnitStateMachine
 {
     internal abstract class Transition : MonoBehaviour
     {
-        internal abstract State NextState { get; set; }
-        internal abstract bool IsNeedAttackState { get; set; }
+        public abstract State NextState { get; set; }
+        public abstract bool IsNeedNextState { get; set; }
     }
 }

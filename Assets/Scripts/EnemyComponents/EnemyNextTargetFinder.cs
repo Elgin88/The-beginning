@@ -37,6 +37,8 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator FindTarget()
         {
+            yield return null;
+
             while (_currentTarget == _mainBuilding.gameObject)
             {
                 foreach (GameObject nextTarget in _enemyVision.Targets)

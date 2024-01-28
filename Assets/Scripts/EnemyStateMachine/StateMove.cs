@@ -41,7 +41,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override State GetNextState()
         {
-            if (_transitionMove.IsNeedAttackState)
+            if (_transitionMove.IsNeedNextState)
             {
                 return _stateAttack;
             }
@@ -67,7 +67,7 @@ namespace Assets.Scripts.UnitStateMachine
                 if (_navMeshAgent != null & _enemyNextTargetFinder != null)
                 {
                     _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
-                    _isNeedNextState = _transitionMove.IsNeedAttackState;
+                    _isNeedNextState = _transitionMove.IsNeedNextState;
                     IsNeedNextState = _isNeedNextState;
                 }
 
