@@ -53,6 +53,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""MoveUnits"",
+                    ""type"": ""Button"",
+                    ""id"": ""046c37a0-2c67-41e3-a482-55ee3dbc2e21"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -130,6 +139,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Change Weapon"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""eed8199e-04b3-4656-8524-03c4999814f7"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""MoveUnits"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -235,6 +255,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_ChangeWeapon = m_Player.FindAction("Change Weapon", throwIfNotFound: true);
+        m_Player_MoveUnits = m_Player.FindAction("MoveUnits", throwIfNotFound: true);
         // BuildingSystem
         m_BuildingSystem = asset.FindActionMap("BuildingSystem", throwIfNotFound: true);
         m_BuildingSystem_PlaceBuilding = m_BuildingSystem.FindAction("PlaceBuilding", throwIfNotFound: true);
@@ -303,6 +324,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_ChangeWeapon;
+    private readonly InputAction m_Player_MoveUnits;
     public struct PlayerActions
     {
         private @InputActions m_Wrapper;
@@ -310,6 +332,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         public InputAction @Move => m_Wrapper.m_Player_Move;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @ChangeWeapon => m_Wrapper.m_Player_ChangeWeapon;
+        public InputAction @MoveUnits => m_Wrapper.m_Player_MoveUnits;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -328,6 +351,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ChangeWeapon.started += instance.OnChangeWeapon;
             @ChangeWeapon.performed += instance.OnChangeWeapon;
             @ChangeWeapon.canceled += instance.OnChangeWeapon;
+            @MoveUnits.started += instance.OnMoveUnits;
+            @MoveUnits.performed += instance.OnMoveUnits;
+            @MoveUnits.canceled += instance.OnMoveUnits;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -341,6 +367,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @ChangeWeapon.started -= instance.OnChangeWeapon;
             @ChangeWeapon.performed -= instance.OnChangeWeapon;
             @ChangeWeapon.canceled -= instance.OnChangeWeapon;
+            @MoveUnits.started -= instance.OnMoveUnits;
+            @MoveUnits.performed -= instance.OnMoveUnits;
+            @MoveUnits.canceled -= instance.OnMoveUnits;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -435,6 +464,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnChangeWeapon(InputAction.CallbackContext context);
+        void OnMoveUnits(InputAction.CallbackContext context);
     }
     public interface IBuildingSystemActions
     {

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Movement;
 using Zenject;
+using Assets.Scripts.PlayerUnits.Utilities;
 
 namespace Assets.Scripts.PlayerComponents
 {
@@ -10,6 +11,8 @@ namespace Assets.Scripts.PlayerComponents
 
         private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
+
+        private GlobalSelection _globalSelection;
 
         private Vector2 _moveDirection;
 
@@ -49,11 +52,17 @@ namespace Assets.Scripts.PlayerComponents
             _playerAttacker.ChangeWeapon();
         }
 
+        private void OnMouse(Vector2 position)
+        {
+
+        }
+
         [Inject]
-        private void Construct(PlayerMovement movement, PlayerAttacker attacker)
+        private void Construct(PlayerMovement movement, PlayerAttacker attacker, GlobalSelection selection)
         {
             _playerMover = movement;
             _playerAttacker = attacker;
+            _globalSelection = selection;
         }
     }
 }
