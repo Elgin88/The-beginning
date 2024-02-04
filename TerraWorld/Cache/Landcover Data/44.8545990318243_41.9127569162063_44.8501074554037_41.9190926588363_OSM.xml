@@ -1,0 +1,507 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<osm version="0.6" generator="Overpass API 0.7.61.5 4133829e">
+  <note>The data included in this document is from www.openstreetmap.org. The data is made available under ODbL.</note>
+  <meta osm_base="2024-01-23T20:58:00Z" />
+  <node id="1482268932" lat="44.8504499" lon="41.9143888" />
+  <node id="1482268938" lat="44.8512540" lon="41.9155432" />
+  <node id="1482268957" lat="44.8516304" lon="41.9134487" />
+  <node id="1482268990" lat="44.8525192" lon="41.9173596" />
+  <node id="1482269023" lat="44.8539798" lon="41.9132583" />
+  <node id="4402349406" lat="44.8523854" lon="41.9128587" />
+  <node id="4402373939" lat="44.8542936" lon="41.9137535" />
+  <node id="4402373940" lat="44.8537617" lon="41.9139016" />
+  <node id="4402373941" lat="44.8531913" lon="41.9140250" />
+  <node id="4402373942" lat="44.8529953" lon="41.9140349" />
+  <node id="4402373943" lat="44.8523759" lon="41.9143656" />
+  <node id="4402373944" lat="44.8516165" lon="41.9146420" />
+  <node id="4402373945" lat="44.8509271" lon="41.9151850" />
+  <node id="4402373946" lat="44.8507382" lon="41.9152344" />
+  <node id="4402373947" lat="44.8504302" lon="41.9153677" />
+  <node id="4402373974" lat="44.8507600" lon="41.9150861" />
+  <node id="4402373975" lat="44.8504793" lon="41.9147935" />
+  <node id="4402373976" lat="44.8512847" lon="41.9129345" />
+  <node id="4402373977" lat="44.8518217" lon="41.9132271" />
+  <node id="4402373978" lat="44.8520413" lon="41.9129861" />
+  <node id="4402373979" lat="44.8524318" lon="41.9131066" />
+  <node id="4402373995" lat="44.8535300" lon="41.9136918" />
+  <node id="4402373996" lat="44.8531396" lon="41.9135886" />
+  <node id="4402373997" lat="44.8524196" lon="41.9139328" />
+  <node id="4402373998" lat="44.8517973" lon="41.9140189" />
+  <node id="4402373999" lat="44.8514556" lon="41.9145353" />
+  <node id="4402374000" lat="44.8511017" lon="41.9148279" />
+  <way id="391039248">
+    <nd ref="1482266254" />
+    <nd ref="1482266271" />
+    <nd ref="1482266276" />
+    <nd ref="3941909235" />
+    <nd ref="1482266273" />
+    <nd ref="1482266278" />
+    <nd ref="1482266281" />
+    <nd ref="1482266557" />
+    <nd ref="1482266576" />
+    <nd ref="1482266583" />
+    <nd ref="1482266590" />
+    <nd ref="1482266597" />
+    <nd ref="1482266599" />
+    <nd ref="1482266602" />
+    <nd ref="1482266863" />
+    <nd ref="1482266861" />
+    <nd ref="1482266889" />
+    <nd ref="1482266887" />
+    <nd ref="1482266888" />
+    <nd ref="1482266859" />
+    <nd ref="1482266625" />
+    <nd ref="1482266528" />
+    <nd ref="1482266267" />
+    <nd ref="1482266301" />
+    <nd ref="1482266347" />
+    <nd ref="1482266411" />
+    <nd ref="1482266457" />
+    <nd ref="1482266553" />
+    <nd ref="1482266699" />
+    <nd ref="1482266734" />
+    <nd ref="1482266790" />
+    <nd ref="1482266909" />
+    <nd ref="1482266916" />
+    <nd ref="1482266982" />
+    <nd ref="1482267023" />
+    <nd ref="1482267041" />
+    <nd ref="1482267103" />
+    <nd ref="1482267192" />
+    <nd ref="1482267227" />
+    <nd ref="1482267276" />
+    <nd ref="1482267282" />
+    <nd ref="1482267326" />
+    <nd ref="1482267352" />
+    <nd ref="1482267408" />
+    <nd ref="1482267426" />
+    <nd ref="1482267445" />
+    <nd ref="1482267487" />
+    <nd ref="1482267518" />
+    <nd ref="1482267535" />
+    <nd ref="1482267556" />
+    <nd ref="1482267564" />
+    <nd ref="1482267572" />
+    <nd ref="1482267524" />
+    <nd ref="1482267526" />
+    <nd ref="1482267534" />
+    <nd ref="1482267456" />
+    <nd ref="1482267371" />
+    <nd ref="1482267312" />
+    <nd ref="1482267274" />
+    <nd ref="1482267240" />
+    <nd ref="1482267182" />
+    <nd ref="1482267073" />
+    <nd ref="1482267054" />
+    <nd ref="1482266989" />
+    <nd ref="1482266980" />
+    <nd ref="1482266918" />
+    <nd ref="1482266890" />
+    <nd ref="1482266865" />
+    <nd ref="3800626872" />
+    <nd ref="1482266822" />
+    <nd ref="1482266837" />
+    <nd ref="3800626873" />
+    <nd ref="1482266958" />
+    <nd ref="1482266920" />
+    <nd ref="1482266948" />
+    <nd ref="1482266978" />
+    <nd ref="1482267135" />
+    <nd ref="3800626881" />
+    <nd ref="1482267244" />
+    <nd ref="1482267258" />
+    <nd ref="1482267423" />
+    <nd ref="1482267510" />
+    <nd ref="1482267599" />
+    <nd ref="1482267662" />
+    <nd ref="1482267672" />
+    <nd ref="3800626915" />
+    <nd ref="3800626922" />
+    <nd ref="3800626927" />
+    <nd ref="3800626928" />
+    <nd ref="3800626929" />
+    <nd ref="3800626930" />
+    <nd ref="3800626931" />
+    <nd ref="3800626933" />
+    <nd ref="3800626932" />
+    <nd ref="3800626926" />
+    <nd ref="3800626925" />
+    <nd ref="3800626924" />
+    <nd ref="3800626923" />
+    <nd ref="3800626921" />
+    <nd ref="3800626920" />
+    <nd ref="3800626918" />
+    <nd ref="3800626916" />
+    <nd ref="3800626913" />
+    <nd ref="3800626912" />
+    <nd ref="3800626911" />
+    <nd ref="3800626910" />
+    <nd ref="1482267669" />
+    <nd ref="3800626909" />
+    <nd ref="1482267595" />
+    <nd ref="3800626908" />
+    <nd ref="1482267558" />
+    <nd ref="1482267457" />
+    <nd ref="1482267411" />
+    <nd ref="3800626901" />
+    <nd ref="3800626902" />
+    <nd ref="3800626900" />
+    <nd ref="3800626899" />
+    <nd ref="3800626897" />
+    <nd ref="3800626896" />
+    <nd ref="3800626894" />
+    <nd ref="1482267338" />
+    <nd ref="1482267311" />
+    <nd ref="5913628199" />
+    <nd ref="5913628198" />
+    <nd ref="1482267287" />
+    <nd ref="1482267271" />
+    <nd ref="3800626886" />
+    <nd ref="1482267219" />
+    <nd ref="3800626875" />
+    <nd ref="1482267187" />
+    <nd ref="1482267169" />
+    <nd ref="1482267139" />
+    <nd ref="1482267110" />
+    <nd ref="3800626876" />
+    <nd ref="1482267191" />
+    <nd ref="3800626885" />
+    <nd ref="3800626879" />
+    <nd ref="3800626880" />
+    <nd ref="3800626888" />
+    <nd ref="3800626887" />
+    <nd ref="3800626877" />
+    <nd ref="1482267179" />
+    <nd ref="1482267212" />
+    <nd ref="3800626882" />
+    <nd ref="3800626883" />
+    <nd ref="3800626878" />
+    <nd ref="1482267184" />
+    <nd ref="1482267213" />
+    <nd ref="3800626884" />
+    <nd ref="3800626889" />
+    <nd ref="3800626890" />
+    <nd ref="3800626891" />
+    <nd ref="1482267309" />
+    <nd ref="3800626892" />
+    <nd ref="3800626893" />
+    <nd ref="3800626895" />
+    <nd ref="1482267399" />
+    <nd ref="1482267483" />
+    <nd ref="3800626904" />
+    <nd ref="3800626903" />
+    <nd ref="3800626905" />
+    <nd ref="3800626907" />
+    <nd ref="3800626906" />
+    <nd ref="1482267587" />
+    <nd ref="1482267660" />
+    <nd ref="1482267687" />
+    <nd ref="1482267691" />
+    <nd ref="1482267719" />
+    <nd ref="3800626914" />
+    <nd ref="3800626917" />
+    <nd ref="3800626919" />
+    <nd ref="1482267780" />
+    <nd ref="1482267782" />
+    <nd ref="1482267819" />
+    <nd ref="1482267823" />
+    <nd ref="1482267832" />
+    <nd ref="1482268233" />
+    <nd ref="1482268236" />
+    <nd ref="1482268249" />
+    <nd ref="1482268258" />
+    <nd ref="1482268374" />
+    <nd ref="3941987502" />
+    <nd ref="1482268384" />
+    <nd ref="1482268504" />
+    <nd ref="1482268641" />
+    <nd ref="1482268732" />
+    <nd ref="1482268788" />
+    <nd ref="1482268790" />
+    <nd ref="1482268982" />
+    <nd ref="1482268990" />
+    <nd ref="1482268938" />
+    <nd ref="1482268932" />
+    <nd ref="1482268957" />
+    <nd ref="1482269023" />
+    <nd ref="1482269056" />
+    <nd ref="1482269033" />
+    <nd ref="1482268977" />
+    <nd ref="3791203882" />
+    <nd ref="3791203883" />
+    <nd ref="3791203885" />
+    <nd ref="3791203884" />
+    <nd ref="1482269184" />
+    <nd ref="3791203886" />
+    <nd ref="3791203887" />
+    <nd ref="3791203888" />
+    <nd ref="1482269301" />
+    <nd ref="3791203889" />
+    <nd ref="1482269383" />
+    <nd ref="1482269387" />
+    <nd ref="3791203890" />
+    <nd ref="1482269398" />
+    <nd ref="1482269406" />
+    <nd ref="1482269415" />
+    <nd ref="1482269296" />
+    <nd ref="1482269275" />
+    <nd ref="1482269281" />
+    <nd ref="1482269389" />
+    <nd ref="1482269414" />
+    <nd ref="1482269421" />
+    <nd ref="1482269432" />
+    <nd ref="1482269452" />
+    <nd ref="3791203891" />
+    <nd ref="1482269536" />
+    <nd ref="1482269567" />
+    <nd ref="3791203892" />
+    <nd ref="1482269631" />
+    <nd ref="1482269635" />
+    <nd ref="1482269644" />
+    <nd ref="1482269719" />
+    <nd ref="1482269721" />
+    <nd ref="1482269729" />
+    <nd ref="1482269747" />
+    <nd ref="1482269911" />
+    <nd ref="1482269976" />
+    <nd ref="1482269979" />
+    <nd ref="1482269982" />
+    <nd ref="1482269990" />
+    <nd ref="1482270013" />
+    <nd ref="1482270020" />
+    <nd ref="1482270022" />
+    <nd ref="1482270026" />
+    <nd ref="1482270037" />
+    <nd ref="1482270046" />
+    <nd ref="1482270059" />
+    <nd ref="1482270063" />
+    <nd ref="1482270066" />
+    <nd ref="1482270068" />
+    <nd ref="1482270119" />
+    <nd ref="1482270129" />
+    <nd ref="1482270180" />
+    <nd ref="1482270197" />
+    <nd ref="1482270200" />
+    <nd ref="1482270215" />
+    <nd ref="1482270219" />
+    <nd ref="1482270245" />
+    <nd ref="1482270264" />
+    <nd ref="1482270328" />
+    <nd ref="1482270340" />
+    <nd ref="1482270343" />
+    <nd ref="3791203893" />
+    <nd ref="1482270354" />
+    <nd ref="1482270464" />
+    <nd ref="1482270548" />
+    <nd ref="3791203894" />
+    <nd ref="3791203895" />
+    <nd ref="1482270588" />
+    <nd ref="1482270585" />
+    <nd ref="1482270591" />
+    <nd ref="1482270600" />
+    <nd ref="3941987551" />
+    <nd ref="1482270604" />
+    <nd ref="1482270610" />
+    <nd ref="1482270612" />
+    <nd ref="471331823" />
+    <tag k="admin_level" v="6" />
+    <tag k="boundary" v="administrative" />
+    <tag k="source" v="границы кадастровых районов" />
+    <tag k="source:url" v="http://maps.rosreestr.ru" />
+  </way>
+  <way id="442556316">
+    <nd ref="4402349398" />
+    <nd ref="4402349399" />
+    <nd ref="4402349397" />
+    <nd ref="4402349400" />
+    <nd ref="4402349401" />
+    <nd ref="4402349402" />
+    <nd ref="4402349403" />
+    <nd ref="4402349404" />
+    <nd ref="4402349405" />
+    <nd ref="4402349406" />
+    <nd ref="4402349407" />
+    <nd ref="4402349408" />
+    <nd ref="4402349409" />
+    <nd ref="4402349410" />
+    <nd ref="4402349411" />
+    <nd ref="4402349412" />
+    <nd ref="4402349413" />
+    <nd ref="4402349414" />
+    <nd ref="4402349415" />
+    <nd ref="4402349394" />
+    <nd ref="4402349416" />
+    <nd ref="4402349417" />
+    <nd ref="4402349418" />
+    <nd ref="4402349419" />
+    <nd ref="4402349420" />
+    <nd ref="4402349421" />
+    <nd ref="4402349422" />
+    <nd ref="4402349423" />
+    <nd ref="4402349424" />
+    <nd ref="4402349425" />
+    <nd ref="4402349426" />
+    <nd ref="4402349427" />
+    <nd ref="4402349428" />
+    <nd ref="4402349429" />
+    <nd ref="4402349430" />
+    <nd ref="4402349431" />
+    <nd ref="4402349432" />
+    <nd ref="4402349433" />
+    <nd ref="4402349434" />
+    <nd ref="4402349435" />
+    <nd ref="4402349436" />
+    <nd ref="4402349437" />
+    <nd ref="4402349438" />
+    <nd ref="4402349439" />
+    <nd ref="4402349440" />
+    <nd ref="4402349441" />
+    <nd ref="4402349442" />
+    <nd ref="4402349443" />
+    <nd ref="4402349444" />
+    <nd ref="4402349445" />
+    <nd ref="4402349446" />
+    <nd ref="4402349447" />
+    <tag k="highway" v="track" />
+  </way>
+  <way id="442559896">
+    <nd ref="4402373919" />
+    <nd ref="4402373931" />
+    <nd ref="4402373932" />
+    <nd ref="4402373933" />
+    <nd ref="4402373934" />
+    <nd ref="4402373935" />
+    <nd ref="4402373936" />
+    <nd ref="4402373937" />
+    <nd ref="4402373938" />
+    <nd ref="4402373939" />
+    <nd ref="4402373940" />
+    <nd ref="4402373941" />
+    <nd ref="4402373942" />
+    <nd ref="4402373943" />
+    <nd ref="4402373944" />
+    <nd ref="4402373945" />
+    <nd ref="4402373946" />
+    <nd ref="4402373947" />
+    <nd ref="4402373948" />
+    <nd ref="4402373949" />
+    <nd ref="4402373950" />
+    <nd ref="4402373951" />
+    <nd ref="4402373952" />
+    <nd ref="4402373953" />
+    <nd ref="4402373954" />
+    <nd ref="4402373955" />
+    <nd ref="4402373956" />
+    <nd ref="4402373957" />
+    <nd ref="4402373958" />
+    <nd ref="4402373959" />
+    <nd ref="744555112" />
+    <tag k="highway" v="track" />
+  </way>
+  <way id="442559900">
+    <nd ref="4402373974" />
+    <nd ref="4402373975" />
+    <nd ref="4402373976" />
+    <nd ref="4402373977" />
+    <nd ref="4402373978" />
+    <nd ref="4402373979" />
+    <nd ref="4402373980" />
+    <nd ref="4402373981" />
+    <nd ref="4402373982" />
+    <nd ref="4402373983" />
+    <nd ref="4402373984" />
+    <nd ref="4402373985" />
+    <nd ref="4402373986" />
+    <nd ref="4402373987" />
+    <nd ref="4402373988" />
+    <nd ref="4402373989" />
+    <nd ref="4402373990" />
+    <nd ref="4402373991" />
+    <nd ref="4402373992" />
+    <nd ref="4402373993" />
+    <nd ref="4402373994" />
+    <nd ref="4402373995" />
+    <nd ref="4402373996" />
+    <nd ref="4402373997" />
+    <nd ref="4402373998" />
+    <nd ref="4402373999" />
+    <nd ref="4402374000" />
+    <nd ref="4402373974" />
+    <tag k="landuse" v="forest" />
+  </way>
+  <relation id="1030057">
+    <member type="way" ref="442844158" role="outer" />
+    <member type="way" ref="391039248" role="outer" />
+    <member type="way" ref="134897588" role="outer" />
+    <member type="way" ref="134897657" role="outer" />
+    <member type="way" ref="134897803" role="outer" />
+    <member type="way" ref="134897537" role="outer" />
+    <member type="way" ref="195979712" role="outer" />
+    <member type="way" ref="195979725" role="outer" />
+    <member type="way" ref="195979731" role="outer" />
+    <member type="way" ref="195979738" role="outer" />
+    <member type="way" ref="66536555" role="outer" />
+    <member type="way" ref="47085384" role="outer" />
+    <member type="way" ref="134897823" role="inner" />
+    <member type="way" ref="244285393" role="inner" />
+    <member type="way" ref="244285399" role="inner" />
+    <member type="way" ref="391058708" role="inner" />
+    <member type="way" ref="391058707" role="inner" />
+    <member type="way" ref="747132002" role="inner" />
+    <member type="way" ref="747132003" role="inner" />
+    <member type="way" ref="775709969" role="inner" />
+    <member type="way" ref="391058713" role="inner" />
+    <member type="way" ref="775709970" role="inner" />
+    <member type="way" ref="766364582" role="inner" />
+    <member type="way" ref="391020554" role="inner" />
+    <member type="way" ref="775979046" role="inner" />
+    <member type="way" ref="391039242" role="inner" />
+    <member type="way" ref="244285392" role="inner" />
+    <member type="node" ref="3033924842" role="admin_centre" />
+    <tag k="addr:country" v="RU" />
+    <tag k="addr:region" v="Ставропольский край" />
+    <tag k="admin_level" v="6" />
+    <tag k="alt_name" v="Шпаковский район" />
+    <tag k="border_type" v="district" />
+    <tag k="boundary" v="administrative" />
+    <tag k="name" v="Шпаковский муниципальный округ" />
+    <tag k="name:en" v="Shpakovsky District" />
+    <tag k="official_status" v="ru:муниципальный округ" />
+    <tag k="source" v="Росреестр,gis-lab.info" />
+    <tag k="type" v="boundary" />
+    <tag k="wikidata" v="Q1253510" />
+    <tag k="wikipedia" v="ru:Шпаковский район" />
+  </relation>
+  <relation id="1030066">
+    <member type="way" ref="583540262" role="outer" />
+    <member type="way" ref="374223251" role="outer" />
+    <member type="way" ref="66939836" role="outer" />
+    <member type="way" ref="374656340" role="outer" />
+    <member type="way" ref="583467776" role="outer" />
+    <member type="way" ref="377041992" role="outer" />
+    <member type="way" ref="376742540" role="outer" />
+    <member type="way" ref="67010386" role="outer" />
+    <member type="way" ref="374221444" role="outer" />
+    <member type="way" ref="373853201" role="outer" />
+    <member type="way" ref="66546213" role="outer" />
+    <member type="way" ref="442844163" role="outer" />
+    <member type="way" ref="374037386" role="outer" />
+    <member type="way" ref="375770505" role="outer" />
+    <member type="way" ref="391039248" role="outer" />
+    <member type="way" ref="374223250" role="outer" />
+    <member type="way" ref="134897711" role="inner" />
+    <member type="node" ref="4456067092" role="admin_centre" />
+    <tag k="addr:country" v="RU" />
+    <tag k="addr:region" v="Ставропольский край" />
+    <tag k="admin_level" v="6" />
+    <tag k="alt_name" v="Кочубеевский район" />
+    <tag k="boundary" v="administrative" />
+    <tag k="name" v="Кочубеевский муниципальный округ" />
+    <tag k="name:en" v="Kochubeyevsky District" />
+    <tag k="official_status" v="ru:муниципальный округ" />
+    <tag k="source" v="Росреестр,gis-lab.info" />
+    <tag k="type" v="boundary" />
+    <tag k="wikidata" v="Q1254794" />
+    <tag k="wikipedia" v="ru:Кочубеевский район" />
+  </relation>
+</osm>
