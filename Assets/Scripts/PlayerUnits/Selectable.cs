@@ -5,18 +5,13 @@ namespace Assets.Scripts.PlayerUnits
 {
     internal class Selectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        [SerializeField] private ParticleSystem _selectedRing;
-
         private ParticleSystem _ring;
         private SelectedUnitsHandler _selectedUnitsHandler;
 
-        private void Start()
+        public void InitSelection(ParticleSystem ring, SelectedUnitsHandler selectedUnitsHandler)
         {
-            _selectedUnitsHandler = new SelectedUnitsHandler();
-
-            _ring = Instantiate(_selectedRing, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
-
-            _ring.Stop();
+            _selectedUnitsHandler = selectedUnitsHandler;
+            _ring = ring;
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -32,6 +27,7 @@ namespace Assets.Scripts.PlayerUnits
         public void OnPointerClick(PointerEventData eventData)
         {
             _selectedUnitsHandler.AddUnit(this);
+            _ring.Play();
         }
     }
 }

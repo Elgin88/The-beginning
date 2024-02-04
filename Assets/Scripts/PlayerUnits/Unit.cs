@@ -21,6 +21,13 @@ namespace Assets.Scripts.PlayerUnits
             Debug.Log("aaay");
         }
 
+        public void Init(float health, float damage, float speed)
+        {
+            _health = health;
+            _damage = damage;
+            _speed = speed;
+        }
+
         public void Select()
         {
             

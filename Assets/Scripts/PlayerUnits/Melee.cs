@@ -1,6 +1,6 @@
 ﻿namespace Assets.Scripts.PlayerUnits
 {
-    internal class Swordsman : Unit
+    internal class Melee : Unit
     {
     }
 }

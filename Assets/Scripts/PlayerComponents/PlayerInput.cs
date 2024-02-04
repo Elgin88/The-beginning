@@ -12,8 +12,6 @@ namespace Assets.Scripts.PlayerComponents
         private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
 
-        private GlobalSelection _globalSelection;
-
         private Vector2 _moveDirection;
 
         private void Start()
@@ -52,17 +50,16 @@ namespace Assets.Scripts.PlayerComponents
             _playerAttacker.ChangeWeapon();
         }
 
-        private void OnMouse(Vector2 position)
+        private void OnMoveUnits()
         {
 
         }
 
         [Inject]
-        private void Construct(PlayerMovement movement, PlayerAttacker attacker, GlobalSelection selection)
+        private void Construct(PlayerMovement movement, PlayerAttacker attacker)
         {
             _playerMover = movement;
             _playerAttacker = attacker;
-            _globalSelection = selection;
         }
     }
 }

@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
-using Assets.Scripts.PlayerUnits.Utilities;
 using UnityEngine;
 using Zenject;
 
@@ -12,7 +11,6 @@ namespace Assets.Scripts.Installers
         [SerializeField] private PlayerInput _playerInput;
         [SerializeField] private PlayerConfig _playerConfig;
         [SerializeField] private PlayerAnimator _playerAnimator;
-        [SerializeField] private GlobalSelection _globalSelection;
         [SerializeField] private Mark _mark;
 
         public override void InstallBindings()
@@ -34,7 +32,6 @@ namespace Assets.Scripts.Installers
             
             Container.Bind<PlayerMovement>().FromNew().AsSingle().NonLazy();
             Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
-            Container.Bind<GlobalSelection>().FromInstance(_globalSelection).AsSingle().NonLazy();
             PlayerInput input = Container.InstantiatePrefabForComponent<PlayerInput>(_playerInput);
 
             input.transform.parent = player.transform;
