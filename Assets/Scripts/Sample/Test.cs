@@ -6,14 +6,21 @@ namespace Assets.Scripts.Sample
 {
     internal class Test : MonoBehaviour, IDamageable, IMoveable
     {
-        public Transform Transform => transform;
+        [SerializeField] private float _health;
 
         public float Speed => 1;
 
         public float RotationSpeed => 1;
 
-        public void TakeDamage(int damage)
+        public Transform Transform => transform;
+
+        public bool IsPlayerObject => false;
+
+        public void TakeDamage(float damage)
         {
+            _health -= damage;
+
+            Debug.Log(_health);
         }
     }
 }

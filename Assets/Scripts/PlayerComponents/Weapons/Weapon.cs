@@ -8,18 +8,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
     {
         [SerializeField] private float _damage;
         [SerializeField] private float _attackSpeed;
-        [SerializeField] private string _name;
 
-        [SerializeField] protected LayerMask LayerMask;
-
-        private Collider _weaponCollider;
-
+        protected Collider WeaponCollider;
         protected Coroutine AttackCoroutine;
-        protected float TimePast;
 
         public bool CanAttack { protected set; get; }
-
-        public string Name => _name;
 
         public float Damage => _damage;
 
@@ -27,9 +20,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void Start()
         {
-            _weaponCollider = GetComponent<Collider>();
+            WeaponCollider = GetComponent<Collider>();
 
-            _weaponCollider.enabled = false;
+            WeaponCollider.enabled = false;
 
             CanAttack = true;
         }
@@ -44,9 +37,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         {
             CanAttack = false;
 
-            WaitForSeconds attackDelay = new(attackSpeed);
-
-            yield return attackDelay;
+            yield return new WaitForSeconds(attackSpeed);
 
             CanAttack = true;
         }

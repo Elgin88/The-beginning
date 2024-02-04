@@ -48,13 +48,11 @@ namespace Assets.Scripts.PlayerComponents
 
         public void RotateTowards(Transform target, Vector3 offset)
         {
-            Debug.DrawLine(_player.transform.position, target.position, Color.red);
+            Vector3 directionToTarget = target.position - _player.transform.position;
+            Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
+            offset = new Vector3(_player.transform.rotation.x, offset.y , _player.transform.rotation.z);
 
-            //Quaternion directionRotation = Quaternion.LookRotation(target.position);
-
-            //_player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, directionRotation, Time.fixedDeltaTime);
-
-            _player.transform.LookAt(target.position);
+            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime / 2);
         }
 
         private void SurfaceAlignment(Vector3 movementVector)

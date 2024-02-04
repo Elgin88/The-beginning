@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 
@@ -9,7 +7,7 @@ namespace Assets.Scripts.BuildingSystem.Buildings
     internal abstract class Building : MonoBehaviour, IDamageable
     {
         public int Cost;
-        public int Strength;
+        public float Strength;
         public ParticleSystem EffectOfDestroying;
         public GameObject PrafabOfruins;
 
@@ -17,7 +15,9 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
         public Transform Transform => transform;
 
-        public void TakeDamage(int damage)
+        public abstract bool IsPlayerObject { get; }
+
+        public void TakeDamage(float damage)
         {
             if (Strength > 0 && damage > 0)
             {
