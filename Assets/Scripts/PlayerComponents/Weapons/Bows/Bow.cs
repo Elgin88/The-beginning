@@ -34,7 +34,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             {
                 float distance;
                 float closestDistance = _radius;
-                Collider closerstCollider = hitColliders[0];
+                Collider closestCollider = hitColliders[0];
 
                 for (int i = 0; i < hitColliders.Length; i++)
                 {
@@ -43,19 +43,20 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                     if (distance <= closestDistance)
                     {
                         closestDistance = distance;
-                        closerstCollider = hitColliders[i];
+                        closestCollider = hitColliders[i];
                     }
                 }
 
-                if (closerstCollider.TryGetComponent<IDamageable>(out IDamageable target))
+                if (closestCollider.TryGetComponent<IDamageable>(out IDamageable target))
                 {
                     _closestTarget = target;
                     Mark(target);
+                    CanAttack = true;
                 }
             }
             else
             {
-                _closestTarget = null;
+                CanAttack = false;
                 UnMark();
             }
         }
@@ -84,13 +85,10 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
             yield return new WaitForSeconds(attackSpeed - 0.65f);
 
-            if (_closestTarget != null)
-            {
-                Arrow arrow = _pool.GetArrow();
+            Arrow arrow = _pool.GetArrow();
 
-                arrow.transform.position = _shootPoint.position;
-                arrow.Fly(_closestTarget.Transform);
-            }
+            arrow.transform.position = _shootPoint.position;
+            arrow.Fly(_closestTarget.Transform);
         }
 
         private void Mark(IDamageable enemy)

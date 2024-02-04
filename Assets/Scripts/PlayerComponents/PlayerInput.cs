@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.Movement;
 using Zenject;
+using Assets.Scripts.PlayerUnits.Utilities;
 
 namespace Assets.Scripts.PlayerComponents
 {
@@ -47,6 +48,11 @@ namespace Assets.Scripts.PlayerComponents
         private void OnChangeWeaponInput()
         {
             _playerAttacker.ChangeWeapon();
+        }
+
+        private void OnMoveUnits()
+        {
+
         }
 
         [Inject]
