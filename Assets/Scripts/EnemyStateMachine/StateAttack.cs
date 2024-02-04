@@ -1,27 +1,59 @@
-using Assets.Scripts.UnitStateMachine;
+using System.Collections;
+using Assets.Scripts.Enemy;
+using UnityEngine;
 
-namespace Assets.Scripts.Tests
+namespace Assets.Scripts.UnitStateMachine
 {
+    [RequireComponent(typeof(Animator))]
+
     internal class StateAttack : State
     {
-        public override State GetNextState()
+        private EnemyAnimation _enemyAnimation;
+        private WaitForSeconds _speedOfAttackWFS;
+        private Coroutine _attack;
+        private float _speedOfAttack = 1;
+
+        internal override bool IsNeedNextState { get; set; }
+
+        internal override State GetNextState()
         {
             throw new System.NotImplementedException();
         }
 
-        public override void GetNextTransition()
+        internal override void StartState()
         {
-            throw new System.NotImplementedException();
+            if (_attack == null)
+            {
+                _attack = StartCoroutine(Attack());
+            }
         }
 
-        public override void StartState()
+        internal override void StopState()
         {
-            throw new System.NotImplementedException();
+            if (_attack != null)
+            {
+                StopCoroutine(_attack);
+                _attack = null;
+
+                _enemyAnimation.StopPlayAttack();
+
+            }
         }
 
-        public override void StopState()
+        private void Awake()
         {
-            throw new System.NotImplementedException();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
+
+            _speedOfAttackWFS = new WaitForSeconds(_speedOfAttack);
+        }
+
+        private IEnumerator Attack()
+        {
+            while (true)
+            {
+                _enemyAnimation.StartPlayAttack();
+                yield return _speedOfAttackWFS;
+            }
         }
     }
 }

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.AI;
-using Zenject;
 
 namespace Assets.Scripts.Tests
 {
