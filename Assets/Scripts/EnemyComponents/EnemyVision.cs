@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
@@ -8,12 +9,29 @@ namespace Assets.Scripts.Enemy
     {
         private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
+        private GameObject _currentTarget;
         private float _visionAngle = 160;
         private float _visionRange = 10;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
-        public List<GameObject> Targets => _targets;
+        internal GameObject GetCloseTarget()
+        {
+            if (_targets.Count != 0)
+            {
+                _currentTarget = _targets[0];
+
+                foreach (GameObject target in _targets)
+                {
+                    if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
+                    {
+                        _currentTarget = target;
+                    }
+                }
+            }
+
+            return _currentTarget;
+        }
 
         private void Awake()
         {
@@ -53,8 +71,6 @@ namespace Assets.Scripts.Enemy
         private void CreateRay(out Ray ray)
         {
             ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
-
-            Debug.DrawRay(_enemyRayPoint.transform.position, ray.direction * _visionRange, Color.yellow, 0.1f);
         }
 
         private void SetDataRaycastHit(Ray ray)
@@ -65,9 +81,12 @@ namespace Assets.Scripts.Enemy
 
             if (raycastHit.collider != null)
             {
-                if (raycastHit.collider.gameObject.TryGetComponent<Terrain>(out Terrain terrain) == false & raycastHit.distance <= _visionRange)
+                if (raycastHit.collider.gameObject.TryGetComponent<IDamageable>(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
                 {
-                    AddTargetInList(raycastHit.collider.gameObject);
+                    if (idamageable.IsPlayerObject)
+                    {
+                        AddTargetInList(raycastHit.collider.gameObject);
+                    }
                 }
             }
         }

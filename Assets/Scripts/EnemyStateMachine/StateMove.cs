@@ -16,7 +16,6 @@ namespace Assets.Scripts.UnitStateMachine
         private TransitionMove _transitionMove;
         private Coroutine _move;
         private StateAttack _stateAttack;
-        private bool _isNeedNextState;
 
         internal override bool IsNeedNextState { get; set; }
 
@@ -41,7 +40,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override State GetNextState()
         {
-            if (_transitionMove.IsNeedNextState)
+            if (_transitionMove.GetIsNeedNextState())
             {
                 return _stateAttack;
             }
@@ -58,18 +57,13 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Move()
         {
-            yield return null;
+            //yield return null;
 
             _transitionMove.StartCallculateDistance();
 
             while (true)
             {
-                if (_navMeshAgent != null & _enemyNextTargetFinder != null)
-                {
-                    _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
-                    _isNeedNextState = _transitionMove.IsNeedNextState;
-                    IsNeedNextState = _isNeedNextState;
-                }
+                _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
 
                 yield return null;
             }
