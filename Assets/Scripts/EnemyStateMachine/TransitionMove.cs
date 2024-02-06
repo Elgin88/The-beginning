@@ -11,59 +11,25 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class TransitionMove : Transition
     {
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private EnemyRayPoint _enemyRayPoint;
-        private StateAttack _stateAttack;
-        private RaycastHit _raycastHit;
-        private Coroutine _calculateDistance;
-        private State _nextState;
-        private Ray _ray;
-        private float _currentDistanceToTarget;
-        private float _minDistanceToTarget = 2;
+        protected override State NextState { get; set; }
+        protected override bool IsNeedNextState { get; set; }
 
-        public override State NextState { get ; set ; }
-
-        public override bool IsNeedNextState { get ; set; }
-
-        public void StartCallculateDistance()
+        internal override bool GetIsNeedNextState()
         {
-            _calculateDistance = StartCoroutine(CalculateDistance());
+            return IsNeedNextState;
         }
 
-        public void StopCallculateDistance()
+        internal override State GetNextState()
         {
-            StopCoroutine(_calculateDistance);
+            return NextState;
         }
 
-        private void Awake()
+        internal void StartCallculateDistance()
         {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _stateAttack = GetComponent<StateAttack>();
-            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
-            StartCallculateDistance();
         }
 
-        private IEnumerator CalculateDistance()
-        {
-            while (true)
-            {
-                CalculateDistanceToTarget();
-
-                yield return null;
-            }
-
-            SetNextState(_stateAttack);
-            StopCallculateDistance();
-        }
-
-        private void SetNextState(State state)
-        {
-            NextState = state;
-            IsNeedNextState = true;
-        }
-
-        private void CalculateDistanceToTarget()
+        internal void StopCallculateDistance()
         {
 
         }
