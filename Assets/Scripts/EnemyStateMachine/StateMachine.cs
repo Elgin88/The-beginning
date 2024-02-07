@@ -15,7 +15,10 @@ namespace Assets.Scripts.UnitStateMachine
         private void Awake()
         {
             _startState = GetComponent<StateMove>();
+        }
 
+        private void Start()
+        {
             _currentState = _startState;
 
             StartCurrentState();

@@ -51,7 +51,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                _enemyAnimation.StartPlayAttack();
+                _enemyAnimation.PlayAttack();
                 yield return _speedOfAttackWFS;
             }
         }

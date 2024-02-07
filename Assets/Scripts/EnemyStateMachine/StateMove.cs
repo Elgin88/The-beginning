@@ -12,6 +12,7 @@ namespace Assets.Scripts.UnitStateMachine
     internal class StateMove : State
     {
         private EnemyNextTargetFinder _enemyNextTargetFinder;
+        private EnemyAnimation _enemyAnimation;
         private TransitionMove _transitionMove;
         private NavMeshAgent _navMeshAgent;
         private StateAttack _stateAttack;
@@ -24,6 +25,8 @@ namespace Assets.Scripts.UnitStateMachine
             if (_move == null)
             {
                 _move = StartCoroutine(Move());
+                _transitionMove.StartCallculateDistance();
+                _enemyAnimation.PlayRun();
             }
         }
 
@@ -32,9 +35,10 @@ namespace Assets.Scripts.UnitStateMachine
             if (_move != null)
             {
                 StopCoroutine(_move);
-                _move = null;
-
+                _enemyAnimation.StopPlayRun();
                 _transitionMove.StopCallculateDistance();
+
+                _move = null;
             }
         }
 
@@ -53,12 +57,11 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _transitionMove = GetComponent<TransitionMove>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
         }
 
         private IEnumerator Move()
         {
-            _transitionMove.StartCallculateDistance();
-
             while (IsNeedNextState == false)
             {
                 _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
