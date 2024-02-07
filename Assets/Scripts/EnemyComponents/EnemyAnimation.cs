@@ -21,15 +21,11 @@ namespace Assets.Scripts.Enemy
         internal void PlayRun()
         {
             _animator.SetBool(_run, true);
-
-            Debug.Log("Run = true");
         }
 
         internal void StopPlayRun()
         {
             _animator.SetBool(_run, false);
-
-            Debug.Log("Run = false");
         }
 
         internal void PlayAttack()
