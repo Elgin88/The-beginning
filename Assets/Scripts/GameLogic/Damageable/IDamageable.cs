@@ -6,6 +6,8 @@ namespace Assets.Scripts.GameLogic.Damageable
     {
         public bool IsPlayerObject { get; }
 
+        public bool IsDead { get; }
+
         public Transform Transform { get; }
 
         public void TakeDamage(float damage);

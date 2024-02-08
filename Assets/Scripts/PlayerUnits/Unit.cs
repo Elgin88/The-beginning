@@ -9,6 +9,7 @@ namespace Assets.Scripts.PlayerUnits
         private float _health;
         private float _damage;
         private float _speed;
+        private bool _isDead;
 
         private Coroutine _move;
 
@@ -16,8 +17,18 @@ namespace Assets.Scripts.PlayerUnits
 
         public Transform Transform => transform;
 
+        public bool IsDead => _isDead;
+
         public void TakeDamage(float damage)
         {
+            _health -= damage;
+
+            if (_health <= 0)
+            {
+                _isDead = true;
+                Debug.Log("F");
+            }
+
             Debug.Log("aaay");
         }
 
@@ -26,6 +37,7 @@ namespace Assets.Scripts.PlayerUnits
             _health = health;
             _damage = damage;
             _speed = speed;
+            _isDead = false;
         }
 
         public void Select()
