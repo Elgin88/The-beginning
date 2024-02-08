@@ -18,7 +18,7 @@ namespace Assets.Scripts.UnitStateMachine
         private StateAttack _stateAttack;
         private Coroutine _move;
 
-        internal override bool IsNeedNextState { get; set; }
+        protected override bool IsNeedNextState { get; set; }
 
         internal override void StartState()
         {
@@ -75,6 +75,11 @@ namespace Assets.Scripts.UnitStateMachine
 
                 yield return null;
             }
+        }
+
+        internal override bool GetIsNeedNextState()
+        {
+            return IsNeedNextState;
         }
     }
 }

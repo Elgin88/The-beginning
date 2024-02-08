@@ -41,7 +41,7 @@ namespace Assets.Scripts.UnitStateMachine
 
             while (true)
             {
-                if (_currentState.IsNeedNextState)
+                if (_currentState.GetIsNeedNextState())
                 {
                     StopCurrentState();
 

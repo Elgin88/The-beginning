@@ -13,7 +13,7 @@ namespace Assets.Scripts.Enemy
         private Animator _animator;
         private string _orcBossRunForwardSpeed = "OrcBossRunForwardSpeed";
         private string _run = "IsRun";
-        private string _attack = "IsAttack";
+        private string _attack = "IsAttack1";
         private float _baseMoveSpeed = 3;
         private float _normalizeMoveSpeed;
         private float _normalizeAttackSpeed;

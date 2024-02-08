@@ -1,5 +1,6 @@
 using System.Collections;
 using Assets.Scripts.Enemy;
+using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
@@ -8,16 +9,18 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateAttack : State
     {
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
+        private TransitionAttack _transitionAttack;
         private EnemyAnimation _enemyAnimation;
-        private WaitForSeconds _speedOfAttackWFS;
+        private WaitForSeconds _intervalBetweenAttacksWFS;
         private Coroutine _attack;
-        private float _speedOfAttack = 1;
+        private float _intervalBetweenAttacks = 1f;
 
-        internal override bool IsNeedNextState { get; set; }
+        protected override bool IsNeedNextState { get; set; }
 
         internal override State GetNextState()
         {
-            throw new System.NotImplementedException();
+            return _transitionAttack.GetNextState();
         }
 
         internal override void StartState()
@@ -34,17 +37,20 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 StopCoroutine(_attack);
                 _attack = null;
-
-                _enemyAnimation.StopPlayAttack();
-
             }
+        }
+
+        internal override bool GetIsNeedNextState()
+        {
+            return IsNeedNextState;
         }
 
         private void Awake()
         {
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _enemyAnimation = GetComponent<EnemyAnimation>();
 
-            _speedOfAttackWFS = new WaitForSeconds(_speedOfAttack);
+            _intervalBetweenAttacksWFS = new WaitForSeconds(_intervalBetweenAttacks);
         }
 
         private IEnumerator Attack()
@@ -52,7 +58,14 @@ namespace Assets.Scripts.UnitStateMachine
             while (true)
             {
                 _enemyAnimation.PlayAttack();
-                yield return _speedOfAttackWFS;
+
+                yield return _intervalBetweenAttacksWFS;
+
+                _enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().TakeDamage(20) ;
+
+                _enemyAnimation.StopPlayAttack();
+
+                yield return _intervalBetweenAttacksWFS;
             }
         }
     }
