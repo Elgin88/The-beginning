@@ -1,31 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using UnityEngine;
+﻿using UnityEngine;
+using Zenject;
 
 namespace Assets.Scripts.PlayerUnits
 {
     internal class UnitsFactory : MonoBehaviour
     {
         [SerializeField] private Melee _meleePrefab;
+        [SerializeField] private ParticleSystem _particleSystemPrefab;
 
         private SelectedUnitsHandler _handler;
         private UnitsPool _pool;
 
-        public UnitsFactory() 
+        private void Start() 
         { 
-            _handler = new SelectedUnitsHandler();
-            _pool = new UnitsPool(_meleePrefab ,1, 2, 3);
+            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 1, 2, 10, _handler);
+            _handler.Init(_pool.MeleePool);
         }
 
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-
+                Unit unit = _pool.GetMelee();
+                unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
             }
+        }
+
+        [Inject]
+        private void Construct(SelectedUnitsHandler selectedUnitsHandler)
+        {
+            _handler = selectedUnitsHandler;
         }
     }
 }

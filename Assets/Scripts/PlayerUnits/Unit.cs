@@ -21,7 +21,7 @@ namespace Assets.Scripts.PlayerUnits
             Debug.Log("aaay");
         }
 
-        public void Init(float health, float damage, float speed)
+        public void InitStats(float health, float damage, float speed)
         {
             _health = health;
             _damage = damage;
@@ -54,10 +54,16 @@ namespace Assets.Scripts.PlayerUnits
         {
             while (transform.position !=  position)
             {
-                Vector3.MoveTowards(transform.position, position, moveSpeed);
+                Debug.Log(transform.position);
+                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
 
                 yield return null;
             }
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
         }
     }
 }
