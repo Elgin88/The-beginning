@@ -21,6 +21,8 @@ namespace Assets.Scripts.Enemy
 
         public bool IsPlayerObject => false;
 
+        public bool IsDead => _health <= 0;
+
         internal abstract NavMeshAgent NavMeshAgent { get; set; }
 
         internal abstract float CurrentSpeed { get; set; }

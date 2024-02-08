@@ -16,6 +16,8 @@ namespace Assets.Scripts.Sample
 
         public bool IsPlayerObject => false;
 
+        public bool IsDead => _health <= 0;
+
         public void TakeDamage(float damage)
         {
             _health -= damage;
