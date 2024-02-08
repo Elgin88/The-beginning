@@ -1,15 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits
 {
     internal class SelectedUnitsHandler
     {
-        private List<Selectable> _units;
+        private static LayerMask _groundMask = LayerMask.GetMask("Water");
 
-        public SelectedUnitsHandler() 
-        { 
+        private List<Selectable> _units;
+        private Ray _ray;
+        private float _rayDistance = 40f;
+        private Vector3 _mousePosition;
+
+        public void Init(Unit[] units)
+        {
             _units = new List<Selectable>();
+
+            foreach (var unit in units)
+            {
+                _units.Add(unit);
+            }
         }
 
         public void AddUnit(Selectable unit)
@@ -22,13 +33,23 @@ namespace Assets.Scripts.PlayerUnits
             _units.Remove(unit);
         }
 
-        public void MoveUnits(Vector3 position)
+        public void MoveUnits()
         {
-            foreach (Selectable selectable in _units)
+
+            Debug.Log("Moving");
+            _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+
+            if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
             {
-                if (selectable.TryGetComponent<Unit>(out Unit unit))
+                _mousePosition = hit.point;
+                Debug.Log(_mousePosition);
+            }
+
+            foreach (Unit unit in _units)
+            {
+                if (unit.IsSelected && unit.gameObject.activeSelf)
                 {
-                    unit.Move(position);
+                    unit.Move(_mousePosition);
                 }
             }
         }

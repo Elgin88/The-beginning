@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
+using Assets.Scripts.PlayerUnits;
 using UnityEngine;
 using Zenject;
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.Installers
         {
             Container.Bind<Mark>().FromInstance(_mark).AsSingle().NonLazy();
 
+            Container.Bind<SelectedUnitsHandler>().FromNew().AsSingle().NonLazy();
 
             Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
             Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
