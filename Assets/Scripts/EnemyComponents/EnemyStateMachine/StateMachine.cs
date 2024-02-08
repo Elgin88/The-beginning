@@ -15,7 +15,10 @@ namespace Assets.Scripts.UnitStateMachine
         private void Awake()
         {
             _startState = GetComponent<StateMove>();
+        }
 
+        private void Start()
+        {
             _currentState = _startState;
 
             StartCurrentState();
@@ -24,25 +27,21 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void StartCurrentState()
         {
-            if (_currentState != null)
-            {
-                _currentState.StartState();
-            }
+            _currentState.StartState();
         }
 
         private void StopCurrentState()
         {
-            if (_currentState != null)
-            {
-                _currentState.StopState();
-            }
+            _currentState.StopState();
         }
 
         private IEnumerator TrySetNextState()
         {
+            yield return null;
+
             while (true)
             {
-                if (_currentState != null & _currentState.IsNeedNextState)
+                if (_currentState.GetIsNeedNextState())
                 {
                     StopCurrentState();
 

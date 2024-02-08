@@ -5,25 +5,28 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(TransitionMove))]
     [RequireComponent(typeof(EnemyNextTargetFinder))]
+    [RequireComponent(typeof(TransitionMove))]
+    [RequireComponent(typeof(NavMeshAgent))]
 
     internal class StateMove : State
     {
         private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private NavMeshAgent _navMeshAgent;
+        private EnemyAnimation _enemyAnimation;
         private TransitionMove _transitionMove;
-        private Coroutine _move;
+        private NavMeshAgent _navMeshAgent;
         private StateAttack _stateAttack;
+        private Coroutine _move;
 
-        internal override bool IsNeedNextState { get; set; }
+        protected override bool IsNeedNextState { get; set; }
 
         internal override void StartState()
         {
             if (_move == null)
             {
                 _move = StartCoroutine(Move());
+                _transitionMove.StartCallculateDistance();
+                _enemyAnimation.PlayRun();
             }
         }
 
@@ -32,9 +35,10 @@ namespace Assets.Scripts.UnitStateMachine
             if (_move != null)
             {
                 StopCoroutine(_move);
-                _move = null;
-
+                _enemyAnimation.StopPlayRun();
                 _transitionMove.StopCallculateDistance();
+
+                _move = null;
             }
         }
 
@@ -42,7 +46,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             if (_transitionMove.GetIsNeedNextState())
             {
-                return _stateAttack;
+                return _transitionMove.GetNextState();
             }
 
             return null;
@@ -50,24 +54,32 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _transitionMove = GetComponent<TransitionMove>();
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
+            _transitionMove = GetComponent<TransitionMove>();
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
         }
 
         private IEnumerator Move()
         {
-            //yield return null;
-
-            _transitionMove.StartCallculateDistance();
-
-            while (true)
+            while (IsNeedNextState == false)
             {
                 _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
+
+                IsNeedNextState = _transitionMove.GetIsNeedNextState();
+
+                if (IsNeedNextState)
+                {
+                    _navMeshAgent.ResetPath();
+                }
 
                 yield return null;
             }
         }
 
+        internal override bool GetIsNeedNextState()
+        {
+            return IsNeedNextState;
+        }
     }
 }

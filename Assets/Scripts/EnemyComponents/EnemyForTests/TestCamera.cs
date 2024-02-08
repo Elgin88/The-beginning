@@ -11,7 +11,7 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            transform.position.Set(_gameObject.transform.position.x + deltaX, _gameObject.transform.position.y + deltaY, _gameObject.transform.position.z + deltaZ);
+            transform.position = new Vector3(_gameObject.transform.position.x + deltaX, _gameObject.transform.position.y + deltaY, _gameObject.transform.position.z + deltaZ);
         }
     }
 }
