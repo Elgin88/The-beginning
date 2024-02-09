@@ -2,12 +2,29 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    internal abstract class Transition : MonoBehaviour
+    internal class Transition : MonoBehaviour
     {
-        protected abstract State NextState { get; set; }
-        protected abstract bool IsNeedNextState { get; set; }
+        protected State NextState;
+        protected bool IsNeedNextState;
 
-        internal abstract bool GetIsNeedNextState();
-        internal abstract State GetNextState();
+        internal void SetTrueIsNeedNextState()
+        {
+            IsNeedNextState = true;
+        }
+
+        internal void SetFalseIsNeedNextState()
+        {
+            IsNeedNextState = false;
+        }
+
+        internal bool GetIsNeedNextState()
+        {
+            return IsNeedNextState;
+        }
+
+        internal State GetNextState()
+        {
+            return NextState;
+        }
     }
 }

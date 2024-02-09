@@ -4,17 +4,16 @@ namespace Assets.Scripts.Enemy
 {
     internal class TransitionAttack : Transition
     {
-        protected override State NextState { get; set; }
-        protected override bool IsNeedNextState { get; set; }
+        private StateAttack _stateAttack;
 
-        internal override bool GetIsNeedNextState()
+        internal void SetNextStateIsAttack()
         {
-            return IsNeedNextState;
+            NextState = _stateAttack;
         }
 
-        internal override State GetNextState()
+        private void Awake()
         {
-            return NextState;
+            _stateAttack = GetComponent<StateAttack>();
         }
     }
 }

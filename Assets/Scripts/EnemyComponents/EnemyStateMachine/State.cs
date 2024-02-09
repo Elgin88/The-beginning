@@ -6,8 +6,6 @@ namespace Assets.Scripts.UnitStateMachine
 {
     internal abstract class State : MonoBehaviour
     {
-        protected abstract bool IsNeedNextState { get; set; }
-
         internal abstract void StartState();
 
         internal abstract void StopState();

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Assets.Scripts.Enemy;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.AI;
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(EnemyNextTargetFinder))]
+    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(TransitionMove))]
     [RequireComponent(typeof(NavMeshAgent))]
 
@@ -15,10 +17,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private TransitionMove _transitionMove;
         private NavMeshAgent _navMeshAgent;
-        private StateAttack _stateAttack;
         private Coroutine _move;
-
-        protected override bool IsNeedNextState { get; set; }
 
         internal override void StartState()
         {
@@ -35,51 +34,44 @@ namespace Assets.Scripts.UnitStateMachine
             if (_move != null)
             {
                 StopCoroutine(_move);
-                _enemyAnimation.StopPlayRun();
                 _transitionMove.StopCallculateDistance();
-
+                _enemyAnimation.StopPlayRun();
                 _move = null;
             }
         }
 
         internal override State GetNextState()
         {
-            if (_transitionMove.GetIsNeedNextState())
-            {
-                return _transitionMove.GetNextState();
-            }
+            return _transitionMove.GetNextState();
+        }
 
-            return null;
+
+        internal override bool GetIsNeedNextState()
+        {
+            return _transitionMove.GetIsNeedNextState();
+        }
+
+        internal void ResetPath()
+        {
+            _navMeshAgent.ResetPath();
         }
 
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
             _transitionMove = GetComponent<TransitionMove>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _enemyAnimation = GetComponent<EnemyAnimation>();
         }
 
         private IEnumerator Move()
         {
-            while (IsNeedNextState == false)
+            while (_transitionMove.GetIsNeedNextState() == false)
             {
                 _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
 
-                IsNeedNextState = _transitionMove.GetIsNeedNextState();
-
-                if (IsNeedNextState)
-                {
-                    _navMeshAgent.ResetPath();
-                }
-
                 yield return null;
             }
-        }
-
-        internal override bool GetIsNeedNextState()
-        {
-            return IsNeedNextState;
         }
     }
 }

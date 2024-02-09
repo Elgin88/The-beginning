@@ -4,12 +4,14 @@ using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.Enemy;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AI;
 using Zenject;
 
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(EnemyNextTargetFinder))]
     [RequireComponent(typeof(StateAttack))]
+    [RequireComponent(typeof(StateMove))]
 
     internal class TransitionMove : Transition
     {
@@ -18,25 +20,10 @@ namespace Assets.Scripts.UnitStateMachine
         private float _minDistanceToTarget = 2.0f;
 
         private EnemyNextTargetFinder _enemyNextTargetFinder;
+        private StateMove _stateMove;
         private EnemyRayPoint _enemyRayPoint;
         private StateAttack _stateAttack;
         private Coroutine _calculateDistance;
-        private RaycastHit _raysactHit;
-        private Ray _ray;
-
-        protected override State NextState { get; set; }
-
-        protected override bool IsNeedNextState { get; set; }
-
-        internal override bool GetIsNeedNextState()
-        {
-            return IsNeedNextState;
-        }
-
-        internal override State GetNextState()
-        {
-            return NextState;
-        }
 
         internal void StartCallculateDistance()
         {
@@ -59,6 +46,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _stateAttack = GetComponent<StateAttack>();
+            _stateMove = GetComponent<StateMove>();
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
             StartCallculateDistance();
@@ -72,17 +60,15 @@ namespace Assets.Scripts.UnitStateMachine
 
             while (_mainBuilding != null)
             {
-                _ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
+                Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
 
-                Debug.DrawRay(_enemyRayPoint.transform.position, _ray.direction * 100, Color.red, 0.1f);
-
-
-                if (Physics.Raycast(_enemyRayPoint.transform.position, _ray.direction, out _raysactHit))
+                if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
                 {
-                    if (_raysactHit.distance < _minDistanceToTarget & _enemyNextTargetFinder.CurrentTarget.gameObject == _raysactHit.collider.gameObject)
+                    if (raysactHit.distance < _minDistanceToTarget & _enemyNextTargetFinder.CurrentTarget.gameObject == raysactHit.collider.gameObject)
                     {
                         IsNeedNextState = true;
                         NextState = _stateAttack;
+                        _stateMove.ResetPath();
                     }
                 }
 

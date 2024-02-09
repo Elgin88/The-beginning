@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(Animator))]
+    [RequireComponent(typeof(EnemyNextTargetFinder))]
+    [RequireComponent(typeof(TransitionAttack))]
+    [RequireComponent(typeof(EnemyAnimation))]
 
     internal class StateAttack : State
     {
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private TransitionAttack _transitionAttack;
         private EnemyAnimation _enemyAnimation;
-        private WaitForSeconds _intervalBetweenAttacksWFS;
+        private WaitForSeconds _timeToAttackWFS;
         private Coroutine _attack;
-        private float _intervalBetweenAttacks = 0.5f;
+        private float _timeToAttack = 0.5f;
         private float _damage;
-
-        protected override bool IsNeedNextState { get; set; }
 
         internal override State GetNextState()
         {
@@ -43,34 +43,33 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override bool GetIsNeedNextState()
         {
-            return IsNeedNextState;
+            return _transitionAttack.GetIsNeedNextState();
         }
 
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
+            _transitionAttack = GetComponent<TransitionAttack>();
             _enemyAnimation = GetComponent<EnemyAnimation>();
-
-            _intervalBetweenAttacksWFS = new WaitForSeconds(_intervalBetweenAttacks);
             _damage = GetComponent<IEnemy>().Damage;
+
+            _timeToAttackWFS = new WaitForSeconds(_timeToAttack);
         }
 
         private IEnumerator Attack()
         {
-            while (true)
+            _enemyAnimation.PlayAttack();
+
+            yield return _timeToAttackWFS;
+
+            if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
             {
-                _enemyAnimation.PlayAttack();
-
-                yield return _intervalBetweenAttacksWFS;
-
-                _enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().TakeDamage(_damage);
-
-                Debug.Log(_enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().IsDead);
-
-                _enemyAnimation.StopPlayAttack();
-
-                yield return _intervalBetweenAttacksWFS;
+                idamageable.TakeDamage(_damage);
             }
+
+            _enemyAnimation.StopPlayAttack();
+
+            yield return _timeToAttackWFS;
         }
     }
 }
