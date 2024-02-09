@@ -4,7 +4,6 @@ using UnityEngine;
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(StateMove))]
-    [RequireComponent(typeof(TransitionMove))]
 
     internal class StateMachine : MonoBehaviour
     {
@@ -15,42 +14,45 @@ namespace Assets.Scripts.UnitStateMachine
         private void Awake()
         {
             _startState = GetComponent<StateMove>();
+
+            _currentState = _startState;
         }
 
         private void Start()
         {
-            _currentState = _startState;
-
             StartCurrentState();
             StartTrySetNextState();
         }
 
+        private IEnumerator TrySetNextState()
+        {
+            while (true)
+            {
+                StopCurrentState();
+
+                State nextState = _currentState.GetNextState();
+
+                _currentState = nextState;
+
+                StartCurrentState();
+
+                yield return null;
+            }
+        }
+
         private void StartCurrentState()
         {
-            _currentState.StartState();
+            if (_currentState != null)
+            {
+                _currentState.StartState();
+            }
         }
 
         private void StopCurrentState()
         {
-            _currentState.StopState();
-        }
-
-        private IEnumerator TrySetNextState()
-        {
-            yield return null;
-
-            while (true)
+            if (_currentState != null)
             {
-                if (_currentState.GetIsNeedNextState())
-                {
-                    StopCurrentState();
-
-                    _currentState = _currentState.GetNextState();
-
-                    StartCurrentState();
-                }
-
-                yield return null;
+                _currentState.StopState();
             }
         }
 

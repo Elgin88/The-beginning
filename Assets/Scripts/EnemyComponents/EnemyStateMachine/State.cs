@@ -11,7 +11,5 @@ namespace Assets.Scripts.UnitStateMachine
         internal abstract void StopState();
 
         internal abstract State GetNextState();
-
-        internal abstract bool GetIsNeedNextState();
     }
 }

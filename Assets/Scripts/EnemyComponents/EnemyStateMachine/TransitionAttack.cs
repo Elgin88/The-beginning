@@ -1,19 +1,23 @@
+using System;
 using Assets.Scripts.UnitStateMachine;
+using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
+    [RequireComponent(typeof(StateMove))]
+
     internal class TransitionAttack : Transition
     {
-        private StateAttack _stateAttack;
+        private StateMove _stateMove;
 
-        internal void SetNextStateIsAttack()
+        internal override State GetNextState()
         {
-            NextState = _stateAttack;
+            return NextState;
         }
 
         private void Awake()
         {
-            _stateAttack = GetComponent<StateAttack>();
+            _stateMove = GetComponent<StateMove>();
         }
     }
 }

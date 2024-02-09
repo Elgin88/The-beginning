@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Assets.Scripts.Enemy;
 using UnityEngine;
@@ -31,13 +30,12 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override void StopState()
         {
-            if (_move != null)
-            {
-                StopCoroutine(_move);
-                _transitionMove.StopCallculateDistance();
-                _enemyAnimation.StopPlayRun();
-                _move = null;
-            }
+            StopCoroutine(_move);
+            _transitionMove.StopCallculateDistance();
+            _enemyAnimation.StopPlayRun();
+            ResetPath();
+
+            _move = null;
         }
 
         internal override State GetNextState()
@@ -45,13 +43,7 @@ namespace Assets.Scripts.UnitStateMachine
             return _transitionMove.GetNextState();
         }
 
-
-        internal override bool GetIsNeedNextState()
-        {
-            return _transitionMove.GetIsNeedNextState();
-        }
-
-        internal void ResetPath()
+        private void ResetPath()
         {
             _navMeshAgent.ResetPath();
         }
@@ -66,7 +58,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Move()
         {
-            while (_transitionMove.GetIsNeedNextState() == false)
+            while (transform.position != _enemyNextTargetFinder.CurrentTarget.transform.position)
             {
                 _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
 

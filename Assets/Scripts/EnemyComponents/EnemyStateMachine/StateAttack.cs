@@ -41,11 +41,6 @@ namespace Assets.Scripts.UnitStateMachine
             }
         }
 
-        internal override bool GetIsNeedNextState()
-        {
-            return _transitionAttack.GetIsNeedNextState();
-        }
-
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
