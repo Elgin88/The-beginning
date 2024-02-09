@@ -83,7 +83,7 @@ namespace Assets.Scripts.Enemy
             {
                 if (raycastHit.collider.gameObject.TryGetComponent<IDamageable>(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
                 {
-                    if (idamageable.IsPlayerObject)
+                    if (idamageable.IsPlayerObject & idamageable.IsDead == false)
                     {
                         AddTargetInList(raycastHit.collider.gameObject);
                     }

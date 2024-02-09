@@ -13,28 +13,43 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(EnemyVision))]
     [RequireComponent(typeof(Animator))]
 
-    internal abstract class Enemy : MonoBehaviour, IDamageable
+    internal class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
-        [SerializeField] private float _health;
+        private bool _isDead;
 
-        public Transform Transform => transform;
+        protected float Health;
+        protected float Damage;
+
+        protected NavMeshAgent NavMeshAgent;
+
+        protected float CurrentSpeed;
 
         public bool IsPlayerObject => false;
 
-        public bool IsDead => _health <= 0;
+        public bool IsDead => _isDead;
 
-        internal abstract NavMeshAgent NavMeshAgent { get; set; }
+        public Transform Transform => transform;
 
-        internal abstract float CurrentSpeed { get; set; }
+        float IEnemy.Health => Health;
+
+        float IEnemy.Damage => Damage;
 
         void IDamageable.TakeDamage(float damage)
         {
-            _health -= damage;
+            Health -= damage;
 
-            if (_health <= 0)
+            if (Health <= 0)
             {
+                _isDead = true;
                 Destroy(gameObject);
             }
+        }
+
+        private void Awake()
+        {
+            NavMeshAgent = GetComponent<NavMeshAgent>();
+
+            CurrentSpeed = NavMeshAgent.speed;
         }
     }
 }

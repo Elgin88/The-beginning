@@ -7,14 +7,13 @@ namespace Assets.Scripts.Enemy
 
     internal class EnemyMeleeOgreGreen : EnemyMelee
     {
-        internal override NavMeshAgent NavMeshAgent { get; set; }
-        internal override float CurrentSpeed { get; set; }
+        private float _startHealth = 100;
+        private float _startDamage = 80;
 
         private void Awake()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-
-            CurrentSpeed = NavMeshAgent.speed;
+            Health = _startHealth;
+            Damage = _startDamage;
         }
     }
 }

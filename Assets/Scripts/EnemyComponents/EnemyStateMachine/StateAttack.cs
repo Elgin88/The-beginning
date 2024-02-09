@@ -14,7 +14,8 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private WaitForSeconds _intervalBetweenAttacksWFS;
         private Coroutine _attack;
-        private float _intervalBetweenAttacks = 1f;
+        private float _intervalBetweenAttacks = 0.5f;
+        private float _damage;
 
         protected override bool IsNeedNextState { get; set; }
 
@@ -51,6 +52,7 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyAnimation = GetComponent<EnemyAnimation>();
 
             _intervalBetweenAttacksWFS = new WaitForSeconds(_intervalBetweenAttacks);
+            _damage = GetComponent<IEnemy>().Damage;
         }
 
         private IEnumerator Attack()
@@ -61,7 +63,9 @@ namespace Assets.Scripts.UnitStateMachine
 
                 yield return _intervalBetweenAttacksWFS;
 
-                _enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().TakeDamage(20) ;
+                _enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().TakeDamage(_damage);
+
+                Debug.Log(_enemyNextTargetFinder.CurrentTarget.GetComponent<IDamageable>().IsDead);
 
                 _enemyAnimation.StopPlayAttack();
 
