@@ -1,0 +1,81 @@
+﻿using Assets.Scripts.GameLogic.Damageable;
+using System.Collections;
+using UnityEngine;
+
+namespace Assets.Scripts.PlayerUnits
+{
+    internal abstract class Unit : Selectable, IDamageable
+    {
+        private float _health;
+        private float _damage;
+        private float _speed;
+        private bool _isDead;
+
+        private Coroutine _move;
+
+        public bool IsPlayerObject => true;
+
+        public Transform Transform => transform;
+
+        public bool IsDead => _isDead;
+
+        public void TakeDamage(float damage)
+        {
+            _health -= damage;
+
+            if (_health <= 0)
+            {
+                _isDead = true;
+                Debug.Log("F");
+            }
+
+            Debug.Log("aaay");
+        }
+
+        public void InitStats(float health, float damage, float speed)
+        {
+            _health = health;
+            _damage = damage;
+            _speed = speed;
+            _isDead = false;
+        }
+
+        public void Select()
+        {
+            
+        }
+
+        public void Deselect()
+        {
+            
+        }
+
+        public void Move(Vector3 position)
+        {
+            float scaledMoveSpeed = _speed * Time.fixedDeltaTime;
+
+            if (_move != null)
+            {
+                StopCoroutine(_move);
+            }
+
+            _move = StartCoroutine(Move(position, scaledMoveSpeed));
+        }
+
+        private IEnumerator Move(Vector3 position, float moveSpeed)
+        {
+            while (transform.position !=  position)
+            {
+                Debug.Log(transform.position);
+                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
+
+                yield return null;
+            }
+        }
+
+        private void Die()
+        {
+            gameObject.SetActive(false);
+        }
+    }
+}

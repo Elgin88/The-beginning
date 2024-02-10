@@ -7,7 +7,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
     {
         [SerializeField] private ParticleSystem _particlePrefab;
 
-        private ParticleSystem _mark;
+        private ParticleSystem _markEffect;
 
         private IDamageable _target;
 
@@ -15,24 +15,24 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public void Init()
         {
-            _mark = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
-            _mark.Stop();
+            _markEffect = Instantiate(_particlePrefab, transform.position, Quaternion.identity);
+            _markEffect.Stop();
         }
 
         public void MarkEnemy(IDamageable enemy)
         {
             _target = enemy;
-            _mark.transform.position = _target.Transform.position;
+            _markEffect.transform.position = _target.Transform.position;
 
-            if (_mark.isStopped)
-                _mark.Play();
+            if (_markEffect.isStopped)
+                _markEffect.Play();
         }
 
         public void UnMarkEnemy()
         {
-            if (_mark != null)
+            if (_markEffect != null)
             {
-                _mark.Stop();
+                _markEffect.Stop();
             }
         }
     }

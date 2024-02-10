@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
-using Assets.Scripts.Movement;
 using Zenject;
+using Assets.Scripts.PlayerUnits;
 
 namespace Assets.Scripts.PlayerComponents
 {
@@ -10,6 +10,7 @@ namespace Assets.Scripts.PlayerComponents
 
         private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
+        private SelectedUnitsHandler _selectedUnitsHandler;
 
         private Vector2 _moveDirection;
 
@@ -25,6 +26,7 @@ namespace Assets.Scripts.PlayerComponents
             _moveDirection = _inputActions.Player.Move.ReadValue<Vector2>();
             _inputActions.Player.Attack.performed += ctx => OnAttackInput();
             _inputActions.Player.ChangeWeapon.performed += ctx => OnChangeWeaponInput();
+            _inputActions.Player.MoveUnits.performed += ctx => OnMoveUnits();
 
             OnMoveInput(_moveDirection);
         }
@@ -49,11 +51,17 @@ namespace Assets.Scripts.PlayerComponents
             _playerAttacker.ChangeWeapon();
         }
 
+        private void OnMoveUnits()
+        {
+            _selectedUnitsHandler.MoveUnits();
+        }
+
         [Inject]
-        private void Construct(PlayerMovement movement, PlayerAttacker attacker)
+        private void Construct(PlayerMovement movement, PlayerAttacker attacker, SelectedUnitsHandler selectedUnitsHandler)
         {
             _playerMover = movement;
             _playerAttacker = attacker;
+            _selectedUnitsHandler = selectedUnitsHandler;
         }
     }
 }

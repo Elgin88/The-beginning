@@ -18,7 +18,7 @@ TagManager:
   - Water
   - UI
   - Enemy
-  - 
+  - PlayerUnit
   - PostProcessing
   - Terra_Vegetation
   - Terra_Geometry
