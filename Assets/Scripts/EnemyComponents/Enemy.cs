@@ -5,8 +5,9 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyAnimation))]
+    [RequireComponent(typeof(EnemyNextTargetFinder))]
     [RequireComponent(typeof(CapsuleCollider))]
+    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
     [RequireComponent(typeof(EnemyVision))]
@@ -14,15 +15,17 @@ namespace Assets.Scripts.Enemy
 
     internal abstract class Enemy : MonoBehaviour, IDamageable
     {
-        [SerializeField] private int _health;
+        [SerializeField] private float _health;
 
-        Transform IDamageable.Transform => gameObject.transform;
+        public Transform Transform => transform;
+
+        public bool IsPlayerObject => false;
 
         internal abstract NavMeshAgent NavMeshAgent { get; set; }
 
         internal abstract float CurrentSpeed { get; set; }
 
-        void IDamageable.TakeDamage(int damage)
+        void IDamageable.TakeDamage(float damage)
         {
             _health -= damage;
 

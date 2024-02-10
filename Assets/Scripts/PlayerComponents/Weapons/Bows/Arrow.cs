@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.Scripts.GameLogic.Damageable;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
@@ -8,10 +9,17 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private ParticleSystem _hitEffect;
         [SerializeField] private float _speed;
 
+        private float _damage;
+
         private Coroutine _flying;
 
         private void OnTriggerEnter(Collider other)
         {
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            {
+                target.TakeDamage(_damage);
+            }
+
             ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
             Destroy(hitEffect.gameObject, 1f);
             gameObject.SetActive(false);
@@ -25,6 +33,11 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             }
                 
             _flying = StartCoroutine(Flying(target));
+        }
+
+        public void Init(float damage)
+        {
+            _damage = damage;
         }
 
         private IEnumerator Flying(Transform target)

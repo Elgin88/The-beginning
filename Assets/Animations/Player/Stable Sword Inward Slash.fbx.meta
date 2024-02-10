@@ -62,7 +62,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 1.8
     - serializedVersion: 16
-      name: Attack
+      name: Sword Attack
       takeName: mixamo.com
       internalID: -203655887218126122
       firstFrame: 0
@@ -85,21 +85,7 @@ ModelImporter:
       mirror: 0
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
-      events:
-      - time: 0
-        functionName: SwordAttackAnimationStart()
-        data: 
-        objectReferenceParameter: {fileID: 170511074636822116, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
-      - time: 1
-        functionName: SwordAttackAnimationEnd()
-        data: 
-        objectReferenceParameter: {fileID: 170511074636822116, guid: 54c4bdb00cd5f8f49a543cc3c37d44ad, type: 3}
-        floatParameter: 0
-        intParameter: 0
-        messageOptions: 0
+      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}

@@ -12,8 +12,11 @@ namespace Assets.Scripts.ConStants
         public static int EquipBow = Animator.StringToHash("Equip Bow");
         public static int BowAttack = Animator.StringToHash("Bow Attack");
         public static int EquipSword = Animator.StringToHash("Equip Sword");
+        public static int AttackSpeed = Animator.StringToHash("AttackSpeed");
         public static int SwordAttack = Animator.StringToHash("Sword Attack");
 
+        public static string SwordAttackString = "Sword Attack";
+        public static string BowAttackString = "Bow Attack";
         public static string Attack = " Attack";
     }
 }

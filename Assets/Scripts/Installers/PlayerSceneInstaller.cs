@@ -1,9 +1,9 @@
-﻿using Assets.Scripts.Movement;
+﻿using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
 using UnityEngine;
 using Zenject;
 
-namespace Assets.Scripts.PlayerComponents
+namespace Assets.Scripts.Installers
 {
     internal class PlayerSceneInstaller : MonoInstaller
     {
@@ -29,8 +29,8 @@ namespace Assets.Scripts.PlayerComponents
             Container.Bind<PlayerAnimator>().FromComponentOn(player.gameObject).AsSingle().NonLazy();
             Container.Bind<WeaponsInventory>().FromComponentOn(player.gameObject).AsSingle().NonLazy();
             
-            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
             Container.Bind<PlayerMovement>().FromNew().AsSingle().NonLazy();
+            Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
             PlayerInput input = Container.InstantiatePrefabForComponent<PlayerInput>(_playerInput);
 
             input.transform.parent = player.transform;

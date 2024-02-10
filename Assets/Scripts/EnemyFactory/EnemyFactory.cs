@@ -1,3 +1,4 @@
+using Assets.Scripts.BuildingSystem.Buildings;
 using System.Collections;
 using UnityEngine;
 using Zenject;
@@ -13,7 +14,7 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private float _minorEnemyCount;
 
         [Inject] private DiContainer _currentEnemyDI;
-       // [Inject] private MainBuilding _mainBuilding; 
+        [Inject] private MainBuilding _mainBuilding; 
         
         private EnemySpawnPoint[] _spawnPoints;
         private EnemySpawnPoint _currentSpawnPoint;
@@ -37,6 +38,7 @@ namespace Assets.Scripts.Enemy
 
             while (isWork)
             {
+                ChooseSpawnPoint();
                 CreateMainEnemyInWave();
                 CreateMinorEnemiesInWave();
 
@@ -48,8 +50,7 @@ namespace Assets.Scripts.Enemy
 
         private void CreateMainEnemyInWave()
         {
-            ChooseSpawnPoint();
-            SpawnRandom();
+            SpawnRandomEnemy();
         }
 
         private void CreateMinorEnemiesInWave()
@@ -57,7 +58,7 @@ namespace Assets.Scripts.Enemy
             for (int i = 0; i < _minorEnemyCount; i++)
             {
                 CalculateMinorUnitStartPosition();
-                SpawnRandom();
+                SpawnRandomEnemy();
             }
         }
 
@@ -88,31 +89,26 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        private void SpawnRandom()
+        private void SpawnRandomEnemy()
         {
             switch (Random.Range(1, 3))
             {
                 case 1:
-                    SpawnMeleeEnemy();
+                    SpawnEnemy(_enemyMeleeOrc.gameObject);
                     break;
 
                 case 2:
-                    SpawnRangeEnemy();
-                    break;
-
-                default:
+                    SpawnEnemy(_rangeEneny.gameObject);
                     break;
             }
         }
 
-        private void SpawnMeleeEnemy()
+        private void SpawnEnemy(GameObject gameObject)
         {
-           // _currentEnemyDI.InstantiatePrefab(_enemyMeleeOrc, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
-        }
-
-        private void SpawnRangeEnemy()
-        {
-            _currentEnemyDI.InstantiatePrefab(_rangeEneny, _currentEnemyPosition, Quaternion.identity, null);
+            if (_currentEnemyPosition.x != _mainBuilding.transform.position.x)
+            {
+                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+            }
         }
     }
 }
