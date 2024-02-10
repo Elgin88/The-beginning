@@ -17,6 +17,8 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
         public abstract bool IsPlayerObject { get; }
 
+        public bool IsDead => false;
+
         public void TakeDamage(float damage)
         {
             if (Strength > 0 && damage > 0)
