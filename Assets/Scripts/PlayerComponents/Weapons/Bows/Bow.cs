@@ -12,7 +12,6 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Mark _mark;
-        [SerializeField] private PlayerBowAttack _attack;
         [SerializeField] private LayerMask _layerMask;
 
         private Coroutine _attackCoroutine;
@@ -34,6 +33,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             {
                 float distance;
                 float closestDistance = _radius;
+               
                 Collider closestCollider = hitColliders[0];
 
                 for (int i = 0; i < hitColliders.Length; i++)

@@ -27,30 +27,52 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public void Fly(Transform target)
         {
-            if (_flying != null)
+            if (target == null)
+            {
+                Destroy(gameObject);
+
+            }
+
+                if (_flying != null)
             {
                 StopCoroutine(_flying);
             }
-                
+
             _flying = StartCoroutine(Flying(target));
         }
+
 
         public void Init(float damage)
         {
             _damage = damage;
         }
 
+        //private IEnumerator Flying(Transform target)
+        //{
+        //    while(Vector3.Distance(transform.position, target.position) > 0.1f)
+        //    {
+        //        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+
+        //        Vector3 relativePosition = target.position - transform.position;
+        //        transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+
+        //        yield return null;
+        //    }
+        //}
+
         private IEnumerator Flying(Transform target)
         {
-            while(Vector3.Distance(transform.position, target.position) > 0.1f)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+                while (target != null && Vector3.Distance(transform.position, target.position) > 0.1f)
+                {           
+                     transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
-                Vector3 relativePosition = target.position - transform.position;
-                transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+                    Vector3 relativePosition = target.position - transform.position;
+                    transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
 
-                yield return null;
-            }
+                    yield return null;
+                }
+
+           gameObject.SetActive(false);
         }
     }
 }
