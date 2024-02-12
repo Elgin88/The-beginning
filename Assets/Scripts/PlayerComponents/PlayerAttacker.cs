@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.PlayerComponents.Weapons;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents
 {
@@ -20,6 +21,9 @@ namespace Assets.Scripts.PlayerComponents
 
         public void Attack()
         {
+            Debug.Log(_currentWeapon.AttackSpeed);
+            Debug.Log(_currentWeapon.CanAttack);
+
             if (_currentWeapon.CanAttack)
             {
                 _animator.SetAnimatorAttackTrigger(_currentWeapon);

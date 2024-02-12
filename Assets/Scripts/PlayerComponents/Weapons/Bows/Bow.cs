@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
-using Assets.Scripts.AnimatorScripts.Player;
 using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
@@ -12,7 +11,6 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Mark _mark;
-        [SerializeField] private PlayerBowAttack _attack;
         [SerializeField] private LayerMask _layerMask;
 
         private Coroutine _attackCoroutine;

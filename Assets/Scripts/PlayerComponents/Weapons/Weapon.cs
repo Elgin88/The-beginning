@@ -37,6 +37,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         {
             CanAttack = false;
 
+            Debug.Log(attackSpeed);
+
             yield return new WaitForSeconds(attackSpeed);
 
             CanAttack = true;
