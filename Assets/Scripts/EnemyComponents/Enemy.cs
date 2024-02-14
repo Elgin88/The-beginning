@@ -5,13 +5,8 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(EnemyVision))]
-    [RequireComponent(typeof(Animator))]
 
     internal class Enemy : MonoBehaviour, IDamageable, IEnemy
     {

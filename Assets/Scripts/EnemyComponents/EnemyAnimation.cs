@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -16,7 +15,6 @@ namespace Assets.Scripts.Enemy
         private string _attack = "IsAttack1";
         private float _baseMoveSpeed = 3;
         private float _normalizeMoveSpeed;
-        private float _normalizeAttackSpeed;
 
         internal void PlayRun()
         {
