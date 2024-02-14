@@ -38,7 +38,7 @@ namespace Assets.Scripts.UnitStateMachine
             _move = null;
         }
 
-        internal override State GetNextState()
+        internal override State TryGetNextState()
         {
             return _transitionMove.GetNextState();
         }

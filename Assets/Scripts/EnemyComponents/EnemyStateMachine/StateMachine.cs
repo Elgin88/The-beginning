@@ -8,13 +8,15 @@ namespace Assets.Scripts.UnitStateMachine
     internal class StateMachine : MonoBehaviour
     {
         private Coroutine _startTrySetNextState;
+        private StateMove _stateMove;
         private State _currentState;
         private State _startState;
 
         private void Awake()
         {
-            _startState = GetComponent<StateMove>();
+            _stateMove = GetComponent<StateMove>();
 
+            _startState = _stateMove;
             _currentState = _startState;
         }
 
@@ -28,13 +30,16 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                StopCurrentState();
+                State nextState = _currentState.TryGetNextState();
 
-                State nextState = _currentState.GetNextState();
+                if (nextState != null)
+                {
+                    StopCurrentState();
 
-                _currentState = nextState;
+                    _currentState = nextState;
 
-                StartCurrentState();
+                    StartCurrentState();
+                }
 
                 yield return null;
             }

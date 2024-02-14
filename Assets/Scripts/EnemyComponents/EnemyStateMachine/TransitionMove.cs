@@ -18,8 +18,9 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyRayPoint _enemyRayPoint;
         private StateAttack _stateAttack;
         private Coroutine _calculateDistance;
-        private StateMove _stateMove;
         private float _minDistanceToTarget = 2.0f;
+
+        protected override State NextState { get; set; }
 
         internal void StartCallculateDistance()
         {
@@ -40,14 +41,17 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override State GetNextState()
         {
-            return null;
+            State state = null;
+            state = NextState;
+            NextState = null;
+
+            return state;
         }
 
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _stateAttack = GetComponent<StateAttack>();
-            _stateMove = GetComponent<StateMove>();
 
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
 
@@ -56,7 +60,9 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator CalculateDistance()
         {
-            while (_mainBuilding != null)
+            bool isWork = true;
+
+            while (isWork)
             {
                 Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
 
@@ -64,8 +70,8 @@ namespace Assets.Scripts.UnitStateMachine
                 {
                     if (raysactHit.distance <= _minDistanceToTarget & _enemyNextTargetFinder.CurrentTarget.gameObject == raysactHit.collider.gameObject)
                     {
-                        _stateMove.StopState();
-                        StopCallculateDistance();
+                        NextState = _stateAttack;
+                        isWork = false;
                     }
                 }
 

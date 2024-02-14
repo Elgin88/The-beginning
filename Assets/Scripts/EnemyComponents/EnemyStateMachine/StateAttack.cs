@@ -19,7 +19,7 @@ namespace Assets.Scripts.UnitStateMachine
         private float _timeToAttack = 0.5f;
         private float _damage;
 
-        internal override State GetNextState()
+        internal override State TryGetNextState()
         {
             return _transitionAttack.GetNextState();
         }
@@ -64,7 +64,8 @@ namespace Assets.Scripts.UnitStateMachine
 
             _enemyAnimation.StopPlayAttack();
 
-            yield return _timeToAttackWFS;
+            _transitionAttack.SetNextStateMove();
+
         }
     }
 }

@@ -10,9 +10,21 @@ namespace Assets.Scripts.Enemy
     {
         private StateMove _stateMove;
 
+        protected override State NextState { get; set; }
+
         internal override State GetNextState()
         {
-            return NextState;
+            State state = null;
+
+            state = NextState;
+            NextState = null;
+
+            return state;
+        }
+
+        internal void SetNextStateMove()
+        {
+            NextState = _stateMove;
         }
 
         private void Awake()
