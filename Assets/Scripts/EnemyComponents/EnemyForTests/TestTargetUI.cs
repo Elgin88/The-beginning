@@ -1,8 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using Assets.Scripts.Enemy;
-using UnityEngine;
 using TMPro;
+using UnityEngine;
 
 public class TestTargetUI : MonoBehaviour
 {

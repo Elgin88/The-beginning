@@ -1,10 +1,5 @@
-using UnityEngine;
-using UnityEngine.AI;
-
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-
     internal class EnemyMeleeOgreGreen : EnemyMelee
     {
         private float _startHealth = 100;
