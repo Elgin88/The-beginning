@@ -58,9 +58,12 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Move()
         {
-            while (transform.position != _enemyNextTargetFinder.CurrentTarget.transform.position)
+            while (true)
             {
-                _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
+                if (_enemyNextTargetFinder.CurrentTarget != null)
+                {
+                    _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
+                }
 
                 yield return null;
             }

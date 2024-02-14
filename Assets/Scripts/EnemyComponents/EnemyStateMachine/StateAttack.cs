@@ -16,7 +16,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private WaitForSeconds _timeToAttackWFS;
         private Coroutine _attack;
-        private float _timeToAttack = 0.5f;
+        private float _timeToAttack = 0.7f;
         private float _damage;
 
         internal override State TryGetNextState()
