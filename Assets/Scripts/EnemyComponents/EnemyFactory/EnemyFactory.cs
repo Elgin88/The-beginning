@@ -98,7 +98,8 @@ namespace Assets.Scripts.Enemy
                     break;
 
                 case 2:
-                    SpawnEnemy(_rangeEneny.gameObject);
+                    SpawnEnemy(_enemyMeleeOrc.gameObject);
+                    //SpawnEnemy(_rangeEneny.gameObject);
                     break;
             }
         }

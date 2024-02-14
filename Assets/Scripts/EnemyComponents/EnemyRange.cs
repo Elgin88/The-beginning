@@ -7,7 +7,5 @@ namespace Assets.Scripts.Enemy
 
     internal class EnemyRange : Enemy
     {
-        internal override NavMeshAgent NavMeshAgent { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        internal override float CurrentSpeed { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

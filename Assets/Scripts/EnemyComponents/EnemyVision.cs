@@ -2,11 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
+using Zenject;
+using Assets.Scripts.BuildingSystem.Buildings ;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
+        [Inject] private MainBuilding _mainBuilding;
+
         private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
         private GameObject _currentTarget;
@@ -48,7 +52,7 @@ namespace Assets.Scripts.Enemy
             {
                 int currentRayNumber = 0;
 
-                _targets = new List<GameObject>();
+                _targets = new List<GameObject>{_mainBuilding.gameObject};
 
                 while (currentRayNumber <= _rayCount)
                 {
@@ -81,9 +85,9 @@ namespace Assets.Scripts.Enemy
 
             if (raycastHit.collider != null)
             {
-                if (raycastHit.collider.gameObject.TryGetComponent<IDamageable>(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
+                if (raycastHit.collider.gameObject.TryGetComponent(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
                 {
-                    if (idamageable.IsPlayerObject)
+                    if (idamageable.IsPlayerObject & idamageable.IsDead == false)
                     {
                         AddTargetInList(raycastHit.collider.gameObject);
                     }

@@ -42,10 +42,7 @@ namespace Assets.Scripts.Enemy
         {
             _navMeshAgent = GetComponent<NavMeshAgent>();
             _animator = GetComponent<Animator>();
-        }
 
-        private void Start()
-        {
             _normalizeMoveSpeed = _navMeshAgent.speed / _baseMoveSpeed;
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
         }

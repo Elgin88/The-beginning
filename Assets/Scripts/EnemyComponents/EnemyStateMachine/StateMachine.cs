@@ -4,53 +4,60 @@ using UnityEngine;
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(StateMove))]
-    [RequireComponent(typeof(TransitionMove))]
 
     internal class StateMachine : MonoBehaviour
     {
         private Coroutine _startTrySetNextState;
+        private StateMove _stateMove;
         private State _currentState;
         private State _startState;
 
         private void Awake()
         {
-            _startState = GetComponent<StateMove>();
+            _stateMove = GetComponent<StateMove>();
+
+            _startState = _stateMove;
+            _currentState = _startState;
         }
 
         private void Start()
         {
-            _currentState = _startState;
-
             StartCurrentState();
             StartTrySetNextState();
         }
 
-        private void StartCurrentState()
-        {
-            _currentState.StartState();
-        }
-
-        private void StopCurrentState()
-        {
-            _currentState.StopState();
-        }
-
         private IEnumerator TrySetNextState()
         {
-            yield return null;
-
             while (true)
             {
-                if (_currentState.GetIsNeedNextState())
+                State nextState = _currentState.TryGetNextState();
+
+                if (nextState != null)
                 {
                     StopCurrentState();
 
-                    _currentState = _currentState.GetNextState();
+                    _currentState = nextState;
 
                     StartCurrentState();
                 }
 
                 yield return null;
+            }
+        }
+
+        private void StartCurrentState()
+        {
+            if (_currentState != null)
+            {
+                _currentState.StartState();
+            }
+        }
+
+        private void StopCurrentState()
+        {
+            if (_currentState != null)
+            {
+                _currentState.StopState();
             }
         }
 

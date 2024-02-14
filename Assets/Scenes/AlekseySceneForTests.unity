@@ -1017,7 +1017,7 @@ Transform:
   m_GameObject: {fileID: 1745011000}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -22.1, y: 1.7434679, z: 6.2}
+  m_LocalPosition: {x: -18.6, y: 1.7434679, z: 26.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3357,7 +3357,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fec0cb343787455895e5dea7e0ac83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
 --- !u!114 &5701742569221543647
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3917,6 +3916,7 @@ GameObject:
   - component: {fileID: 282769782284461713}
   - component: {fileID: 5701742569221543647}
   - component: {fileID: 8895571624379928234}
+  - component: {fileID: 8895571624379928235}
   m_Layer: 0
   m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
@@ -4000,7 +4000,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
 --- !u!1 &7616349011946344918
 GameObject:
   m_ObjectHideFlags: 0
@@ -4506,7 +4505,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d679cd6f355124c0999d1f90d84a9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
+--- !u!114 &8895571624379928235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7363686164366267321}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &8919756332750928236
 Transform:
   m_ObjectHideFlags: 0
