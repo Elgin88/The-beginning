@@ -23,7 +23,6 @@ namespace Assets.Scripts.UnitStateMachine
             if (_move == null)
             {
                 _move = StartCoroutine(Move());
-                _enemyAnimation.PlayRun();
 
                 _transitionMove.StartCheckTransition();
             }
@@ -62,6 +61,8 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
+                _enemyAnimation.PlayRun();
+
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
                     _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;

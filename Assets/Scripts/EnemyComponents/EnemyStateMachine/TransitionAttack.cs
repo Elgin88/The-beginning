@@ -1,20 +1,21 @@
-using System;
 using System.Collections;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
+    [RequireComponent(typeof(StateIdle))]
+
     internal class TransitionAttack : Transition
     {
+        private StateIdle _stateIdle;
+
         protected override State NextState { get; set; }
         protected override Coroutine CheckTransition { get; set; }
 
         internal override State GetNextState()
         {
-            State state = null;
-
-            return state;
+            return NextState;
         }
 
         internal override IEnumerator CheckTransitionIE()
@@ -26,17 +27,25 @@ namespace Assets.Scripts.Enemy
         {
             if (CheckTransition == null)
             {
+                NextState = null;
                 CheckTransition = StartCoroutine(CheckTransitionIE());
             }
         }
 
         internal override void StopCheckTransition()
         {
-            if (CheckTransition != null)
-            {
-                CheckTransition = StartCoroutine(CheckTransitionIE());
-                CheckTransition = null;
-            }
+            CheckTransition = StartCoroutine(CheckTransitionIE());
+            CheckTransition = null;
+        }
+
+        internal void SetStateIdle()
+        {
+            NextState = _stateIdle;
+        }
+
+        private void Awake()
+        {
+            _stateIdle = GetComponent<StateIdle>();
         }
     }
 }

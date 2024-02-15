@@ -55,8 +55,6 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Attack()
         {
-            Debug.Log("Attack");
-
             _enemyAnimation.PlayAttack();
 
             yield return _timeToAttackWFS;
@@ -65,6 +63,10 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 idamageable.TakeDamage(_damage);
             }
+
+            _transitionAttack.SetStateIdle();
+            _enemyAnimation.StopPlayAttack();
+            StopState();
         }
     }
 }

@@ -34,13 +34,6 @@ namespace Assets.Scripts.UnitStateMachine
 
                 if (nextState != null)
                 {
-                    Debug.Log(nextState);
-                }
-
-                
-
-                if (nextState != null)
-                {
                     StopCurrentState();
 
                     _currentState = nextState;

@@ -1,6 +1,7 @@
 using System.Collections;
 using Assets.Scripts.Enemy;
 using UnityEngine;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.UnitStateMachine
 {
@@ -27,7 +28,7 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 NextState = null;
 
-                if (IsMinDistance())
+                if (IsMinDistanceToPlayerObject())
                 {
                     NextState = _stateIdle;
                 }
@@ -36,7 +37,7 @@ namespace Assets.Scripts.UnitStateMachine
             }
         }
 
-        internal bool IsMinDistance()
+        internal bool IsMinDistanceToPlayerObject()
         {
             bool isMinDistance = false;
 
@@ -44,9 +45,12 @@ namespace Assets.Scripts.UnitStateMachine
 
             if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
             {
-                if (raysactHit.distance <= _minDistanceToTarget)
+                if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
                 {
-                    isMinDistance = true;
+                    if (idamageable.IsPlayerObject == true & raysactHit.distance <= _minDistanceToTarget)
+                    {
+                        isMinDistance = true;
+                    }
                 }
             }
 

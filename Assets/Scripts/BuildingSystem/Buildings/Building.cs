@@ -37,7 +37,7 @@ namespace Assets.Scripts.BuildingSystem.Buildings
         protected void Destroy()
         {
             //Instantiate(EffectOfDestroying, transform.position, Quaternion.identity);
-            Destroy(gameObject);                                                           // ������ ����� ������������, �� �� ��� ����� ����� ���������� ���������,
+            DestroyImmediate(gameObject);                                              // ������ ����� ������������, �� �� ��� ����� ����� ���������� ���������,
             //Instantiate(PrafabOfruins, transform.position, Quaternion.identity);    // ����� ��������� �� ���� ����� ������, �� ���� ����� ������ ����� ������ ���������� �� ������
             //OnDestroyed?.Invoke();
         }
