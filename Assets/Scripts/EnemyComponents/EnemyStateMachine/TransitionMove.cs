@@ -1,82 +1,80 @@
 using System.Collections;
-using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.Enemy;
 using UnityEngine;
-using Zenject;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(StateAttack))]
-    [RequireComponent(typeof(StateMove))]
+    [RequireComponent(typeof(StateIdle))]
 
     internal class TransitionMove : Transition
     {
-        [Inject] private MainBuilding _mainBuilding;
-
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyRayPoint _enemyRayPoint;
-        private StateAttack _stateAttack;
-        private Coroutine _calculateDistance;
+        private StateIdle _stateIdle;
         private float _minDistanceToTarget = 2.0f;
+
+        protected override Coroutine CheckTransition { get; set; }
 
         protected override State NextState { get; set; }
 
-        internal void StartCallculateDistance()
-        {
-            if (_calculateDistance == null)
-            {
-                _calculateDistance = StartCoroutine(CalculateDistance());
-            }
-        }
-
-        internal void StopCallculateDistance()
-        {
-            if (_calculateDistance != null)
-            {
-                StopCoroutine(_calculateDistance);
-                _calculateDistance = null;
-            }
-        }
-
         internal override State GetNextState()
         {
-            State state;
-            state = NextState;
-            NextState = null;
-
-            return state;
+            return NextState;
         }
 
-        private void Awake()
+        internal override IEnumerator CheckTransitionIE()
         {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _stateAttack = GetComponent<StateAttack>();
-
-            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
-
-            StartCallculateDistance();
-        }
-
-        private IEnumerator CalculateDistance()
-        {
-            bool isWork = true;
-
-            while (isWork)
+            while (true)
             {
-                Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
+                NextState = null;
 
-                if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
+                if (IsMinDistance())
                 {
-                    if (raysactHit.distance <= _minDistanceToTarget & _enemyNextTargetFinder.CurrentTarget.gameObject == raysactHit.collider.gameObject)
-                    {
-                        NextState = _stateAttack;
-                        isWork = false;
-                    }
+                    NextState = _stateIdle;
                 }
 
                 yield return null;
             }
+        }
+
+        internal bool IsMinDistance()
+        {
+            bool isMinDistance = false;
+
+            Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
+
+            if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
+            {
+                if (raysactHit.distance <= _minDistanceToTarget)
+                {
+                    isMinDistance = true;
+                }
+            }
+
+            return isMinDistance;
+        }
+
+        internal override void StartCheckTransition()
+        {
+            if (CheckTransition == null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+            }
+        }
+
+        internal override void StopCheckTransition()
+        {
+            if (CheckTransition != null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+                CheckTransition = null;
+            }
+        }
+
+        private void Awake()
+        {
+            _stateIdle = GetComponent<StateIdle>();
+
+            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
         }
     }
 }

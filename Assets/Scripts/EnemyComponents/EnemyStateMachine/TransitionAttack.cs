@@ -1,36 +1,42 @@
 using System;
+using System.Collections;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(StateMove))]
-
     internal class TransitionAttack : Transition
     {
-        private StateMove _stateMove;
-
         protected override State NextState { get; set; }
+        protected override Coroutine CheckTransition { get; set; }
 
         internal override State GetNextState()
         {
             State state = null;
 
-            state = NextState;
-            NextState = null;
-
             return state;
         }
 
-        internal void SetNextStateMove()
+        internal override IEnumerator CheckTransitionIE()
         {
-            Debug.Log("Move");
-            NextState = _stateMove;
+            yield return null;
         }
 
-        private void Awake()
+        internal override void StartCheckTransition()
         {
-            _stateMove = GetComponent<StateMove>();
+            if (CheckTransition == null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+            }
+        }
+
+        internal override void StopCheckTransition()
+        {
+            if (CheckTransition != null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+                CheckTransition = null;
+            }
         }
     }
 }

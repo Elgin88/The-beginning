@@ -3,20 +3,20 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(StateMove))]
+    [RequireComponent(typeof(StateIdle))]
 
     internal class StateMachine : MonoBehaviour
     {
         private Coroutine _startTrySetNextState;
-        private StateMove _stateMove;
+        private StateIdle _stateIdle;
         private State _currentState;
         private State _startState;
 
         private void Awake()
         {
-            _stateMove = GetComponent<StateMove>();
+            _stateIdle = GetComponent<StateIdle>();
 
-            _startState = _stateMove;
+            _startState = _stateIdle;
             _currentState = _startState;
         }
 
@@ -31,6 +31,13 @@ namespace Assets.Scripts.UnitStateMachine
             while (true)
             {
                 State nextState = _currentState.TryGetNextState();
+
+                if (nextState != null)
+                {
+                    Debug.Log(nextState);
+                }
+
+                
 
                 if (nextState != null)
                 {
