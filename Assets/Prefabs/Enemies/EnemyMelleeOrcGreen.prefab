@@ -2363,6 +2363,7 @@ GameObject:
   - component: {fileID: 4588992870866705208}
   - component: {fileID: 8314578972581342070}
   - component: {fileID: 1423910423695567156}
+  - component: {fileID: 5977292687717916677}
   m_Layer: 0
   m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
@@ -2441,7 +2442,7 @@ NavMeshAgent:
   m_GameObject: {fileID: 6517527388443274768}
   m_Enabled: 1
   m_AgentTypeID: 0
-  m_Radius: 2
+  m_Radius: 1
   m_Speed: 4
   m_Acceleration: 8
   avoidancePriority: 50
@@ -2478,7 +2479,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fec0cb343787455895e5dea7e0ac83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
 --- !u!114 &-4093611054570065152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2515,7 +2515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
 --- !u!114 &4588992870866705208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2552,7 +2551,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d679cd6f355124c0999d1f90d84a9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
+--- !u!114 &5977292687717916677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6583875623457425539
 GameObject:
   m_ObjectHideFlags: 0

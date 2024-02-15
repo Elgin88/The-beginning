@@ -65,7 +65,6 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyAnimation.StopPlayAttack();
 
             _transitionAttack.SetNextStateMove();
-
         }
     }
 }

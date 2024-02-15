@@ -24,6 +24,7 @@ namespace Assets.Scripts.Enemy
 
         internal void SetNextStateMove()
         {
+            Debug.Log("Move");
             NextState = _stateMove;
         }
 

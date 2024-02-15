@@ -15,7 +15,7 @@ namespace Assets.Scripts.Enemy
         private List<GameObject> _targets;
         private GameObject _currentTarget;
         private float _visionAngle = 160;
-        private float _visionRange = 10;
+        private float _visionRange = 50;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
@@ -87,15 +87,15 @@ namespace Assets.Scripts.Enemy
             {
                 if (raycastHit.collider.gameObject.TryGetComponent(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
                 {
-                    if (idamageable.IsPlayerObject & idamageable.IsDead == false)
+                    if (idamageable.IsPlayerObject & idamageable.IsDead == false & raycastHit.collider.gameObject.TryGetComponent(out TerrainCollider terrainCollider) == false)
                     {
-                        AddTargetInList(raycastHit.collider.gameObject);
+                        AddTargetToList(raycastHit.collider.gameObject);
                     }
                 }
             }
         }
 
-        private void AddTargetInList(GameObject gameObject)
+        private void AddTargetToList(GameObject gameObject)
         {
             if (CheckTargetsForRepeat(gameObject) == false)
             {

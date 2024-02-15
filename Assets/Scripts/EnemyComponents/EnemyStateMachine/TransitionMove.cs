@@ -41,7 +41,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override State GetNextState()
         {
-            State state = null;
+            State state;
             state = NextState;
             NextState = null;
 
