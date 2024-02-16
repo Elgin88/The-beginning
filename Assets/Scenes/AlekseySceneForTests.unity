@@ -220,6 +220,7 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
   m_PrefabInstance: {fileID: 3132480594505099875}
   m_PrefabAsset: {fileID: 0}
+<<<<<<< HEAD
 --- !u!1 &347748930
 GameObject:
   m_ObjectHideFlags: 0
@@ -368,6 +369,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of f21bd58 (Merge pull request #48 from Elgin88/elgin-create-enemy-3)
 --- !u!1 &456251077
 GameObject:
   m_ObjectHideFlags: 0
@@ -771,6 +774,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b4d4f02336174c149ac912348adb3381, type: 3}
+<<<<<<< HEAD
 --- !u!1 &1205202902
 GameObject:
   m_ObjectHideFlags: 0
@@ -919,6 +923,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of f21bd58 (Merge pull request #48 from Elgin88/elgin-create-enemy-3)
 --- !u!1 &1316130285
 GameObject:
   m_ObjectHideFlags: 0
@@ -963,6 +969,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
 --- !u!1 &1475890888
 GameObject:
   m_ObjectHideFlags: 0
@@ -1111,6 +1118,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of f21bd58 (Merge pull request #48 from Elgin88/elgin-create-enemy-3)
 --- !u!1 &1532442922
 GameObject:
   m_ObjectHideFlags: 0
@@ -1566,6 +1575,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+<<<<<<< HEAD
 --- !u!1 &1761205955
 GameObject:
   m_ObjectHideFlags: 0
@@ -1862,6 +1872,8 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+=======
+>>>>>>> parent of f21bd58 (Merge pull request #48 from Elgin88/elgin-create-enemy-3)
 --- !u!4 &86147086562813072
 Transform:
   m_ObjectHideFlags: 0
@@ -5518,9 +5530,12 @@ SceneRoots:
   - {fileID: 670522496}
   - {fileID: 1745011004}
   - {fileID: 1532442928}
+<<<<<<< HEAD
   - {fileID: 347748936}
   - {fileID: 1979593156}
   - {fileID: 1761205961}
   - {fileID: 1205202908}
   - {fileID: 1475890894}
   - {fileID: 1707937435}
+=======
+>>>>>>> parent of f21bd58 (Merge pull request #48 from Elgin88/elgin-create-enemy-3)
