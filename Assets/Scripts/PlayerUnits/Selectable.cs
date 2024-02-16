@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -9,9 +9,7 @@ namespace Assets.Scripts.PlayerUnits
         private ParticleSystem _ring;
         private SelectedUnitsHandler _handler;
         private bool _isSelected;
-
-        public event Action<Selectable> Selected;
-        public event Action<Selectable> Unselected;
+        private Coroutine _selection;
 
         public bool IsSelected => _isSelected;
 
@@ -28,6 +26,7 @@ namespace Assets.Scripts.PlayerUnits
         public void OnPointerEnter(PointerEventData eventData)
         {
             _ring.Play();
+            _ring.transform.position = transform.position;
         }
 
         public void OnPointerExit(PointerEventData eventData)
@@ -40,17 +39,31 @@ namespace Assets.Scripts.PlayerUnits
         {
             if (_isSelected) 
             {
-                Debug.Log("unselected");
                 _isSelected = false;
                 _ring.Stop();
                 _handler.RemoveUnit(this);
             }
             else
             {
-                Debug.Log("selected");
                 _isSelected = true;
+
+                if (_selection != null)
+                    StopCoroutine(_selection);
+
+                _selection = StartCoroutine(Selection());
+
                 _ring.Play();
                 _handler.AddUnit(this);
+            }
+        }
+
+        private IEnumerator Selection()
+        {
+            while (_isSelected)
+            {
+                _ring.transform.position = transform.position;
+
+                yield return null;
             }
         }
     }

@@ -4,13 +4,22 @@ using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
+    [RequireComponent(typeof(Collider))]
     internal class Sword : Weapon
     {
         private Coroutine _attackCoroutine;
+        private Collider _swordCollider;
+
+        private void Start()
+        {
+            _swordCollider = GetComponent<Collider>();
+
+            _swordCollider.enabled = false;
+        }
 
         public override void Attack()
         {
-            WeaponCollider.enabled = true;
+            _swordCollider.enabled = true;
 
             if (_attackCoroutine != null )
             {
@@ -22,9 +31,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            other.excludeLayers = LayerMask.NameToLayer("Player");
-
-            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            if (other.gameObject.layer == _layerMask && other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
             {
                 target.TakeDamage(Damage);
             }
@@ -36,7 +43,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
             yield return new WaitForSeconds(attackSpeed);
 
-            WeaponCollider.enabled = false;
+            _swordCollider.enabled = false;
         }
     }
 }
