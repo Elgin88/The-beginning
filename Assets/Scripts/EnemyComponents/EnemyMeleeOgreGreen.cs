@@ -1,20 +1,14 @@
-using UnityEngine;
-using UnityEngine.AI;
-
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-
     internal class EnemyMeleeOgreGreen : EnemyMelee
     {
-        internal override NavMeshAgent NavMeshAgent { get; set; }
-        internal override float CurrentSpeed { get; set; }
+        private float _startHealth = 100;
+        private float _startDamage = 200;
 
         private void Awake()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-
-            CurrentSpeed = NavMeshAgent.speed;
+            Health = _startHealth;
+            Damage = _startDamage;
         }
     }
 }

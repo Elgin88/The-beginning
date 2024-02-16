@@ -4,18 +4,22 @@ using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.BuildingSystem.Buildings
 {
+    [RequireComponent(typeof(Rigidbody))]
+
     internal abstract class Building : MonoBehaviour, IDamageable
     {
         public int Cost;
         public float Strength;
-        public ParticleSystem EffectOfDestroying;
-        public GameObject PrafabOfruins;
+        //public ParticleSystem EffectOfDestroying;
+        //public GameObject PrafabOfruins;
 
         public Action OnDestroyed;
 
         public Transform Transform => transform;
 
         public abstract bool IsPlayerObject { get; }
+
+        public bool IsDead => false;
 
         public void TakeDamage(float damage)
         {
@@ -32,10 +36,10 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
         protected void Destroy()
         {
-            Instantiate(EffectOfDestroying, transform.position, Quaternion.identity);
-            Destroy(gameObject);                                                           // здание будет уничтожаться, но на его месте будут оставаться развалины,
-            Instantiate(PrafabOfruins, transform.position, Quaternion.identity);    // чтобы построить на этом месте заного, их надо будет снести через панель управления за деньги
-            OnDestroyed?.Invoke();
+            //Instantiate(EffectOfDestroying, transform.position, Quaternion.identity);
+            DestroyImmediate(gameObject);                                              // пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ,
+            //Instantiate(PrafabOfruins, transform.position, Quaternion.identity);    // пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
+            //OnDestroyed?.Invoke();
         }
     }
 }
