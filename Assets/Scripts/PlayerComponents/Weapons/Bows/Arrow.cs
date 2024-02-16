@@ -15,14 +15,12 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target) && target.IsPlayerObject == false)
             {
                 target.TakeDamage(_damage);
+                ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+                Destroy(hitEffect.gameObject, 1f);
             }
-
-            ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
-            Destroy(hitEffect.gameObject, 1f);
-            gameObject.SetActive(false);
         }
 
         public void Fly(Transform target)
@@ -51,6 +49,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
                 yield return null;
             }
+
+            gameObject.SetActive(false);
         }
     }
 }

@@ -3,13 +3,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
 {
-    [RequireComponent(typeof(Collider))]
     internal abstract class Weapon : MonoBehaviour
     {
         [SerializeField] private float _damage;
         [SerializeField] private float _attackSpeed;
+        [SerializeField] protected LayerMask _layerMask;
 
-        protected Collider WeaponCollider;
         protected Coroutine AttackCoroutine;
 
         public bool CanAttack { protected set; get; }
@@ -18,12 +17,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public float AttackSpeed => _attackSpeed;
 
-        private void Start()
+        private void Awake()
         {
-            WeaponCollider = GetComponent<Collider>();
-
-            WeaponCollider.enabled = false;
-
             CanAttack = true;
         }
 
@@ -36,8 +31,6 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         private IEnumerator AttackDelay(float attackSpeed)
         {
             CanAttack = false;
-
-            Debug.Log(attackSpeed);
 
             yield return new WaitForSeconds(attackSpeed);
 

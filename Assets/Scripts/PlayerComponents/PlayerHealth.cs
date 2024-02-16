@@ -24,6 +24,14 @@ namespace Assets.Scripts.PlayerComponents
             _playerCollider = GetComponent<Collider>();
         }
 
+        private void Update()
+        {
+            if (Input.GetKeyUp(KeyCode.DownArrow)) 
+            {
+                TakeDamage(10);
+            }
+        }
+
         public void TakeDamage(float damage)
         {
             _value -= damage;
@@ -31,14 +39,18 @@ namespace Assets.Scripts.PlayerComponents
             if (_value <= 0)
             {
                 Debug.Log("F");
+                gameObject.SetActive(false);
             }
-
-            if (_damageRecover != null)
+            else
             {
-                StopCoroutine(_damageRecover);
-            }
 
-            _damageRecover = StartCoroutine(DamageRecover(_recoverTime));
+                if (_damageRecover != null)
+                {
+                    StopCoroutine(_damageRecover);
+                }
+
+                _damageRecover = StartCoroutine(DamageRecover(_recoverTime));
+            }
         }
 
 
