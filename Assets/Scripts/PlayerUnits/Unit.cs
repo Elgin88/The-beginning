@@ -1,10 +1,11 @@
-﻿using Assets.Scripts.GameLogic.Damageable;
+﻿using Assets.Scripts.GameLogic;
+using Assets.Scripts.GameLogic.Damageable;
 using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits
 {
-    internal abstract class Unit : Selectable, IDamageable
+    internal abstract class Unit : Selectable, IDamageable, IMoveable
     {
         private float _health;
         private float _damage;
@@ -17,8 +18,14 @@ namespace Assets.Scripts.PlayerUnits
 
         public Transform Transform => transform;
 
-        public bool IsDead => _isDead;
+        public float MoveSpeed => 2;
 
+        public float RotationSpeed => 5;
+
+        public SurfaceAlignment SurfaceAlignment => new SurfaceAlignment(this);
+
+        public bool IsDead => _isDead;
+        
         public void TakeDamage(float damage)
         {
             _health -= damage;
@@ -40,19 +47,9 @@ namespace Assets.Scripts.PlayerUnits
             _isDead = false;
         }
 
-        public void Select()
-        {
-            
-        }
-
-        public void Deselect()
-        {
-            
-        }
-
         public void Move(Vector3 position)
         {
-            float scaledMoveSpeed = _speed * Time.fixedDeltaTime;
+            float scaledMoveSpeed = MoveSpeed * Time.fixedDeltaTime;
 
             if (_move != null)
             {
@@ -66,8 +63,11 @@ namespace Assets.Scripts.PlayerUnits
         {
             while (transform.position !=  position)
             {
-                Debug.Log(transform.position);
                 transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
+
+                Vector3 movementVector = transform.position - position;
+                movementVector = new Vector3(movementVector.x, 0, movementVector.y);
+                SurfaceAlignment.Align(movementVector);
 
                 yield return null;
             }
