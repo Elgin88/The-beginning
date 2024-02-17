@@ -1,6 +1,5 @@
 ﻿using Assets.Scripts.GameLogic;
 using Assets.Scripts.GameLogic.Damageable;
-using Assets.Scripts.PlayerComponents.Weapons;
 using System.Collections;
 using UnityEngine;
 
@@ -11,13 +10,15 @@ namespace Assets.Scripts.PlayerUnits
         private float _radius;
         private float _health;
         private float _speed;
+        private bool _isDead;
 
         private LayerMask _layerMask;
         private ClosestTargetFinder _closestTargetFinder;
-        public bool IsDead => _isDead;
 
         private IDamageable _closestTarget;
         private Coroutine _move;
+
+        public bool IsDead => _isDead;
 
         public bool IsPlayerObject => true;
 
