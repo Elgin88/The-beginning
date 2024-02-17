@@ -24,14 +24,6 @@ namespace Assets.Scripts.PlayerComponents
             _playerCollider = GetComponent<Collider>();
         }
 
-        private void Update()
-        {
-            if (Input.GetKeyUp(KeyCode.DownArrow)) 
-            {
-                TakeDamage(10);
-            }
-        }
-
         public void TakeDamage(float damage)
         {
             _value -= damage;

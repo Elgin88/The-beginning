@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.GameLogic;
 using Assets.Scripts.GameLogic.Damageable;
+using Assets.Scripts.PlayerComponents.Weapons;
 using System.Collections;
 using UnityEngine;
 
@@ -7,32 +8,43 @@ namespace Assets.Scripts.PlayerUnits
 {
     internal abstract class Unit : Selectable, IDamageable, IMoveable
     {
+        private float _radius;
         private float _health;
-        private float _damage;
         private float _speed;
+        private LayerMask _layerMask;
+        private ClosestTargetFinder _closestTargetFinder;
 
+        private IDamageable _closestTarget;
         private Coroutine _move;
 
         public bool IsPlayerObject => true;
 
         public Transform Transform => transform;
 
-        public float MoveSpeed => 2;
-
-        public float RotationSpeed => 5;
+        public float MoveSpeed => _speed;
 
         public SurfaceAlignment SurfaceAlignment => new SurfaceAlignment(this);
 
-        public void TakeDamage(float damage)
+        private void FixedUpdate()
         {
-            Debug.Log("aaay");
+            if (_closestTarget != null && _closestTarget.Transform.gameObject.activeSelf)
+                return;
+
+            _closestTarget = _closestTargetFinder.FindTarget(transform.position);
         }
 
-        public void InitStats(float health, float damage, float speed)
+        public void TakeDamage(float damage)
+        {
+            if (_health <= 0)
+                Die();
+        }
+
+        public void InitUnit(float health, float speed)
         {
             _health = health;
-            _damage = damage;
             _speed = speed;
+
+            _closestTargetFinder = new ClosestTargetFinder(_radius, _layerMask);
         }
 
         public void Move(Vector3 position)
@@ -49,16 +61,29 @@ namespace Assets.Scripts.PlayerUnits
 
         private IEnumerator Move(Vector3 position, float moveSpeed)
         {
-            while (transform.position !=  position)
+            while (transform.position != position)
             {
                 transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
-
                 Vector3 movementVector = transform.position - position;
+
+                if (Physics.Raycast(transform.position, position, out RaycastHit hit, 1f, _layerMask))
+                {
+                    if (hit.collider.TryGetComponent<IDamageable>(out IDamageable unit))
+                    {
+                        position = transform.position;
+                    }
+                }
+
                 movementVector = new Vector3(movementVector.x, 0, movementVector.y);
                 SurfaceAlignment.Align(movementVector);
 
                 yield return null;
             }
+        }
+
+        private void Attack(IDamageable target)
+        {
+            
         }
 
         private void Die()

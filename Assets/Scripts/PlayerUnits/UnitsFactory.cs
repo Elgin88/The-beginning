@@ -13,7 +13,7 @@ namespace Assets.Scripts.PlayerUnits
 
         private void Start() 
         { 
-            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 1, 2, 1, _handler);
+            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 2, 1, _handler);
             _handler.Init(_pool.MeleePool);
         }
 
