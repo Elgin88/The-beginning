@@ -9,6 +9,7 @@ namespace Assets.Scripts.PlayerComponents
     {
         private float _value;
         private float _recoverTime;
+        private bool _isDead;
 
         private Collider _playerCollider;
         private Coroutine _damageRecover;
@@ -17,11 +18,15 @@ namespace Assets.Scripts.PlayerComponents
 
         public bool IsPlayerObject => true;
 
+        public bool IsDead => _isDead;
+
         public Transform Transform => transform;
 
         private void Start()
         {
             _playerCollider = GetComponent<Collider>();
+
+            _isDead = false;
         }
 
         public void TakeDamage(float damage)
@@ -30,6 +35,7 @@ namespace Assets.Scripts.PlayerComponents
 
             if (_value <= 0)
             {
+                _isDead = true;
                 Debug.Log("F");
                 gameObject.SetActive(false);
             }
@@ -44,7 +50,6 @@ namespace Assets.Scripts.PlayerComponents
                 _damageRecover = StartCoroutine(DamageRecover(_recoverTime));
             }
         }
-
 
         private IEnumerator DamageRecover(float time)
         {

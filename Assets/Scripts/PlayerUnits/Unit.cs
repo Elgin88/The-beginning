@@ -11,8 +11,10 @@ namespace Assets.Scripts.PlayerUnits
         private float _radius;
         private float _health;
         private float _speed;
+
         private LayerMask _layerMask;
         private ClosestTargetFinder _closestTargetFinder;
+        public bool IsDead => _isDead;
 
         private IDamageable _closestTarget;
         private Coroutine _move;

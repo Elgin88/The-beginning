@@ -5,34 +5,46 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(CapsuleCollider))]
-    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(EnemyVision))]
-    [RequireComponent(typeof(Animator))]
 
-    internal abstract class Enemy : MonoBehaviour, IDamageable
+    internal class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
-        [SerializeField] private float _health;
+        private bool _isDead;
 
-        public Transform Transform => transform;
+        protected float Health;
+        protected float Damage;
+
+        protected NavMeshAgent NavMeshAgent;
+
+        protected float CurrentSpeed;
 
         public bool IsPlayerObject => false;
 
-        internal abstract NavMeshAgent NavMeshAgent { get; set; }
+        public bool IsDead => _isDead;
 
-        internal abstract float CurrentSpeed { get; set; }
+        public Transform Transform => transform;
+
+        float IEnemy.Health => Health;
+
+        float IEnemy.Damage => Damage;
 
         void IDamageable.TakeDamage(float damage)
         {
-            _health -= damage;
+            Health -= damage;
 
-            if (_health <= 0)
+            if (Health <= 0)
             {
+                _isDead = true;
                 Destroy(gameObject);
             }
+        }
+
+        private void Awake()
+        {
+            NavMeshAgent = GetComponent<NavMeshAgent>();
+
+            CurrentSpeed = NavMeshAgent.speed;
         }
     }
 }
