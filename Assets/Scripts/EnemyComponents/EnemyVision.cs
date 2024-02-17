@@ -1,16 +1,12 @@
+using Assets.Scripts.GameLogic.Damageable;
 using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
-using Zenject;
-using Assets.Scripts.BuildingSystem.Buildings ;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
-        [Inject] private MainBuilding _mainBuilding;
-
         private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
         private GameObject _currentTarget;
@@ -51,8 +47,6 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 int currentRayNumber = 0;
-
-                _targets = new List<GameObject>{_mainBuilding.gameObject};
 
                 while (currentRayNumber <= _rayCount)
                 {
