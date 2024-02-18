@@ -47,7 +47,6 @@ namespace Assets.Scripts.PlayerComponents
             _damageRecover = StartCoroutine(DamageRecover(_recoverTime));
         }
 
-
         private IEnumerator DamageRecover(float time)
         {
             _playerCollider.enabled = false;
