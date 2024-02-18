@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 6223196405196245382}
   - component: {fileID: 4891476816409540167}
   - component: {fileID: 3073113798063255964}
-  - component: {fileID: 5510538571180269156}
+  - component: {fileID: -6609717199606280639}
   m_Layer: 0
-  m_Name: Arrow
+  m_Name: Shell
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -100,13 +100,13 @@ SphereCollider:
     serializedVersion: 2
     m_Bits: 0
   m_LayerOverridePriority: 0
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &5510538571180269156
+--- !u!114 &-6609717199606280639
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,8 +115,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 7214715371749683887}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cb0714c563b475248b044d68c670ae6e, type: 3}
+  m_Script: {fileID: 11500000, guid: 17eb47374e3ac5e4e874640e0015d67d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hitEffect: {fileID: 8660190770777754294, guid: c069ec34bdc97de41bc91380ea46b312, type: 3}
   _speed: 5
