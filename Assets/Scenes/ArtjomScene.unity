@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0685a465063cfaa4480415a4684b8580, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _meleePrefab: {fileID: 7103278898370801807, guid: 03866804f7e84e740a9429b672a4fecb, type: 3}
+  _meleePrefab: {fileID: -3708529417658594655, guid: fe5d0b40303882c43a7e9de4698ea63a, type: 3}
   _particleSystemPrefab: {fileID: 2742286770426070534, guid: 055b96e68f267fd4884a9f6f6b1fa5ad, type: 3}
 --- !u!65 &64106931
 BoxCollider:
