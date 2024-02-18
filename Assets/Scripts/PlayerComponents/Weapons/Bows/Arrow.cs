@@ -15,64 +15,42 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target))
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target) && target.IsPlayerObject == false)
             {
                 target.TakeDamage(_damage);
+                ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
+                Destroy(hitEffect.gameObject, 1f);
             }
-
-            ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
-            Destroy(hitEffect.gameObject, 1f);
-            gameObject.SetActive(false);
         }
 
         public void Fly(Transform target)
         {
-            if (target == null)
-            {
-                Destroy(gameObject);
-
-            }
-
-                if (_flying != null)
+            if (_flying != null)
             {
                 StopCoroutine(_flying);
             }
-
+                
             _flying = StartCoroutine(Flying(target));
         }
-
 
         public void Init(float damage)
         {
             _damage = damage;
         }
 
-        //private IEnumerator Flying(Transform target)
-        //{
-        //    while(Vector3.Distance(transform.position, target.position) > 0.1f)
-        //    {
-        //        transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
-
-        //        Vector3 relativePosition = target.position - transform.position;
-        //        transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
-
-        //        yield return null;
-        //    }
-        //}
-
         private IEnumerator Flying(Transform target)
         {
-                while (target != null && Vector3.Distance(transform.position, target.position) > 0.1f)
-                {           
-                     transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
+            while(Vector3.Distance(transform.position, target.position) > 0.1f)
+            {
+                transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 
-                    Vector3 relativePosition = target.position - transform.position;
-                    transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
+                Vector3 relativePosition = target.position - transform.position;
+                transform.rotation = Quaternion.LookRotation(relativePosition, Vector3.up);
 
-                    yield return null;
-                }
+                yield return null;
+            }
 
-           gameObject.SetActive(false);
+            gameObject.SetActive(false);
         }
     }
 }

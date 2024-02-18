@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
-using Assets.Scripts.AnimatorScripts.Player;
 using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.PlayerComponents.Weapons
@@ -12,13 +11,12 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         [SerializeField] private Transform _shootPoint;
         [SerializeField] private Arrow _arrowPrefab;
         [SerializeField] private Mark _mark;
-        [SerializeField] private LayerMask _layerMask;
 
         private Coroutine _attackCoroutine;
         private ArrowsPool _pool;
         private IDamageable _closestTarget;
 
-        private void Awake()
+        private void Start()
         {
             _pool = new ArrowsPool(_arrowPrefab, Damage);
 
@@ -33,7 +31,6 @@ namespace Assets.Scripts.PlayerComponents.Weapons
             {
                 float distance;
                 float closestDistance = _radius;
-               
                 Collider closestCollider = hitColliders[0];
 
                 for (int i = 0; i < hitColliders.Length; i++)
@@ -71,6 +68,8 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         public override void Attack()
         {
+            base.Attack();
+
             if (_attackCoroutine != null)
             {
                 StopCoroutine(_attackCoroutine);
@@ -81,9 +80,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private IEnumerator AttackDelay(float attackSpeed)
         {
-            base.Attack();
-
-            yield return new WaitForSeconds(attackSpeed - 0.65f);
+            yield return new WaitForSeconds(attackSpeed - 0.5f);
 
             Arrow arrow = _pool.GetArrow();
 

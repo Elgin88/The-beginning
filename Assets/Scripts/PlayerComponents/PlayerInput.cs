@@ -19,6 +19,8 @@ namespace Assets.Scripts.PlayerComponents
             _inputActions = new InputActions();
 
             _inputActions.Enable();
+
+            Cursor.visible = true;
         }
 
         private void FixedUpdate()

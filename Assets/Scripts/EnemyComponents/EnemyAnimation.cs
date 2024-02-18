@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,10 +12,11 @@ namespace Assets.Scripts.Enemy
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
         private string _orcBossRunForwardSpeed = "OrcBossRunForwardSpeed";
-        private string _run = "IsRun";
         private string _attack = "IsAttack1";
-        private float _baseMoveSpeed = 3;
+        private string _idle = "IsIdle";
+        private string _run = "IsRun";
         private float _normalizeMoveSpeed;
+        private float _baseMoveSpeed = 3;
 
         internal void PlayRun()
         {
@@ -43,6 +45,16 @@ namespace Assets.Scripts.Enemy
 
             _normalizeMoveSpeed = _navMeshAgent.speed / _baseMoveSpeed;
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
+        }
+
+        internal void PlayIdle()
+        {
+            _animator.SetBool(_idle, true);
+        }
+
+        internal void StopPlayIdle()
+        {
+            _animator.SetBool(_idle, false);
         }
     }
 }
