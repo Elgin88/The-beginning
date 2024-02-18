@@ -6,6 +6,7 @@ using UnityEngine.AI;
 namespace Assets.Scripts.UnitStateMachine
 {
     [RequireComponent(typeof(EnemyNextTargetFinder))]
+    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(TransitionMove))]
     [RequireComponent(typeof(NavMeshAgent))]
 
@@ -15,71 +16,60 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private TransitionMove _transitionMove;
         private NavMeshAgent _navMeshAgent;
-        private StateAttack _stateAttack;
         private Coroutine _move;
-
-        protected override bool IsNeedNextState { get; set; }
 
         internal override void StartState()
         {
             if (_move == null)
             {
                 _move = StartCoroutine(Move());
-                _transitionMove.StartCallculateDistance();
-                _enemyAnimation.PlayRun();
+
+                _transitionMove.StartCheckTransition();
             }
         }
 
         internal override void StopState()
         {
-            if (_move != null)
-            {
-                StopCoroutine(_move);
-                _enemyAnimation.StopPlayRun();
-                _transitionMove.StopCallculateDistance();
+            StopCoroutine(_move);
+            _move = null;
 
-                _move = null;
-            }
+            ResetPath();
+
+            _enemyAnimation.StopPlayRun();
+            _transitionMove.StopCheckTransition();
         }
 
-        internal override State GetNextState()
+        internal override State TryGetNextState()
         {
-            if (_transitionMove.GetIsNeedNextState())
-            {
-                return _transitionMove.GetNextState();
-            }
+            return _transitionMove.GetNextState();
+        }
 
-            return null;
+        private void ResetPath()
+        {
+            _navMeshAgent.ResetPath();
         }
 
         private void Awake()
         {
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
+            _enemyAnimation = GetComponent<EnemyAnimation>();
             _transitionMove = GetComponent<TransitionMove>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
-            _enemyAnimation = GetComponent<EnemyAnimation>();
         }
 
         private IEnumerator Move()
         {
-            while (IsNeedNextState == false)
+            while (true)
             {
-                _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
+                _enemyAnimation.PlayRun();
 
-                IsNeedNextState = _transitionMove.GetIsNeedNextState();
-
-                if (IsNeedNextState)
+                if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _navMeshAgent.ResetPath();
+                    _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
                 }
 
                 yield return null;
             }
-        }
-
-        internal override bool GetIsNeedNextState()
-        {
-            return IsNeedNextState;
         }
     }
 }

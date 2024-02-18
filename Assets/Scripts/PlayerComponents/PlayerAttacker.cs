@@ -1,4 +1,5 @@
 ﻿using Assets.Scripts.PlayerComponents.Weapons;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents
 {

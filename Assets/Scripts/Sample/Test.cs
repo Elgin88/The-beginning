@@ -21,6 +21,11 @@ namespace Assets.Scripts.Sample
         public void TakeDamage(float damage)
         {
             _health -= damage;
+
+            if (_health <= 0) 
+            { 
+                gameObject.SetActive(false);
+            }
         }
     }
 }

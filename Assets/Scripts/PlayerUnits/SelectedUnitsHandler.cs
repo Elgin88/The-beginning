@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits
@@ -35,15 +34,14 @@ namespace Assets.Scripts.PlayerUnits
 
         public void MoveUnits()
         {
-
-            Debug.Log("Moving");
             _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
             if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
             {
                 _mousePosition = hit.point;
-                Debug.Log(_mousePosition);
             }
+
+            _mousePosition = new Vector3(_mousePosition.x, _mousePosition.y + 1, _mousePosition.z);
 
             foreach (Unit unit in _units)
             {

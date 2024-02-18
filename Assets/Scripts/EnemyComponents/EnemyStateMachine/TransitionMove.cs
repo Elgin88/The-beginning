@@ -1,93 +1,84 @@
-using System;
 using System.Collections;
-using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.Enemy;
-using Unity.VisualScripting;
 using UnityEngine;
-using Zenject;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(StateAttack))]
+    [RequireComponent(typeof(StateIdle))]
 
     internal class TransitionMove : Transition
     {
-        [Inject] private MainBuilding _mainBuilding;
-
+        private EnemyRayPoint _enemyRayPoint;
+        private StateIdle _stateIdle;
         private float _minDistanceToTarget = 2.0f;
 
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private EnemyRayPoint _enemyRayPoint;
-        private StateAttack _stateAttack;
-        private Coroutine _calculateDistance;
-        private RaycastHit _raysactHit;
-        private Ray _ray;
+        protected override Coroutine CheckTransition { get; set; }
 
         protected override State NextState { get; set; }
-
-        protected override bool IsNeedNextState { get; set; }
-
-        internal override bool GetIsNeedNextState()
-        {
-            return IsNeedNextState;
-        }
 
         internal override State GetNextState()
         {
             return NextState;
         }
 
-        internal void StartCallculateDistance()
+        internal override IEnumerator CheckTransitionIE()
         {
-            if (_calculateDistance == null)
+            while (true)
             {
-                _calculateDistance = StartCoroutine(CalculateDistance());
+                NextState = null;
+
+                if (IsMinDistanceToPlayerObject())
+                {
+                    NextState = _stateIdle;
+                }
+
+                yield return null;
             }
         }
 
-        internal void StopCallculateDistance()
+        internal bool IsMinDistanceToPlayerObject()
         {
-            if (_calculateDistance != null)
+            bool isMinDistance = false;
+
+            Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
+
+            if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
             {
-                StopCoroutine(_calculateDistance);
-                _calculateDistance = null;
+                if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
+                {
+                    if (idamageable.IsPlayerObject == true & raysactHit.distance <= _minDistanceToTarget)
+                    {
+                        isMinDistance = true;
+                    }
+                }
+            }
+
+            return isMinDistance;
+        }
+
+        internal override void StartCheckTransition()
+        {
+            if (CheckTransition == null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+            }
+        }
+
+        internal override void StopCheckTransition()
+        {
+            if (CheckTransition != null)
+            {
+                CheckTransition = StartCoroutine(CheckTransitionIE());
+                CheckTransition = null;
             }
         }
 
         private void Awake()
         {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _stateAttack = GetComponent<StateAttack>();
+            _stateIdle = GetComponent<StateIdle>();
+
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
-
-            StartCallculateDistance();
-        }
-
-        private IEnumerator CalculateDistance()
-        {
-            IsNeedNextState = false;
-
-            yield return null;
-
-            while (_mainBuilding != null)
-            {
-                _ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
-
-                Debug.DrawRay(_enemyRayPoint.transform.position, _ray.direction * 100, Color.red, 0.1f);
-
-
-                if (Physics.Raycast(_enemyRayPoint.transform.position, _ray.direction, out _raysactHit))
-                {
-                    if (_raysactHit.distance < _minDistanceToTarget & _enemyNextTargetFinder.CurrentTarget.gameObject == _raysactHit.collider.gameObject)
-                    {
-                        IsNeedNextState = true;
-                        NextState = _stateAttack;
-                    }
-                }
-
-                yield return null;
-            }
         }
     }
 }

@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
+using Zenject;
+using Assets.Scripts.BuildingSystem.Buildings ;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
+        [Inject] private MainBuilding _mainBuilding;
+
         private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
         private GameObject _currentTarget;
         private float _visionAngle = 160;
-        private float _visionRange = 10;
+        private float _visionRange = 50;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
@@ -48,7 +52,7 @@ namespace Assets.Scripts.Enemy
             {
                 int currentRayNumber = 0;
 
-                _targets = new List<GameObject>();
+                _targets = new List<GameObject>{_mainBuilding.gameObject};
 
                 while (currentRayNumber <= _rayCount)
                 {
@@ -81,17 +85,17 @@ namespace Assets.Scripts.Enemy
 
             if (raycastHit.collider != null)
             {
-                if (raycastHit.collider.gameObject.TryGetComponent<IDamageable>(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
+                if (raycastHit.collider.gameObject.TryGetComponent(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
                 {
-                    if (idamageable.IsPlayerObject)
+                    if (idamageable.IsPlayerObject & idamageable.IsDead == false & raycastHit.collider.gameObject.TryGetComponent(out TerrainCollider terrainCollider) == false)
                     {
-                        AddTargetInList(raycastHit.collider.gameObject);
+                        AddTargetToList(raycastHit.collider.gameObject);
                     }
                 }
             }
         }
 
-        private void AddTargetInList(GameObject gameObject)
+        private void AddTargetToList(GameObject gameObject)
         {
             if (CheckTargetsForRepeat(gameObject) == false)
             {

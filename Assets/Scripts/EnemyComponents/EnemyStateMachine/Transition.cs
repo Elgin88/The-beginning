@@ -1,13 +1,20 @@
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
     internal abstract class Transition : MonoBehaviour
     {
-        protected abstract State NextState { get; set; }
-        protected abstract bool IsNeedNextState { get; set; }
+        protected abstract Coroutine CheckTransition { get; set; }
 
-        internal abstract bool GetIsNeedNextState();
+        protected abstract State NextState { get; set; }
+
         internal abstract State GetNextState();
+
+        internal abstract void StartCheckTransition();
+
+        internal abstract void StopCheckTransition();
+
+        internal abstract IEnumerator CheckTransitionIE();
     }
 }
