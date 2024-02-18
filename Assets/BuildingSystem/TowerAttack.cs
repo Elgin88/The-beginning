@@ -16,7 +16,7 @@ public class TowerAttack : MonoBehaviour
     [SerializeField] private float _delayOfShoot;
     [SerializeField] private bool _isPlayerTower;
     [SerializeField] private float _damage;
-    [SerializeField] private LayerMask _layerMask;
+    [SerializeField] private LayerMask _targetlayerMask;
 
     private List<IDamageable> _targets = new();
     private IDamageable _target;
@@ -31,7 +31,7 @@ public class TowerAttack : MonoBehaviour
 
     private void Awake()
     { 
-         _poolOfArrows = new ArrowsPool(_arrowPrefab, _damage);
+         _poolOfArrows = new ArrowsPool(_arrowPrefab, _damage, _targetlayerMask);
     }
 
     private void SetCurrentLayerMask(IDamageable idamageable)

@@ -194,9 +194,9 @@ MonoBehaviour:
   _delayOfShoot: 0.1
   _isPlayerTower: 1
   _damage: 5
-  _layerMask:
+  _targetlayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
 --- !u!1 &256850524
 GameObject:
   m_ObjectHideFlags: 0
@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5102919991719705125, guid: 373e745bf4567f54f881ad1de60d16d7, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6274449716085618512, guid: 373e745bf4567f54f881ad1de60d16d7, type: 3}
       propertyPath: _shootPoint
@@ -559,10 +559,10 @@ MonoBehaviour:
   _layerMask:
     serializedVersion: 2
     m_Bits: 0
-  _radius: 15
-  _shootPoint: {fileID: 2040823164}
   _arrowPrefab: {fileID: 4306390963386993369, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
+  _shootPoint: {fileID: 2040823164}
   _mark: {fileID: 0}
+  _radius: 15
 --- !u!135 &463071251
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -1008,7 +1008,7 @@ Transform:
   m_GameObject: {fileID: 2040823163}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1.02, z: 0}
+  m_LocalPosition: {x: 0, y: 0.22, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
