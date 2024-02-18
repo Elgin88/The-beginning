@@ -1,19 +1,21 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.GameLogic;
+using UnityEngine;
 
 namespace Assets.Scripts.PlayerComponents
 {
-    internal class PlayerMovement
+    internal class PlayerMovement : IMoveable
     {
-        private static LayerMask _groundMask = LayerMask.GetMask("Water");
-
         private float _attackMoveSpeed;
         private PlayerAnimator _animator;
         private Player _player;
 
         private bool _isAttacking;
-        private float _alignmentSpeed = 2.5f;
-        private float _desiredHeight = 1.08f;
-        private float _rayDistance = 5f;
+
+        public Transform Transform => _player.transform;
+
+        public float MoveSpeed => _player.Speed;
+
+        public SurfaceAlignment SurfaceAlignment => new SurfaceAlignment(this);
 
         public PlayerMovement(Player player, PlayerAnimator animator)
         {
@@ -30,10 +32,10 @@ namespace Assets.Scripts.PlayerComponents
             Vector3 movementVector = new Vector3(direction.x, 0, direction.y);
 
             _animator.SetAnimatorSpeed(movementVector, _player.Speed);
-            
+
             _player.transform.position += movementVector * scaledMoveSpeed;
 
-            SurfaceAlignment(movementVector);
+            SurfaceAlignment.Align(movementVector);
         }
 
         public void StopMove()
@@ -50,38 +52,9 @@ namespace Assets.Scripts.PlayerComponents
         {
             Vector3 directionToTarget = target.position - _player.transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
-            offset = new Vector3(_player.transform.rotation.x, offset.y , _player.transform.rotation.z);
+            offset = new Vector3(_player.transform.rotation.x, offset.y, _player.transform.rotation.z);
 
             _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime / 2);
-        }
-
-        private void SurfaceAlignment(Vector3 movementVector)
-        {
-            Ray ray = new Ray(_player.transform.position, -_player.transform.up);
-            RaycastHit hit;
-
-            if (Physics.Raycast(ray, out hit, _rayDistance, _groundMask))
-            {
-                Rotate(movementVector, hit.normal);
-
-                if (hit.distance > _desiredHeight)
-                {
-                    _player.transform.position = Vector3.Lerp(_player.transform.position, hit.point, _alignmentSpeed * Time.fixedDeltaTime);
-                }
-            }
-        }
-
-        private void Rotate(Vector3 movementVector, Vector3 groundNormal)
-        {
-            if (movementVector.sqrMagnitude > 0 && _isAttacking == false)
-            {
-                Quaternion surfaceAlignmentRotation = Quaternion.FromToRotation(Vector3.up, groundNormal);
-                Quaternion directionRotation = Quaternion.LookRotation(movementVector);
-
-                Quaternion combinedRotation = surfaceAlignmentRotation * directionRotation;
-
-                _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, combinedRotation, _player.RotationSpeed * Time.fixedDeltaTime);
-            }
         }
     }
 }

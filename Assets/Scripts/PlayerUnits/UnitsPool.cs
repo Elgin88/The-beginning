@@ -11,10 +11,10 @@ namespace Assets.Scripts.PlayerUnits
 
         public Unit[] MeleePool => _meleePool;
 
-        public UnitsPool(Unit meleePrefab, ParticleSystem ring, float meleeDamage, float meleeHealth, float meleeSpeed, SelectedUnitsHandler handler)
+        public UnitsPool(Unit meleePrefab, ParticleSystem ring, float meleeHealth, float meleeSpeed, SelectedUnitsHandler handler)
         {
             _handler = handler;
-            _meleePool = CreateMelee(meleeDamage, meleeHealth, meleeSpeed, meleePrefab, ring);
+            _meleePool = CreateMelee(meleeHealth, meleeSpeed, meleePrefab, ring);
         }
 
         public Unit GetMelee()
@@ -32,14 +32,14 @@ namespace Assets.Scripts.PlayerUnits
             throw new System.Exception("Not enough MeleeUnit in The pool!!!");
         }
 
-        private Unit[] CreateMelee(float meleeDamage, float meleeHealth, float meleeSpeed, Unit prefab, ParticleSystem ring)
+        private Unit[] CreateMelee(float meleeHealth, float meleeSpeed, Unit prefab, ParticleSystem ring)
         {
             Unit[] pool = new Unit[_capacity];
 
             for (int i = 0; i < _capacity; i++)
             {
                 Unit melee = GameObject.Instantiate(prefab);
-                melee.InitStats(meleeHealth, meleeDamage, meleeSpeed);
+                melee.InitUnit(meleeHealth, meleeSpeed);
                 melee.Init(ring, _handler);
                 melee.gameObject.SetActive(false);
                 pool[i] = melee;

@@ -8,8 +8,6 @@ namespace Assets.Scripts.GameLogic
 
         public float MoveSpeed { get; }
 
-        public float RotationSpeed { get; }
-
         public SurfaceAlignment SurfaceAlignment { get; }
     }
 }
