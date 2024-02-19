@@ -19,8 +19,6 @@ namespace Assets.Scripts.Enemy
         {
             if (_targets.Count != 0)
             {
-                _currentTarget = _targets[0];
-
                 foreach (GameObject target in _targets)
                 {
                     if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))

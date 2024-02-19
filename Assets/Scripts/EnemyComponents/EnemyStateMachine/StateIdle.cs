@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
+    [RequireComponent(typeof(EnemyNextTargetFinder))]
     [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(TransitionIdle))]
 
@@ -18,7 +19,6 @@ namespace Assets.Scripts.UnitStateMachine
             if (_idle == null)
             {
                 _idle = StartCoroutine(StartIdle());
-
                 _transitionIdle.StartCheckTransition();
             }
         }

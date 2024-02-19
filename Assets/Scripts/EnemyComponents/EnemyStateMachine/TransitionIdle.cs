@@ -1,4 +1,5 @@
 using System.Collections;
+using Assets.Scripts.Enemy;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
@@ -9,6 +10,7 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class TransitionIdle : Transition
     {
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
         private TransitionMove _transitionMove;
         private StateAttack _stateAttack;
         private StateMove _stateMove;
@@ -27,7 +29,11 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 NextState = null;
 
-                if (_transitionMove.IsMinDistanceToPlayerObject())
+                if(_enemyNextTargetFinder.CurrentTarget == null)
+                {
+                    NextState = null;
+                }
+                else if (_transitionMove.IsMinDistanceToPlayerObject())
                 {
                     NextState = _stateAttack;
                 }
@@ -59,6 +65,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _transitionMove = GetComponent<TransitionMove>();
             _stateAttack = GetComponent<StateAttack>();
             _stateMove = GetComponent<StateMove>();
