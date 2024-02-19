@@ -17,7 +17,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target) && other.gameObject.layer == _layerMask)
+            int mask = 1 << other.gameObject.layer;
+
+            if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target) && mask == _layerMask)
             {
                 target.TakeDamage(_damage);
                 ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);

@@ -18,6 +18,8 @@ public class TowerAttack : MonoBehaviour
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _targetlayerMask;
 
+    private bool _canAttack;
+
     private List<IDamageable> _targets = new();
     private IDamageable _target;
     private float _timeBetweenShoots = 5;
@@ -32,6 +34,8 @@ public class TowerAttack : MonoBehaviour
     private void Awake()
     { 
          _poolOfArrows = new ArrowsPool(_arrowPrefab, _damage, _targetlayerMask);
+
+        _canAttack = true;
     }
 
     private void SetCurrentLayerMask(IDamageable idamageable)
@@ -48,7 +52,7 @@ public class TowerAttack : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.TryGetComponent(out IDamageable idamageable))
+            if (other.gameObject.TryGetComponent(out IDamageable idamageable) && _canAttack == true)
             {
                 SetCurrentLayerMask(idamageable);
 
@@ -90,7 +94,8 @@ public class TowerAttack : MonoBehaviour
 
     private IEnumerator Shoot(Transform target)
     {
-        yield return new WaitForSeconds(_delayOfShoot);
+        _canAttack = false;
+
         Arrow arrow = _poolOfArrows.GetArrow();
 
         arrow.transform.position = _shootPoint.position;
@@ -101,6 +106,10 @@ public class TowerAttack : MonoBehaviour
         // arrow.transform.position = _shootPoint.position;
         // arrow.Init(_damage);
         arrow.Fly(target);
+
+        yield return new WaitForSeconds(_delayOfShoot);
+
+        _canAttack = true;
     }
 
     //private void TryToShot(Transform target)

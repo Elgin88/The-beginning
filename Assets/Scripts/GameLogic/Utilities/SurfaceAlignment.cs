@@ -6,8 +6,8 @@ namespace Assets.Scripts.GameLogic
     {
         private static LayerMask _groundMask = LayerMask.GetMask("Water");
 
-        private float _alignmentSpeed = 2.5f;
-        private float _desiredHeight = 1.08f;
+        private float _alignmentSpeed = 6f;
+        private float _desiredHeight = 0.1f;
         private float _rayDistance = 5f;
         private float _rotationSpeed = 5f;
 
