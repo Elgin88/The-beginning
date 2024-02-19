@@ -1,10 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
 guid: fa16ccee22621324c8967078dfb38b12
-========
-guid: 3182c0d94a3814fada86181dee03c2d0
-folderAsset: yes
->>>>>>>> develop:Assets/Scenes/!SceneForBuild.meta
 DefaultImporter:
   externalObjects: {}
   userData: 

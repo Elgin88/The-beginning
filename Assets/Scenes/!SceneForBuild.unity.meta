@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Assets/Plugins/Zenject/OptionalExtras/ReflectionBaking/Zenject-ReflectionBaking.csproj.meta
-guid: 9bcb9930a310e304f8609c92208cc7ff
-========
 guid: f4bedad68acce42c8a41b3388b1002f7
->>>>>>>> develop:Assets/Scenes/!SceneForBuild.unity.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
