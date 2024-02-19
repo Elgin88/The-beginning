@@ -55,7 +55,8 @@ namespace Assets.Scripts.PlayerComponents
 
         private void OnMoveUnits()
         {
-            _selectedUnitsHandler.MoveUnits();
+            if (_selectedUnitsHandler.IsAnyUnitSelected())
+                _selectedUnitsHandler.MoveUnits();
         }
 
         [Inject]

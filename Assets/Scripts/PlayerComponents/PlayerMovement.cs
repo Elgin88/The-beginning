@@ -33,9 +33,12 @@ namespace Assets.Scripts.PlayerComponents
 
             _animator.SetAnimatorSpeed(movementVector, _player.Speed);
 
-            _player.transform.position += movementVector * scaledMoveSpeed;
-
             SurfaceAlignment.Align(movementVector);
+
+            if (SurfaceAlignment.CanWalkOnSlope() == false)
+                return;
+
+            _player.transform.position += movementVector * scaledMoveSpeed;
         }
 
         public void StopMove()

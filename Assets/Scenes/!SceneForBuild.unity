@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -508,7 +508,7 @@ GameObject:
   - component: {fileID: 93402257}
   - component: {fileID: 93402256}
   - component: {fileID: 93402255}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(100.00, -21.40, -100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1000,6 +1000,50 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4724479352656210, guid: 09348a46d0ad31749b5d1e21784cfd42, type: 3}
   m_PrefabInstance: {fileID: 230389730}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &232622165
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 232622167}
+  - component: {fileID: 232622166}
+  m_Layer: 0
+  m_Name: PlayerSpawnPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &232622166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232622165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44b32b139ad687047a29843acdc810d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &232622167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 232622165}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -31.51, y: 1.39, z: 15.52}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &280000972
 GameObject:
   m_ObjectHideFlags: 0
@@ -1011,7 +1055,7 @@ GameObject:
   - component: {fileID: 280000975}
   - component: {fileID: 280000974}
   - component: {fileID: 280000973}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(100.00, -21.40, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1988,7 +2032,7 @@ GameObject:
   - component: {fileID: 504375470}
   - component: {fileID: 504375469}
   - component: {fileID: 504375468}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2207,7 +2251,7 @@ GameObject:
   - component: {fileID: 667295876}
   - component: {fileID: 667295875}
   - component: {fileID: 667295874}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(0.00, -21.40, -100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2508,7 +2552,7 @@ GameObject:
   - component: {fileID: 710535225}
   - component: {fileID: 710535224}
   - component: {fileID: 710535223}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(100.00, -21.40, 100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2995,7 +3039,7 @@ GameObject:
   - component: {fileID: 1119581210}
   - component: {fileID: 1119581209}
   - component: {fileID: 1119581208}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(-100.00, -21.40, -100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3227,7 +3271,7 @@ GameObject:
   - component: {fileID: 1262190948}
   - component: {fileID: 1262190947}
   - component: {fileID: 1262190946}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(0.00, -21.40, 100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3522,7 +3566,7 @@ GameObject:
   - component: {fileID: 1372982168}
   - component: {fileID: 1372982167}
   - component: {fileID: 1372982166}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(-100.00, -21.40, 0.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3869,6 +3913,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyFactory
       objectReference: {fileID: 0}
+    - target: {fileID: 2833508966409144620, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: _rangeEneny
+      value: 
+      objectReference: {fileID: 6492183350018304201, guid: d76560c8ebe7820488a141824560cf6d, type: 3}
+    - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
+      propertyPath: _enemyMeleeOrc
+      value: 
+      objectReference: {fileID: 6106297887006264949, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
     - target: {fileID: 5335336476679103779, guid: 1772be25ae5fbef44914456423c59f94, type: 3}
       propertyPath: _minorEnemyCount
       value: 1
@@ -4206,7 +4262,7 @@ GameObject:
   - component: {fileID: 1567580264}
   - component: {fileID: 1567580263}
   - component: {fileID: 1567580262}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrain_(-100.00, -21.40, 100.00)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4576,7 +4632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1684897801}
-  m_Layer: 0
+  m_Layer: 4
   m_Name: Terrains
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4619,6 +4675,10 @@ PrefabInstance:
     - target: {fileID: 1976735639839414, guid: 14f4f60387c6fb64f954511f05df977f, type: 3}
       propertyPath: m_Name
       value: MountainSkybox
+      objectReference: {fileID: 0}
+    - target: {fileID: 1976735639839414, guid: 14f4f60387c6fb64f954511f05df977f, type: 3}
+      propertyPath: m_Layer
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4771701601394688, guid: 14f4f60387c6fb64f954511f05df977f, type: 3}
       propertyPath: m_RootOrder
@@ -4853,6 +4913,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: System
       objectReference: {fileID: 0}
+    - target: {fileID: 9040862911161240251, guid: b4d4f02336174c149ac912348adb3381, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5042,6 +5106,7 @@ GameObject:
   - component: {fileID: 2058004617}
   - component: {fileID: 2058004616}
   - component: {fileID: 2058004615}
+  - component: {fileID: 2058004618}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5116,13 +5181,25 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2058004614}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.18440105, y: -0.77158386, z: 0.19442117, w: 0.57693595}
-  m_LocalPosition: {x: 25.3, y: 12.9, z: 18.5}
+  m_LocalRotation: {x: 0.5735764, y: 0, z: 0, w: 0.8191521}
+  m_LocalPosition: {x: 0, y: 21, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30.851, y: -107.537, z: -4.023}
+  m_LocalEulerAnglesHint: {x: 70, y: 0, z: 0}
+--- !u!114 &2058004618
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2058004614}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db628aa2a2cfe524a896024a82e60f0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2092572980
 GameObject:
   m_ObjectHideFlags: 0
@@ -5208,3 +5285,4 @@ SceneRoots:
   - {fileID: 1401907207}
   - {fileID: 700981342}
   - {fileID: 1029898648}
+  - {fileID: 232622167}
