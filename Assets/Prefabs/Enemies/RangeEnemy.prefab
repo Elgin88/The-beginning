@@ -23,6 +23,9 @@ GameObject:
   - component: {fileID: 4441102510191212306}
   - component: {fileID: 7509397910694932458}
   - component: {fileID: 7917539677042299261}
+  - component: {fileID: 1043574405156389252}
+  - component: {fileID: 7444889158086054412}
+  - component: {fileID: 3097796858710846413}
   m_Layer: 6
   m_Name: RangeEnemy
   m_TagString: Untagged
@@ -158,7 +161,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb59048355b304a2ea09e15bc0afa954, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _health: 100
 --- !u!114 &4880319856371633147
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -183,8 +185,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fec0cb343787455895e5dea7e0ac83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions:
-  - {fileID: 0}
 --- !u!195 &6415274043360687229
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -288,7 +288,42 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d679cd6f355124c0999d1f90d84a9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _transitions: []
+--- !u!114 &1043574405156389252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb6552bf023e4585aad90b87d460c88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7444889158086054412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3097796858710846413
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869905696999793707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8102739328761439645
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -300,6 +335,10 @@ PrefabInstance:
     - target: {fileID: 2633041355845911071, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_Name
       value: EnemyRayPoint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2633041355845911071, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6832316802961050226, guid: 08f85dbc38c254719900fab5c6a8f9bb, type: 3}
       propertyPath: m_RootOrder
