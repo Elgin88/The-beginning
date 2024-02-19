@@ -65,7 +65,7 @@ namespace Assets.Scripts.UnitStateMachine
 
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _navMeshAgent.destination = _enemyNextTargetFinder.CurrentTarget.transform.position;
+                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTarget.transform.position);
                 }
 
                 yield return null;
