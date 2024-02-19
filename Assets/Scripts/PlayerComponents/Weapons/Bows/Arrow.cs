@@ -16,9 +16,9 @@ namespace Assets.Scripts.PlayerComponents.Weapons
         private Coroutine _flying;
 
         private void OnTriggerEnter(Collider other)
-        {
+        {   
             int mask = 1 << other.gameObject.layer;
-
+           
             if (other.gameObject.TryGetComponent<IDamageable>(out IDamageable target) && mask == _layerMask)
             {
                 target.TakeDamage(_damage);
@@ -45,7 +45,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private IEnumerator Flying(Transform target)
         {
-            while(Vector3.Distance(transform.position, target.position) > 0.1f)
+            while(target != null && Vector3.Distance(transform.position, target.position) > 0.1f)
             {
                 transform.position = Vector3.MoveTowards(transform.position, target.position, _speed * Time.deltaTime);
 

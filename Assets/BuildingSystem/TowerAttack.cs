@@ -1,3 +1,4 @@
+using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.Enemy;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.PlayerComponents;
@@ -5,120 +6,94 @@ using Assets.Scripts.PlayerComponents.Weapons;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 using static UnityEngine.GraphicsBuffer;
 
 public class TowerAttack : MonoBehaviour
 {
     [SerializeField] private Transform _shootPoint;
     [SerializeField] private Arrow _arrowPrefab;
-    //[SerializeField] private Shell _shellPrefab;
     [SerializeField] private float _delayOfShoot;
-    [SerializeField] private bool _isPlayerTower;
     [SerializeField] private float _damage;
     [SerializeField] private LayerMask _targetlayerMask;
 
-    private bool _canAttack;
-
-    private List<IDamageable> _targets = new();
-    private IDamageable _target;
-    private float _timeBetweenShoots = 5;
+    private List<Transform> _targets = new();
+    private Transform _target;
     private ArrowsPool _poolOfArrows;
-
-    private string _enemy = "Enemy";
-    private string _playerUnit = "PlayerUnit";
-    private string _currentLayerMask;
-
-    private Coroutine _shootCoroutine;
+    private float _currentDelay;
 
     private void Awake()
     { 
          _poolOfArrows = new ArrowsPool(_arrowPrefab, _damage, _targetlayerMask);
-
-        _canAttack = true;
     }
 
-    private void SetCurrentLayerMask(IDamageable idamageable)
+    private void Update()
     {
-        if (idamageable.IsPlayerObject)
+        if (_targets.Count > 0)
         {
-            _currentLayerMask = _playerUnit;
+            TryForShoot();
+            CleanTargets(_targets);
         }
-        else
+    }
+
+    private void TryForShoot()
+    {  
+        if(_currentDelay >= _delayOfShoot)
+        {  
+            Shoot();
+            _currentDelay = 0;
+        }  
+        
+        _currentDelay += Time.deltaTime;
+    }
+
+    private void Shoot()
+    {
+        //for (int i = 0; i < _targets.Count; i++)   //AllTargetsAttack
+        //{
+        //    Arrow arrow = _poolOfArrows.GetArrow();
+
+        //    arrow.transform.position = _shootPoint.position;
+        //    arrow.Fly(_targets[i]);
+        //}
+
+       //FirstTargetAttack
+        Arrow arrow = _poolOfArrows.GetArrow();
+        arrow.transform.position = _shootPoint.position;
+        arrow.Fly(_targets.First());
+    }
+
+    private void CleanTargets(List<Transform> targets)
+    {
+        for(int i = 0; i < _targets.Count; i++)
         {
-            _currentLayerMask = _enemy;
+            if (targets[i] == null && targets[i].gameObject.activeSelf == false)
+            {
+                _targets.RemoveAt(i);
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-            if (other.gameObject.TryGetComponent(out IDamageable idamageable) && _canAttack == true)
-            {
-                SetCurrentLayerMask(idamageable);
+        int mask = 1 << other.gameObject.layer;
 
-                if (_isPlayerTower && _currentLayerMask == _enemy)
-                {
-                    StartCoroutine(Shoot(idamageable.Transform));
-                    //InitShell(idamageable);
-                    Debug.Log("Лечу на врага");
-                }
-
-                if (!_isPlayerTower && _currentLayerMask == _playerUnit)
-                {
-                    StartCoroutine(Shoot(idamageable.Transform));
-                    // InitShell(idamageable);
-                     Debug.Log("Лечу на игрока");
-
-                 }
-                
-               // StartCoroutine(Shoot(idamageable.Transform));
-            }
+        if (other.gameObject.TryGetComponent(out IDamageable target) && mask == _targetlayerMask)
+        {
+            _targets.Add(target.Transform);
+        }
     }
 
-    //private void InitShell(IDamageable idamageable)
-    //{
-    //   Shell shell =  Instantiate(_shellPrefab, _shootPoint.position, Quaternion.identity);
-    //   shell.Init(idamageable.Transform);
-    //}
-
-    //private IEnumerator InitShell2(IDamageable idamageable)
-    //{
-    //    yield return new WaitForSeconds(_delayOfShoot);
-
-    //    Shell shell = Instantiate(_shellPrefab, _shootPoint.position, Quaternion.identity);
-    //    shell.Init(idamageable.Transform);
-    //}
-
-
-
-
-    private IEnumerator Shoot(Transform target)
+    private void OnTriggerExit(Collider other)
     {
-        _canAttack = false;
+        int mask = 1 << other.gameObject.layer;
 
-        Arrow arrow = _poolOfArrows.GetArrow();
-
-        arrow.transform.position = _shootPoint.position;
-
-
-        // Arrow arrow = Instantiate(_arrowPrefab);
-        // arrow.gameObject.SetActive(true);
-        // arrow.transform.position = _shootPoint.position;
-        // arrow.Init(_damage);
-        arrow.Fly(target);
-
-        yield return new WaitForSeconds(_delayOfShoot);
-
-        _canAttack = true;
+        if (other.gameObject.TryGetComponent(out IDamageable target) && mask == _targetlayerMask)
+        {
+            _targets.Remove(target.Transform);
+        }
     }
-
-    //private void TryToShot(Transform target)
-    //{
-    //    if (_shootCoroutine != null)
-    //    {
-    //        StopCoroutine(_shootCoroutine);
-    //    }
-
-    //    _shootCoroutine = StartCoroutine(Shoot(target));
-    //}
 }
