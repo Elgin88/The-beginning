@@ -2,40 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
-using Zenject;
-using Assets.Scripts.BuildingSystem.Buildings ;
 
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
-        [Inject] private MainBuilding _mainBuilding;
-
-        private EnemyRayPoint _enemyRayPoint;
         private List<GameObject> _targets;
-        private GameObject _currentTarget;
+        private EnemyRayPoint _enemyRayPoint;
         private float _visionAngle = 160;
-        private float _visionRange = 50;
+        private float _visionRange = 100;
         private float _stepOfRotationY => _visionAngle / _rayCount;
-        private int _rayCount = 100;
-
-        internal GameObject GetCloseTarget()
-        {
-            if (_targets.Count != 0)
-            {
-                _currentTarget = _targets[0];
-
-                foreach (GameObject target in _targets)
-                {
-                    if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
-                    {
-                        _currentTarget = target;
-                    }
-                }
-            }
-
-            return _currentTarget;
-        }
+        private int _rayCount = 10;
 
         private void Awake()
         {
@@ -51,14 +28,12 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 int currentRayNumber = 0;
-
-                _targets = new List<GameObject>{_mainBuilding.gameObject};
+                _targets = new List<GameObject>();
 
                 while (currentRayNumber <= _rayCount)
                 {
                     SetEnemyRayPointRotation(currentRayNumber);
-                    CreateRay(out Ray ray);
-                    SetDataRaycastHit(ray);
+                    SetDataRaycastHit();
 
                     currentRayNumber++;
                 }
@@ -72,22 +47,15 @@ namespace Assets.Scripts.Enemy
             _enemyRayPoint.transform.localRotation = Quaternion.Euler(_enemyRayPoint.transform.localRotation.x, - 90 + (180 - _visionAngle)/2 + _stepOfRotationY * currentRayNumber, _enemyRayPoint.transform.localRotation.z);
         }
 
-        private void CreateRay(out Ray ray)
+        private void SetDataRaycastHit()
         {
-            ray = new Ray(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward);
-        }
-
-        private void SetDataRaycastHit(Ray ray)
-        {
-            RaycastHit raycastHit;
-
-            Physics.Raycast(ray, out raycastHit);
+            Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange);
 
             if (raycastHit.collider != null)
             {
-                if (raycastHit.collider.gameObject.TryGetComponent(out IDamageable idamageable) & raycastHit.distance <= _visionRange)
+                if (raycastHit.collider.gameObject.TryGetComponent(out IDamageable idamageable))
                 {
-                    if (idamageable.IsPlayerObject & idamageable.IsDead == false & raycastHit.collider.gameObject.TryGetComponent(out TerrainCollider terrainCollider) == false)
+                    if (idamageable.IsPlayerObject & idamageable.IsDead == false)
                     {
                         AddTargetToList(raycastHit.collider.gameObject);
                     }
@@ -116,6 +84,15 @@ namespace Assets.Scripts.Enemy
             }
 
             return isRepeat;
+        }
+
+        internal List<GameObject> GetTargets()
+        {
+            List<GameObject> targets;
+
+            targets = _targets;
+
+            return targets;
         }
     }
 }

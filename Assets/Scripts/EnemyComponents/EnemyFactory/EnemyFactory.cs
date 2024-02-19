@@ -14,7 +14,8 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private float _minorEnemyCount;
 
         [Inject] private DiContainer _currentEnemyDI;
-        [Inject] private MainBuilding _mainBuilding; 
+
+        private MainBuilding _mainBuilding; 
         
         private EnemySpawnPoint[] _spawnPoints;
         private EnemySpawnPoint _currentSpawnPoint;
@@ -25,6 +26,8 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
+            _mainBuilding = FindObjectOfType<MainBuilding>();
+
             _spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
 
             _delayBetweenWavesEnemyWFS = new WaitForSeconds(_delayBetweenWavesEnemy);
@@ -106,9 +109,11 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnEnemy(GameObject gameObject)
         {
-            if (_currentEnemyPosition.x != _mainBuilding.transform.position.x)
+            Debug.Log(_currentEnemyPosition);
+
+            if (_currentEnemyPosition != new Vector3(0,0,0))
             {
-                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.identity, null);
             }
         }
     }

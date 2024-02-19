@@ -9,6 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class TransitionMove : Transition
     {
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyRayPoint _enemyRayPoint;
         private StateIdle _stateIdle;
         private float _minDistanceToTarget = 2.0f;
@@ -28,7 +29,7 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 NextState = null;
 
-                if (IsMinDistanceToPlayerObject())
+                if (IsMinDistanceToPlayerObject() || _enemyNextTargetFinder.CurrentTarget == null)
                 {
                     NextState = _stateIdle;
                 }
@@ -76,6 +77,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _stateIdle = GetComponent<StateIdle>();
 
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
