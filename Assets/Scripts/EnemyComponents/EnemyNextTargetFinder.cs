@@ -2,6 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.BuildingSystem.Buildings;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {
@@ -33,10 +34,48 @@ namespace Assets.Scripts.Enemy
             }
         }
 
+        internal GameObject GetCloseTarget()
+        {
+            _currentTarget = null;
+
+            SetMainBuildingAsTarget();
+            SelectNearbyObjectAsTarget();
+
+            return _currentTarget;
+        }
+
+        private void SetMainBuildingAsTarget()
+        {
+            if (_mainBulding != null)
+            {
+                _currentTarget = _mainBulding.gameObject;
+            }
+        }
+
+        private void SelectNearbyObjectAsTarget()
+        {
+            if (_enemyVision.GetTargets().Count > 0)
+            {
+                _currentTarget = _enemyVision.GetTargets()[0];
+            }
+
+            foreach (GameObject target in _enemyVision.GetTargets())
+            {
+                if (_enemyVision.GetTargets().Count > 1)
+                {
+                    if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
+                    {
+                        _currentTarget = target;
+                    }
+                }
+            }
+        }
+
         private void Awake()
         {
-            _enemyVision = GetComponent<EnemyVision>();
             _mainBulding = FindAnyObjectByType<MainBuilding>();
+
+            _enemyVision = GetComponent<EnemyVision>();
 
             StartFindNextTarget();
         }
@@ -49,34 +88,6 @@ namespace Assets.Scripts.Enemy
 
                 yield return null;
             }
-        }
-
-        internal GameObject GetCloseTarget()
-        {
-            _currentTarget = _enemyVision.GetTargets()[0];
-
-            foreach (GameObject target in _enemyVision.GetTargets())
-            {
-                if (target != null)
-                {
-                    if (target.gameObject.TryGetComponent(out IDamageable idamageable) & idamageable.IsDead == false)
-                    {
-                        if (target != null & _currentTarget != null)
-                        {
-                            if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
-                            {
-                                _currentTarget = target;
-                            }
-                        }
-                        else if (_mainBulding != null)
-                        {
-                            _currentTarget = _mainBulding.gameObject;
-                        }
-                    }
-                }
-            }
-
-            return _currentTarget;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Assets.Scripts.Enemy
         private List<GameObject> _targets;
         private EnemyRayPoint _enemyRayPoint;
         private float _visionAngle = 160;
-        private float _visionRange = 50;
+        private float _visionRange = 100;
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 10;
 
@@ -28,6 +28,7 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 int currentRayNumber = 0;
+                _targets = new List<GameObject>();
 
                 while (currentRayNumber <= _rayCount)
                 {

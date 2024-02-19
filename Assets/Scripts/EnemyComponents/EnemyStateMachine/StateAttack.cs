@@ -59,9 +59,12 @@ namespace Assets.Scripts.UnitStateMachine
 
             yield return _timeToAttackWFS;
 
-            if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
+            if (_enemyNextTargetFinder.CurrentTarget != null)
             {
-                idamageable.TakeDamage(_damage);
+                if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
+                {
+                    idamageable.TakeDamage(_damage);
+                }
             }
 
             _transitionAttack.SetStateIdle();
