@@ -9,6 +9,7 @@ namespace Assets.Scripts.GameLogic
         private float _alignmentSpeed = 2.5f;
         private float _desiredHeight = 1.08f;
         private float _rayDistance = 5f;
+        private float _rotationSpeed = 5f;
 
         private IMoveable _target;
 
@@ -26,6 +27,11 @@ namespace Assets.Scripts.GameLogic
             {
                 Rotate(movementVector, hit.normal);
 
+                if(hit.normal.y < 0.78f)
+                {
+                    _target.Transform.position -= movementVector / 8;
+                }
+
                 if (hit.distance > _desiredHeight)
                 {
                     _target.Transform.position = Vector3.Lerp(_target.Transform.position, hit.point, _alignmentSpeed * Time.fixedDeltaTime);
@@ -42,7 +48,7 @@ namespace Assets.Scripts.GameLogic
 
                 Quaternion combinedRotation = surfaceAlignmentRotation * directionRotation;
 
-                _target.Transform.rotation = Quaternion.Slerp(_target.Transform.rotation, combinedRotation, _target.RotationSpeed * Time.fixedDeltaTime);
+                _target.Transform.rotation = Quaternion.Slerp(_target.Transform.rotation, combinedRotation, _rotationSpeed * Time.fixedDeltaTime);
             }
         }
     }

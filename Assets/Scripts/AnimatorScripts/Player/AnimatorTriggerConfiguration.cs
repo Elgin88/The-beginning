@@ -1,5 +1,6 @@
 ﻿using Assets.Scripts.ConStants;
 using Assets.Scripts.PlayerComponents.Weapons;
+using Assets.Scripts.PlayerComponents.Weapons.Bows;
 using System;
 using System.Collections.Generic;
 
@@ -12,10 +13,10 @@ namespace Assets.Scripts.AnimatorScripts.Player
 
         public AnimatorTriggerConfiguration()
         {
-            _attackTriggers[typeof(Bow)] = AnimatorHash.BowAttack;
+            _attackTriggers[typeof(PlayerBow)] = AnimatorHash.BowAttack;
             _attackTriggers[typeof(Sword)] = AnimatorHash.SwordAttack;
 
-            _changeWeaponTriggers[typeof(Bow)] = AnimatorHash.EquipBow;
+            _changeWeaponTriggers[typeof(PlayerBow)] = AnimatorHash.EquipBow;
             _changeWeaponTriggers[typeof(Sword)] = AnimatorHash.EquipSword;
         }
 

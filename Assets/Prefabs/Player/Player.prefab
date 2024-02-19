@@ -279,7 +279,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _weapons:
   - {fileID: 7074407505586110123}
-  - {fileID: 2254243264041936596}
+  - {fileID: 6388631767544512250}
 --- !u!114 &-434474296401398925
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3479,7 +3479,7 @@ GameObject:
   - component: {fileID: 5112301924052255452}
   - component: {fileID: 6995916280033097238}
   - component: {fileID: 8861393346656398749}
-  - component: {fileID: 2254243264041936596}
+  - component: {fileID: 6388631767544512250}
   m_Layer: 0
   m_Name: Long Bow
   m_TagString: Untagged
@@ -3576,7 +3576,7 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 4285039123826067349, guid: 1d21314fd22c5af4e9e3785c6d1ee4d6, type: 3}
---- !u!114 &2254243264041936596
+--- !u!114 &6388631767544512250
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -3589,14 +3589,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 5
-  _attackSpeed: 1.5
+  _attackSpeed: 2
   _layerMask:
     serializedVersion: 2
     m_Bits: 64
-  _radius: 10
-  _shootPoint: {fileID: 8841447842545000901}
   _arrowPrefab: {fileID: 4306390963386993369, guid: a495a43c4ec10aa4c98ca79951eaacf3, type: 3}
+  _shootPoint: {fileID: 8841447842545000901}
   _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}
+  _radius: 10
 --- !u!1 &8950715178592391206
 GameObject:
   m_ObjectHideFlags: 0
