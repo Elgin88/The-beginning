@@ -51,5 +51,18 @@ namespace Assets.Scripts.PlayerUnits
                 }
             }
         }
+
+        public bool IsAnyUnitSelected()
+        {
+            foreach (Unit unit in _units)
+            {
+                if (unit.IsSelected && unit.gameObject.activeSelf)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
