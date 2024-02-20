@@ -36,7 +36,7 @@ namespace Assets.Scripts.Enemy
             if (Health <= 0)
             {
                 _isDead = true;
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 
