@@ -14,9 +14,11 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private TransitionAttack _transitionAttack;
         private EnemyAnimation _enemyAnimation;
-        private WaitForSeconds _timeToAttackWFS;
+        private WaitForSeconds _timeBeforeAttackWFS;
+        private WaitForSeconds _timeAfterAttackWFS;
         private Coroutine _attack;
-        private float _timeToAttack = 0.4f;
+        private float _timeBeforeAttack = 0.4f;
+        private float _timeAfterAttack = 1f;
         private float _damage;
 
         internal override State TryGetNextState()
@@ -30,19 +32,16 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 _attack = StartCoroutine(Attack());
                 _transitionAttack.StartCheckTransition();
-                _enemyAnimation.PlayAttack();
+                _enemyAnimation.StartPlayAttack();
             }
         }
 
         internal override void StopState()
         {
-            if (_attack != null)
-            {
-                StopCoroutine(_attack);
-                _attack = null;
-                _transitionAttack.StopCheckTransition();
-                _enemyAnimation.StopPlayAttack();
-            }
+            StopCoroutine(_attack);
+            _attack = null;
+            _transitionAttack.StopCheckTransition();
+            _enemyAnimation.StopPlayAttack();
         }
 
         private void Awake()
@@ -52,12 +51,13 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyAnimation = GetComponent<EnemyAnimation>();
             _damage = GetComponent<IEnemy>().Damage;
 
-            _timeToAttackWFS = new WaitForSeconds(_timeToAttack);
+            _timeBeforeAttackWFS = new WaitForSeconds(_timeBeforeAttack);
+            _timeAfterAttackWFS = new WaitForSeconds(_timeAfterAttack);
         }
 
         private IEnumerator Attack()
         {
-            yield return _timeToAttackWFS;
+            yield return _timeBeforeAttackWFS;
 
             if (_enemyNextTargetFinder.CurrentTarget != null)
             {
@@ -67,7 +67,7 @@ namespace Assets.Scripts.UnitStateMachine
                 }
             }
 
-            yield return _timeToAttackWFS;
+            yield return _timeAfterAttackWFS;
 
             _transitionAttack.SetStateIdle();
         }

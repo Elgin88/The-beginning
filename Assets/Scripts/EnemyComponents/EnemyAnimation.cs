@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -18,9 +19,19 @@ namespace Assets.Scripts.Enemy
         private float _normalizeMoveSpeed;
         private float _baseMoveSpeed = 3;
 
-        internal void PlayRun()
+        internal void StartPlayRun()
         {
             _animator.SetBool(_run, true);
+        }
+
+        internal void StartPlayAttack()
+        {
+            _animator.SetBool(_attack, true);
+        }
+
+        internal void StartPlayIdle()
+        {
+            _animator.SetBool(_idle, true);
         }
 
         internal void StopPlayRun()
@@ -28,14 +39,14 @@ namespace Assets.Scripts.Enemy
             _animator.SetBool(_run, false);
         }
 
-        internal void PlayAttack()
-        {
-            _animator.SetBool(_attack, true);
-        }
-
         internal void StopPlayAttack()
         {
             _animator.SetBool(_attack, false);
+        }
+
+        internal void StopPlayIdle()
+        {
+            _animator.SetBool(_idle, false);
         }
 
         private void Awake()
@@ -45,16 +56,6 @@ namespace Assets.Scripts.Enemy
 
             _normalizeMoveSpeed = _navMeshAgent.speed / _baseMoveSpeed;
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
-        }
-
-        internal void PlayIdle()
-        {
-            _animator.SetBool(_idle, true);
-        }
-
-        internal void StopPlayIdle()
-        {
-            _animator.SetBool(_idle, false);
         }
     }
 }
