@@ -12,7 +12,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyRayPoint _enemyRayPoint;
         private StateIdle _stateIdle;
-        private float _minDistanceToTarget = 1.0f;
+        private float _minDistanceToTarget = 2f;
 
         protected override Coroutine CheckTransition { get; set; }
 
