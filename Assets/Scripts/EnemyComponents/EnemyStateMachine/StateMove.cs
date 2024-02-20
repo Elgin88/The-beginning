@@ -25,6 +25,7 @@ namespace Assets.Scripts.UnitStateMachine
                 _move = StartCoroutine(Move());
 
                 _transitionMove.StartCheckTransition();
+                _enemyAnimation.StartPlayRun();
             }
         }
 
@@ -35,8 +36,8 @@ namespace Assets.Scripts.UnitStateMachine
 
             ResetPath();
 
-            _enemyAnimation.StopPlayRun();
             _transitionMove.StopCheckTransition();
+            _enemyAnimation.StopPlayRun();
         }
 
         internal override State TryGetNextState()
@@ -61,8 +62,6 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                _enemyAnimation.PlayRun();
-
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
                     _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTarget.transform.position);

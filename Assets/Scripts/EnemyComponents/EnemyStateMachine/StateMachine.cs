@@ -26,6 +26,29 @@ namespace Assets.Scripts.UnitStateMachine
             StartTrySetNextState();
         }
 
+        private void StartCurrentState()
+        {
+            if (_currentState != null)
+            {
+                _currentState.StartState();
+            }
+        }
+
+        private void StopCurrentState()
+        {
+            _currentState.StopState();
+            _currentState = null;
+        }
+
+
+        private void StartTrySetNextState()
+        {
+            if (_startTrySetNextState == null)
+            {
+                _startTrySetNextState = StartCoroutine(TrySetNextState());
+            }
+        }
+
         private IEnumerator TrySetNextState()
         {
             while (true)
@@ -42,30 +65,6 @@ namespace Assets.Scripts.UnitStateMachine
                 }
 
                 yield return null;
-            }
-        }
-
-        private void StartCurrentState()
-        {
-            if (_currentState != null)
-            {
-                _currentState.StartState();
-            }
-        }
-
-        private void StopCurrentState()
-        {
-            if (_currentState != null)
-            {
-                _currentState.StopState();
-            }
-        }
-
-        private void StartTrySetNextState()
-        {
-            if (_startTrySetNextState == null)
-            {
-                _startTrySetNextState = StartCoroutine(TrySetNextState());
             }
         }
     }
