@@ -16,7 +16,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private WaitForSeconds _timeToAttackWFS;
         private Coroutine _attack;
-        private float _timeToAttack = 0.45f;
+        private float _timeToAttack = 0.4f;
         private float _damage;
 
         internal override State TryGetNextState()
@@ -30,6 +30,7 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 _attack = StartCoroutine(Attack());
                 _transitionAttack.StartCheckTransition();
+                _enemyAnimation.PlayAttack();
             }
         }
 
@@ -40,6 +41,7 @@ namespace Assets.Scripts.UnitStateMachine
                 StopCoroutine(_attack);
                 _attack = null;
                 _transitionAttack.StopCheckTransition();
+                _enemyAnimation.StopPlayAttack();
             }
         }
 
@@ -55,8 +57,6 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Attack()
         {
-            _enemyAnimation.PlayAttack();
-
             yield return _timeToAttackWFS;
 
             if (_enemyNextTargetFinder.CurrentTarget != null)
@@ -67,9 +67,9 @@ namespace Assets.Scripts.UnitStateMachine
                 }
             }
 
+            yield return _timeToAttackWFS;
+
             _transitionAttack.SetStateIdle();
-            _enemyAnimation.StopPlayAttack();
-            StopState();
         }
     }
 }
