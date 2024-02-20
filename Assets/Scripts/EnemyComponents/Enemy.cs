@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
+    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
 
