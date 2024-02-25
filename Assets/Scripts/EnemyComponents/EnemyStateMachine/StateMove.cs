@@ -17,6 +17,7 @@ namespace Assets.Scripts.UnitStateMachine
         private TransitionMove _transitionMove;
         private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
+        
 
         internal override void StartState()
         {

@@ -17,8 +17,8 @@ namespace Assets.Scripts.UnitStateMachine
         private WaitForSeconds _timeBeforeAttackWFS;
         private WaitForSeconds _timeAfterAttackWFS;
         private Coroutine _attack;
-        private float _timeBeforeAttack = 0.4f;
-        private float _timeAfterAttack = 1f;
+        private float _timeBeforeAttack = 0.5f;
+        private float _timeAfterAttack = 0.5f;
         private float _damage;
 
         internal override State TryGetNextState()

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.41227058, g: 0.48923618, b: 0.60328966, a: 1}
+  m_IndirectSpecularColor: {r: 0.41227594, g: 0.48922873, b: 0.60328513, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -638,7 +638,7 @@ GameObject:
   - component: {fileID: 1205202904}
   - component: {fileID: 1205202903}
   m_Layer: 0
-  m_Name: Tower1 (4)
+  m_Name: Tower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -765,7 +765,7 @@ Transform:
   m_GameObject: {fileID: 1205202902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.71, y: 1.71, z: 23.52}
+  m_LocalPosition: {x: -19.71, y: 1.62, z: 23.52}
   m_LocalScale: {x: 1, y: 3.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4471,7 +4471,7 @@ Transform:
   m_GameObject: {fileID: 1316130285}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.1, y: 0, z: 16.7}
+  m_LocalPosition: {x: -13.8, y: 0, z: 28.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4619,7 +4619,7 @@ Transform:
   m_GameObject: {fileID: 1532442922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.31, y: 1.71, z: 29.27}
+  m_LocalPosition: {x: -18.31, y: 1.59, z: 29.27}
   m_LocalScale: {x: 1, y: 3.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4753,7 +4753,7 @@ Transform:
   m_GameObject: {fileID: 1573873514}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 1.42, z: 33.1}
+  m_LocalPosition: {x: -7, y: 0.95, z: 33.1}
   m_LocalScale: {x: 3.69, y: 1.64, z: 1.64}
   m_ConstrainProportionsScale: 0
   m_Children: []

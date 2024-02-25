@@ -9,10 +9,10 @@ namespace Assets.Scripts.Enemy
     {
         private List<GameObject> _targets;
         private EnemyRayPoint _enemyRayPoint;
-        private float _visionAngle = 160;
-        private float _visionRange = 100;
+        private float _visionAngle = 170;
+        private float _visionRange = 20;
         private float _stepOfRotationY => _visionAngle / _rayCount;
-        private int _rayCount = 10;
+        private int _rayCount = 20;
 
         private void Awake()
         {
@@ -50,6 +50,8 @@ namespace Assets.Scripts.Enemy
         private void SetDataRaycastHit()
         {
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange);
+
+            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.red, 0.1f);
 
             if (raycastHit.collider != null)
             {
