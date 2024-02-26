@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
+    [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
 
@@ -36,7 +37,7 @@ namespace Assets.Scripts.Enemy
             if (Health <= 0)
             {
                 _isDead = true;
-                Destroy(gameObject);
+                gameObject.SetActive(false);
             }
         }
 

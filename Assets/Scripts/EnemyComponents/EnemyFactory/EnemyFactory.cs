@@ -109,8 +109,6 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnEnemy(GameObject gameObject)
         {
-            Debug.Log(_currentEnemyPosition);
-
             if (_currentEnemyPosition != new Vector3(0,0,0))
             {
                 _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.identity, null);

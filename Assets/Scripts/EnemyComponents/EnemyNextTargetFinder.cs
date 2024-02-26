@@ -1,8 +1,6 @@
+using Assets.Scripts.BuildingSystem.Buildings;
 using System.Collections;
 using UnityEngine;
-using Assets.Scripts.GameLogic.Damageable;
-using Assets.Scripts.BuildingSystem.Buildings;
-using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.Enemy
 {

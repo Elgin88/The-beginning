@@ -12,7 +12,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyRayPoint _enemyRayPoint;
         private StateIdle _stateIdle;
-        private float _minDistanceToTarget = 2.0f;
+        private float _minDistanceToTarget = 1f;
 
         protected override Coroutine CheckTransition { get; set; }
 
@@ -42,13 +42,11 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            Ray ray = new Ray(_enemyRayPoint.transform.position, transform.forward);
-
-            if (Physics.Raycast(_enemyRayPoint.transform.position, ray.direction, out RaycastHit raysactHit))
+            if (Physics.Raycast(_enemyRayPoint.transform.position, transform.forward, out RaycastHit raysactHit, _minDistanceToTarget))
             {
                 if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
                 {
-                    if (idamageable.IsPlayerObject == true & raysactHit.distance <= _minDistanceToTarget)
+                    if (idamageable.IsPlayerObject == true)
                     {
                         isMinDistance = true;
                     }
