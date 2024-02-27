@@ -8,10 +8,9 @@ namespace Assets.Scripts.Enemy
     internal class EnemyFactory: MonoBehaviour
     {
         [SerializeField] private EnemyMeleeOgreGreen _enemyMeleeOrc;
-        [SerializeField] private EnemyRange _rangeEneny;
         [SerializeField] private float _delayBetweenWavesEnemy;
-        [SerializeField] private float _minorEnemySpawnRangeMax;
-        [SerializeField] private float _minorEnemyCount;
+        [SerializeField] private float _rangeMinorSpawn;
+        [SerializeField] private float _countMinorEnemy;
 
         [Inject] private DiContainer _currentEnemyDI;
 
@@ -22,7 +21,7 @@ namespace Assets.Scripts.Enemy
         private WaitForSeconds _delayBetweenWavesEnemyWFS;
         private Coroutine _createAllEnemies;
         private Vector3 _currentEnemyPosition;
-        private float _minorEnemySpawnRangeMin => _minorEnemySpawnRangeMax - 0.5f;
+        private float _minorEnemySpawnRangeMin => _rangeMinorSpawn - 0.5f;
 
         private void Awake()
         {
@@ -58,7 +57,7 @@ namespace Assets.Scripts.Enemy
 
         private void CreateMinorEnemiesInWave()
         {
-            for (int i = 0; i < _minorEnemyCount; i++)
+            for (int i = 0; i <= _countMinorEnemy; i++)
             {
                 CalculateMinorUnitStartPosition();
                 SpawnRandomEnemy();
@@ -79,13 +78,13 @@ namespace Assets.Scripts.Enemy
 
             while (isWork)
             {
-                _currentEnemyPosition.x = _currentSpawnPoint.transform.position.x + Random.Range(-_minorEnemySpawnRangeMax, _minorEnemySpawnRangeMax);
+                _currentEnemyPosition.x = _currentSpawnPoint.transform.position.x + Random.Range(-_rangeMinorSpawn, _rangeMinorSpawn);
                 _currentEnemyPosition.y = gameObject.transform.position.y;
-                _currentEnemyPosition.z = _currentSpawnPoint.transform.position.z + Random.Range(-_minorEnemySpawnRangeMax, _minorEnemySpawnRangeMax);
+                _currentEnemyPosition.z = _currentSpawnPoint.transform.position.z + Random.Range(-_rangeMinorSpawn, _rangeMinorSpawn);
 
                 radius = Mathf.Sqrt(Mathf.Pow(_currentEnemyPosition.x - _currentSpawnPoint.transform.position.x, 2) + Mathf.Pow(_currentEnemyPosition.z - _currentSpawnPoint.transform.position.z, 2));
 
-                if (radius >= _minorEnemySpawnRangeMin & radius <= _minorEnemySpawnRangeMax)
+                if (radius >= _minorEnemySpawnRangeMin & radius <= _rangeMinorSpawn)
                 {
                     isWork = false;
                 }
@@ -109,9 +108,9 @@ namespace Assets.Scripts.Enemy
 
         private void SpawnEnemy(GameObject gameObject)
         {
-            if (_currentEnemyPosition != new Vector3(0,0,0))
+            if (_currentEnemyPosition != new Vector3(0,0,0) & _mainBuilding != null)
             {
-                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.identity, null);
+                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
             }
         }
     }

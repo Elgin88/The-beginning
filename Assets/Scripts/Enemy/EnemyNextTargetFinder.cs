@@ -23,35 +23,23 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        internal void StopFindNextTarget()
+        private IEnumerator FindNextTarget()
         {
-            if (_findNextTarget != null)
+            while (true)
             {
-                StopCoroutine(_findNextTarget);
-                _findNextTarget = null;
+                GetCloseTarget();
+
+                yield return null;
             }
         }
 
-        internal GameObject GetCloseTarget()
-        {
-            _currentTarget = null;
-
-            SetMainBuildingAsTarget();
-            SelectNearbyObjectAsTarget();
-
-            return _currentTarget;
-        }
-
-        private void SetMainBuildingAsTarget()
+        private GameObject GetCloseTarget()
         {
             if (_mainBulding != null)
             {
                 _currentTarget = _mainBulding.gameObject;
             }
-        }
 
-        private void SelectNearbyObjectAsTarget()
-        {
             if (_enemyVision.GetTargets().Count > 0)
             {
                 _currentTarget = _enemyVision.GetTargets()[0];
@@ -67,6 +55,8 @@ namespace Assets.Scripts.Enemy
                     }
                 }
             }
+
+            return _currentTarget;
         }
 
         private void Awake()
@@ -76,16 +66,6 @@ namespace Assets.Scripts.Enemy
             _enemyVision = GetComponent<EnemyVision>();
 
             StartFindNextTarget();
-        }
-
-        private IEnumerator FindNextTarget()
-        {
-            while (true)
-            {
-                _currentTarget = GetCloseTarget();
-
-                yield return null;
-            }
         }
     }
 }

@@ -8,15 +8,15 @@ namespace Assets.Scripts.UnitStateMachine
     internal class StateMachine : MonoBehaviour
     {
         private Coroutine _startTrySetNextState;
-        private StateIdle _stateIdle;
+        private StateMove _stateMove;
         private State _currentState;
         private State _startState;
 
         private void Awake()
         {
-            _stateIdle = GetComponent<StateIdle>();
+            _stateMove = GetComponent<StateMove>();
 
-            _startState = _stateIdle;
+            _startState = _stateMove;
             _currentState = _startState;
         }
 

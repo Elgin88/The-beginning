@@ -9,6 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateIdle : State
     {
+        private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyAnimation _enemyAnimation;
         private TransitionIdle _transitionIdle;
 
@@ -31,6 +32,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
+            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _enemyAnimation = GetComponent<EnemyAnimation>();
             _transitionIdle = GetComponent<TransitionIdle>();
         }
