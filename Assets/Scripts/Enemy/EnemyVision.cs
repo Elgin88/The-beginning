@@ -14,6 +14,15 @@ namespace Assets.Scripts.Enemy
         private float _stepOfRotationY => _visionAngle / _rayCount;
         private int _rayCount = 100;
 
+        internal List<GameObject> GetTargets()
+        {
+            List<GameObject> targets;
+
+            targets = _targets;
+
+            return targets;
+        }
+
         private void Awake()
         {
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
@@ -86,15 +95,6 @@ namespace Assets.Scripts.Enemy
             }
 
             return isRepeat;
-        }
-
-        internal List<GameObject> GetTargets()
-        {
-            List<GameObject> targets;
-
-            targets = _targets;
-
-            return targets;
         }
     }
 }
