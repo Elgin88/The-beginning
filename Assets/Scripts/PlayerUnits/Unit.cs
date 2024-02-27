@@ -1,22 +1,27 @@
-﻿using Assets.Scripts.GameLogic;
+﻿using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
-using System.Collections;
-using UnityEngine;
+using Assets.Scripts.PlayerUnits.UnitFiniteStateMachine;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.PlayerUnits
 {
-    internal abstract class Unit : Selectable, IDamageable, IMoveable
+    [RequireComponent(typeof(UnitAnimator))]
+    [RequireComponent(typeof(NavMeshAgent))]
+    internal abstract class Unit : Selectable, IDamageable
     {
-        private float _radius;
         private float _health;
-        private float _speed;
         private bool _isDead;
+        private float _attackRange;
+        private float _aggroRange;
+        private LayerMask _enemyMask;
 
-        private LayerMask _layerMask;
-        private ClosestTargetFinder _closestTargetFinder;
+        private FiniteStateMachine _fsm;
+        private UnitAnimator _animator;
+        private NavMeshAgent _agent;
 
-        private IDamageable _closestTarget;
-        private Coroutine _move;
+        public float AttackRange => _attackRange;
+        public float AggroRange => _aggroRange;
+        public LayerMask EnemyMask => _enemyMask;
 
         public bool IsDead => _isDead;
 
@@ -24,69 +29,42 @@ namespace Assets.Scripts.PlayerUnits
 
         public Transform Transform => transform;
 
-        public float MoveSpeed => _speed;
-
-        public SurfaceAlignment SurfaceAlignment => new SurfaceAlignment(this);
-
-        private void FixedUpdate()
+        private void Start()
         {
-            if (_closestTarget != null && _closestTarget.Transform.gameObject.activeSelf)
-                return;
+            _animator = GetComponent<UnitAnimator>();
+            _agent = GetComponent<NavMeshAgent>();
 
-            _closestTarget = _closestTargetFinder.FindTarget(transform.position);
+            _fsm = new FiniteStateMachine();
+
+            _fsm.AddState(new FSMStateIdle(_fsm, this, _agent, _animator));
+            _fsm.AddState(new FSMStateMove(_fsm, this, _agent, _animator));
+
+            _fsm.SetState<FSMStateIdle>();
+        }
+
+        public void Update() 
+        {
+            _fsm.Update();
         }
 
         public void TakeDamage(float damage)
         {
+            _health -= damage;
+
             if (_health <= 0)
                 Die();
         }
 
-        public void InitUnit(float health, float speed)
+        public void InitUnit(float health, LayerMask layer)
         {
             _health = health;
-            _speed = speed;
-
-            _closestTargetFinder = new ClosestTargetFinder(_radius, _layerMask);
+            _enemyMask = layer;
         }
 
         public void Move(Vector3 position)
         {
-            float scaledMoveSpeed = MoveSpeed * Time.fixedDeltaTime;
-
-            if (_move != null)
-            {
-                StopCoroutine(_move);
-            }
-
-            _move = StartCoroutine(Move(position, scaledMoveSpeed));
-        }
-
-        private IEnumerator Move(Vector3 position, float moveSpeed)
-        {
-            while (transform.position != position)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, position, moveSpeed);
-                Vector3 movementVector = transform.position - position;
-
-                if (Physics.Raycast(transform.position, position, out RaycastHit hit, 1f, _layerMask))
-                {
-                    if (hit.collider.TryGetComponent<IDamageable>(out IDamageable unit))
-                    {
-                        position = transform.position;
-                    }
-                }
-
-                movementVector = new Vector3(movementVector.x, 0, movementVector.y);
-                SurfaceAlignment.Align(movementVector);
-
-                yield return null;
-            }
-        }
-
-        private void Attack(IDamageable target)
-        {
-            
+            _fsm.SetMovePosition(position);
+            _fsm.SetState<FSMStateMove>();
         }
 
         private void Die()

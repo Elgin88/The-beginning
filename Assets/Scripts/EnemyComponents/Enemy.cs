@@ -34,8 +34,6 @@ namespace Assets.Scripts.Enemy
         {
             Health -= damage;
 
-            Debug.Log(Health);
-
             if (Health <= 0)
             {
                 _isDead = true;

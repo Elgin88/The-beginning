@@ -31,9 +31,7 @@ namespace Assets.Scripts.PlayerComponents.Weapons
 
         private void FixedUpdate()
         {
-            _closestTarget = _closestTargetFinder.FindTarget(transform.position);
-
-            if (_closestTarget != null && _closestTarget.Transform.gameObject.activeSelf)
+            if (_closestTargetFinder.TryFindTarget(transform.position, out _closestTarget))
             {
                 Mark(_closestTarget);
                 CanAttack = !_isOnCooldown;
