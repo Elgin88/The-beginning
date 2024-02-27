@@ -32,11 +32,10 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        internal GameObject GetCloseTarget()
+        private GameObject GetCloseTarget()
         {
             _currentTarget = null;
 
-            SetMainBuildingAsTarget();
             SelectNearbyObjectAsTarget();
 
             return _currentTarget;
@@ -75,6 +74,7 @@ namespace Assets.Scripts.Enemy
 
             _enemyVision = GetComponent<EnemyVision>();
 
+            SetMainBuildingAsTarget();
             StartFindNextTarget();
         }
 
@@ -83,6 +83,11 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 _currentTarget = GetCloseTarget();
+
+                if (_currentTarget == null)
+                {
+                    SetMainBuildingAsTarget();
+                }
 
                 yield return null;
             }
