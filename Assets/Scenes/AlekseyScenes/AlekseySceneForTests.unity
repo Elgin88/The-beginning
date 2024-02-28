@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 2100000, guid: 3e5399bd195de7649b874f58c1b9f8a3, type: 2}
+  m_SkyboxMaterial: {fileID: 2100000, guid: efd1c33efd2d58340b88804268e6833f, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.41227058, g: 0.48923618, b: 0.60328966, a: 1}
+  m_IndirectSpecularColor: {r: 0.46602172, g: 0.5960813, b: 0.7371453, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -648,7 +648,7 @@ GameObject:
   - component: {fileID: 1205202904}
   - component: {fileID: 1205202903}
   m_Layer: 0
-  m_Name: Tower2
+  m_Name: Tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -736,7 +736,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c9ea827aaa4145c8900e81ca1395aae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -775,7 +775,7 @@ Transform:
   m_GameObject: {fileID: 1205202902}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -19.71, y: 1.62, z: 23.52}
+  m_LocalPosition: {x: 3.9, y: 1.62, z: 4.7}
   m_LocalScale: {x: 1, y: 3.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4502,7 +4502,7 @@ GameObject:
   - component: {fileID: 1532442924}
   - component: {fileID: 1532442923}
   m_Layer: 0
-  m_Name: Tower1
+  m_Name: Tower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4590,7 +4590,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 5c9ea827aaa4145c8900e81ca1395aae, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4629,7 +4629,7 @@ Transform:
   m_GameObject: {fileID: 1532442922}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -18.31, y: 1.59, z: 29.27}
+  m_LocalPosition: {x: 5.299999, y: 1.59, z: 10.450001}
   m_LocalScale: {x: 1, y: 3.04, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4724,7 +4724,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: c07befab8ca1540368e662cfe2fddf6b, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4763,7 +4763,7 @@ Transform:
   m_GameObject: {fileID: 1573873514}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.02, y: 0.95, z: 31.87}
+  m_LocalPosition: {x: 2.5899982, y: 0.95, z: 13.050001}
   m_LocalScale: {x: 3.69, y: 1.64, z: 1.64}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -7957,8 +7957,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7363686164366267321}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: 0.36077324, z: -0, w: 0.9326536}
-  m_LocalPosition: {x: -21.54, y: 0, z: 16.94}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.27, y: 0, z: -6.16}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 1
   m_Children:
@@ -7966,7 +7966,7 @@ Transform:
   - {fileID: 6394999580490640957}
   - {fileID: 5290741487021259701}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 42.295, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &5515842038671246900
 Transform:
   m_ObjectHideFlags: 0
@@ -10012,13 +10012,13 @@ SceneRoots:
   m_Roots:
   - {fileID: 5500420758407302724}
   - {fileID: 1213120106}
+  - {fileID: 670522496}
+  - {fileID: 1316130287}
   - {fileID: 963194228}
   - {fileID: 705507995}
   - {fileID: 90989968}
   - {fileID: 456251078}
   - {fileID: 990098999}
-  - {fileID: 1316130287}
-  - {fileID: 670522496}
-  - {fileID: 1532442928}
   - {fileID: 1205202908}
+  - {fileID: 1532442928}
   - {fileID: 1573873521}

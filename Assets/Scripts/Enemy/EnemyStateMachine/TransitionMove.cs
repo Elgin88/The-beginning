@@ -12,7 +12,9 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyRayPoint _enemyRayPoint;
         private StateIdle _stateIdle;
-        private float _minDistanceToTarget = 1.5f;
+        private float _minDistanceToTargetForMelleeEnemy = 1.5f;
+        private float _minDistanceToTargetForRangeEnemy = 5f;
+        private float _minDistanteToTarget;
 
         protected override Coroutine CheckTransition { get; set; }
 
@@ -42,7 +44,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            if (Physics.Raycast(_enemyRayPoint.transform.position, transform.forward, out RaycastHit raysactHit, _minDistanceToTarget))
+            if (Physics.Raycast(_enemyRayPoint.transform.position, transform.forward, out RaycastHit raysactHit, _minDistanteToTarget))
             {
                 if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
                 {
@@ -79,6 +81,16 @@ namespace Assets.Scripts.UnitStateMachine
             _stateIdle = GetComponent<StateIdle>();
 
             _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
+
+            if (TryGetComponent(out EnemyMelee enemyMelee))
+            {
+                _minDistanteToTarget = _minDistanceToTargetForMelleeEnemy;
+            }
+            else if (TryGetComponent(out EnemyRange enemyRange))
+            {
+                _minDistanceToTargetForMelleeEnemy = _minDistanceToTargetForRangeEnemy;
+            }
+
         }
     }
 }
