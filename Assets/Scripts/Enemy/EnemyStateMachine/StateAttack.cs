@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using Assets.Scripts.Enemy;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
+using static UnityEngine.GraphicsBuffer;
 
 namespace Assets.Scripts.UnitStateMachine
 {
@@ -17,7 +19,8 @@ namespace Assets.Scripts.UnitStateMachine
         private WaitForSeconds _timeBeforeAttackWFS;
         private WaitForSeconds _timeAfterAttackWFS;
         private Coroutine _attack;
-        private float _timeBeforeAttack = 0.5f;
+        private Coroutine _setRotation;
+        private float _timeBeforeAttack = 3.45f;
         private float _timeAfterAttack = 0.5f;
         private float _damage;
 
@@ -57,19 +60,33 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Attack()
         {
-            yield return _timeBeforeAttackWFS;
+            _setRotation = StartCoroutine(SetRotation());
 
             if (_enemyNextTargetFinder.CurrentTarget != null)
             {
                 if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
                 {
+                    yield return _timeBeforeAttackWFS;
+
                     idamageable.TakeDamage(_damage);
                 }
             }
 
             yield return _timeAfterAttackWFS;
 
+            StopCoroutine(_setRotation);
             _transitionAttack.SetStateIdle();
+        }
+
+        private IEnumerator SetRotation()
+        {
+            while (_enemyNextTargetFinder.CurrentTarget != null)
+            {
+                transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTarget.transform.position);
+                transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, transform.rotation.eulerAngles.z);
+
+                yield return null;
+            }
         }
     }
 }
