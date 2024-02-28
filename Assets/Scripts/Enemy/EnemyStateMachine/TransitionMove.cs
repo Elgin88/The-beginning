@@ -88,7 +88,7 @@ namespace Assets.Scripts.UnitStateMachine
             }
             else if (TryGetComponent(out EnemyRange enemyRange))
             {
-                _minDistanceToTargetForMelleeEnemy = _minDistanceToTargetForRangeEnemy;
+                _minDistanteToTarget = _minDistanceToTargetForRangeEnemy;
             }
 
         }

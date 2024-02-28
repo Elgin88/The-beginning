@@ -27,44 +27,39 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
-                GetCloseTarget();
+                if (_mainBulding != null)
+                {
+                    _currentTarget = _mainBulding.gameObject;
+                }
+
+                if (_enemyVision.GetTargets().Count > 0)
+                {
+                    _currentTarget = _enemyVision.GetTargets()[0];
+                }
+
+                foreach (GameObject target in _enemyVision.GetTargets())
+                {
+                    if (_enemyVision.GetTargets().Count > 1 & _currentTarget != null & target != null)
+                    {
+                        if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
+                        {
+                            _currentTarget = target;
+                        }
+                    }
+                }
 
                 yield return null;
             }
         }
 
-        private GameObject GetCloseTarget()
-        {
-            if (_mainBulding != null)
-            {
-                _currentTarget = _mainBulding.gameObject;
-            }
-
-            if (_enemyVision.GetTargets().Count > 0)
-            {
-                _currentTarget = _enemyVision.GetTargets()[0];
-            }
-
-            foreach (GameObject target in _enemyVision.GetTargets())
-            {
-                if (_enemyVision.GetTargets().Count > 1)
-                {
-                    if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
-                    {
-                        _currentTarget = target;
-                    }
-                }
-            }
-
-            return _currentTarget;
-        }
-
         private void Awake()
         {
             _mainBulding = FindAnyObjectByType<MainBuilding>();
-
             _enemyVision = GetComponent<EnemyVision>();
+        }
 
+        private void Start()
+        {
             StartFindNextTarget();
         }
     }

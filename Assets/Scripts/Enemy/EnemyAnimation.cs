@@ -1,5 +1,3 @@
-using System;
-using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,7 +10,7 @@ namespace Assets.Scripts.Enemy
     {
         private NavMeshAgent _navMeshAgent;
         private Animator _animator;
-        private string _orcBossRunForwardSpeed = "OrcBossRunForwardSpeed";
+        private string _orcBossRunForwardSpeed = "RunForwardSpeed";
         private string _attack = "IsAttack1";
         private string _idle = "IsIdle";
         private string _run = "IsRun";
