@@ -1,9 +1,10 @@
 using Assets.Scripts.Enemy;
+using UnityEngine;
 
 internal class EnemyRangeWoodArcher : EnemyRange
 {
-    private float _startHealth = 50;
-    private float _startDamage = 25;
+    [SerializeField] private float _startHealth;
+    [SerializeField] private float _startDamage;
 
     private void Awake()
     {

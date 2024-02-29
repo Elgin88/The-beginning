@@ -68,8 +68,6 @@ namespace Assets.Scripts.UnitStateMachine
                     yield return _timeBeforeAttackWFS;
 
                     idamageable.TakeDamage(_damage);
-
-                    Debug.Log(GetComponent<IEnemy>().Damage);
                 }
             }
 

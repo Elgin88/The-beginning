@@ -94,9 +94,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyMeleeOrc: {fileID: 6106297887006264949, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
+  _enemyRangeWoodArcher: {fileID: 3323807904976690673, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
   _delayBetweenWavesEnemy: 3
   _rangeMinorSpawn: 3
-  _countMinorEnemy: 0
+  _countMinorEnemy: 1
 --- !u!1 &3403799311861047830
 GameObject:
   m_ObjectHideFlags: 0

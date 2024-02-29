@@ -1,9 +1,11 @@
+using UnityEngine;
+
 namespace Assets.Scripts.Enemy
 {
     internal class EnemyMeleeOgreGreen : EnemyMelee
     {
-        private float _startHealth = 100;
-        private float _startDamage = 50;
+        [SerializeField] private float _startHealth;
+        [SerializeField] private float _startDamage;
 
         private void Awake()
         {

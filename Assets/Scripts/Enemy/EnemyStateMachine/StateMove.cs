@@ -12,6 +12,8 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateMove : State
     {
+        [SerializeField] private float _maxSpeed;
+
         private EnemyNextTargetFinder _enemyNextTargetFinder;
         private EnemyAnimation _enemyAnimation;
         private TransitionMove _transitionMove;
@@ -56,6 +58,8 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyAnimation = GetComponent<EnemyAnimation>();
             _transitionMove = GetComponent<TransitionMove>();
             _navMeshAgent = GetComponent<NavMeshAgent>();
+
+            _navMeshAgent.speed = _maxSpeed;
         }
 
         private IEnumerator Move()
