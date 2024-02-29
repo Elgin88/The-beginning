@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyRangeArrow : MonoBehaviour
@@ -7,6 +6,8 @@ public class EnemyRangeArrow : MonoBehaviour
     [SerializeField] private TestStart _testStart;
     [SerializeField] private TestFinish _testFinish;
     [SerializeField] private float _speed;
+
+    //private Tween _tween;
 
     private Coroutine _fly;
 

@@ -342,7 +342,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.0006683476, y: 0.0006214818, z: 0.0070154234}
+  m_Size: {x: 0.0004, y: 0.0005, z: 0.0070154234}
   m_Center: {x: -8.731149e-11, y: 0.000051924857, z: 0.0002547677}
 --- !u!33 &4681639188035910514
 MeshFilter:
@@ -425,7 +425,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _testStart: {fileID: 2108469973}
   _testFinish: {fileID: 1338279848}
-  _speed: 2
+  _speed: 0
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
