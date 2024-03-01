@@ -425,7 +425,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _testStart: {fileID: 2108469973}
   _testFinish: {fileID: 1338279848}
-  _speed: 0
+  _speedOfMove: 5
+  _speedOfRotation: 90
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

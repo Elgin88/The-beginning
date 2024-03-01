@@ -1,33 +1,19 @@
 using System.Collections;
+using DG.Tweening;
 using UnityEngine;
 
-public class EnemyRangeArrow : MonoBehaviour
+namespace Assets.Scripts.Enemy
 {
-    [SerializeField] private TestStart _testStart;
-    [SerializeField] private TestFinish _testFinish;
-    [SerializeField] private float _speed;
-
-    //private Tween _tween;
-
-    private Coroutine _fly;
-
-    internal void StartFly()
+    public class EnemyRangeArrow : MonoBehaviour
     {
-        _fly = StartCoroutine(Fly());
-    }
+        [SerializeField] private TestStart _testStart;
+        [SerializeField] private TestFinish _testFinish;
+        [SerializeField] private float _speedOfMove;
+        [SerializeField] private float _speedOfRotation;
 
-    internal void StopFly()
-    {
-        StopCoroutine(_fly);
-    }
-
-    private IEnumerator Fly()
-    {
-        while (transform.position != _testFinish.transform.position)
+        private void Awake()
         {
-            yield return null;
+            transform.DOMove(_testFinish.transform.position, _speedOfMove).SetSpeedBased().SetEase(Ease.Linear);
         }
-
-        StopFly();
     }
 }
