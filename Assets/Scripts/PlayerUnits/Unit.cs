@@ -19,9 +19,12 @@ namespace Assets.Scripts.PlayerUnits
         private UnitAnimator _animator;
         private NavMeshAgent _agent;
 
-        public float AttackRange => _attackRange;
-        public float AggroRange => _aggroRange;
+        public float AttackRange => 2;
+        public float AggroRange => 5;
         public LayerMask EnemyMask => _enemyMask;
+
+        public float Damage => 5;
+        public float AttackSpeed => 2;
 
         public bool IsDead => _isDead;
 
@@ -34,10 +37,7 @@ namespace Assets.Scripts.PlayerUnits
             _animator = GetComponent<UnitAnimator>();
             _agent = GetComponent<NavMeshAgent>();
 
-            _fsm = new FiniteStateMachine();
-
-            _fsm.AddState(new FSMStateIdle(_fsm, this, _agent, _animator));
-            _fsm.AddState(new FSMStateMove(_fsm, this, _agent, _animator));
+            _fsm = new FiniteStateMachine(_animator, _agent, this);
 
             _fsm.SetState<FSMStateIdle>();
         }

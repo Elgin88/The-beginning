@@ -13,11 +13,6 @@ namespace Assets.Scripts.PlayerUnits
             _animator = GetComponent<Animator>();
         }
 
-        public void SetSpeed(float speed)
-        {
-            _animator.SetFloat(AnimatorHash.Speed, speed);
-        }
-
         public void SetMovingBool(bool isMoving)
         {
             _animator.SetBool(AnimatorHash.Moving, isMoving);

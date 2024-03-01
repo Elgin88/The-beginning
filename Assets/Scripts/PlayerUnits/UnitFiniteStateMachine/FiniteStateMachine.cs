@@ -1,7 +1,8 @@
-﻿using Assets.Scripts.GameLogic.Damageable;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 {
@@ -10,8 +11,24 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
         private FSMState _currentState;
         private Dictionary<Type, FSMState> _states = new Dictionary<Type, FSMState>();
 
+        private UnitAnimator _animator;
+        private NavMeshAgent _agent;
+        private Unit _unit;
+
         public Vector3 MovePosition { get; private set; }
         public IDamageable Target { get; private set; }
+
+        public FiniteStateMachine(UnitAnimator animator, NavMeshAgent agent, Unit unit)
+        {
+            _animator = animator;
+            _agent = agent;
+            _unit = unit;
+
+            AddState(new FSMStateIdle(this, _unit, _agent, _animator));
+            AddState(new FSMStateMove(this, _unit, _agent, _animator));
+            AddState(new FSMStateChaseEnemy(this, _unit, _agent, _animator));
+            AddState(new FSMStateAttack(this, _unit, _agent, _animator));
+        }
 
         public void AddState(FSMState state)
         {
@@ -22,20 +39,7 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
         {
             var type = typeof(T);
 
-            if (_currentState == null)
-            {
-                if (_states.TryGetValue(type, out var newState))
-                {
-                    _currentState = newState;
-
-                    _currentState.Enter();
-
-                    return;
-                }
-            }
-
-            //если еще раз будет команда передвижения, он не выйдет из стейта
-            if (_currentState.GetType() != type)
+            if (_currentState?.GetType() == typeof(FSMStateMove) || _currentState?.GetType() != type)
             {
                 if (_states.TryGetValue(type, out var newState))
                 {
@@ -56,7 +60,6 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
         public void SetMovePosition(Vector3 position)
         {
             MovePosition = position;
-            Debug.Log(MovePosition);
         }
 
         public void SetEnemy(IDamageable target)

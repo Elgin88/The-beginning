@@ -14,13 +14,18 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
             _targetFinder = new ClosestTargetFinder(unit.AggroRange, unit.EnemyMask);
         }
 
+        public override void Enter()
+        {
+            FSM.SetEnemy(null);
+        }
+
         public override void Update() 
         { 
-            //if (_targetFinder.TryFindTarget(Unit.transform.position, out _target))
-            //{
-            //    FSM.SetMovePosition(_target.Transform.position);
-            //    FSM.SetState<FSMStateAttack>();
-            //}
+            if (_targetFinder.TryFindTarget(Unit.transform.position, out _target))
+            {
+                FSM.SetEnemy(_target);
+                FSM.SetState<FSMStateChaseEnemy>();
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using UnityEngine.AI;
-using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 {
@@ -22,7 +21,7 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 
         public override void Update()
         {
-            if (Unit.transform.position == FSM.MovePosition)
+            if (UnitNavMesh.pathEndPosition == Unit.transform.position)
             {
                 FSM.SetState<FSMStateIdle>();
             }
