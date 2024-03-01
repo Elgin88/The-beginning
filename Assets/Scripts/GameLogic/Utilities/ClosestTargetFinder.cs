@@ -15,7 +15,7 @@ namespace Assets.Scripts.GameLogic
             _layerMask = layerMask;
         }
 
-        public IDamageable FindTarget(Vector3 currentPosition)
+        public bool TryFindTarget(Vector3 currentPosition, out IDamageable target)
         {
             Collider[] hitColliders = Physics.OverlapSphere(currentPosition, _radius, _layerMask);
 
@@ -25,11 +25,15 @@ namespace Assets.Scripts.GameLogic
                     => Vector3.Distance(currentPosition, x.transform.position)
                     .CompareTo(Vector3.Distance(currentPosition, y.transform.position)));
 
-                if (hitColliders[0].TryGetComponent<IDamageable>(out IDamageable target))
-                   return target;
+                if (hitColliders[0].TryGetComponent<IDamageable>(out IDamageable enemy))
+                {
+                    target = enemy;
+                    return true;
+                }
             }
 
-            return null;
+            target = null;
+            return false;
         }
     }
 }
