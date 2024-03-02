@@ -7,13 +7,14 @@ namespace Assets.Scripts.PlayerUnits
     {
         [SerializeField] private Melee _meleePrefab;
         [SerializeField] private ParticleSystem _particleSystemPrefab;
+        [SerializeField] private LayerMask _enemyLayerMask;
 
         private SelectedUnitsHandler _handler;
         private UnitsPool _pool;
 
         private void Start() 
         { 
-            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 2, 1, _handler);
+            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 2, _enemyLayerMask, _handler);
             _handler.Init(_pool.MeleePool);
         }
 

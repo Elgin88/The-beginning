@@ -24,6 +24,13 @@ namespace Assets.Scripts.PlayerComponents.Weapons
                 target.TakeDamage(_damage);
                 ParticleSystem hitEffect = Instantiate(_hitEffect, transform.position, Quaternion.identity);
                 Destroy(hitEffect.gameObject, 1f);
+
+                if (_flying != null)
+                {
+                    StopCoroutine(_flying);
+                }
+
+                gameObject.SetActive(false);
             }
         }
 

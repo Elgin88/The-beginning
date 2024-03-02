@@ -2354,19 +2354,19 @@ GameObject:
   - component: {fileID: 8076804215856804845}
   - component: {fileID: 5538255215729447699}
   - component: {fileID: 5549773251676875182}
+  - component: {fileID: 608824489198612735}
   - component: {fileID: 529700466918893106}
+  - component: {fileID: 6106297887006264949}
   - component: {fileID: -3228283824888894521}
   - component: {fileID: -963228721103223142}
   - component: {fileID: -4093611054570065152}
   - component: {fileID: 5430675260899835263}
-  - component: {fileID: 6106297887006264949}
   - component: {fileID: 4588992870866705208}
   - component: {fileID: 8314578972581342070}
   - component: {fileID: 1423910423695567156}
   - component: {fileID: 5977292687717916677}
   - component: {fileID: 8576810530071468875}
   - component: {fileID: 7679217566705177323}
-  - component: {fileID: 608824489198612735}
   m_Layer: 6
   m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
@@ -2436,6 +2436,33 @@ CapsuleCollider:
   m_Height: 5.36
   m_Direction: 1
   m_Center: {x: 0, y: 2.8, z: 0.24653745}
+--- !u!54 &608824489198612735
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  serializedVersion: 4
+  m_Mass: 100
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!195 &529700466918893106
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -2458,6 +2485,18 @@ NavMeshAgent:
   m_BaseOffset: -0.35
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &6106297887006264949
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-3228283824888894521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2482,6 +2521,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9fec0cb343787455895e5dea7e0ac83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxSpeed: 4
 --- !u!114 &-4093611054570065152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2504,18 +2544,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3e1c4fcb17c5842e88c5b0bea10f8454, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &6106297887006264949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &4588992870866705208
@@ -2590,33 +2618,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &608824489198612735
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  serializedVersion: 4
-  m_Mass: 100
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 1
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1 &6583875623457425539
 GameObject:
   m_ObjectHideFlags: 0
