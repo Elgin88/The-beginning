@@ -34,12 +34,12 @@ public class TowerAttack : MonoBehaviour
     {
         if (_targets.Count > 0)
         {
-            TryForShoot();
+            TryToShoot();
             CleanTargets(_targets);
         }
     }
 
-    private void TryForShoot()
+    private void TryToShoot()
     {  
         if(_currentDelay >= _delayOfShoot)
         {  
@@ -52,15 +52,6 @@ public class TowerAttack : MonoBehaviour
 
     private void Shoot()
     {
-        //for (int i = 0; i < _targets.Count; i++)   //AllTargetsAttack
-        //{
-        //    Arrow arrow = _poolOfArrows.GetArrow();
-
-        //    arrow.transform.position = _shootPoint.position;
-        //    arrow.Fly(_targets[i]);
-        //}
-
-       //FirstTargetAttack
         Arrow arrow = _poolOfArrows.GetArrow();
         arrow.transform.position = _shootPoint.position;
         arrow.Fly(_targets.First());
@@ -70,7 +61,7 @@ public class TowerAttack : MonoBehaviour
     {
         for(int i = 0; i < _targets.Count; i++)
         {
-            if (targets[i] == null && targets[i].gameObject.activeSelf == false)
+            if (targets[i] == null) // || targets[i].gameObject.activeSelf == false)
             {
                 _targets.RemoveAt(i);
             }
