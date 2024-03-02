@@ -40,14 +40,14 @@ namespace Assets.Scripts.BuildingSystem.Service
 
         private void OnEnable()
         {
-            BuildingUI.PanelActivated += TurnVisualisationOn;
-            BuildingUI.PanelDeActivated += EndStateAction;
+            BuildingUI.BuildPanelActivated += TurnVisualisationOn;
+            BuildingUI.BuildPanelDeActivated += EndStateAction;
         }
 
         private void OnDisable()
         {
-            BuildingUI.PanelActivated -= TurnVisualisationOn;
-            BuildingUI.PanelDeActivated -= EndStateAction;
+            BuildingUI.BuildPanelActivated -= TurnVisualisationOn;
+            BuildingUI.BuildPanelDeActivated -= EndStateAction;
         }
 
         private void SelectSpotToBuild()
