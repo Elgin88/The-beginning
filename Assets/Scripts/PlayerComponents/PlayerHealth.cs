@@ -36,7 +36,6 @@ namespace Assets.Scripts.PlayerComponents
             if (_value <= 0)
             {
                 _isDead = true;
-                //Debug.Log("F");
                 gameObject.SetActive(false);
             }
             else

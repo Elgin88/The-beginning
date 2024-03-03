@@ -436,8 +436,8 @@ GameObject:
   - component: {fileID: 998409003791680193}
   - component: {fileID: -783418416945532075}
   - component: {fileID: 636881724947717666}
+  - component: {fileID: 2695639779105777554}
   - component: {fileID: -3708529417658594655}
-  - component: {fileID: 4611561998721555120}
   - component: {fileID: 6897483755523968014}
   m_Layer: 0
   m_Name: Unit
@@ -473,7 +473,7 @@ Animator:
   m_GameObject: {fileID: 3030303930352175095}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ba24e610e0a338545b447ff44a3cf1cc, type: 3}
-  m_Controller: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5229232903daf974cbe937c5262e7ad7, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -507,7 +507,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 0
-  m_IsKinematic: 0
+  m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
@@ -534,6 +534,18 @@ CapsuleCollider:
   m_Height: 1.6341828
   m_Direction: 1
   m_Center: {x: 0, y: 0.7796069, z: 0}
+--- !u!114 &2695639779105777554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3030303930352175095}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9e68fa4f8b2dee4295e8ad054d6f95c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &-3708529417658594655
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,20 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9532390b5ee87b848888302227a84ccb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4611561998721555120
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3030303930352175095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83911bee77829854fbb7c4d4ba01d2a6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _force: 2
-  _stopSpeed: 0.7
 --- !u!195 &6897483755523968014
 NavMeshAgent:
   m_ObjectHideFlags: 0

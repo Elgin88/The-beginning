@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 using Assets.Scripts.AnimatorScripts.Player;
-using Assets.Scripts.ConStants;
+using Assets.Scripts.Constants;
 using Assets.Scripts.PlayerComponents.Weapons;
 
 namespace Assets.Scripts.PlayerComponents

@@ -1,12 +1,14 @@
 using UnityEngine;
 
-namespace Assets.Scripts.ConStants
+namespace Assets.Scripts.Constants
 {
     internal static class AnimatorHash
     {
         public static int Hit = Animator.StringToHash("Hit");
         public static int Speed = Animator.StringToHash("Speed");
         public static int Death = Animator.StringToHash("Death");
+        public static int Attack = Animator.StringToHash("Attack");
+        public static int Moving = Animator.StringToHash("IsMoving");
         public static int Restart = Animator.StringToHash("Restart");
         public static int Intercat = Animator.StringToHash("Interact");
         public static int EquipBow = Animator.StringToHash("Equip Bow");
@@ -17,6 +19,5 @@ namespace Assets.Scripts.ConStants
 
         public static string SwordAttackString = "Sword Attack";
         public static string BowAttackString = "Bow Attack";
-        public static string Attack = " Attack";
     }
 }

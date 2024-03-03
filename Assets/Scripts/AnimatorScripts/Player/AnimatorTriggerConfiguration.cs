@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.ConStants;
+﻿using Assets.Scripts.Constants;
 using Assets.Scripts.PlayerComponents.Weapons;
 using Assets.Scripts.PlayerComponents.Weapons.Bows;
 using System;
