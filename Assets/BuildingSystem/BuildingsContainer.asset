@@ -15,11 +15,11 @@ MonoBehaviour:
   BuildingInformation:
   - <Name>k__BackingField: MainBuild
     <Id>k__BackingField: 1
-    <Size>k__BackingField: {x: 4, y: 4}
+    <Size>k__BackingField: {x: 9, y: 8}
     <Prefab>k__BackingField: {fileID: 1364794601154076828, guid: f60049a361861434a9480def90f17931, type: 3}
   - <Name>k__BackingField: Barracks
     <Id>k__BackingField: 2
-    <Size>k__BackingField: {x: 3, y: 2}
+    <Size>k__BackingField: {x: 6, y: 4}
     <Prefab>k__BackingField: {fileID: 3933242781349702402, guid: a88fa0e0fb2dcce4d901b22a7797df2f, type: 3}
   - <Name>k__BackingField: Tower
     <Id>k__BackingField: 3
@@ -27,5 +27,5 @@ MonoBehaviour:
     <Prefab>k__BackingField: {fileID: 3277521558683797174, guid: 37d77b52b58eeca4ba37bf907a9ccf0d, type: 3}
   - <Name>k__BackingField: ResourceBuilding
     <Id>k__BackingField: 4
-    <Size>k__BackingField: {x: 4, y: 3}
+    <Size>k__BackingField: {x: 8, y: 6}
     <Prefab>k__BackingField: {fileID: 2870047379772927500, guid: 816813eb3cdde214586681b219fabef4, type: 3}
