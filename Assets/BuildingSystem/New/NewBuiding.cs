@@ -75,8 +75,9 @@ namespace Assets.BuildingSystem.New
         protected void Destroy()
         {
             //Instantiate(EffectOfDestroying, transform.position, Quaternion.identity);
+            Destroyed?.Invoke(this.transform);
             DestroyImmediate(gameObject);                                              
-            Destroyed?.Invoke(Transform);
+            
         }
     }
 }

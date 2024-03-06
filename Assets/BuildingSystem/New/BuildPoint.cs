@@ -8,16 +8,16 @@ using Unity.VisualScripting;
 
 namespace Assets.BuildingSystem.New
 {
-    [RequireComponent(typeof(SpriteRenderer))]
     internal class BuildPoint : MonoBehaviour
     {
         [SerializeField] private Transform _spotToPlace;
-        [SerializeField] private Sprite _iconOfBuilding;
+        [SerializeField] private GameObject _visualObject;
         [SerializeField] private Button _buildButton;
         [SerializeField] private GameObject _buildPrefab;
 
         private bool _isOccupied;
-        private SpriteRenderer _spriteRenderer;
+        private int speedOfRotate = 200;
+
 
         private void OnEnable()
         {
@@ -31,21 +31,24 @@ namespace Assets.BuildingSystem.New
             NewBuiding.Destroyed -= FreeSpotToBuild;
         }
 
-        private void Awake()
+        private void Update()
         {
-            _spriteRenderer = GetComponent<SpriteRenderer>();
+            RotateVisualObject();
         }
-       
-        private void Start()
+
+        private void RotateVisualObject()
         {
-            RenderIcon();
+            _visualObject.transform.Rotate(0, speedOfRotate * Time.deltaTime, 0);
         }
-       
+
         private void OnTriggerEnter(Collider other)
         {
             if (other != null && other.gameObject.TryGetComponent(out Player player))
             {
-                _buildButton.gameObject.SetActive(true);
+                if (_isOccupied == false)
+                {
+                    _buildButton.gameObject.SetActive(true);
+                }   
             }
         }
 
@@ -54,6 +57,7 @@ namespace Assets.BuildingSystem.New
             if (_isOccupied == true && buidingTransform.position == _spotToPlace.position)
             {
                 _isOccupied = false;
+                _visualObject.SetActive(true);
             }
         }
 
@@ -61,15 +65,14 @@ namespace Assets.BuildingSystem.New
         {
             if (other != null && other.gameObject.TryGetComponent(out Player player))
             {
-                _buildButton.gameObject.SetActive(false);     
+                if(_buildButton.gameObject.activeSelf == true)
+                {
+                    _buildButton.gameObject.SetActive(false);
+                }      
             }
         }
 
-        private void RenderIcon()
-        {
-            _spriteRenderer.sprite = _iconOfBuilding;
-            
-        }
+
 
         private void Build()
         {
@@ -77,6 +80,8 @@ namespace Assets.BuildingSystem.New
             {
                 Instantiate(_buildPrefab, _spotToPlace);
                 _isOccupied = true;
+                _visualObject.SetActive(false);
+                _buildButton.gameObject.SetActive(false);
             }
         }
     }
