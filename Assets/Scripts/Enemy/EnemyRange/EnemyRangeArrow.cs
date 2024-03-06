@@ -1,10 +1,13 @@
 using System.Collections;
 using UnityEngine;
+using Assets.Scripts.GameLogic.Damageable;
 
 namespace Assets.Scripts.Enemy
 {
     public class EnemyRangeArrow : MonoBehaviour
     {
+        [SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
+
         private Coroutine _fly;
         private Transform _target;
         private Vector3 _currentTargetPosition;
@@ -17,12 +20,21 @@ namespace Assets.Scripts.Enemy
 
         internal void StartFly(Transform target)
         {
-            
             _target = target;
             _startTrajectoryPosition = transform.position;
             _isMoveUp = true;
 
             _fly = StartCoroutine(Fly());
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject == _target.gameObject)
+            {
+                _target.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
+                StopFly();
+                gameObject.SetActive(false);
+            }
         }
 
         private IEnumerator Fly()
@@ -41,7 +53,6 @@ namespace Assets.Scripts.Enemy
 
             StopFly();
             gameObject.SetActive(false);
-            
         }
 
         private float CalculateDistane(Vector3 start, Vector3 finish)

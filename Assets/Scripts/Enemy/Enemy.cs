@@ -12,7 +12,7 @@ namespace Assets.Scripts.Enemy
     internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
         [SerializeField] private float _health;
-        [SerializeField] protected float _damage;
+        [SerializeField] private float _damage;
 
         private bool _isDead;
 

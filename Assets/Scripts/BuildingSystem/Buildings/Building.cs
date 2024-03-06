@@ -29,7 +29,8 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
                 if (Strength <= 0)
                 {
-                    Destroy();
+                    gameObject.SetActive(false);
+                    //Destroy();
                 }
             }
         }
