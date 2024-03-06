@@ -16,6 +16,8 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyAnimation _enemyAnimation;
         private WaitForSeconds _timeBeforeAttackWFS;
         private WaitForSeconds _timeAfterAttackWFS;
+        private EnemyMelee _enemyMelee;
+        private EnemyRange _enemyRange;
         private Coroutine _attack;
         private float _timeBeforeAttack = 0.45f;
         private float _timeAfterAttack = 0.5f;
@@ -49,6 +51,8 @@ namespace Assets.Scripts.UnitStateMachine
             _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
             _transitionAttack = GetComponent<TransitionAttack>();
             _enemyAnimation = GetComponent<EnemyAnimation>();
+            _enemyMelee = GetComponent<EnemyMelee>();
+            _enemyRange = GetComponent<EnemyRange>();
         }
 
         private void Start()
@@ -61,14 +65,23 @@ namespace Assets.Scripts.UnitStateMachine
 
         private IEnumerator Attack()
         {
-            if (_enemyNextTargetFinder.CurrentTarget != null)
+            if (_enemyMelee != null)
             {
-                if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
+                if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    yield return _timeBeforeAttackWFS;
+                    if (_enemyNextTargetFinder.CurrentTarget.TryGetComponent(out IDamageable idamageable))
+                    {
+                        yield return _timeBeforeAttackWFS;
 
-                    idamageable.TakeDamage(_damage);
+                        idamageable.TakeDamage(_damage);
+                    }
                 }
+            }
+            else if (_enemyRange != null)
+            {
+                yield return _timeBeforeAttackWFS;
+
+                _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform);
             }
 
             yield return _timeAfterAttackWFS;
