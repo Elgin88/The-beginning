@@ -39,7 +39,7 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator Fly()
         {
-            while (transform.position != _target.transform.position)
+            while (true)
             {
                 CalculateDistane(_startTrajectoryPosition, _target.position);
                 SetMiddleTrajectoryPosition();
@@ -48,11 +48,13 @@ namespace Assets.Scripts.Enemy
                 SetArrowPosition();
                 SetArrowRotation();
 
+                if (_target == null)
+                {
+                    gameObject.SetActive(false);
+                }
+
                 yield return null;
             }
-
-            StopFly();
-            gameObject.SetActive(false);
         }
 
         private float CalculateDistane(Vector3 start, Vector3 finish)

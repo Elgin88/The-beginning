@@ -8,7 +8,7 @@ namespace Assets.Scripts.Enemy
     internal class EnemyFactory: MonoBehaviour
     {
         [SerializeField] private EnemyMeleeOgreGreen _enemyMeleeOrc;
-        //[SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
+        [SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
         [SerializeField] private float _delayBetweenWavesEnemy;
         [SerializeField] private float _rangeMinorSpawn;
         [SerializeField] private float _countMinorEnemy;
@@ -101,8 +101,8 @@ namespace Assets.Scripts.Enemy
                     break;
 
                 case 2:
-                    SpawnEnemy(_enemyMeleeOrc.gameObject);
-                    //SpawnEnemy(_enemyRangeWoodArcher.gameObject);
+                    //SpawnEnemy(_enemyMeleeOrc.gameObject);
+                    SpawnEnemy(_enemyRangeWoodArcher.gameObject);
                     break;
             }
         }

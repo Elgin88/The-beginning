@@ -81,7 +81,10 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 yield return _timeBeforeAttackWFS;
 
-                _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform);
+                if (_enemyNextTargetFinder.CurrentTarget != null)
+                {
+                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform);
+                }
             }
 
             yield return _timeAfterAttackWFS;
