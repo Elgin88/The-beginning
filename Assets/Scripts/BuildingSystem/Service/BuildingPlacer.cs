@@ -9,11 +9,14 @@ namespace Assets.Scripts.BuildingSystem.Service
     {
         [SerializeField] private List<GameObject> _placedBuildings = new();
 
+        private int _yOffset = 1;
+        
         public int PlaceBuilding(GameObject prefab, Vector3 position)
         {
             int correctionNumber = 1;
             GameObject selectedBuilding = Instantiate(prefab);
-            selectedBuilding.transform.position = position;
+           // selectedBuilding.transform.position = position;
+            selectedBuilding.transform.position = new Vector3(position.x, position.y - _yOffset, position.z);
             _placedBuildings.Add(selectedBuilding);
             return _placedBuildings.Count - correctionNumber;
         }

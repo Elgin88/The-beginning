@@ -11,37 +11,38 @@ namespace Assets.Scripts.BuildingSystem.View
         [SerializeField] private Button _button;
         [SerializeField] private Button _closeButton;
         [SerializeField] private GameObject _buildPanel;
+        [SerializeField] private StartBuildingZone _startBuildingZone;
 
-        public static Action PanelActivated;
-        public static Action PanelDeActivated;
+        public static Action BuildPanelActivated;
+        public static Action BuildPanelDeActivated;
 
 
         private void OnEnable()
         {
             _button.onClick.AddListener(OnButtonClicked);
             _closeButton.onClick.AddListener(OnCloseButtonClicked);
-            StartBuildingZone.PlayerWentIn += OnPlayerWentIn;
-            StartBuildingZone.PlayerWentOut += OnPlayerWentOut;
+            _startBuildingZone.PlayerWentIn += OnPlayerWentIn;
+            _startBuildingZone.PlayerWentOut += OnPlayerWentOut;
         }
 
         private void OnDisable()
         {
             _button.onClick.RemoveListener(OnButtonClicked);
             _closeButton.onClick.RemoveListener(OnCloseButtonClicked);
-            StartBuildingZone.PlayerWentIn -= OnPlayerWentIn;
-            StartBuildingZone.PlayerWentOut -= OnPlayerWentOut;
+            _startBuildingZone.PlayerWentIn -= OnPlayerWentIn;
+            _startBuildingZone.PlayerWentOut -= OnPlayerWentOut;
         }
 
         public void OnButtonClicked()
         {
             _buildPanel.SetActive(true);
-            PanelActivated?.Invoke();
+            BuildPanelActivated?.Invoke();
         }
 
         public void OnCloseButtonClicked()
         {
             _buildPanel.SetActive(false);
-            PanelDeActivated?.Invoke();
+            BuildPanelDeActivated?.Invoke();
         }
 
         private void OnPlayerWentIn()
