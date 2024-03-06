@@ -27,6 +27,8 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
+                _currentTarget = null;
+
                 if (_mainBulding != null)
                 {
                     _currentTarget = _mainBulding.gameObject;
