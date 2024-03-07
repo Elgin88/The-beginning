@@ -41,17 +41,19 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
+                if (_target == null || _startTrajectoryPosition == null || _target.position == null)
+                {
+                    StopFly();
+                    gameObject.SetActive(false);
+                    yield break;
+                }
+
                 CalculateDistane(_startTrajectoryPosition, _target.position);
                 SetMiddleTrajectoryPosition();
                 CheckIsMoveUp();
                 CalculateTargetPosition();
                 SetArrowPosition();
                 SetArrowRotation();
-
-                if (_target == null)
-                {
-                    gameObject.SetActive(false);
-                }
 
                 yield return null;
             }
