@@ -14,21 +14,21 @@ namespace Assets.Scripts.PlayerComponents
 
         private Vector2 _moveDirection;
 
-        private void Start()
+        private void OnEnable()
         {
             _inputActions = new InputActions();
-
             _inputActions.Enable();
 
             Cursor.visible = true;
+
+            _inputActions.Player.Attack.performed += ctx => OnAttackInput();
+            _inputActions.Player.ChangeWeapon.performed += ctx => OnChangeWeaponInput();
+            _inputActions.Player.MoveUnits.performed += ctx => OnMoveUnits();
         }
 
         private void FixedUpdate()
         {
             _moveDirection = _inputActions.Player.Move.ReadValue<Vector2>();
-            _inputActions.Player.Attack.performed += ctx => OnAttackInput();
-            _inputActions.Player.ChangeWeapon.performed += ctx => OnChangeWeaponInput();
-            _inputActions.Player.MoveUnits.performed += ctx => OnMoveUnits();
 
             OnMoveInput(_moveDirection);
         }
