@@ -9,12 +9,12 @@ namespace Assets.Scripts.Enemy
     [RequireComponent(typeof(StateMachine))]
     [RequireComponent(typeof(NavMeshAgent))]
 
-    internal class Enemy : MonoBehaviour, IDamageable, IEnemy
+    internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
-        private bool _isDead;
+        [SerializeField] private float _health;
+        [SerializeField] private float _damage;
 
-        protected float Health;
-        protected float Damage;
+        private bool _isDead;
 
         protected NavMeshAgent NavMeshAgent;
 
@@ -26,15 +26,15 @@ namespace Assets.Scripts.Enemy
 
         public Transform Transform => transform;
 
-        float IEnemy.Health => Health;
+        float IEnemy.Health => _health;
 
-        float IEnemy.Damage => Damage;
+        float IEnemy.Damage => _damage;
 
         void IDamageable.TakeDamage(float damage)
         {
-            Health -= damage;
+            _health -= damage;
 
-            if (Health <= 0)
+            if (_health <= 0)
             {
                 _isDead = true;
                 gameObject.SetActive(false);

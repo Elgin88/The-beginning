@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class StartBuildingZone : MonoBehaviour
 {
-    public static Action PlayerWentIn;    // тут нужен префаб иконки, которая будет видна игроку и подходя к которой, будет появляться кнопака "Построить"
-    public static Action PlayerWentOut;
+    public  Action PlayerWentIn;    // тут нужен префаб иконки, которая будет видна игроку и подходя к которой, будет появляться кнопака "Построить"
+    public  Action PlayerWentOut;
     
 
     private void OnTriggerEnter(Collider other)

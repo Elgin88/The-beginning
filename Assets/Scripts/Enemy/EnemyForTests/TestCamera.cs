@@ -4,15 +4,11 @@ namespace Assets.Scripts.Tests
 {
     internal class TestCamera: MonoBehaviour
     {
-        private GameObject _gameObject;
-        [SerializeField] private float deltaX;
-        [SerializeField] private float deltaY;
-        [SerializeField] private float deltaZ;
+        [SerializeField] private GameObject _gameObject;
 
-        private void Awake()
-        {
-            _gameObject = FindObjectOfType<EnemyRangeWoodArcher>().gameObject;
-        }
+        private float deltaX = 0;
+        private float deltaY = 10;
+        private float deltaZ = -10;
 
         private void Update()
         {

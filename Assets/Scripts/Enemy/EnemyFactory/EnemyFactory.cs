@@ -101,6 +101,7 @@ namespace Assets.Scripts.Enemy
                     break;
 
                 case 2:
+                    //SpawnEnemy(_enemyMeleeOrc.gameObject);
                     SpawnEnemy(_enemyRangeWoodArcher.gameObject);
                     break;
             }
