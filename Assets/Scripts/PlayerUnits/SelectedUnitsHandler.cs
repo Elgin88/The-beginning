@@ -5,17 +5,15 @@ namespace Assets.Scripts.PlayerUnits
 {
     internal class SelectedUnitsHandler
     {
-        private static LayerMask _groundMask = LayerMask.GetMask("Water");
+        private static LayerMask _groundMask = LayerMask.GetMask("Ground");
 
-        private List<Selectable> _units;
+        private List<Selectable> _units = new List<Selectable>();
         private Ray _ray;
         private float _rayDistance = 40f;
         private Vector3 _mousePosition;
 
         public void Init(Unit[] units)
         {
-            _units = new List<Selectable>();
-
             foreach (var unit in units)
             {
                 _units.Add(unit);

@@ -1,5 +1,9 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Plugins/Zenject/OptionalExtras/Signals/Zenject-Signals.csproj.meta
+guid: 434e8b3abcdf1624ea521fc4ddc16d6c
+========
 guid: 3d547f18b0d7bdd42bbe6db7ac7c7746
+>>>>>>>> develop:Assets/!GET_MORE_ASSETS_FOR_FREE/DevFreedom.club -  UE and Unity developers community. Q&A, Assets, Tutorials.url.meta
 DefaultImporter:
   externalObjects: {}
   userData: 
