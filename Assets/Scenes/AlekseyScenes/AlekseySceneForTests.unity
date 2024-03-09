@@ -716,7 +716,7 @@ GameObject:
   - component: {fileID: 1205202905}
   - component: {fileID: 1205202904}
   - component: {fileID: 1205202903}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -913,7 +913,7 @@ GameObject:
   - component: {fileID: 1532442925}
   - component: {fileID: 1532442924}
   - component: {fileID: 1532442923}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1061,7 +1061,7 @@ GameObject:
   - component: {fileID: 1573873518}
   - component: {fileID: 1573873517}
   - component: {fileID: 1573873522}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MainBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1211,6 +1211,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NavMeshSurface
       objectReference: {fileID: 0}
+    - target: {fileID: 4363802104849498181, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6879135553930684689, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1266,7 +1270,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 268537361354957356, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.21
+      value: 20.15
       objectReference: {fileID: 0}
     - target: {fileID: 268537361354957356, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1274,7 +1278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 268537361354957356, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 25.02
+      value: 30.71
       objectReference: {fileID: 0}
     - target: {fileID: 268537361354957356, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1308,9 +1312,17 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyRangeWoodArcher
       objectReference: {fileID: 0}
+    - target: {fileID: 892685252430481271, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3841391347561571486, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
+      propertyPath: _visionRange
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 6297621058983814839, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
       propertyPath: _maxSpeed
-      value: 2.5
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

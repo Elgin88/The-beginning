@@ -7,12 +7,14 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
+        [SerializeField] private EnemyRayPoint _enemyRayPoint;
+        [SerializeField] private LayerMask _layersForEnemyVision;
+        [SerializeField] private float _visionAngle = 360;
+        [SerializeField] private float _visionRange = 20;
+        [SerializeField] private int _visionRayCount = 100;
+
         private List<GameObject> _targets;
-        private EnemyRayPoint _enemyRayPoint;
-        private float _visionAngle = 360;
-        private float _visionRange = 20;
-        private float _stepOfRotationY => _visionAngle / _rayCount;
-        private int _rayCount = 100;
+        private float _stepOfRotationY => _visionAngle / _visionRayCount;
 
         internal List<GameObject> GetTargets()
         {
@@ -39,7 +41,7 @@ namespace Assets.Scripts.Enemy
                 int currentRayNumber = 0;
                 _targets = new List<GameObject>();
 
-                while (currentRayNumber <= _rayCount)
+                while (currentRayNumber <= _visionRayCount)
                 {
                     SetEnemyRayPointRotation(currentRayNumber);
                     SetDataRaycastHit();
@@ -58,7 +60,7 @@ namespace Assets.Scripts.Enemy
 
         private void SetDataRaycastHit()
         {
-            Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange);
+            Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
 
             if (raycastHit.collider != null)
             {
