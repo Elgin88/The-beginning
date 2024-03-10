@@ -29,11 +29,14 @@ namespace Assets.Scripts.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            if (other.gameObject == _target.gameObject)
+            if (_target != null)
             {
-                _target.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
-                StopFly();
-                gameObject.SetActive(false);
+                if (other.gameObject == _target.gameObject)
+                {
+                    _target.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
+                    StopFly();
+                    gameObject.SetActive(false);
+                }
             }
         }
 
