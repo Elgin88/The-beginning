@@ -2,18 +2,26 @@ using System;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 
-namespace Assets.Scripts.BuildingSystem.Buildings
+namespace Assets.Scripts.BuildingSystem
 {
     [RequireComponent(typeof(Rigidbody))]
 
     internal abstract class Building : MonoBehaviour, IDamageable
     {
-        public int Cost;
         public float Strength;
         //public ParticleSystem EffectOfDestroying;
-        //public GameObject PrafabOfruins;
+       
+       // public int Cost;
 
-        public Action OnDestroyed;
+        public static Action<Transform> Destroyed;
+       // public Action<int> Created;
+        
+        //public void Start()
+        //{
+        //    Created?.Invoke(Cost);
+        //}
+
+        public int IndexOfBuilding;
 
         public Transform Transform => transform;
 
@@ -29,9 +37,7 @@ namespace Assets.Scripts.BuildingSystem.Buildings
 
                 if (Strength <= 0)
                 {
-                    //gameObject.SetActive(false);
-                    //Destroy();
-                    Destroy(gameObject);
+                    Destroy();
                 }
             }
         }
@@ -39,9 +45,8 @@ namespace Assets.Scripts.BuildingSystem.Buildings
         protected void Destroy()
         {
             //Instantiate(EffectOfDestroying, transform.position, Quaternion.identity);
-            DestroyImmediate(gameObject);                                              // ������ ����� ������������, �� �� ��� ����� ����� ���������� ���������,
-            //Instantiate(PrafabOfruins, transform.position, Quaternion.identity);    // ����� ��������� �� ���� ����� ������, �� ���� ����� ������ ����� ������ ���������� �� ������
-            //OnDestroyed?.Invoke();
+            Destroyed?.Invoke(this.transform);
+            DestroyImmediate(gameObject);
         }
     }
 }

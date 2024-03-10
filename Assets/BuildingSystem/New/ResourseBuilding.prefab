@@ -13,8 +13,8 @@ GameObject:
   - component: {fileID: 8059771981626684168}
   - component: {fileID: 2263319265578042724}
   - component: {fileID: 6415715305145123401}
-  - component: {fileID: 2873778882243293143}
   - component: {fileID: 3508081377698175059}
+  - component: {fileID: 7460018259144252484}
   m_Layer: 0
   m_Name: ResourseBuilding
   m_TagString: Untagged
@@ -135,22 +135,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &2873778882243293143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4618999126709695401}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5a88fe59ad643d44db33047f969f63ab, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Cost: 0
-  Strength: 20
-  TimeWhilePassable: 2
-  CurrentTimeWhilePassable: 0
 --- !u!64 &3508081377698175059
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -173,3 +157,17 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &7460018259144252484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4618999126709695401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6da6b3aa0b0c1a449eeeb8e032da0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Strength: 100
+  IndexOfBuilding: 2

@@ -21,6 +21,7 @@ namespace Assets.BuildingSystem.New
        // public int Id;
 
         public Transform Transform => transform;
+        
         public static Action<Transform> Destroyed;
         public Rigidbody Rigidbody { get; private set; }
         public MeshCollider MeshCollider { get; private set; }

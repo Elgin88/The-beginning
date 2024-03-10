@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2859236786326628164}
   - component: {fileID: 8458328098266625045}
   m_Layer: 0
-  m_Name: SM_Item_Hammer_07
+  m_Name: Hammer_1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,8 +27,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5129592591792702071}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.36115187, y: -0.575385, z: 0.07665102, w: 0.7298124}
-  m_LocalPosition: {x: -2.04, y: 0, z: 43.64}
+  m_LocalRotation: {x: 0.3391098, y: -0.41927752, z: 0.1468373, w: 0.8292465}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
