@@ -4,5 +4,10 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
-  m_configObjects: {}
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/DmitriysScenes/StudyLevel.unity
+    guid: 4f8ed0f3ba3feaa4f80cf7c93dde93cd
+  m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: af029e0b575884144bc59df188ddab02, type: 2}
+    com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: 141824df4ba6cc54389ec26655728ac0, type: 2}
