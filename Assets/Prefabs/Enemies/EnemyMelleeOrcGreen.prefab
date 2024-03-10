@@ -2364,9 +2364,9 @@ GameObject:
   - component: {fileID: 4588992870866705208}
   - component: {fileID: 8314578972581342070}
   - component: {fileID: 1423910423695567156}
-  - component: {fileID: 5977292687717916677}
   - component: {fileID: 8576810530071468875}
   - component: {fileID: 7679217566705177323}
+  - component: {fileID: -5224444083855361051}
   m_Layer: 6
   m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
@@ -2498,7 +2498,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _damage: 25
+  _damage: 5
 --- !u!114 &-3228283824888894521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2584,18 +2584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d679cd6f355124c0999d1f90d84a9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5977292687717916677
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8576810530071468875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2618,6 +2606,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-5224444083855361051
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &6583875623457425539

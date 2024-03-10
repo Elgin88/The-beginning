@@ -486,11 +486,11 @@ GameObject:
   - component: {fileID: 7954706898335332759}
   - component: {fileID: 8667210149714839670}
   - component: {fileID: 2241415680853517594}
-  - component: {fileID: 1431758143212085255}
   - component: {fileID: 5614938181954786132}
   - component: {fileID: 2128691280463660830}
   - component: {fileID: 6297621058983814839}
   - component: {fileID: 7995668561108668934}
+  - component: {fileID: 3155930811926258692}
   m_Layer: 6
   m_Name: EnemyRangeWoodArcher
   m_TagString: Untagged
@@ -663,7 +663,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _health: 100
-  _damage: 25
+  _damage: 5
   _arrows:
   - {fileID: 3104937314605660935}
   - {fileID: 1365138780761572874}
@@ -736,18 +736,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81932cd6ee17443faaa1d3a2f44e3ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1431758143212085255
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 892685252430481271}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &5614938181954786132
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -795,6 +783,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &3155930811926258692
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 892685252430481271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &930535338594101386
