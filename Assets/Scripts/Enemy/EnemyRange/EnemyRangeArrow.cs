@@ -9,7 +9,8 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
 
         private Coroutine _fly;
-        private Transform _target;
+        private Transform _currentTarget;
+        private Transform _startTarget;
         private Vector3 _currentTargetPosition;
         private Vector3 _startTrajectoryPosition;
         private Vector3 _middleTrajectoryPosition;
@@ -20,7 +21,7 @@ namespace Assets.Scripts.Enemy
 
         internal void StartFly(Transform target)
         {
-            _target = target;
+            _startTarget = target;
             _startTrajectoryPosition = transform.position;
             _isMoveUp = true;
 
@@ -29,11 +30,11 @@ namespace Assets.Scripts.Enemy
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_target != null)
+            if (_currentTarget != null)
             {
-                if (other.gameObject == _target.gameObject)
+                if (other.gameObject == _currentTarget.gameObject)
                 {
-                    _target.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
+                    _currentTarget.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
                     StopFly();
                     gameObject.SetActive(false);
                 }
@@ -42,16 +43,18 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator Fly()
         {
+            _currentTarget = _startTarget;
+
             while (true)
             {
-                if (_target == null || _startTrajectoryPosition == null || _target.position == null)
+                if (_currentTarget == null || _startTrajectoryPosition == null || _currentTarget.position == null || _currentTarget != _startTarget)
                 {
                     StopFly();
                     gameObject.SetActive(false);
                     yield break;
                 }
 
-                CalculateDistane(_startTrajectoryPosition, _target.position);
+                CalculateDistane(_startTrajectoryPosition, _currentTarget.position);
                 SetMiddleTrajectoryPosition();
                 CheckIsMoveUp();
                 CalculateTargetPosition();
@@ -69,12 +72,12 @@ namespace Assets.Scripts.Enemy
 
         private void SetMiddleTrajectoryPosition()
         {
-            _middleTrajectoryPosition = new Vector3((_startTrajectoryPosition.x + _target.position.x) / 2, _startTrajectoryPosition.y + _hight, (_startTrajectoryPosition.z + _target.position.z) / 2);
+            _middleTrajectoryPosition = new Vector3((_startTrajectoryPosition.x + _currentTarget.position.x) / 2, _startTrajectoryPosition.y + _hight, (_startTrajectoryPosition.z + _currentTarget.position.z) / 2);
         }
 
         private void CheckIsMoveUp()
         {
-            if (CalculateDistane(transform.position, _target.position) < (CalculateDistane(_startTrajectoryPosition, _target.position) / 1.9f))
+            if (CalculateDistane(transform.position, _currentTarget.position) < (CalculateDistane(_startTrajectoryPosition, _currentTarget.position) / 1.9f))
             {
                 _isMoveUp = false;
             }
@@ -88,7 +91,7 @@ namespace Assets.Scripts.Enemy
             }
             else
             {
-                _currentTargetPosition = _target.transform.position;
+                _currentTargetPosition = _currentTarget.transform.position;
             }
         }
 
