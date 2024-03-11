@@ -26,7 +26,6 @@ namespace Assets.Scripts.BuildingSystem
        
         private void Build()
         {
-            Debug.Log("Кнопка работает из сервиса, но не строит");
 
             for (int i = 0; i < _buildPoints.Count; i++)
             {
@@ -44,8 +43,6 @@ namespace Assets.Scripts.BuildingSystem
                     }
                 }
             }
-
-            Debug.Log("Кнопка строит");
         }
 
         private void SignToBuildingsPointEvents()
