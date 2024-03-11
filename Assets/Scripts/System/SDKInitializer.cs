@@ -19,8 +19,8 @@ namespace Assets.Scripts.Yandex
 
         private void OnInitialized()
         {
-            SceneManager.LoadScene("StudyLevel");
-            //SceneManager.LoadScene("AlekseySceneForTests");
+            //SceneManager.LoadScene("StudyLevel");
+            SceneManager.LoadScene("AlekseySceneForTests");
         }
     }
 }
