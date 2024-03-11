@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Assets.Scripts.Enemy;
 using UnityEngine;
@@ -33,5 +34,10 @@ internal class EnemyRangeWoodArcher : EnemyRange
                 }
             }
         }
+    }
+
+    internal void SetRotation(Quaternion rotation)
+    {
+        transform.rotation = rotation;
     }
 }

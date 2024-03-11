@@ -1,44 +1,33 @@
-﻿using Assets.Scripts.GameLogic;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.AI;
 
 namespace Assets.Scripts.PlayerComponents
 {
-    internal class PlayerMovement : IMoveable
+    internal class PlayerMovement : MonoBehaviour
     {
-        private float _attackMoveSpeed;
         private PlayerAnimator _animator;
-        private Player _player;
+        private NavMeshAgent _navMeshAgent;
 
+        private float _attackMoveSpeed;
+        private float _rotationSpeed = 2;
         private bool _isAttacking;
+        private float _moveSpeed = 6;
 
-        public Transform Transform => _player.transform;
-
-        public float MoveSpeed => _player.Speed;
-
-        public SurfaceAlignment SurfaceAlignment => new SurfaceAlignment(this);
-
-        public PlayerMovement(Player player, PlayerAnimator animator)
+        private void Start()
         {
-            _player = player;
-            _animator = animator;
-
-            _attackMoveSpeed = 0;
+            _navMeshAgent = GetComponent<NavMeshAgent>();
+            _animator = GetComponent<PlayerAnimator>();
         }
 
         public void Move(Vector2 direction)
         {
-            float moveSpeed = _isAttacking ? _attackMoveSpeed : _player.Speed;
-            float scaledMoveSpeed = moveSpeed * Time.fixedDeltaTime;
-            Vector3 movementVector = new Vector3(direction.x, 0, direction.y);
+            Vector3 movementDIrection = new Vector3(direction.x, 0, direction.y);
+            Vector3 movePosition = transform.position + movementDIrection;
 
-            _animator.SetAnimatorSpeed(movementVector, _player.Speed);
+            _navMeshAgent.speed = _isAttacking ? _attackMoveSpeed : _moveSpeed;
+            _navMeshAgent.SetDestination(movePosition);
 
-            SurfaceAlignment.Align(movementVector);
-
-            if (SurfaceAlignment.CanWalkOnSlope() == false)
-                return;
-
-            _player.transform.position += movementVector * scaledMoveSpeed;
+            _animator.SetAnimatorSpeed(movementDIrection, _moveSpeed);
         }
 
         public void StopMove()
@@ -53,11 +42,11 @@ namespace Assets.Scripts.PlayerComponents
 
         public void RotateTowards(Transform target, Vector3 offset)
         {
-            Vector3 directionToTarget = target.position - _player.transform.position;
+            Vector3 directionToTarget = target.position - transform.position;
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
-            offset = new Vector3(_player.transform.rotation.x, offset.y, _player.transform.rotation.z);
+            offset = new Vector3(transform.rotation.x, offset.y, transform.rotation.z);
 
-            _player.transform.rotation = Quaternion.Slerp(_player.transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime / 2);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime / _rotationSpeed);
         }
     }
 }

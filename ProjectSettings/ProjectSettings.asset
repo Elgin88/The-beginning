@@ -134,7 +134,8 @@ PlayerSettings:
   vulkanEnableCommandBufferRecycling: 1
   loadStoreDebugModeEnabled: 0
   bundleVersion: 0.1
-  preloadedAssets: []
+  preloadedAssets:
+  - {fileID: -4023246685557329660, guid: af029e0b575884144bc59df188ddab02, type: 2}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   m_HolographicPauseOnTrackingLoss: 1
@@ -143,7 +144,7 @@ PlayerSettings:
   vrSettings:
     enable360StereoCapture: 0
   isWsaHolographicRemotingEnabled: 0
-  enableFrameTimingStats: 0
+  enableFrameTimingStats: 1
   enableOpenGLProfilerGPURecorders: 1
   useHDRDisplay: 0
   hdrBitDepth: 0
@@ -592,6 +593,8 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: tvOS
     m_EncodingQuality: 1
+  - m_BuildTarget: WebGL
+    m_EncodingQuality: 0
   m_BuildTargetGroupHDRCubemapEncodingQuality:
   - m_BuildTarget: Android
     m_EncodingQuality: 1
@@ -599,6 +602,8 @@ PlayerSettings:
     m_EncodingQuality: 1
   - m_BuildTarget: tvOS
     m_EncodingQuality: 1
+  - m_BuildTarget: WebGL
+    m_EncodingQuality: 0
   m_BuildTargetGroupLightmapSettings: []
   m_BuildTargetGroupLoadStoreDebugModeSettings: []
   m_BuildTargetNormalMapEncoding:
@@ -847,21 +852,21 @@ PlayerSettings:
   blurSplashScreenBackground: 1
   spritePackerPolicy: 
   webGLMemorySize: 2048
-  webGLExceptionSupport: 1
-  webGLNameFilesAsHashes: 0
+  webGLExceptionSupport: 0
+  webGLNameFilesAsHashes: 1
   webGLShowDiagnostics: 0
-  webGLDataCaching: 1
+  webGLDataCaching: 0
   webGLDebugSymbols: 0
   webGLEmscriptenArgs: 
   webGLModulesDirectory: 
   webGLTemplate: PROJECT:FullscreenWindow
   webGLAnalyzeBuildSize: 0
   webGLUseEmbeddedResources: 0
-  webGLCompressionFormat: 1
+  webGLCompressionFormat: 2
   webGLWasmArithmeticExceptions: 0
   webGLLinkerTarget: 1
   webGLThreadsSupport: 1
-  webGLDecompressionFallback: 0
+  webGLDecompressionFallback: 1
   webGLInitialMemorySize: 32
   webGLMaximumMemorySize: 2048
   webGLMemoryGrowthMode: 2
@@ -870,24 +875,24 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    Android: UNITY_POST_PROCESSING_STACK_V2
     Bratwurst: UNITY_POST_PROCESSING_STACK_V2
-    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    GameCoreScarlett: DOTWEEN
-    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    LinuxHeadlessSimulation: DOTWEEN
-    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    PS4: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    PS5: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    QNX: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    Stadia: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    Standalone: UNITY_POST_PROCESSING_STACK_V2;TERRAWORLD_PRO;LANDSCAPE_BUILDER;LB_EDITOR;DOTWEEN
-    VisionOS: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    WebGL: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    Windows Store Apps: DOTWEEN
-    XboxOne: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
-    iPhone: DOTWEEN
-    tvOS: UNITY_POST_PROCESSING_STACK_V2;DOTWEEN
+    EmbeddedLinux: UNITY_POST_PROCESSING_STACK_V2
+    GameCoreScarlett: 
+    GameCoreXboxOne: UNITY_POST_PROCESSING_STACK_V2
+    LinuxHeadlessSimulation: 
+    Nintendo Switch: UNITY_POST_PROCESSING_STACK_V2
+    PS4: UNITY_POST_PROCESSING_STACK_V2
+    PS5: UNITY_POST_PROCESSING_STACK_V2
+    QNX: UNITY_POST_PROCESSING_STACK_V2
+    Stadia: UNITY_POST_PROCESSING_STACK_V2
+    Standalone: UNITY_POST_PROCESSING_STACK_V2;TERRAWORLD_PRO;LANDSCAPE_BUILDER;LB_EDITOR
+    VisionOS: UNITY_POST_PROCESSING_STACK_V2
+    WebGL: UNITY_POST_PROCESSING_STACK_V2
+    Windows Store Apps: 
+    XboxOne: UNITY_POST_PROCESSING_STACK_V2
+    iPhone: 
+    tvOS: UNITY_POST_PROCESSING_STACK_V2
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}
