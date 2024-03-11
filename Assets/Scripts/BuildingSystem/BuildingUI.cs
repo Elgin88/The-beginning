@@ -31,7 +31,9 @@ namespace Assets.Scripts.BuildingSystem
 
         private void OnButtonClicked()
         {
+            Debug.Log("Кнопка работает из юишки");
             ButtonClicked?.Invoke();
+            
         }
 
         public void ActiveButton()

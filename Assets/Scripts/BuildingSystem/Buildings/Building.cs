@@ -9,20 +9,8 @@ namespace Assets.Scripts.BuildingSystem
     internal abstract class Building : MonoBehaviour, IDamageable
     {
         public float Strength;
-        //public ParticleSystem EffectOfDestroying;
-       
-       // public int Cost;
-
         public static Action<Transform> Destroyed;
-       // public Action<int> Created;
-        
-        //public void Start()
-        //{
-        //    Created?.Invoke(Cost);
-        //}
-
         public int IndexOfBuilding;
-
         public Transform Transform => transform;
 
         public abstract bool IsPlayerObject { get; }
