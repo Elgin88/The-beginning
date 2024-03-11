@@ -2,7 +2,6 @@
   "dependencies": {
     "com.agava.webutility": "https://github.com/forcepusher/com.agava.webutility.git#3.1.0",
     "com.agava.yandexgames": "https://github.com/forcepusher/com.agava.yandexgames.git#16.0.0",
-    "com.unity.adaptiveperformance": "5.0.2",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.cinemachine": "2.9.7",
     "com.unity.collab-proxy": "2.2.0",
