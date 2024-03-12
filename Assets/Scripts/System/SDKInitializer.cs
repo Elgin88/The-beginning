@@ -10,17 +10,22 @@ namespace Assets.Scripts.Yandex
         private void Awake()
         {
             YandexGamesSdk.CallbackLogging = true;
+            Debug.Log("AYAY tararai tararai");
         }
 
         private IEnumerator Start()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
             yield return YandexGamesSdk.Initialize(OnInitialized);
+            Debug.Log("START INIT");
+#endif
+            yield return null;
         }
 
         private void OnInitialized()
         {
+            Debug.Log("FINISHED INIT");
             SceneManager.LoadScene("StudyLevel");
-            //SceneManager.LoadScene("AlekseySceneForTests");
         }
     }
 }

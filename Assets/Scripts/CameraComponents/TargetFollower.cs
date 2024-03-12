@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using Zenject;
 using Assets.Scripts.PlayerComponents;
+using Agava.YandexGames;
 
 namespace Assets.Scripts.CameraComponents
 {
@@ -12,6 +13,10 @@ namespace Assets.Scripts.CameraComponents
 
         private void Awake()
         {
+#if UNITY_WEBGL && !UNITY_EDITOR
+            YandexGamesSdk.GameReady();
+            Debug.Log("GAME READY");
+#endif
             _cameraOffset = transform.position;
         }
 
