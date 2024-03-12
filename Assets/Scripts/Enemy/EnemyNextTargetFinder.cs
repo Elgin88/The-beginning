@@ -8,7 +8,7 @@ namespace Assets.Scripts.Enemy
 
     internal class EnemyNextTargetFinder : MonoBehaviour
     {
-        private MainBuilding _mainBulding;
+        private BuildingSystem.Buildings.MainBuilding _mainBulding;
         private EnemyVision _enemyVision;
         private GameObject _currentTarget;
         private Coroutine _findNextTarget;
@@ -56,7 +56,7 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
-            _mainBulding = FindAnyObjectByType<MainBuilding>();
+            _mainBulding = FindAnyObjectByType<BuildingSystem.Buildings.MainBuilding>();
             _enemyVision = GetComponent<EnemyVision>();
         }
 
