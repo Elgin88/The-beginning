@@ -51,9 +51,9 @@ namespace Assets.Scripts.BuildingSystem
         {
             if (other != null && other.gameObject.TryGetComponent(out Player player))
             {
-                if (_isOccupied == false) // тут проверять хватает ли денег у игрока сравнивая с _buildingUI.BuidingCost
+                if (_isOccupied == false) // тут взять денеги у игрока 
                 {
-                    PlayerWentIn?.Invoke(transform);
+                    PlayerWentIn?.Invoke(transform);   //и передать сюда
                 }
             }
         }
