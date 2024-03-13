@@ -1001,8 +1001,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &240704751
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1210,8 +1210,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &259545778
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1783,8 +1783,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &394221147
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2441,8 +2441,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &503601192
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2712,50 +2712,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8076804215856804845, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
   m_PrefabInstance: {fileID: 524354710}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &525473409
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 525473411}
-  - component: {fileID: 525473410}
-  m_Layer: 0
-  m_Name: SDK
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &525473410
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525473409}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0db04fa140267284faf66d236997a974, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!4 &525473411
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 525473409}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.08248, y: 41.50985, z: -324.23572}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &532750525 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 268537361354957356, guid: 9811ccfee99a748abbc00211019577ab, type: 3}
@@ -3504,8 +3460,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &729926962
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3789,8 +3745,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &829151435
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4327,8 +4283,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &972864875
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4747,8 +4703,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1054688094
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -5439,8 +5395,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1205202905
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6118,8 +6074,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1450408329
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6449,8 +6405,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1532442925
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -6693,8 +6649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba17c1020db7bd646a054359acdce012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 150
   Strength: 1000
+  IndexOfBuilding: 0
+  _spotOfRespawnUnits: {fileID: 0}
 --- !u!1001 &1573873642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -6897,8 +6854,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1594056157
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7243,8 +7200,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1754857714
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7465,8 +7422,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1796682687
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8019,8 +7976,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &1949158331
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8299,8 +8256,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &2037624604
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8838,8 +8795,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Cost: 50
   Strength: 100
+  IndexOfBuilding: 0
 --- !u!65 &2111336108
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9114,4 +9071,3 @@ SceneRoots:
   - {fileID: 696842266}
   - {fileID: 990098999}
   - {fileID: 1755570330}
-  - {fileID: 525473411}
