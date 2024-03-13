@@ -11,20 +11,22 @@ namespace Assets.Scripts.BuildingSystem
         [SerializeField] private List<Building> _buildings;
 
         private Transform _currentPlayersTransform;
+        // сделать переменную для денег игрока
+        private int _buildButtonIndex = 1;
 
         private void OnEnable()
         {
             SignToBuildingsPointEvents();
-            _buildingUI.ButtonClicked += Build;
+            _buildingUI.BuildButtonClicked += Build;
         }
 
         private void OnDisable()
         {
             UnSignToBuildingsPointEvents();
-            _buildingUI.ButtonClicked -= Build;
+            _buildingUI.BuildButtonClicked -= Build;
         }
        
-        private void Build()
+        private void Build()   //тут сравнивнить деньги с _buildingUI.BuidingCost
         {
 
             for (int i = 0; i < _buildPoints.Count; i++)
@@ -38,7 +40,7 @@ namespace Assets.Scripts.BuildingSystem
                             Instantiate(_buildings[j], _buildPoints[i].SpotToPlaceBuilding);
                             _buildPoints[i].TakeSpot();
                             _buildPoints[i].TryToDeActiveIconOfBuildPoint();
-                            _buildingUI.TryToDeActiveButton();
+                            _buildingUI.DeActiveButton(_buildButtonIndex);
                         }
                     }
                 }
@@ -63,7 +65,7 @@ namespace Assets.Scripts.BuildingSystem
             }
         }
 
-        private void OnPlayerWentIn(Transform spotOfPlayer)
+        private void OnPlayerWentIn(Transform spotOfPlayer)  // тут получить деньги от игрока
         {
             _currentPlayersTransform = spotOfPlayer;
 
@@ -71,7 +73,7 @@ namespace Assets.Scripts.BuildingSystem
             {
                 if (_buildPoints[i].transform == spotOfPlayer)
                 {
-                    _buildingUI.ActiveButton();
+                    _buildingUI.ActiveButton(_buildButtonIndex);
                     _buildingUI.SetButtonText(_buildPoints[i].CostToBuild);     
                 }
             }
@@ -79,7 +81,7 @@ namespace Assets.Scripts.BuildingSystem
 
         private void OnPlayerWentOut() 
         {
-            _buildingUI.TryToDeActiveButton();
+            _buildingUI.DeActiveButton(_buildButtonIndex);
         }
     }
 }

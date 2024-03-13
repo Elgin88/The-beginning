@@ -1,3 +1,4 @@
+using Assets.Scripts.PlayerUnits;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -9,19 +10,30 @@ namespace Assets.Scripts.BuildingSystem
     internal class BuildingUI : MonoBehaviour
     {
         [SerializeField] private Button _buildButton;
+        [SerializeField] private Button _spawnUnitButton;
+
 
         private string _buttonText = "Построить за ";
+        private int _buildButtonIndex = 1;
+        
 
-        public Action ButtonClicked;
+        public Action BuildButtonClicked;
+        public static Action SpawnButtonClicked;
 
         private void OnEnable()
         {
-            _buildButton.onClick.AddListener(OnButtonClicked);
+            _buildButton.onClick.AddListener(OnBuildButtonClicked);
+            _spawnUnitButton.onClick.AddListener(OnBuildButtonClicked);
+            UnitsFactory.PlayerWentIn += ActiveButton;
+            UnitsFactory.PlayerWentOut += DeActiveButton;
         }
 
         private void OnDisable()
         {
-            _buildButton.onClick.RemoveListener(OnButtonClicked);
+            _buildButton.onClick.RemoveListener(OnBuildButtonClicked);
+            _spawnUnitButton.onClick.RemoveListener(OnSpawnButtonClicked);
+            UnitsFactory.PlayerWentIn -= ActiveButton;
+            UnitsFactory.PlayerWentOut -= DeActiveButton;
         }
 
         public void SetButtonText(int costOfBuilding)
@@ -29,21 +41,38 @@ namespace Assets.Scripts.BuildingSystem
             _buildButton.GetComponentInChildren<TMP_Text>().text = _buttonText + costOfBuilding;
         }
 
-        private void OnButtonClicked()
+        private void OnBuildButtonClicked()
         {
-            ButtonClicked?.Invoke(); 
+            BuildButtonClicked?.Invoke(); 
         }
 
-        public void ActiveButton()
+        private void OnSpawnButtonClicked()
         {
-            _buildButton.gameObject.SetActive(true);
+            SpawnButtonClicked?.Invoke();
         }
 
-        public void TryToDeActiveButton()
+        public void ActiveButton(int indexOfButton)
         {
-            if (_buildButton.gameObject.activeSelf == true)
+            if (indexOfButton == _buildButtonIndex)
+            {
+                _buildButton.gameObject.SetActive(true);
+            }
+            else
+            {
+                _spawnUnitButton.gameObject.SetActive(true);
+            }  
+        }
+
+
+        public void DeActiveButton(int indexOfButton)
+        {
+            if (indexOfButton == _buildButtonIndex)
             {
                 _buildButton.gameObject.SetActive(false);
+            }
+            else
+            {
+                _spawnUnitButton.gameObject.SetActive(false);
             }
         }
     }
