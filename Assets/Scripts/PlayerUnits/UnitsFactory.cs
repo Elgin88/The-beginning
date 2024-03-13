@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿using Assets.Scripts.BuildingSystem;
+using Assets.Scripts.GameLogic.Damageable;
+using Assets.Scripts.PlayerComponents;
+using System;
+using Unity.VisualScripting;
+using UnityEngine;
 using Zenject;
 
 namespace Assets.Scripts.PlayerUnits
@@ -8,9 +13,15 @@ namespace Assets.Scripts.PlayerUnits
         [SerializeField] private Melee _meleePrefab;
         [SerializeField] private ParticleSystem _particleSystemPrefab;
         [SerializeField] private LayerMask _enemyLayerMask;
+        [SerializeField] private Transform _spotOfRespawnUnits;
 
         private SelectedUnitsHandler _handler;
         private UnitsPool _pool;
+        private int _spawnUnitButtonIndex = 2;
+
+
+        public static Action<int> PlayerWentIn;   //также передавать деньги игрока
+        public static Action<int> PlayerWentOut;
 
         private void Start() 
         { 
@@ -20,10 +31,36 @@ namespace Assets.Scripts.PlayerUnits
 
         private void Update()
         {
-            if (Input.GetKeyUp(KeyCode.Space))
+            //if (Input.GetKeyUp(KeyCode.Space))
+            //{
+            //    Unit unit = _pool.GetMelee();
+            //    unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            //}
+        }
+
+        private void OnEnable()
+        {
+            BuildingUI.SpawnButtonClicked += SpawnUnit;
+        }
+
+        private void OnDisable()
+        {
+            BuildingUI.SpawnButtonClicked -= SpawnUnit;
+        }
+
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out Player player)) // деньги для проверки взять тут
             {
-                Unit unit = _pool.GetMelee();
-                unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+                PlayerWentIn?.Invoke(_spawnUnitButtonIndex);
+            }
+        }
+
+        private void OnTriggerExit(Collider other)
+        {
+            if (other.gameObject.TryGetComponent(out Player player))
+            {
+                PlayerWentOut?.Invoke(_spawnUnitButtonIndex);
             }
         }
 
@@ -31,6 +68,12 @@ namespace Assets.Scripts.PlayerUnits
         private void Construct(SelectedUnitsHandler selectedUnitsHandler)
         {
             _handler = selectedUnitsHandler;
+        }
+
+        private void SpawnUnit()  // сделать проверку на деньги
+        {
+            Unit unit = _pool.GetMelee();
+            unit.transform.position = _spotOfRespawnUnits.transform.position; 
         }
     }
 }
