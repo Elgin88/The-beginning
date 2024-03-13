@@ -1,7 +1,7 @@
 using System.Collections;
 using Assets.Scripts.Enemy;
-using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
+using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
@@ -13,7 +13,7 @@ namespace Assets.Scripts.UnitStateMachine
         private EnemyRayPoint _enemyRayPoint;
         private StateIdle _stateIdle;
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
-        private float _minDistanceToTargetForRangeEnemy = 5f;
+        private float _minDistanceToTargetForRangeEnemy = 8f;
         private float _minDistanteToTarget;
 
         protected override Coroutine CheckTransition { get; set; }

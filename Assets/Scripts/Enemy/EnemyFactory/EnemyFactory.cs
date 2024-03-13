@@ -15,7 +15,7 @@ namespace Assets.Scripts.Enemy
 
         [Inject] private DiContainer _currentEnemyDI;
 
-        private MainBuilding _mainBuilding; 
+        private BuildingSystem.Buildings.MainBuilding _mainBuilding; 
         
         private EnemySpawnPoint[] _spawnPoints;
         private EnemySpawnPoint _currentSpawnPoint;
@@ -26,7 +26,7 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
-            _mainBuilding = FindObjectOfType<MainBuilding>();
+            _mainBuilding = FindObjectOfType<BuildingSystem.Buildings.MainBuilding>();
 
             _spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
 

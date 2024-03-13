@@ -137,7 +137,7 @@ GameObject:
   - component: {fileID: 6010917}
   - component: {fileID: 6010922}
   - component: {fileID: 6010921}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: MainBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -285,7 +285,7 @@ GameObject:
   - component: {fileID: 94178681}
   - component: {fileID: 94178680}
   - component: {fileID: 94178679}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -511,7 +511,7 @@ GameObject:
   - component: {fileID: 632090551}
   - component: {fileID: 632090556}
   - component: {fileID: 632090555}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 1638092491}
   - component: {fileID: 1638092490}
   - component: {fileID: 1638092495}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1085,7 +1085,7 @@ GameObject:
   - component: {fileID: 1718153037}
   - component: {fileID: 1718153036}
   - component: {fileID: 1718153041}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Tower (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1379,7 +1379,7 @@ PrefabInstance:
     - target: {fileID: 2545940667423566284, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
       propertyPath: m_NavMeshData
       value: 
-      objectReference: {fileID: 23800000, guid: 626a08da869e84374a08e705f649b409, type: 2}
+      objectReference: {fileID: 23800000, guid: 7bae6e006a53d4590a9341dc74fb4f96, type: 2}
     - target: {fileID: 4363802104849498181, guid: 7506bf3e124f7e846950231b6cfe2de3, type: 3}
       propertyPath: m_Name
       value: NavMeshSurface
