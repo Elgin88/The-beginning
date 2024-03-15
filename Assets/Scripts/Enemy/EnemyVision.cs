@@ -62,7 +62,7 @@ namespace Assets.Scripts.Enemy
         {
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
 
-            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
+            //Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
 
             if (raycastHit.collider != null)
             {
