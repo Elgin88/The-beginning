@@ -9,9 +9,9 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private EnemyRayPoint _enemyRayPoint;
         [SerializeField] private LayerMask _layersForEnemyVision;
-        [SerializeField] private float _visionAngle = 360;
-        [SerializeField] private float _visionRange = 20;
-        [SerializeField] private int _visionRayCount = 100;
+        [SerializeField] private float _visionAngle;
+        [SerializeField] private float _visionRange;
+        [SerializeField] private float _visionRayCount;
 
         private List<GameObject> _targets;
         private float _stepOfRotationY => _visionAngle / _visionRayCount;
@@ -61,6 +61,8 @@ namespace Assets.Scripts.Enemy
         private void SetDataRaycastHit()
         {
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
+
+            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
 
             if (raycastHit.collider != null)
             {
