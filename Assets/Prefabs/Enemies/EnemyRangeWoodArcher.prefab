@@ -592,7 +592,7 @@ NavMeshAgent:
   m_Acceleration: 10000
   avoidancePriority: 50
   m_AngularSpeed: 10000
-  m_StoppingDistance: 3
+  m_StoppingDistance: 1
   m_AutoTraverseOffMeshLink: 1
   m_AutoBraking: 1
   m_AutoRepath: 1
@@ -703,10 +703,10 @@ MonoBehaviour:
   _enemyRayPoint: {fileID: 6986193781745187224}
   _layersForEnemyVision:
     serializedVersion: 2
-    m_Bits: 67592
+    m_Bits: 2056
   _visionAngle: 360
-  _visionRange: 40
-  _visionRayCount: 50
+  _visionRange: 10
+  _visionRayCount: 120
 --- !u!114 &7954706898335332759
 MonoBehaviour:
   m_ObjectHideFlags: 0
