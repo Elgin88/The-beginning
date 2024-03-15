@@ -9,7 +9,7 @@ namespace Assets.Scripts.PlayerUnits
         private ParticleSystem _ring;
         private SelectedUnitsHandler _handler;
         private bool _isSelected;
-        private Coroutine _selection;
+        private Coroutine _selected;
 
         public bool IsSelected => _isSelected;
 
@@ -47,17 +47,17 @@ namespace Assets.Scripts.PlayerUnits
             {
                 _isSelected = true;
 
-                if (_selection != null)
-                    StopCoroutine(_selection);
+                if (_selected != null)
+                    StopCoroutine(_selected);
 
-                _selection = StartCoroutine(Selection());
+                _selected = StartCoroutine(Selected());
 
                 _ring.Play();
                 _handler.AddUnit(this);
             }
         }
 
-        private IEnumerator Selection()
+        private IEnumerator Selected()
         {
             while (_isSelected)
             {

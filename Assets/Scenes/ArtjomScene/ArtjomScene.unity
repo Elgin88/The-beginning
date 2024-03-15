@@ -161,6 +161,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   _spotOfRespawnUnits: {fileID: 0}
+  _handler: {fileID: 0}
 --- !u!65 &64106931
 BoxCollider:
   m_ObjectHideFlags: 0

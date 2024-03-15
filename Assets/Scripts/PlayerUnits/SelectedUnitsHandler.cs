@@ -3,22 +3,22 @@ using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits
 {
-    internal class SelectedUnitsHandler
+    internal class SelectedUnitsHandler : MonoBehaviour
     {
-        private static LayerMask _groundMask = LayerMask.GetMask("Ground");
+        [SerializeField] private LayerMask _groundMask;
 
         private List<Selectable> _units = new List<Selectable>();
         private Ray _ray;
         private float _rayDistance = 40f;
         private Vector3 _mousePosition;
 
-        public void Init(Unit[] units)
-        {
-            foreach (var unit in units)
-            {
-                _units.Add(unit);
-            }
-        }
+        //public void Init(Unit[] units)
+        //{
+        //    foreach (var unit in units)
+        //    {
+        //        _units.Add(unit);
+        //    }
+        //}
 
         public void AddUnit(Selectable unit)
         {
@@ -32,35 +32,25 @@ namespace Assets.Scripts.PlayerUnits
 
         public void MoveUnits()
         {
-            _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
-            if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
+            if (_units.Count > 0)
             {
-                _mousePosition = hit.point;
-            }
+                _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-            _mousePosition = new Vector3(_mousePosition.x, _mousePosition.y + 1, _mousePosition.z);
-
-            foreach (Unit unit in _units)
-            {
-                if (unit.IsSelected && unit.gameObject.activeSelf)
+                if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
                 {
-                    unit.Move(_mousePosition);
+                    _mousePosition = hit.point;
+                }
+
+                _mousePosition = new Vector3(_mousePosition.x, _mousePosition.y + 1, _mousePosition.z);
+
+                foreach (Unit unit in _units)
+                {
+                    if (unit.IsSelected && unit.gameObject.activeSelf)
+                    {
+                        unit.Move(_mousePosition);
+                    }
                 }
             }
-        }
-
-        public bool IsAnyUnitSelected()
-        {
-            foreach (Unit unit in _units)
-            {
-                if (unit.IsSelected && unit.gameObject.activeSelf)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
     }
 }

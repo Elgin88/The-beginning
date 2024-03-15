@@ -14,11 +14,10 @@ namespace Assets.Scripts.PlayerUnits
         [SerializeField] private ParticleSystem _particleSystemPrefab;
         [SerializeField] private LayerMask _enemyLayerMask;
         [SerializeField] private Transform _spotOfRespawnUnits;
+        [SerializeField] private SelectedUnitsHandler _handler;
 
-        private SelectedUnitsHandler _handler;
         private UnitsPool _pool;
         private int _spawnUnitButtonIndex = 2;
-
 
         public static Action<int> PlayerWentIn;   //также передавать деньги игрока
         public static Action<int> PlayerWentOut;
@@ -26,16 +25,16 @@ namespace Assets.Scripts.PlayerUnits
         private void Start() 
         { 
             _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 2, _enemyLayerMask, _handler);
-            _handler.Init(_pool.MeleePool);
+            //_handler.Init(_pool.MeleePool);
         }
 
         private void Update()
         {
-            //if (Input.GetKeyUp(KeyCode.Space))
-            //{
-            //    Unit unit = _pool.GetMelee();
-            //    unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-            //}
+            if (Input.GetKeyUp(KeyCode.Space))
+            {
+                Unit unit = _pool.GetMelee();
+                unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
+            }
         }
 
         private void OnEnable()
@@ -62,12 +61,6 @@ namespace Assets.Scripts.PlayerUnits
             {
                 PlayerWentOut?.Invoke(_spawnUnitButtonIndex);
             }
-        }
-
-        [Inject]
-        private void Construct(SelectedUnitsHandler selectedUnitsHandler)
-        {
-            _handler = selectedUnitsHandler;
         }
 
         private void SpawnUnit()  // сделать проверку на деньги
