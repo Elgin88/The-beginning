@@ -8,31 +8,47 @@ namespace Assets.Scripts.PlayerUnits
         [SerializeField] private LayerMask _groundMask;
 
         private List<Selectable> _units = new List<Selectable>();
+        private List<Selectable> _selectedUnits = new List<Selectable>();
+
         private Ray _ray;
         private float _rayDistance = 40f;
         private Vector3 _mousePosition;
 
-        //public void Init(Unit[] units)
-        //{
-        //    foreach (var unit in units)
-        //    {
-        //        _units.Add(unit);
-        //    }
-        //}
+        private ArmyFormation _armyFormation = new ArmyFormation();
 
-        public void AddUnit(Selectable unit)
+        private void OnDisable()
         {
-            _units.Add(unit);
+            foreach (Selectable unit in _units)
+            {
+                unit.Selected -= OnSelect;
+                unit.Deselected -= OnDeselct;
+            }
         }
 
-        public void RemoveUnit(Selectable unit)
+        public void Init(Unit[] units)
         {
-            _units.Remove(unit);
+            foreach (var unit in units)
+            {
+                unit.Selected += OnSelect;
+                unit.Deselected += OnDeselct;
+
+                _units.Add(unit);
+            }
+        }
+
+        public void OnSelect(Selectable unit)
+        {
+            _selectedUnits.Add(unit);
+        }
+
+        public void OnDeselct(Selectable unit)
+        {
+            _selectedUnits.Remove(unit);
         }
 
         public void MoveUnits()
         {
-            if (_units.Count > 0)
+            if (_selectedUnits.Count > 0)
             {
                 _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
@@ -43,11 +59,13 @@ namespace Assets.Scripts.PlayerUnits
 
                 _mousePosition = new Vector3(_mousePosition.x, _mousePosition.y + 1, _mousePosition.z);
 
-                foreach (Unit unit in _units)
+                Vector3[] formation = _armyFormation.GetFormationDestination(_mousePosition, _selectedUnits.Count);
+
+                for (int i = 0; i < _selectedUnits.Count; i++)
                 {
-                    if (unit.IsSelected && unit.gameObject.activeSelf)
+                    if (_selectedUnits[i] is Unit unit)
                     {
-                        unit.Move(_mousePosition);
+                        unit.Move(formation[i]);
                     }
                 }
             }

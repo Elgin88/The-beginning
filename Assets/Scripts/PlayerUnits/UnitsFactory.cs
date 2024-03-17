@@ -1,18 +1,13 @@
 ﻿using Assets.Scripts.BuildingSystem;
-using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.PlayerComponents;
 using System;
-using Unity.VisualScripting;
 using UnityEngine;
-using Zenject;
 
 namespace Assets.Scripts.PlayerUnits
 {
     internal class UnitsFactory : MonoBehaviour
     {
-        [SerializeField] private Melee _meleePrefab;
-        [SerializeField] private ParticleSystem _particleSystemPrefab;
-        [SerializeField] private LayerMask _enemyLayerMask;
+        [SerializeField] private UnitData _unitData;
         [SerializeField] private Transform _spotOfRespawnUnits;
         [SerializeField] private SelectedUnitsHandler _handler;
 
@@ -24,15 +19,15 @@ namespace Assets.Scripts.PlayerUnits
 
         private void Start() 
         { 
-            _pool = new UnitsPool(_meleePrefab, _particleSystemPrefab , 2, _enemyLayerMask, _handler);
-            //_handler.Init(_pool.MeleePool);
+            _pool = new UnitsPool(_unitData);
+            _handler.Init(_pool.MeleePool);
         }
 
         private void Update()
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                Unit unit = _pool.GetMelee();
+                Unit unit = _pool.GetUnit();
                 unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
             }
         }
@@ -65,7 +60,7 @@ namespace Assets.Scripts.PlayerUnits
 
         private void SpawnUnit()  // сделать проверку на деньги
         {
-            Unit unit = _pool.GetMelee();
+            Unit unit = _pool.GetUnit();
             unit.transform.position = _spotOfRespawnUnits.transform.position; 
         }
     }

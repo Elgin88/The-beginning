@@ -60,7 +60,7 @@ namespace Assets.Scripts.PlayerComponents
         }
 
         [Inject]
-        private void Construct(PlayerConfig playerConfig)
+        private void Construct(PlayerData playerConfig)
         {
             _value = playerConfig.Health;
             _recoverTime = playerConfig.RecoverTime;

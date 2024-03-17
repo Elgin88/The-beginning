@@ -9,9 +9,10 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
         private ClosestTargetFinder _targetFinder;
         private IDamageable _target;
 
-        public FSMStateIdle(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator) : base(fsm, unit, navMesh, animator)
+        public FSMStateIdle(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator, UnitData data) 
+            : base(fsm, unit, navMesh, animator, data)
         {
-            _targetFinder = new ClosestTargetFinder(unit.AggroRange, unit.EnemyMask);
+            _targetFinder = new ClosestTargetFinder(data.AggroRange, data.EnemyLayerMask);
         }
 
         public override void Enter()

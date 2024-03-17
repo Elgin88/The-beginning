@@ -13,7 +13,7 @@ namespace Assets.Scripts.PlayerComponents
         public Transform Transform => transform;
 
         [Inject]
-        private void Construct(PlayerConfig config)
+        private void Construct(PlayerData config)
         {
             Speed = config.Speed;
             RotationSpeed = config.RotationSpeed;
