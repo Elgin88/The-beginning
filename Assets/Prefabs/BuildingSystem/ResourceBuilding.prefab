@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -397255482838673179}
   - component: {fileID: 6391643872984395748}
   m_Layer: 3
-  m_Name: ResourceBuildingPreset2
+  m_Name: ResourceBuilding
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
