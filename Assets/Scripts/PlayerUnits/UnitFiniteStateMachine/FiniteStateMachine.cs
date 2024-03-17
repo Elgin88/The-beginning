@@ -11,23 +11,15 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
         private FSMState _currentState;
         private Dictionary<Type, FSMState> _states = new Dictionary<Type, FSMState>();
 
-        private UnitAnimator _animator;
-        private NavMeshAgent _agent;
-        private Unit _unit;
-
         public Vector3 MovePosition { get; private set; }
         public IDamageable Target { get; private set; }
 
-        public FiniteStateMachine(UnitAnimator animator, NavMeshAgent agent, Unit unit)
+        public FiniteStateMachine(UnitAnimator animator, NavMeshAgent agent, Unit unit, UnitData data)
         {
-            _animator = animator;
-            _agent = agent;
-            _unit = unit;
-
-            AddState(new FSMStateIdle(this, _unit, _agent, _animator));
-            AddState(new FSMStateMove(this, _unit, _agent, _animator));
-            AddState(new FSMStateChaseEnemy(this, _unit, _agent, _animator));
-            AddState(new FSMStateAttack(this, _unit, _agent, _animator));
+            AddState(new FSMStateIdle(this, unit, agent, animator, data));
+            AddState(new FSMStateMove(this, unit, agent, animator, data));
+            AddState(new FSMStateChaseEnemy(this, unit, agent, animator, data));
+            AddState(new FSMStateAttack(this, unit, agent, animator, data));
         }
 
         public void AddState(FSMState state)

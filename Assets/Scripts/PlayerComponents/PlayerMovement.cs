@@ -8,8 +8,7 @@ namespace Assets.Scripts.PlayerComponents
         private PlayerAnimator _animator;
         private NavMeshAgent _navMeshAgent;
 
-        private float _attackMoveSpeed;
-        private float _rotationSpeed = 2;
+        private float _attackMoveSpeed = 1;
         private bool _isAttacking;
         private float _moveSpeed = 6;
 
@@ -32,12 +31,14 @@ namespace Assets.Scripts.PlayerComponents
 
         public void StopMove()
         {
+            _navMeshAgent.updateRotation = false;
             _isAttacking = true;
         }
 
         public void StartMove()
         {
             _isAttacking = false;
+            _navMeshAgent.updateRotation = true;
         }
 
         public void RotateTowards(Transform target, Vector3 offset)
@@ -46,7 +47,7 @@ namespace Assets.Scripts.PlayerComponents
             Quaternion targetRotation = Quaternion.LookRotation(directionToTarget, Vector3.up);
             offset = new Vector3(transform.rotation.x, offset.y, transform.rotation.z);
 
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime / _rotationSpeed);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation * Quaternion.Euler(offset), Time.fixedDeltaTime);
         }
     }
 }

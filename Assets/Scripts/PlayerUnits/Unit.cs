@@ -7,24 +7,15 @@ namespace Assets.Scripts.PlayerUnits
 {
     [RequireComponent(typeof(UnitAnimator))]
     [RequireComponent(typeof(NavMeshAgent))]
-    internal abstract class Unit : Selectable, IDamageable
+    internal class Unit : Selectable, IDamageable
     {
+        private UnitData _unitData;
         private float _health;
         private bool _isDead;
-        private float _attackRange;
-        private float _aggroRange;
-        private LayerMask _enemyMask;
 
         private FiniteStateMachine _fsm;
         private UnitAnimator _animator;
         private NavMeshAgent _agent;
-
-        public float AttackRange => 2;
-        public float AggroRange => 5;
-        public LayerMask EnemyMask => _enemyMask;
-
-        public float Damage => 5;
-        public float AttackSpeed => 2;
 
         public bool IsDead => _isDead;
 
@@ -37,7 +28,7 @@ namespace Assets.Scripts.PlayerUnits
             _animator = GetComponent<UnitAnimator>();
             _agent = GetComponent<NavMeshAgent>();
 
-            _fsm = new FiniteStateMachine(_animator, _agent, this);
+            _fsm = new FiniteStateMachine(_animator, _agent, this, _unitData);
 
             _fsm.SetState<FSMStateIdle>();
         }
@@ -55,10 +46,10 @@ namespace Assets.Scripts.PlayerUnits
                 Die();
         }
 
-        public void InitUnit(float health, LayerMask layer)
+        public void Init(UnitData data)
         {
-            _health = health;
-            _enemyMask = layer;
+            _unitData = data;
+            _health = data.Health;
         }
 
         public void Move(Vector3 position)

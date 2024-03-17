@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
@@ -6,21 +7,28 @@ namespace Assets.Scripts.PlayerUnits
 {
     internal class Selectable : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        private ParticleSystem _ring;
-        private SelectedUnitsHandler _handler;
+        [SerializeField] private ParticleSystem _ring;
+
         private bool _isSelected;
-        private Coroutine _selection;
+        private Coroutine _selected;
 
         public bool IsSelected => _isSelected;
 
-        public void Init(ParticleSystem ring, SelectedUnitsHandler handler)
+        public event Action<Selectable> Selected;
+        public event Action<Selectable> Deselected;
+
+        private void Awake()
         {
-            _ring = ring;
             _ring = Instantiate(_ring, new Vector3(transform.position.x, transform.position.y - 1, transform.position.z), Quaternion.identity);
             _ring.Stop();
 
             _isSelected = false;
-            _handler = handler;
+        }
+
+        private void OnDisable()
+        {
+            _isSelected = false;
+            Deselected?.Invoke(this);
         }
 
         public void OnPointerEnter(PointerEventData eventData)
@@ -41,23 +49,23 @@ namespace Assets.Scripts.PlayerUnits
             {
                 _isSelected = false;
                 _ring.Stop();
-                _handler.RemoveUnit(this);
+                Deselected?.Invoke(this);
             }
             else
             {
                 _isSelected = true;
 
-                if (_selection != null)
-                    StopCoroutine(_selection);
+                if (_selected != null)
+                    StopCoroutine(_selected);
 
-                _selection = StartCoroutine(Selection());
+                _selected = StartCoroutine(SelectedRing());
 
                 _ring.Play();
-                _handler.AddUnit(this);
+                Selected?.Invoke(this);
             }
         }
 
-        private IEnumerator Selection()
+        private IEnumerator SelectedRing()
         {
             while (_isSelected)
             {

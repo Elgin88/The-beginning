@@ -10,7 +10,7 @@ namespace Assets.Scripts.Installers
     {
         [SerializeField] private Player _playerPrefab;
         [SerializeField] private PlayerInput _playerInput;
-        [SerializeField] private PlayerConfig _playerConfig;
+        [SerializeField] private PlayerData _playerConfig;
         [SerializeField] private Mark _mark;
 
         public override void InstallBindings()
@@ -22,9 +22,7 @@ namespace Assets.Scripts.Installers
         {
             Container.Bind<Mark>().FromInstance(_mark).AsSingle().NonLazy();
 
-            Container.Bind<SelectedUnitsHandler>().FromNew().AsSingle().NonLazy();
-
-            Container.Bind<PlayerConfig>().FromInstance(_playerConfig).NonLazy();
+            Container.Bind<PlayerData>().FromInstance(_playerConfig).NonLazy();
             Player player = Container.InstantiatePrefabForComponent<Player>(_playerPrefab, transform.position, Quaternion.identity, null);
             Container.BindInterfacesAndSelfTo<Player>().FromInstance(player);
 

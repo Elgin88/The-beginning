@@ -2,19 +2,21 @@
 
 namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 {
-    internal class FSMState
+    internal abstract class FSMState
     {
         protected FiniteStateMachine FSM;
         protected Unit Unit;
+        protected UnitData Data;
         protected NavMeshAgent UnitNavMesh;
         protected UnitAnimator Animator;
 
-        public FSMState(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator)
+        public FSMState(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator, UnitData data)
         {
             FSM = fsm;
             Unit = unit;
             UnitNavMesh = navMesh;
             Animator = animator;
+            Data = data;
         }
 
         public virtual void Enter() { }
