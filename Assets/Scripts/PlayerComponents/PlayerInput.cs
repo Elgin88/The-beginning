@@ -6,11 +6,11 @@ namespace Assets.Scripts.PlayerComponents
 {
     internal class PlayerInput : MonoBehaviour
     {
-        private InputActions _inputActions;
+        [SerializeField] private SelectedUnitsHandler _selectedUnitsHandler;
 
+        private InputActions _inputActions;
         private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
-        private SelectedUnitsHandler _selectedUnitsHandler;
 
         private Vector2 _moveDirection;
 
@@ -55,16 +55,14 @@ namespace Assets.Scripts.PlayerComponents
 
         private void OnMoveUnits()
         {
-            if (_selectedUnitsHandler.IsAnyUnitSelected())
-                _selectedUnitsHandler.MoveUnits();
+            _selectedUnitsHandler.MoveUnits();
         }
 
         [Inject]
-        private void Construct(PlayerMovement movement, PlayerAttacker attacker, SelectedUnitsHandler selectedUnitsHandler)
+        private void Construct(PlayerMovement movement, PlayerAttacker attacker)
         {
             _playerMover = movement;
             _playerAttacker = attacker;
-            _selectedUnitsHandler = selectedUnitsHandler;
         }
     }
 }

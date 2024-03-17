@@ -4,7 +4,8 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 {
     internal class FSMStateChaseEnemy : FSMState
     {
-        public FSMStateChaseEnemy(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator) : base(fsm, unit, navMesh, animator)
+        public FSMStateChaseEnemy(FiniteStateMachine fsm, Unit unit, NavMeshAgent navMesh, UnitAnimator animator, UnitData data)
+            : base(fsm, unit, navMesh, animator, data)
         {
         }
 
@@ -22,7 +23,7 @@ namespace Assets.Scripts.PlayerUnits.UnitFiniteStateMachine
 
         public override void Update()
         {
-            if (UnitNavMesh.remainingDistance <= Unit.AttackRange)
+            if (UnitNavMesh.remainingDistance <= Data.AttackRange)
             {
                 FSM.SetState<FSMStateAttack>();
             }
