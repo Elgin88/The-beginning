@@ -4,12 +4,11 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(EnemyVision))]
-
     internal class EnemyNextTargetFinder : MonoBehaviour
     {
+        [SerializeField] private EnemyVision _enemyVision;
+
         private BuildingSystem.Buildings.MainBuilding _mainBulding;
-        private EnemyVision _enemyVision;
         private GameObject _currentTarget;
         private Coroutine _findNextTarget;
 
@@ -57,7 +56,6 @@ namespace Assets.Scripts.Enemy
         private void Awake()
         {
             _mainBulding = FindAnyObjectByType<BuildingSystem.Buildings.MainBuilding>();
-            _enemyVision = GetComponent<EnemyVision>();
         }
 
         private void Start()

@@ -2459,7 +2459,7 @@ Rigidbody:
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
   m_UseGravity: 1
-  m_IsKinematic: 1
+  m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
@@ -2511,6 +2511,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1fc5b84725c3447499a7ec82770f2814, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateMove: {fileID: -963228721103223142}
 --- !u!114 &-963228721103223142
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2536,6 +2537,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 81932cd6ee17443faaa1d3a2f44e3ba3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyNextTargetFinder: {fileID: 8314578972581342070}
+  _enemyRayPoint: {fileID: 3760915708570732159}
+  _stateIdle: {fileID: 7679217566705177323}
 --- !u!114 &5430675260899835263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2548,6 +2552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3e1c4fcb17c5842e88c5b0bea10f8454, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _navMeshAgent: {fileID: 529700466918893106}
+  _animator: {fileID: 5538255215729447699}
 --- !u!114 &4588992870866705208
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2579,6 +2585,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 75b7a1fdf54d6456da2097b21c9a4af9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyVision: {fileID: 4588992870866705208}
 --- !u!114 &1423910423695567156
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2591,6 +2598,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d679cd6f355124c0999d1f90d84a9e87, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyNextTargetFinder: {fileID: 8314578972581342070}
+  _transitionAttack: {fileID: -5224444083855361051}
+  _enemyAnimation: {fileID: 5430675260899835263}
+  _rigidbody: {fileID: 608824489198612735}
+  _enemyMelee: {fileID: 6106297887006264949}
+  _enemyRange: {fileID: 0}
 --- !u!114 &8576810530071468875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2603,6 +2616,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bb6552bf023e4585aad90b87d460c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyNextTargetFinder: {fileID: 8314578972581342070}
+  _transitionMove: {fileID: -4093611054570065152}
+  _stateAttack: {fileID: 1423910423695567156}
+  _stateMove: {fileID: -963228721103223142}
 --- !u!114 &7679217566705177323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2615,6 +2632,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyNextTargetFinder: {fileID: 8314578972581342070}
+  _enemyAnimation: {fileID: 5430675260899835263}
+  _transitionIdle: {fileID: 8576810530071468875}
+  _rigidboy: {fileID: 608824489198612735}
 --- !u!114 &-5224444083855361051
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2627,6 +2648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53cb5ca4f9a09494281e0ed5cc7b527f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _stateIdle: {fileID: 7679217566705177323}
 --- !u!1 &6583875623457425539
 GameObject:
   m_ObjectHideFlags: 0

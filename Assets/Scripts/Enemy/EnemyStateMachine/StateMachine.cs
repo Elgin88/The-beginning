@@ -3,19 +3,16 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(StateIdle))]
-
     internal class StateMachine : MonoBehaviour
     {
+        [SerializeField] private StateMove _stateMove;
+
         private Coroutine _startTrySetNextState;
-        private StateMove _stateMove;
         private State _currentState;
         private State _startState;
 
         private void Awake()
         {
-            _stateMove = GetComponent<StateMove>();
-
             _startState = _stateMove;
             _currentState = _startState;
         }
