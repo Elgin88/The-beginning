@@ -4,11 +4,9 @@ using UnityEngine;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(StateIdle))]
-
     internal class TransitionAttack : Transition
     {
-        private StateIdle _stateIdle;
+        [SerializeField] private StateIdle _stateIdle;
 
         protected override State NextState { get; set; }
         protected override Coroutine CheckTransition { get; set; }
@@ -41,11 +39,6 @@ namespace Assets.Scripts.Enemy
         internal void SetStateIdle()
         {
             NextState = _stateIdle;
-        }
-
-        private void Awake()
-        {
-            _stateIdle = GetComponent<StateIdle>();
         }
     }
 }

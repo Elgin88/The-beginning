@@ -4,16 +4,12 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(TransitionMove))]
-    [RequireComponent(typeof(StateAttack))]
-    [RequireComponent(typeof(StateMove))]
-
     internal class TransitionIdle : Transition
     {
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private TransitionMove _transitionMove;
-        private StateAttack _stateAttack;
-        private StateMove _stateMove;
+        [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
+        [SerializeField] private TransitionMove _transitionMove;
+        [SerializeField] private StateAttack _stateAttack;
+        [SerializeField] private StateMove _stateMove;
 
         protected override Coroutine CheckTransition { get; set; }
         protected override State NextState { get; set; }
@@ -61,14 +57,6 @@ namespace Assets.Scripts.UnitStateMachine
                 CheckTransition = StartCoroutine(CheckTransitionIE());
                 CheckTransition = null;
             }
-        }
-
-        private void Awake()
-        {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _transitionMove = GetComponent<TransitionMove>();
-            _stateAttack = GetComponent<StateAttack>();
-            _stateMove = GetComponent<StateMove>();
         }
     }
 }

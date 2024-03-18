@@ -3,13 +3,11 @@ using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
-    [RequireComponent(typeof(NavMeshAgent))]
-    [RequireComponent(typeof(Animator))]
-
     internal class EnemyAnimation : MonoBehaviour
     {
-        private NavMeshAgent _navMeshAgent;
-        private Animator _animator;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private Animator _animator;
+
         private string _orcBossRunForwardSpeed = "RunForwardSpeed";
         private string _attack = "IsAttack1";
         private string _idle = "IsIdle";
@@ -49,9 +47,6 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-            _animator = GetComponent<Animator>();
-
             _normalizeMoveSpeed = _navMeshAgent.speed / _baseMoveSpeed;
             _animator.SetFloat(_orcBossRunForwardSpeed, _normalizeMoveSpeed);
         }
