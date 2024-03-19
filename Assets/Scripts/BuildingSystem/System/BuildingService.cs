@@ -13,6 +13,7 @@ namespace Assets.Scripts.BuildingSystem
         private Transform _currentPlayersTransform;
         // сделать переменную для денег игрока
         private int _buildButtonIndex = 1;
+        private bool _canBuild;
 
         private void OnEnable()
         {
@@ -28,7 +29,8 @@ namespace Assets.Scripts.BuildingSystem
        
         private void Build()   //тут сравнивнить деньги с _buildingUI.BuidingCost
         {
-
+            _canBuild = false;
+            
             for (int i = 0; i < _buildPoints.Count; i++)
             {
                 if (_buildPoints[i].SpotToPlaceBuilding != null && _buildPoints[i].IsOccupied == false && _currentPlayersTransform == _buildPoints[i].transform)
@@ -40,7 +42,7 @@ namespace Assets.Scripts.BuildingSystem
                             Instantiate(_buildings[j], _buildPoints[i].SpotToPlaceBuilding);
                             _buildPoints[i].TakeSpot();
                             _buildPoints[i].TryToDeActiveIconOfBuildPoint();
-                            _buildingUI.DeActiveButton(_buildButtonIndex);
+                            _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
                         }
                     }
                 }
@@ -68,12 +70,13 @@ namespace Assets.Scripts.BuildingSystem
         private void OnPlayerWentIn(Transform spotOfPlayer)  // тут получить деньги от игрока
         {
             _currentPlayersTransform = spotOfPlayer;
+            _canBuild = true;
 
             for (int i = 0; i < _buildPoints.Count; i++)
             {
                 if (_buildPoints[i].transform == spotOfPlayer)
                 {
-                    _buildingUI.ActiveButton(_buildButtonIndex);
+                    _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
                     _buildingUI.SetButtonText(_buildPoints[i].CostToBuild);     
                 }
             }
@@ -81,7 +84,8 @@ namespace Assets.Scripts.BuildingSystem
 
         private void OnPlayerWentOut() 
         {
-            _buildingUI.DeActiveButton(_buildButtonIndex);
+            _canBuild = false;
+            _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
         }
     }
 }

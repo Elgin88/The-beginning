@@ -12,10 +12,6 @@ namespace Assets.Scripts.PlayerUnits
         [SerializeField] private SelectedUnitsHandler _handler;
 
         private UnitsPool _pool;
-        private int _spawnUnitButtonIndex = 2;
-
-        public static Action<int> PlayerWentIn;   //также передавать деньги игрока
-        public static Action<int> PlayerWentOut;
 
         private void Start() 
         { 
@@ -27,39 +23,13 @@ namespace Assets.Scripts.PlayerUnits
         {
             if (Input.GetKeyUp(KeyCode.Space))
             {
-                Unit unit = _pool.GetUnit();
+               // Unit unit = _pool.GetUnit();
                 // unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-                unit.transform.position = _spotOfRespawnUnits.transform.position;
+               // unit.transform.position = _spotOfRespawnUnits.transform.position;
             }
         }
 
-        private void OnEnable()
-        {
-            BuildingUI.SpawnButtonClicked += SpawnUnit;
-        }
-
-        private void OnDisable()
-        {
-            BuildingUI.SpawnButtonClicked -= SpawnUnit;
-        }
-
-        private void OnTriggerEnter(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out Player player)) // деньги для проверки взять тут
-            {
-                PlayerWentIn?.Invoke(_spawnUnitButtonIndex);
-            }
-        }
-
-        private void OnTriggerExit(Collider other)
-        {
-            if (other.gameObject.TryGetComponent(out Player player))
-            {
-                PlayerWentOut?.Invoke(_spawnUnitButtonIndex);
-            }
-        }
-
-        private void SpawnUnit()  // сделать проверку на деньги
+        public void Spawn()  
         {
             Unit unit = _pool.GetUnit();
             unit.transform.position = _spotOfRespawnUnits.transform.position; 
