@@ -8,16 +8,19 @@ namespace Assets.Scripts.UnitStateMachine
     [RequireComponent(typeof(EnemyNextTargetFinder))]
     [RequireComponent(typeof(TransitionAttack))]
     [RequireComponent(typeof(EnemyAnimation))]
+    [RequireComponent(typeof(Rigidbody))]
 
     internal class StateAttack : State
     {
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private TransitionAttack _transitionAttack;
-        private EnemyAnimation _enemyAnimation;
+        [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
+        [SerializeField] private TransitionAttack _transitionAttack;
+        [SerializeField] private EnemyAnimation _enemyAnimation;
+        [SerializeField] private Rigidbody _rigidbody;
+        [SerializeField] private EnemyMelee _enemyMelee;
+        [SerializeField] private EnemyRange _enemyRange;
+
         private WaitForSeconds _timeBeforeAttackWFS;
         private WaitForSeconds _timeAfterAttackWFS;
-        private EnemyMelee _enemyMelee;
-        private EnemyRange _enemyRange;
         private Coroutine _attack;
         private float _timeBeforeAttack = 0.45f;
         private float _timeAfterAttack = 0.5f;
@@ -35,6 +38,7 @@ namespace Assets.Scripts.UnitStateMachine
                 _attack = StartCoroutine(Attack());
                 _transitionAttack.StartCheckTransition();
                 _enemyAnimation.StartPlayAttack();
+                _rigidbody.isKinematic = false;
             }
         }
 
@@ -44,15 +48,7 @@ namespace Assets.Scripts.UnitStateMachine
             _attack = null;
             _transitionAttack.StopCheckTransition();
             _enemyAnimation.StopPlayAttack();
-        }
-
-        private void Awake()
-        {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _transitionAttack = GetComponent<TransitionAttack>();
-            _enemyAnimation = GetComponent<EnemyAnimation>();
-            _enemyMelee = GetComponent<EnemyMelee>();
-            _enemyRange = GetComponent<EnemyRange>();
+            _rigidbody.isKinematic = true;
         }
 
         private void Start()
@@ -83,7 +79,7 @@ namespace Assets.Scripts.UnitStateMachine
 
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform);
+                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTargetPosition);
                 }
             }
 

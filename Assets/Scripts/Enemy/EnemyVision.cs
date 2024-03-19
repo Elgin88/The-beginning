@@ -7,30 +7,31 @@ namespace Assets.Scripts.Enemy
 {
     internal class EnemyVision: MonoBehaviour
     {
+        [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
         [SerializeField] private EnemyRayPoint _enemyRayPoint;
         [SerializeField] private LayerMask _layersForEnemyVision;
         [SerializeField] private float _visionAngle;
         [SerializeField] private float _visionRange;
         [SerializeField] private float _visionRayCount;
 
-        private List<GameObject> _targets;
-        private float _stepOfRotationY => _visionAngle / _visionRayCount;
+        private Dictionary<Vector3, GameObject> _currentNearestPositionAndTarget;
+        private Dictionary<Vector3,GameObject> _currentPositionsAndTargets;
+        private float _stepOfRotationY;
+        private float _currentDistanceToNearestPositionAndTarget;
 
-        internal List<GameObject> GetTargets()
-        {
-            List<GameObject> targets;
+        internal Dictionary<Vector3,GameObject> CurrentPositionAndTarget => _currentNearestPositionAndTarget;
 
-            targets = _targets;
-
-            return targets;
-        }
+        internal float DistanceToNearestPositionAndTarget => _currentDistanceToNearestPositionAndTarget;
 
         private void Awake()
         {
-            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
+            _currentNearestPositionAndTarget = new Dictionary<Vector3, GameObject>();
+            _currentPositionsAndTargets = new Dictionary<Vector3, GameObject>();
+            _stepOfRotationY = _visionAngle / _visionRayCount;
+        }
 
-            _targets = new List<GameObject>();
-
+        private void Start()
+        {
             StartCoroutine(Vision());
         }
 
@@ -39,7 +40,8 @@ namespace Assets.Scripts.Enemy
             while (true)
             {
                 int currentRayNumber = 0;
-                _targets = new List<GameObject>();
+
+                _currentPositionsAndTargets = new Dictionary<Vector3, GameObject>();
 
                 while (currentRayNumber <= _visionRayCount)
                 {
@@ -60,9 +62,9 @@ namespace Assets.Scripts.Enemy
 
         private void SetDataRaycastHit()
         {
-            Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
+            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
 
-            //Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
+            Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
 
             if (raycastHit.collider != null)
             {
@@ -70,33 +72,60 @@ namespace Assets.Scripts.Enemy
                 {
                     if (idamageable.IsPlayerObject & idamageable.IsDead == false)
                     {
-                        AddTargetToList(raycastHit.collider.gameObject);
+                        AddTargetToDictionary(raycastHit.point, raycastHit.collider.gameObject);
                     }
                 }
             }
+
+            SetCurrentNearestPOsitionAndTarget();
         }
 
-        private void AddTargetToList(GameObject gameObject)
+        private void AddTargetToDictionary(Vector3 raycastHitPoint, GameObject hitObject)
         {
-            if (CheckTargetsForRepeat(gameObject) == false)
+            _currentPositionsAndTargets.Add(raycastHitPoint, hitObject);
+        }
+
+        private void SetCurrentNearestPOsitionAndTarget()
+        {
+            _currentNearestPositionAndTarget = GetFirstPositionAndTarget();
+            _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, _enemyNextTargetFinder.StartTarget.transform.position);
+
+            foreach (var item in _currentPositionsAndTargets)
             {
-                _targets.Add(gameObject);
+                if (Vector3.Distance(transform.position, item.Key) < Vector3.Distance(transform.position, GetPositionCurrentTarget()))
+                {
+                    _currentNearestPositionAndTarget = new Dictionary<Vector3, GameObject>() { { item.Key, item.Value } };
+                    _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, item.Key);
+                }
             }
         }
 
-        private bool CheckTargetsForRepeat(GameObject gameObject)
+        private Vector3 GetPositionCurrentTarget()
         {
-            bool isRepeat = false;
-
-            foreach (GameObject target in _targets)
+            if (_currentNearestPositionAndTarget != null)
             {
-                if (target == gameObject)
+                foreach (var item in _currentNearestPositionAndTarget)
                 {
-                    isRepeat = true;
+                    return item.Key;
                 }
             }
 
-            return isRepeat;
+            return _enemyNextTargetFinder.StartTarget.transform.position;
+        }
+
+        private Dictionary<Vector3, GameObject> GetFirstPositionAndTarget()
+        {
+            if (_currentPositionsAndTargets.Count > 0)
+            {
+                foreach (var item in _currentPositionsAndTargets)
+                {
+                    Dictionary<Vector3, GameObject> firstPositionAndTarget = new Dictionary<Vector3, GameObject> { { item.Key, item.Value } };
+
+                    return firstPositionAndTarget;
+                }
+            }
+
+            return null;
         }
     }
 }

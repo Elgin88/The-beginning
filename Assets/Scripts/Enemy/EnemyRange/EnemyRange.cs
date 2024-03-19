@@ -4,6 +4,6 @@ namespace Assets.Scripts.Enemy
 {
     internal abstract class EnemyRange : Enemy
     {
-        internal abstract void EnableArrow(Transform transform);
+        internal abstract void EnableArrow(Vector3 position);
     }
 }

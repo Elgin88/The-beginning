@@ -10,14 +10,14 @@ internal class EnemyRangeWoodArcher : EnemyRange
 
     private EnemyRangeArrow _currentArrow;
 
-    internal override void EnableArrow(Transform target)
+    internal override void EnableArrow(Vector3 targetPosition)
     {
         SetEnemyRangeArrow();
 
         _currentArrow.gameObject.SetActive(true);
         _currentArrow.transform.position = _spawnPoint.transform.position;
 
-        _currentArrow.StartFly(target);
+        _currentArrow.StartFly(targetPosition);
     }
 
     internal void SetEnemyRangeArrow()

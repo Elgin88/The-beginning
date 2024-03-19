@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(StateIdle))]
-
     internal class TransitionMove : Transition
     {
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private EnemyRayPoint _enemyRayPoint;
-        private StateIdle _stateIdle;
+        [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
+        [SerializeField] private EnemyRayPoint _enemyRayPoint;
+        [SerializeField] private EnemyVision _enemyVision;
+        [SerializeField] private StateIdle _stateIdle;
+
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
         private float _minDistanceToTargetForRangeEnemy = 8f;
         private float _minDistanteToTarget;
@@ -44,15 +44,9 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            if (Physics.Raycast(_enemyRayPoint.transform.position, transform.forward, out RaycastHit raysactHit, _minDistanteToTarget))
+            if (_enemyVision.DistanceToNearestPositionAndTarget < _minDistanteToTarget)
             {
-                if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
-                {
-                    if (idamageable.IsPlayerObject == true)
-                    {
-                        isMinDistance = true;
-                    }
-                }
+                isMinDistance = true;
             }
 
             return isMinDistance;
@@ -77,11 +71,6 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _stateIdle = GetComponent<StateIdle>();
-
-            _enemyRayPoint = GetComponentInChildren<EnemyRayPoint>();
-
             if (TryGetComponent(out EnemyMelee enemyMelee))
             {
                 _minDistanteToTarget = _minDistanceToTargetForMelleeEnemy;

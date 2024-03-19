@@ -12,7 +12,10 @@ namespace Assets.Scripts.Tests
 
         private void Update()
         {
-            //transform.position = new Vector3(_gameObject.transform.position.x + deltaX, _gameObject.transform.position.y + deltaY, _gameObject.transform.position.z + deltaZ);
+            if (_gameObject != null)
+            {
+                transform.position = new Vector3(_gameObject.transform.position.x + deltaX, _gameObject.transform.position.y + deltaY, _gameObject.transform.position.z + deltaZ);
+            }
         }
     }
 }

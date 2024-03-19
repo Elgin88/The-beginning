@@ -12,11 +12,7 @@ namespace Assets.Scripts.Yander
 
         public void OnCallGameReadyButtonClick()
         {
-#if UNITY_EDITOR
-            return;
-#endif
-
-#if UNITY_WEBGL
+#if UNITY_WEBGL && !UNITY_EDITOR
             YandexGamesSdk.GameReady();
 #endif
         }
