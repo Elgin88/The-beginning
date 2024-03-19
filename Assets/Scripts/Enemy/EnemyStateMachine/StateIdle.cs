@@ -23,7 +23,7 @@ namespace Assets.Scripts.UnitStateMachine
 
             if (_enemyNextTargetFinder.CurrentTarget != null)
             {
-                transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTarget.transform.position, Vector3.up);
+                transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition, Vector3.up);
             }
         }
 

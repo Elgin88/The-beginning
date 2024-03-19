@@ -1,5 +1,7 @@
-using Assets.Scripts.BuildingSystem.Buildings;
+using System;
 using System.Collections;
+using System.Collections.Generic;
+using Assets.Scripts.BuildingSystem.Buildings;
 using UnityEngine;
 
 namespace Assets.Scripts.Enemy
@@ -8,44 +10,41 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private EnemyVision _enemyVision;
 
-        private BuildingSystem.Buildings.MainBuilding _mainBulding;
+        private Dictionary<Vector3, GameObject> _currentPositionAndTarget;
+        private MainBuilding _mainBulding;
+        private GameObject _startTarget;
         private GameObject _currentTarget;
-        private Coroutine _findNextTarget;
+        private Coroutine _setNextTarget;
+        private Vector3 _currentTargetPosition;
+
+        internal GameObject StartTarget => _startTarget;
 
         internal GameObject CurrentTarget => _currentTarget;
 
-        internal void StartFindNextTarget()
+        internal Vector3 CurrentTargetPosition => _currentTargetPosition;
+
+        internal void StartSetNextTarget()
         {
-            if (_findNextTarget == null)
-            {
-                _findNextTarget = StartCoroutine(FindNextTarget());
-            }
+            _setNextTarget = StartCoroutine(SetNextTarget());
         }
 
-        private IEnumerator FindNextTarget()
+        internal void StopSetNextTarget()
+        {
+            StopCoroutine(_setNextTarget);
+        }
+
+        private IEnumerator SetNextTarget()
         {
             while (true)
             {
-                _currentTarget = null;
+                _currentPositionAndTarget = _enemyVision.CurrentPositionAndTarget;
 
-                if (_mainBulding != null)
+                if (_currentPositionAndTarget != null)
                 {
-                    _currentTarget = _mainBulding.gameObject;
-                }
-
-                if (_enemyVision.GetTargets().Count > 0)
-                {
-                    _currentTarget = _enemyVision.GetTargets()[0];
-                }
-
-                foreach (GameObject target in _enemyVision.GetTargets())
-                {
-                    if (_enemyVision.GetTargets().Count > 1 & _currentTarget != null & target != null)
+                    foreach (var item in _currentPositionAndTarget)
                     {
-                        if (Vector3.Distance(transform.position, target.transform.position) < Vector3.Distance(transform.position, _currentTarget.transform.position))
-                        {
-                            _currentTarget = target;
-                        }
+                        _currentTargetPosition = item.Key;
+                        _currentTarget = item.Value;
                     }
                 }
 
@@ -55,12 +54,15 @@ namespace Assets.Scripts.Enemy
 
         private void Awake()
         {
-            _mainBulding = FindAnyObjectByType<BuildingSystem.Buildings.MainBuilding>();
+            _mainBulding = FindAnyObjectByType<MainBuilding>();
+
+            _startTarget = _mainBulding.gameObject;
+            _currentTarget = _startTarget;
         }
 
         private void Start()
         {
-            StartFindNextTarget();
+            StartSetNextTarget();
         }
     }
 }

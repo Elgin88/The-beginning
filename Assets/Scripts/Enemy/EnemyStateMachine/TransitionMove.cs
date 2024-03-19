@@ -9,6 +9,7 @@ namespace Assets.Scripts.UnitStateMachine
     {
         [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
         [SerializeField] private EnemyRayPoint _enemyRayPoint;
+        [SerializeField] private EnemyVision _enemyVision;
         [SerializeField] private StateIdle _stateIdle;
 
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
@@ -43,15 +44,9 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            if (Physics.Raycast(_enemyRayPoint.transform.position, transform.forward, out RaycastHit raysactHit, _minDistanteToTarget))
+            if (_enemyVision.DistanceToNearestPositionAndTarget < _minDistanteToTarget)
             {
-                if (raysactHit.transform.TryGetComponent(out IDamageable idamageable))
-                {
-                    if (idamageable.IsPlayerObject == true)
-                    {
-                        isMinDistance = true;
-                    }
-                }
+                isMinDistance = true;
             }
 
             return isMinDistance;
