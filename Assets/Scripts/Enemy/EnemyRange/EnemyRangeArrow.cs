@@ -10,7 +10,6 @@ namespace Assets.Scripts.Enemy
 
         private Coroutine _fly;
         private Transform _currentTarget;
-        private Transform _startTarget;
         private Vector3 _currentTargetPosition;
         private Vector3 _startTrajectoryPosition;
         private Vector3 _middleTrajectoryPosition;
@@ -19,9 +18,9 @@ namespace Assets.Scripts.Enemy
         private float _hight = 0.5f;
         private bool _isMoveUp;
 
-        internal void StartFly(Transform target)
+        internal void StartFly(Vector3 targetPosition)
         {
-            _startTarget = target;
+            _currentTargetPosition = targetPosition;
             _startTrajectoryPosition = transform.position;
             _isMoveUp = true;
 
@@ -43,11 +42,9 @@ namespace Assets.Scripts.Enemy
 
         private IEnumerator Fly()
         {
-            _currentTarget = _startTarget;
-
             while (true)
             {
-                if (_currentTarget == null || _startTrajectoryPosition == null || _currentTarget.position == null || _currentTarget != _startTarget)
+                if (_currentTarget == null || _startTrajectoryPosition == null || _currentTarget.position == null)
                 {
                     StopFly();
                     gameObject.SetActive(false);

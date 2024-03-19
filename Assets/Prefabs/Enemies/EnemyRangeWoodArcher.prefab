@@ -701,6 +701,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af40434959ab4e47ae97907e2ce8468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyNextTargetFinder: {fileID: 5515530919677055678}
   _enemyRayPoint: {fileID: 6986193781745187224}
   _layersForEnemyVision:
     serializedVersion: 2
@@ -749,6 +750,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _enemyNextTargetFinder: {fileID: 5515530919677055678}
   _enemyRayPoint: {fileID: 6986193781745187224}
+  _enemyVision: {fileID: 3841391347561571486}
   _stateIdle: {fileID: 7995668561108668934}
 --- !u!114 &5614938181954786132
 MonoBehaviour:

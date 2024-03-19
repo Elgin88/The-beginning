@@ -66,9 +66,12 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                if (_enemyNextTargetFinder.CurrentTarget != null)
+                if (_enemyNextTargetFinder != null)
                 {
-                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTarget.transform.position);
+                    if (_enemyNextTargetFinder.CurrentTarget != null)
+                    {
+                        _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
+                    }
                 }
 
                 yield return null;
