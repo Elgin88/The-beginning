@@ -1,5 +1,8 @@
 using Assets.Scripts.BuildingSystem.Buildings;
+using Assets.Scripts.Constants;
+using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerUnits;
+using Assets.Scripts.UI;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -10,28 +13,24 @@ namespace Assets.Scripts.BuildingSystem
 {
     internal class BuildingUI : MonoBehaviour
     {
-        private const int _buildButtonIndex = 1;
-        private const int _spawnUnitButtonIndex = 2;
-        private const int _spawnChestButtonIndex = 3;
-        
         [SerializeField] private Button _buildButton;
         [SerializeField] private Button _spawnUnitButton;
         [SerializeField] private Button _spawnChestButton;
 
-        private string _buttonText = "Построить за ";
-        private int _currentPlayersCoins;
+        private PlayerWallet _currentPlayersWallet;
+        private int _currentCostToBuy;
 
-        public Action BuildButtonClicked;
-        public static Action SpawnUnitButtonClicked;
-        public static Action SpawnChestButtonClicked;
+        public Action<PlayerWallet> BuildButtonClicked;
+        public static Action<PlayerWallet, int> SpawnUnitButtonClicked;
+        public static Action<PlayerWallet, int> SpawnChestButtonClicked;
 
         private void OnEnable()
         {
             _buildButton.onClick.AddListener(OnBuildButtonClicked);  //передвать деньги от игрока через _currentPlayersCoins
             _spawnUnitButton.onClick.AddListener(OnSpawnButtonClicked);  //передвать деньги от игрока через _currentPlayersCoins
             _spawnChestButton.onClick.AddListener(OnSpawnChestButtonClicked);  //передвать деньги от игрока через _currentPlayersCoins
-            ButtonEventer.PlayerWentIn += ToggleButton;
-            ButtonEventer.PlayerWentOut += ToggleButton;
+            ButtonBuyEventer.PlayerWentIn += ToggleButton;
+            ButtonBuyEventer.PlayerWentOut += ToggleButton;
            
         }
 
@@ -40,42 +39,48 @@ namespace Assets.Scripts.BuildingSystem
             _buildButton.onClick.RemoveListener(OnBuildButtonClicked);
             _spawnUnitButton.onClick.RemoveListener(OnSpawnButtonClicked);
             _spawnChestButton.onClick.RemoveListener(OnSpawnChestButtonClicked);
-            ButtonEventer.PlayerWentIn -= ToggleButton;
-            ButtonEventer.PlayerWentOut -= ToggleButton;
+            ButtonBuyEventer.PlayerWentIn -= ToggleButton;
+            ButtonBuyEventer.PlayerWentOut -= ToggleButton;
         }
 
-        public void SetButtonText(int costOfBuilding)
+        private void SetButtonText(Button activeButton,string title, int costToBuy)
         {
-            _buildButton.GetComponentInChildren<TMP_Text>().text = _buttonText + costOfBuilding;
+            activeButton.GetComponentInChildren<TMP_Text>().text = title + costToBuy;
         }
 
         private void OnBuildButtonClicked()
         {
-            BuildButtonClicked?.Invoke();   //передвать деньги от игрока через _currentPlayersCoins
+            BuildButtonClicked?.Invoke(_currentPlayersWallet);   //передвать деньги от игрока через _currentPlayersCoins
         }
 
         private void OnSpawnButtonClicked()
         {
-            SpawnUnitButtonClicked?.Invoke();  //передвать деньги от игрока через _currentPlayersCoins
+            SpawnUnitButtonClicked?.Invoke(_currentPlayersWallet, _currentCostToBuy);  //передвать деньги от игрока через _currentPlayersCoins 
         }
 
         private void OnSpawnChestButtonClicked()
         {
-            SpawnChestButtonClicked?.Invoke();  //передвать деньги от игрока через _currentPlayersCoins
+            SpawnChestButtonClicked?.Invoke(_currentPlayersWallet, _currentCostToBuy);  //передвать деньги от игрока через _currentPlayersCoins
         }
 
-        public void ToggleButton(int indexOfButton, bool isTurnedOn)   //принимать деньги игрока и записывать в _currentPlayersCoins
+        public void ToggleButton(int indexOfButton, PlayerWallet wallet, int costToBuy, bool isTurnedOn)   //принимать деньги игрока и записывать в _currentPlayersCoins
         {
+            _currentPlayersWallet = wallet;
+            _currentCostToBuy = costToBuy;
+
             switch (indexOfButton) 
             {
-                case _buildButtonIndex:
+                case BuildingUiHash.BuildButtonIndex:
                     _buildButton.gameObject.SetActive(isTurnedOn);
+                    SetButtonText(_buildButton, BuildingUiHash.BuildButtonText, costToBuy);
                     break;
-                case _spawnUnitButtonIndex:
+                case BuildingUiHash.SpawnUnitButtonIndex:
                     _spawnUnitButton.gameObject.SetActive(isTurnedOn);
+                    SetButtonText(_spawnUnitButton, BuildingUiHash.SpawnUnitButtonText, costToBuy);
                     break;
-                case _spawnChestButtonIndex:
+                case BuildingUiHash.SpawnChestButtonIndex:
                     _spawnChestButton.gameObject.SetActive(isTurnedOn);
+                    SetButtonText(_spawnChestButton, BuildingUiHash.SpawnChestButtonText, costToBuy);
                     break;
             } 
         }

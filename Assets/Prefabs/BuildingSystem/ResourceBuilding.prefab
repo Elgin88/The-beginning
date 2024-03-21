@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 5634065310282388832}
   - component: {fileID: 3629968806985754241}
   m_Layer: 3
-  m_Name: Sphere
+  m_Name: ChestBuyer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -119,6 +119,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonIndex: 3
+  _costToBuy: 20
 --- !u!1 &6078276059395135974
 GameObject:
   m_ObjectHideFlags: 0
