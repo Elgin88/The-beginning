@@ -1,7 +1,4 @@
-﻿using Assets.Scripts.BuildingSystem;
-using Assets.Scripts.PlayerComponents;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Assets.Scripts.PlayerUnits
 {
