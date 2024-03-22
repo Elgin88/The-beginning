@@ -2547,7 +2547,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2056
   _visionAngle: 180
-  _visionRange: 10
+  _visionRange: 30
   _visionRayCount: 10
 --- !u!114 &8314578972581342070
 MonoBehaviour:
@@ -2580,6 +2580,7 @@ MonoBehaviour:
   _rigidbody: {fileID: 608824489198612735}
   _enemyMelee: {fileID: 2026044442702048242}
   _enemyRange: {fileID: 0}
+  _enemy: {fileID: 2026044442702048242}
 --- !u!114 &7679217566705177323
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2596,6 +2597,7 @@ MonoBehaviour:
   _enemyAnimation: {fileID: 5430675260899835263}
   _transitionIdle: {fileID: 8576810530071468875}
   _rigidboy: {fileID: 608824489198612735}
+  _enemy: {fileID: 2026044442702048242}
 --- !u!114 &-4093611054570065152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2655,6 +2657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 100
   _damage: 25
+  NavMeshAgent: {fileID: 529700466918893106}
   _enemyNextTargetFinder: {fileID: 8314578972581342070}
 --- !u!1 &6583875623457425539
 GameObject:

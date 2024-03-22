@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 using Assets.Scripts.BuildingSystem.Buildings;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using UnityEngine;
 
 internal class EnemyRangeWoodArcher : EnemyRange
@@ -15,10 +15,12 @@ internal class EnemyRangeWoodArcher : EnemyRange
     {
         SetEnemyRangeArrow();
 
-        _currentArrow.gameObject.SetActive(true);
-        _currentArrow.transform.position = _spawnPoint.transform.position;
-
-        _currentArrow.StartFly(_enemyNextTargetFinder.CurrentTargetPosition, _enemyNextTargetFinder.CurrentTarget);
+        if (_currentArrow != null)
+        {
+            _currentArrow.gameObject.SetActive(true);
+            _currentArrow.transform.position = _spawnPoint.transform.position;
+            _currentArrow.StartFly(_enemyNextTargetFinder.CurrentTargetPosition, _enemyNextTargetFinder.CurrentTarget);
+        }
     }
 
     internal override void InitMainBuilding(MainBuilding mainBuilding)
@@ -47,8 +49,11 @@ internal class EnemyRangeWoodArcher : EnemyRange
         transform.position = position;
     }
 
-    internal override void SetRotation()
+    internal override void SetRotationToTarget(Vector3 targetPosition)
     {
-        transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition);
+        if (targetPosition != Vector3.zero)
+        {
+            transform.rotation = Quaternion.LookRotation(targetPosition);
+        }
     }
 }

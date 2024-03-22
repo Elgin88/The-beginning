@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyAnimation : MonoBehaviour
     {
