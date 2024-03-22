@@ -1,25 +1,25 @@
 using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.GameLogic.Damageable;
-using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Assets.Scripts.Enemy
 {
     [RequireComponent(typeof(Rigidbody))]
-    [RequireComponent(typeof(StateMachine))]
-    [RequireComponent(typeof(NavMeshAgent))]
 
-    internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
+    internal class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
         [SerializeField] private float _health;
         [SerializeField] private float _damage;
+        [SerializeField] protected NavMeshAgent NavMeshAgent;
 
+        private MainBuilding _mainBuilding;
+        private float _currentSpeed;
         private bool _isDead;
 
-        protected NavMeshAgent NavMeshAgent;
+        internal MainBuilding MainBuilding => _mainBuilding;
 
-        protected float CurrentSpeed;
+        internal float CurrentSpeed => _currentSpeed;
 
         public bool IsPlayerObject => false;
 
@@ -30,6 +30,21 @@ namespace Assets.Scripts.Enemy
         float IEnemy.Health => _health;
 
         float IEnemy.Damage => _damage;
+
+        internal void SetPosition(Vector3 position)
+        {
+            transform.position = position;
+        }
+
+        internal void SetRotationToTarget(Vector3 targetPosition)
+        {
+            transform.rotation = Quaternion.LookRotation(targetPosition);
+        }
+
+        internal void InitMainBuilding(MainBuilding mainBuilding)
+        {
+            _mainBuilding = mainBuilding;
+        }
 
         void IDamageable.TakeDamage(float damage)
         {
@@ -42,17 +57,9 @@ namespace Assets.Scripts.Enemy
             }
         }
 
-        internal abstract void SetPosition(Vector3 position);
-
-        internal abstract void SetRotation();
-
-        internal abstract void InitMainBuilding(MainBuilding mainBuilding);
-
         private void Awake()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-
-            CurrentSpeed = NavMeshAgent.speed;
+            _currentSpeed = NavMeshAgent.speed;
         }
     }
 }

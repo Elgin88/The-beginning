@@ -21,7 +21,7 @@ internal class EnemyRangeWoodArcher : EnemyRange
         _currentArrow.StartFly(_enemyNextTargetFinder.CurrentTargetPosition, _enemyNextTargetFinder.CurrentTarget);
     }
 
-    internal override void InitMainBuilding(MainBuilding mainBuilding)
+    internal void InitMainBuilding(MainBuilding mainBuilding)
     {
         _enemyNextTargetFinder.InitMainBuilding(mainBuilding);
     }
@@ -47,8 +47,8 @@ internal class EnemyRangeWoodArcher : EnemyRange
         transform.position = position;
     }
 
-    internal override void SetRotation()
+    internal override void SetRotation(Vector3 targetPosition)
     {
-        transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition);
+        transform.rotation = Quaternion.LookRotation(targetPosition);
     }
 }

@@ -20,6 +20,8 @@ namespace Assets.Scripts.Enemy
 
         internal GameObject CurrentTarget => _currentTarget;
 
+        private MainBuilding MainBuilding => _mainBuilding;
+
         internal void StartSetNextTarget()
         {
             _setNextTarget = StartCoroutine(SetNextTarget());

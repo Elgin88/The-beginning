@@ -5,9 +5,6 @@ using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(TransitionAttack))]
-    [RequireComponent(typeof(EnemyAnimation))]
     [RequireComponent(typeof(Rigidbody))]
 
     internal class StateAttack : State
@@ -33,13 +30,10 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override void StartState()
         {
-            if (_attack == null)
-            {
-                _attack = StartCoroutine(Attack());
-                _transitionAttack.StartCheckTransition();
-                _enemyAnimation.StartPlayAttack();
-                _rigidbody.isKinematic = false;
-            }
+            _attack = StartCoroutine(Attack());
+            _transitionAttack.StartCheckTransition();
+            _enemyAnimation.StartPlayAttack();
+            _rigidbody.isKinematic = false;
         }
 
         internal override void StopState()

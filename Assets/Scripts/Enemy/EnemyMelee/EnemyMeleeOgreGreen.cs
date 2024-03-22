@@ -17,9 +17,9 @@ namespace Assets.Scripts.Enemy
             transform.position = position;
         }
 
-        internal override void SetRotation()
+        internal override void SetRotation(Vector3 targetPosition)
         {
-            transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition);
+            transform.rotation = Quaternion.LookRotation(targetPosition);
         }
     }
 }

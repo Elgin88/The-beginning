@@ -664,6 +664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _health: 50
   _damage: 5
+  NavMeshAgent: {fileID: 6469173234968345886}
   _arrows:
   - {fileID: 3104937314605660935}
   - {fileID: 1365138780761572874}

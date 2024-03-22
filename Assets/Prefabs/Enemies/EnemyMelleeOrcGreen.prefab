@@ -2356,6 +2356,7 @@ GameObject:
   - component: {fileID: 5549773251676875182}
   - component: {fileID: 608824489198612735}
   - component: {fileID: 529700466918893106}
+  - component: {fileID: 2026044442702048242}
   - component: {fileID: -3228283824888894521}
   - component: {fileID: -963228721103223142}
   - component: {fileID: 5430675260899835263}
@@ -2366,7 +2367,6 @@ GameObject:
   - component: {fileID: -4093611054570065152}
   - component: {fileID: 8576810530071468875}
   - component: {fileID: -5224444083855361051}
-  - component: {fileID: 2026044442702048242}
   m_Layer: 6
   m_Name: EnemyMelleeOrcGreen
   m_TagString: Untagged
@@ -2485,6 +2485,22 @@ NavMeshAgent:
   m_BaseOffset: -0.35
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &2026044442702048242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6517527388443274768}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _health: 100
+  _damage: 25
+  NavMeshAgent: {fileID: 529700466918893106}
+  _enemyNextTargetFinder: {fileID: 8314578972581342070}
 --- !u!114 &-3228283824888894521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2641,21 +2657,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _stateIdle: {fileID: 7679217566705177323}
---- !u!114 &2026044442702048242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6517527388443274768}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4a09498166f3420ca25cc708e89f07e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _health: 100
-  _damage: 25
-  _enemyNextTargetFinder: {fileID: 8314578972581342070}
 --- !u!1 &6583875623457425539
 GameObject:
   m_ObjectHideFlags: 0
