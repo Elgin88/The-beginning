@@ -4,20 +4,18 @@ using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
 using UnityEngine.AI;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     [RequireComponent(typeof(Rigidbody))]
     [RequireComponent(typeof(StateMachine))]
-    [RequireComponent(typeof(NavMeshAgent))]
 
     internal abstract class Enemy : MonoBehaviour, IDamageable, IEnemy
     {
         [SerializeField] private float _health;
         [SerializeField] private float _damage;
+        [SerializeField] private NavMeshAgent NavMeshAgent;
 
         private bool _isDead;
-
-        protected NavMeshAgent NavMeshAgent;
 
         protected float CurrentSpeed;
 
@@ -44,14 +42,12 @@ namespace Assets.Scripts.Enemy
 
         internal abstract void SetPosition(Vector3 position);
 
-        internal abstract void SetRotation();
+        internal abstract void SetRotationToTarget(Vector3 targetPosition);
 
         internal abstract void InitMainBuilding(MainBuilding mainBuilding);
 
         private void Awake()
         {
-            NavMeshAgent = GetComponent<NavMeshAgent>();
-
             CurrentSpeed = NavMeshAgent.speed;
         }
     }

@@ -1,6 +1,6 @@
 ﻿using System.Collections;
 using UnityEngine;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 
 namespace Assets.Scripts.Movement
 {

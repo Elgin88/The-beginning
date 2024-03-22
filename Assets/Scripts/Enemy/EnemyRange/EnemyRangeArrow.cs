@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     public class EnemyRangeArrow : MonoBehaviour
     {

@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -54,10 +54,7 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 if (_enemyNextTargetFinder != null)
                 {
-                    if (_enemyNextTargetFinder.CurrentTargetPosition != null)
-                    {
-                        _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
-                    }
+                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
                 }
 
                 yield return null;

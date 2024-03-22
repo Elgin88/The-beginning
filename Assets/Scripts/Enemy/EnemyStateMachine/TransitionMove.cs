@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 

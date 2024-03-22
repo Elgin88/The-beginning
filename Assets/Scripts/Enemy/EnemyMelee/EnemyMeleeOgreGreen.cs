@@ -1,7 +1,7 @@
 using Assets.Scripts.BuildingSystem.Buildings;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyMelleeOrcGreen : EnemyMelee
     {
@@ -17,9 +17,12 @@ namespace Assets.Scripts.Enemy
             transform.position = position;
         }
 
-        internal override void SetRotation()
+        internal override void SetRotationToTarget(Vector3 targetPosition)
         {
-            transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition);
+            if (targetPosition != Vector3.zero)
+            {
+                transform.rotation = Quaternion.LookRotation(targetPosition);
+            }
         }
     }
 }

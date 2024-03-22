@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.BuildingSystem.Buildings;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyFactory: MonoBehaviour
     {

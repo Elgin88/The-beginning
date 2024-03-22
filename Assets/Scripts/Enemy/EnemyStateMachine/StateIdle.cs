@@ -1,11 +1,8 @@
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(EnemyAnimation))]
-    [RequireComponent(typeof(TransitionIdle))]
     [RequireComponent(typeof(Rigidbody))]
 
     internal class StateIdle : State
@@ -14,17 +11,21 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private TransitionIdle _transitionIdle;
         [SerializeField] private Rigidbody _rigidboy;
+        [SerializeField] private Enemy _enemy;
+
+        private void OnEnable()
+        {
+            if (_enemyNextTargetFinder != null)
+            {
+                _enemy.SetRotationToTarget(_enemyNextTargetFinder.CurrentTargetPosition);
+            }
+        }
 
         internal override void StartState()
         {
             _transitionIdle.StartCheckTransition();
             _enemyAnimation.StartPlayIdle();
             _rigidboy.isKinematic = false;
-
-            if (_enemyNextTargetFinder.CurrentTarget != null)
-            {
-                transform.rotation = Quaternion.LookRotation(_enemyNextTargetFinder.CurrentTargetPosition, Vector3.up);
-            }
         }
 
         internal override void StopState()

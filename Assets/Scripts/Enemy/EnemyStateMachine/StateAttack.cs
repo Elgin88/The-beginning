@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
@@ -18,6 +18,7 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private Rigidbody _rigidbody;
         [SerializeField] private EnemyMelee _enemyMelee;
         [SerializeField] private EnemyRange _enemyRange;
+        [SerializeField] private Enemy _enemy;
 
         private WaitForSeconds _timeBeforeAttackWFS;
         private WaitForSeconds _timeAfterAttackWFS;
@@ -33,13 +34,11 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override void StartState()
         {
-            if (_attack == null)
-            {
-                _attack = StartCoroutine(Attack());
-                _transitionAttack.StartCheckTransition();
-                _enemyAnimation.StartPlayAttack();
-                _rigidbody.isKinematic = false;
-            }
+            _attack = StartCoroutine(Attack());
+            _transitionAttack.StartCheckTransition();
+            _enemyAnimation.StartPlayAttack();
+            _rigidbody.isKinematic = false;
+            _enemy.SetRotationToTarget(_enemyNextTargetFinder.CurrentTargetPosition);
         }
 
         internal override void StopState()

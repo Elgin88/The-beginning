@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyVision: MonoBehaviour
     {
@@ -14,20 +14,20 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private float _visionRange;
         [SerializeField] private float _visionRayCount;
 
-        private Dictionary<Vector3, UnityEngine.GameObject> _currentPositionAndTarget;
-        private Dictionary<Vector3, UnityEngine.GameObject> _positionsAndTargets;
+        private Dictionary<Vector3, GameObject> _currentPositionAndTarget;
+        private Dictionary<Vector3, GameObject> _positionsAndTargets;
         private float _stepOfRotationY;
         private float _currentDistanceToNearestPositionAndTarget;
         private float _startDistanceToNearestPositionAndTarget = 100;
 
-        internal Dictionary<Vector3, UnityEngine.GameObject> CurrentPositionAndTarget => _currentPositionAndTarget;
+        internal Dictionary<Vector3, GameObject> CurrentPositionAndTarget => _currentPositionAndTarget;
 
         internal float DistanceToNearestPositionAndTarget => _currentDistanceToNearestPositionAndTarget;
 
         private void Awake()
         {
-            _currentPositionAndTarget = new Dictionary<Vector3, UnityEngine.GameObject>();
-            _positionsAndTargets = new Dictionary<Vector3, UnityEngine.GameObject>();
+            _currentPositionAndTarget = new Dictionary<Vector3, GameObject>();
+            _positionsAndTargets = new Dictionary<Vector3, GameObject>();
             _stepOfRotationY = _visionAngle / _visionRayCount;
             _currentDistanceToNearestPositionAndTarget = _startDistanceToNearestPositionAndTarget;
         }
@@ -43,7 +43,8 @@ namespace Assets.Scripts.Enemy
             {
                 int currentRayNumber = 0;
 
-                _positionsAndTargets = new Dictionary<Vector3, UnityEngine.GameObject>();
+                _positionsAndTargets = new Dictionary<Vector3, GameObject>();
+                _currentDistanceToNearestPositionAndTarget = 1000;
 
                 while (currentRayNumber <= _visionRayCount)
                 {
@@ -64,8 +65,6 @@ namespace Assets.Scripts.Enemy
 
         private void SetDataRaycastHit()
         {
-            //Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
-
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
 
             if (raycastHit.collider != null)
