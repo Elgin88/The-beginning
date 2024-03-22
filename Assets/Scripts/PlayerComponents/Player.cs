@@ -10,6 +10,8 @@ namespace Assets.Scripts.PlayerComponents
 
         public float RotationSpeed {get; private set;}
 
+        public PlayerWallet Wallet => new PlayerWallet();
+
         public Transform Transform => transform;
 
         [Inject]

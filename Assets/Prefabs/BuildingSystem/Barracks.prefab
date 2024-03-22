@@ -181,8 +181,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72a49dd66e6141a4198b9974ec842ece, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 100
   IndexOfBuilding: 2
+  Strength: 100
+  _unitsFactory: {fileID: 6468344224010567201}
 --- !u!1 &5098329011409132469
 GameObject:
   m_ObjectHideFlags: 0
@@ -196,6 +197,7 @@ GameObject:
   - component: {fileID: 7996360908031520772}
   - component: {fileID: 7603827074308717270}
   - component: {fileID: 6468344224010567201}
+  - component: {fileID: 6091333048121056531}
   m_Layer: 0
   m_Name: UnitFactory
   m_TagString: Untagged
@@ -304,6 +306,20 @@ MonoBehaviour:
   _unitData: {fileID: 11400000, guid: 6147c10921b1f6940813d469c5c49c35, type: 2}
   _spotOfRespawnUnits: {fileID: 2441336510995569309}
   _handler: {fileID: 1470356526268399190, guid: 29a60e6834f05c542b0c33311fe6f5bf, type: 3}
+--- !u!114 &6091333048121056531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5098329011409132469}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9dc2ec1f166f3aa49b9e9b3abc294a3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _buttonIndex: 2
+  _costToBuy: 15
 --- !u!1 &6736769962142248280
 GameObject:
   m_ObjectHideFlags: 0

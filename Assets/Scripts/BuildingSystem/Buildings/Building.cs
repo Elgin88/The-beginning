@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
+using Assets.Scripts.PlayerComponents;
 
 namespace Assets.Scripts.BuildingSystem
 {
@@ -8,14 +9,13 @@ namespace Assets.Scripts.BuildingSystem
 
     internal abstract class Building : MonoBehaviour, IDamageable
     {
-        public float Strength;
-        public static Action<Transform> Destroyed;
         public int IndexOfBuilding;
+        public float Strength;
         public Transform Transform => transform;
-
         public abstract bool IsPlayerObject { get; }
-
         public bool IsDead => false;
+
+        public static Action<Transform> Destroyed;
 
         public void TakeDamage(float damage)
         {
