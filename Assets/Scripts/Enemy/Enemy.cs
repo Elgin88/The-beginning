@@ -1,3 +1,4 @@
+using Assets.Scripts.BuildingSystem.Buildings;
 using Assets.Scripts.GameLogic.Damageable;
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
@@ -40,6 +41,12 @@ namespace Assets.Scripts.Enemy
                 gameObject.SetActive(false);
             }
         }
+
+        internal abstract void SetPosition(Vector3 position);
+
+        internal abstract void SetRotation();
+
+        internal abstract void InitMainBuilding(MainBuilding mainBuilding);
 
         private void Awake()
         {

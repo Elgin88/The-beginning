@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.BuildingSystem.Buildings;
@@ -10,18 +9,16 @@ namespace Assets.Scripts.Enemy
     {
         [SerializeField] private EnemyVision _enemyVision;
 
-        private Dictionary<Vector3, GameObject> _currentPositionAndTarget;
-        private MainBuilding _mainBulding;
+        private Dictionary<Vector3, UnityEngine.GameObject> _currentPositionAndTarget;
+        private MainBuilding _mainBuilding; 
         private GameObject _startTarget;
         private GameObject _currentTarget;
         private Coroutine _setNextTarget;
         private Vector3 _currentTargetPosition;
 
-        internal GameObject StartTarget => _startTarget;
+        internal Vector3 CurrentTargetPosition => _currentTargetPosition;
 
         internal GameObject CurrentTarget => _currentTarget;
-
-        internal Vector3 CurrentTargetPosition => _currentTargetPosition;
 
         internal void StartSetNextTarget()
         {
@@ -37,7 +34,13 @@ namespace Assets.Scripts.Enemy
         {
             while (true)
             {
-                _currentPositionAndTarget = _enemyVision.CurrentPositionAndTarget;
+                _currentTargetPosition = Vector3.zero;
+                _currentTarget = null;
+
+                if (_enemyVision.CurrentPositionAndTarget != null)
+                {
+                    _currentPositionAndTarget = _enemyVision.CurrentPositionAndTarget;
+                }
 
                 if (_currentPositionAndTarget != null)
                 {
@@ -48,21 +51,35 @@ namespace Assets.Scripts.Enemy
                     }
                 }
 
+                if (_currentTarget == null & _startTarget != null)
+                {
+                    _currentTarget = _startTarget;
+                    _currentTargetPosition = _startTarget.transform.position;
+                }
+
                 yield return null;
             }
         }
 
-        private void Awake()
+        private void OnEnable()
         {
-            _mainBulding = FindAnyObjectByType<MainBuilding>();
+            if (_mainBuilding != null)
+            {
+                _startTarget = _mainBuilding.gameObject;
+            }
 
-            _startTarget = _mainBulding.gameObject;
-            _currentTarget = _startTarget;
+            if (_startTarget != null)
+            {
+                _currentTarget = _startTarget;
+                _currentTargetPosition = _startTarget.transform.position;
+            }
+
+            StartSetNextTarget();
         }
 
-        private void Start()
+        internal void InitMainBuilding(MainBuilding mainBuilding)
         {
-            StartSetNextTarget();
+            _mainBuilding = mainBuilding;
         }
     }
 }

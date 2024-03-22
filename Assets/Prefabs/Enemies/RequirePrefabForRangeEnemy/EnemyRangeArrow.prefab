@@ -149,3 +149,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _enemyRangeWoodArcher: {fileID: 0}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 67592
