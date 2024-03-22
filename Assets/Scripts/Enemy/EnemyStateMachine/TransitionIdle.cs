@@ -1,5 +1,5 @@
 using System.Collections;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine

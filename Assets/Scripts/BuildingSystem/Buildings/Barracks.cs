@@ -1,3 +1,4 @@
+using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerUnits;
 using System;
 using System.Collections;
@@ -9,8 +10,7 @@ namespace Assets.Scripts.BuildingSystem.Buildings
     internal class Barracks : Building
     {
         [SerializeField] private UnitsFactory _unitsFactory;
-        private int _currentPlayersCoins;
-       
+
         public override bool IsPlayerObject { get => throw new System.NotImplementedException(); }
 
 
@@ -24,9 +24,13 @@ namespace Assets.Scripts.BuildingSystem.Buildings
             BuildingUI.SpawnUnitButtonClicked -= SpawnUnit;
         }
 
-        private void SpawnUnit()  // сделать проверку на деньги
+        private void SpawnUnit(PlayerWallet wallet, int costToBuy)  
         {
-            _unitsFactory.Spawn();
+            if(wallet.Coins >= costToBuy)
+            {
+                _unitsFactory.Spawn();
+                wallet.SpendCoins(costToBuy);
+            }  
         }
     }
 }

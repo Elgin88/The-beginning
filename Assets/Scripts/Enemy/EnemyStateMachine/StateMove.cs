@@ -1,34 +1,25 @@
 using System.Collections;
-using Assets.Scripts.Enemy;
+using Assets.Scripts.EnemyNamespace;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace Assets.Scripts.UnitStateMachine
 {
-    [RequireComponent(typeof(EnemyNextTargetFinder))]
-    [RequireComponent(typeof(EnemyAnimation))]
-    [RequireComponent(typeof(TransitionMove))]
-    [RequireComponent(typeof(NavMeshAgent))]
-
     internal class StateMove : State
     {
         [SerializeField] private float _maxSpeed;
+        [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
+        [SerializeField] private EnemyAnimation _enemyAnimation;
+        [SerializeField] private TransitionMove _transitionMove;
+        [SerializeField] private NavMeshAgent _navMeshAgent;
 
-        private EnemyNextTargetFinder _enemyNextTargetFinder;
-        private EnemyAnimation _enemyAnimation;
-        private TransitionMove _transitionMove;
-        private NavMeshAgent _navMeshAgent;
         private Coroutine _move;
 
         internal override void StartState()
         {
-            if (_move == null)
-            {
-                _move = StartCoroutine(Move());
-
-                _transitionMove.StartCheckTransition();
-                _enemyAnimation.StartPlayRun();
-            }
+            _move = StartCoroutine(Move());
+            _transitionMove.StartCheckTransition();
+            _enemyAnimation.StartPlayRun();
         }
 
         internal override void StopState()
@@ -54,11 +45,6 @@ namespace Assets.Scripts.UnitStateMachine
 
         private void Awake()
         {
-            _enemyNextTargetFinder = GetComponent<EnemyNextTargetFinder>();
-            _enemyAnimation = GetComponent<EnemyAnimation>();
-            _transitionMove = GetComponent<TransitionMove>();
-            _navMeshAgent = GetComponent<NavMeshAgent>();
-
             _navMeshAgent.speed = _maxSpeed;
         }
 
@@ -68,10 +54,7 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 if (_enemyNextTargetFinder != null)
                 {
-                    if (_enemyNextTargetFinder.CurrentTarget != null)
-                    {
-                        _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
-                    }
+                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
                 }
 
                 yield return null;

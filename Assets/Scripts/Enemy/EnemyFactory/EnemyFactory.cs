@@ -1,68 +1,46 @@
 using System.Collections;
+using System.Collections.Generic;
 using Assets.Scripts.BuildingSystem.Buildings;
 using UnityEngine;
-using Zenject;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private EnemyMeleeOgreGreen _enemyMeleeOrc;
-        [SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
-        [SerializeField] private float _delayBetweenWavesEnemy;
-        [SerializeField] private float _rangeMinorSpawn;
-        [SerializeField] private float _countMinorEnemy;
+        [SerializeField] private MainBuilding _mainBuilding;
+        [SerializeField] private float _delayBetweenWaves;
+        [SerializeField] private float _maxRangeOfSpawn;
+        [SerializeField] private float _enemyCountInWave;
+        [SerializeField] private List<EnemyMelleeOrcGreen> _enemiesMeleeOrcs;
+        [SerializeField] private List<EnemyRangeWoodArcher> _enemiesMeleeArchers;
+        [SerializeField] private EnemySpawnPoint[] _spawnPoints;
 
-        [Inject] private DiContainer _currentEnemyDI;
-
-        private BuildingSystem.Buildings.MainBuilding _mainBuilding; 
-        
-        private EnemySpawnPoint[] _spawnPoints;
         private EnemySpawnPoint _currentSpawnPoint;
-        private WaitForSeconds _delayBetweenWavesEnemyWFS;
-        private Coroutine _createAllEnemies;
-        private Vector3 _currentEnemyPosition;
-        private float _minorEnemySpawnRangeMin => _rangeMinorSpawn - 0.5f;
+        private WaitForSeconds _delayBetweenWavesWFS;
+        private Coroutine _createEnemy;
+        private Vector3 _enemyPosition;
+        private float _minRangeOfSpawn => _maxRangeOfSpawn - 0.5f;
 
         private void Awake()
         {
-            _mainBuilding = FindObjectOfType<BuildingSystem.Buildings.MainBuilding>();
-
-            _spawnPoints = GetComponentsInChildren<EnemySpawnPoint>();
-
-            _delayBetweenWavesEnemyWFS = new WaitForSeconds(_delayBetweenWavesEnemy);
-
-            _createAllEnemies = StartCoroutine(CreateAllEnemies());
+            _delayBetweenWavesWFS = new WaitForSeconds(_delayBetweenWaves);
+            _createEnemy = StartCoroutine(CreateEnemy());
         }
 
-        private IEnumerator CreateAllEnemies()
+        private IEnumerator CreateEnemy()
         {
             bool isWork = true;
 
             while (isWork)
             {
                 ChooseSpawnPoint();
-                CreateMainEnemyInWave();
-                CreateMinorEnemiesInWave();
+                CalculateEnemyPosition();
+                EnableRandomEnemy();
 
-                yield return _delayBetweenWavesEnemyWFS;
+                yield return _delayBetweenWavesWFS;
             }
 
-            StopCoroutine(_createAllEnemies);
-        }
-
-        private void CreateMainEnemyInWave()
-        {
-            SpawnRandomEnemy();
-        }
-
-        private void CreateMinorEnemiesInWave()
-        {
-            for (int i = 0; i <= _countMinorEnemy; i++)
-            {
-                CalculateMinorUnitStartPosition();
-                SpawnRandomEnemy();
-            }
+            StopCoroutine(_createEnemy);
         }
 
         private void ChooseSpawnPoint()
@@ -72,47 +50,81 @@ namespace Assets.Scripts.Enemy
             _currentSpawnPoint = _spawnPoints[index];
         }
 
-        private void CalculateMinorUnitStartPosition()
+        private void CalculateEnemyPosition()
         {
             bool isWork = true;
             float radius;
 
             while (isWork)
             {
-                _currentEnemyPosition.x = _currentSpawnPoint.transform.position.x + Random.Range(-_rangeMinorSpawn, _rangeMinorSpawn);
-                _currentEnemyPosition.y = gameObject.transform.position.y;
-                _currentEnemyPosition.z = _currentSpawnPoint.transform.position.z + Random.Range(-_rangeMinorSpawn, _rangeMinorSpawn);
+                _enemyPosition.x = _currentSpawnPoint.transform.position.x + Random.Range(-_maxRangeOfSpawn, _maxRangeOfSpawn);
+                _enemyPosition.y = gameObject.transform.position.y;
+                _enemyPosition.z = _currentSpawnPoint.transform.position.z + Random.Range(-_maxRangeOfSpawn, _maxRangeOfSpawn);
 
-                radius = Mathf.Sqrt(Mathf.Pow(_currentEnemyPosition.x - _currentSpawnPoint.transform.position.x, 2) + Mathf.Pow(_currentEnemyPosition.z - _currentSpawnPoint.transform.position.z, 2));
+                radius = Mathf.Sqrt(Mathf.Pow(_enemyPosition.x - _currentSpawnPoint.transform.position.x, 2) + Mathf.Pow(_enemyPosition.z - _currentSpawnPoint.transform.position.z, 2));
 
-                if (radius >= _minorEnemySpawnRangeMin & radius <= _rangeMinorSpawn)
+                if (radius >= _minRangeOfSpawn & radius <= _maxRangeOfSpawn)
                 {
                     isWork = false;
                 }
             }
         }
 
-        private void SpawnRandomEnemy()
+        private void EnableRandomEnemy()
         {
-            switch (Random.Range(1, 3))
+            int index = Random.Range(0, 2);
+
+            switch (index)
             {
+                case 0:
+                    EnableMeleeOrcs(_enemiesMeleeOrcs);
+                    break;
+
                 case 1:
-                    SpawnEnemy(_enemyMeleeOrc.gameObject);
+                    EnableEnemyRangeArchers(_enemiesMeleeArchers);
                     break;
 
-                case 2:
-                    //SpawnEnemy(_enemyMeleeOrc.gameObject);
-                    SpawnEnemy(_enemyRangeWoodArcher.gameObject);
+                default:
                     break;
             }
         }
 
-        private void SpawnEnemy(GameObject gameObject)
+        private void EnableMeleeOrcs(List<EnemyMelleeOrcGreen> enemies)
         {
-            if (_currentEnemyPosition != new Vector3(0,0,0) & _mainBuilding != null)
+            foreach (EnemyMelleeOrcGreen enemy in enemies)
             {
-                _currentEnemyDI.InstantiatePrefab(gameObject, _currentEnemyPosition, Quaternion.LookRotation(_mainBuilding.transform.position), null);
+                if (enemy != null)
+                {
+                    if (enemy.isActiveAndEnabled == false)
+                    {
+                        enemy.InitMainBuilding(_mainBuilding);
+                        enemy.SetPosition(_currentSpawnPoint.transform.position);
+                        enemy.gameObject.SetActive(true);
+
+                        return;
+                    }
+                }
             }
         }
+
+        private void EnableEnemyRangeArchers(List<EnemyRangeWoodArcher> enemiesMeleeArchers)
+        {
+            foreach (EnemyRangeWoodArcher enemy in enemiesMeleeArchers)
+            {
+                if (enemy != null)
+                {
+                    if (enemy.isActiveAndEnabled == false)
+                    {
+                        enemy.InitMainBuilding(_mainBuilding);
+                        enemy.SetPosition(_currentSpawnPoint.transform.position);
+                        enemy.gameObject.SetActive(true);
+
+                        return;
+                    }
+                }
+            }
+        }
+
+
     }
 }

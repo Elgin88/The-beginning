@@ -319,6 +319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buttonIndex: 2
+  _costToBuy: 15
 --- !u!1 &6736769962142248280
 GameObject:
   m_ObjectHideFlags: 0

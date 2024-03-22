@@ -40,16 +40,20 @@ namespace Assets.Scripts.BuildingSystem.Buildings
             ChestSpawnPointsActivator.Activated -= AddChestSpawnPoint;
         }
 
-        private void SpawnChest()   //проверка денег игрока
+        private void SpawnChest(PlayerWallet wallet, int costToBuy)   //проверка денег игрока
         {
             if(_chestSpawnPoints.Count != 0)
-            {
-                int _lastChestSpawnPoint = _chestSpawnPoints.Count;
-                _currentIndexOfChestSpawnPoint = Random.Range(_firstChestSpawnPoint, _lastChestSpawnPoint);
-               
-               Chest chestToSpawn =  Instantiate(_prefabOfChest, _chestSpawnPoints[_currentIndexOfChestSpawnPoint].transform);
-                chestToSpawn.SetCountOfCoins(_chestSpawnPoints[_currentIndexOfChestSpawnPoint].CoinsOfChest);
-                _chestSpawnPoints.RemoveAt(_currentIndexOfChestSpawnPoint);
+            {  
+                if(wallet.Coins >= costToBuy)
+                {
+                    int _lastChestSpawnPoint = _chestSpawnPoints.Count;
+                    _currentIndexOfChestSpawnPoint = Random.Range(_firstChestSpawnPoint, _lastChestSpawnPoint);
+
+                    Chest chestToSpawn = Instantiate(_prefabOfChest, _chestSpawnPoints[_currentIndexOfChestSpawnPoint].transform);
+                    chestToSpawn.SetCountOfCoins(_chestSpawnPoints[_currentIndexOfChestSpawnPoint].CoinsOfChest);
+                    _chestSpawnPoints.RemoveAt(_currentIndexOfChestSpawnPoint);
+                    wallet.SpendCoins(costToBuy);
+                }   
             }  
         }
 

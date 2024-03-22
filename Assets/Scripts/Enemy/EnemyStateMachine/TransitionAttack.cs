@@ -2,7 +2,7 @@
 using Assets.Scripts.UnitStateMachine;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class TransitionAttack : Transition
     {

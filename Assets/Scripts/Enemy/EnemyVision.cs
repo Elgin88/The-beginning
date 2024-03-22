@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Assets.Scripts.GameLogic.Damageable;
 using UnityEngine;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyVision: MonoBehaviour
     {
@@ -14,20 +14,22 @@ namespace Assets.Scripts.Enemy
         [SerializeField] private float _visionRange;
         [SerializeField] private float _visionRayCount;
 
-        private Dictionary<Vector3, GameObject> _currentNearestPositionAndTarget;
-        private Dictionary<Vector3,GameObject> _currentPositionsAndTargets;
+        private Dictionary<Vector3, GameObject> _currentPositionAndTarget;
+        private Dictionary<Vector3, GameObject> _positionsAndTargets;
         private float _stepOfRotationY;
         private float _currentDistanceToNearestPositionAndTarget;
+        private float _startDistanceToNearestPositionAndTarget = 100;
 
-        internal Dictionary<Vector3,GameObject> CurrentPositionAndTarget => _currentNearestPositionAndTarget;
+        internal Dictionary<Vector3, GameObject> CurrentPositionAndTarget => _currentPositionAndTarget;
 
         internal float DistanceToNearestPositionAndTarget => _currentDistanceToNearestPositionAndTarget;
 
         private void Awake()
         {
-            _currentNearestPositionAndTarget = new Dictionary<Vector3, GameObject>();
-            _currentPositionsAndTargets = new Dictionary<Vector3, GameObject>();
+            _currentPositionAndTarget = new Dictionary<Vector3, GameObject>();
+            _positionsAndTargets = new Dictionary<Vector3, GameObject>();
             _stepOfRotationY = _visionAngle / _visionRayCount;
+            _currentDistanceToNearestPositionAndTarget = _startDistanceToNearestPositionAndTarget;
         }
 
         private void Start()
@@ -41,7 +43,8 @@ namespace Assets.Scripts.Enemy
             {
                 int currentRayNumber = 0;
 
-                _currentPositionsAndTargets = new Dictionary<Vector3, GameObject>();
+                _positionsAndTargets = new Dictionary<Vector3, GameObject>();
+                _currentDistanceToNearestPositionAndTarget = 1000;
 
                 while (currentRayNumber <= _visionRayCount)
                 {
@@ -62,8 +65,6 @@ namespace Assets.Scripts.Enemy
 
         private void SetDataRaycastHit()
         {
-            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _visionRange, Color.yellow);
-
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _visionRange, _layersForEnemyVision);
 
             if (raycastHit.collider != null)
@@ -80,48 +81,53 @@ namespace Assets.Scripts.Enemy
             SetCurrentNearestPOsitionAndTarget();
         }
 
-        private void AddTargetToDictionary(Vector3 raycastHitPoint, GameObject hitObject)
+        private void AddTargetToDictionary(Vector3 raycastHitPoint, UnityEngine.GameObject hitObject)
         {
-            _currentPositionsAndTargets.Add(raycastHitPoint, hitObject);
+            _positionsAndTargets.Add(raycastHitPoint, hitObject);
         }
 
         private void SetCurrentNearestPOsitionAndTarget()
         {
-            _currentNearestPositionAndTarget = GetFirstPositionAndTarget();
-            _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, _enemyNextTargetFinder.StartTarget.transform.position);
+            _currentPositionAndTarget = GetFirstPositionAndTarget();
 
-            foreach (var item in _currentPositionsAndTargets)
+            if (_positionsAndTargets != null)
             {
-                if (Vector3.Distance(transform.position, item.Key) < Vector3.Distance(transform.position, GetPositionCurrentTarget()))
+                foreach (var item in _positionsAndTargets)
                 {
-                    _currentNearestPositionAndTarget = new Dictionary<Vector3, GameObject>() { { item.Key, item.Value } };
-                    _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, item.Key);
+                    if (Vector3.Distance(transform.position, item.Key) < Vector3.Distance(transform.position, GetPositionCurrentTarget()))
+                    {
+                        _currentPositionAndTarget = new Dictionary<Vector3, UnityEngine.GameObject>() { { item.Key, item.Value } };
+                        _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, item.Key);
+                    }
                 }
             }
         }
 
         private Vector3 GetPositionCurrentTarget()
         {
-            if (_currentNearestPositionAndTarget != null)
+            if (_currentPositionAndTarget != null)
             {
-                foreach (var item in _currentNearestPositionAndTarget)
+                foreach (var item in _currentPositionAndTarget)
                 {
                     return item.Key;
                 }
             }
 
-            return _enemyNextTargetFinder.StartTarget.transform.position;
+            return Vector3.zero;
         }
 
-        private Dictionary<Vector3, GameObject> GetFirstPositionAndTarget()
+        private Dictionary<Vector3, UnityEngine.GameObject> GetFirstPositionAndTarget()
         {
-            if (_currentPositionsAndTargets.Count > 0)
+            if (_positionsAndTargets != null)
             {
-                foreach (var item in _currentPositionsAndTargets)
+                if (_positionsAndTargets.Count > 0)
                 {
-                    Dictionary<Vector3, GameObject> firstPositionAndTarget = new Dictionary<Vector3, GameObject> { { item.Key, item.Value } };
+                    foreach (var item in _positionsAndTargets)
+                    {
+                        Dictionary<Vector3, UnityEngine.GameObject> firstPositionAndTarget = new Dictionary<Vector3, UnityEngine.GameObject> { { item.Key, item.Value } };
 
-                    return firstPositionAndTarget;
+                        return firstPositionAndTarget;
+                    }
                 }
             }
 

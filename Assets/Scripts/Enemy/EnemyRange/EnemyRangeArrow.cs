@@ -2,64 +2,52 @@ using System.Collections;
 using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
 
-namespace Assets.Scripts.Enemy
+namespace Assets.Scripts.EnemyNamespace
 {
     public class EnemyRangeArrow : MonoBehaviour
     {
         [SerializeField] private EnemyRangeWoodArcher _enemyRangeWoodArcher;
+        [SerializeField] private LayerMask _layerMask;
 
         private Coroutine _fly;
-        private Transform _currentTarget;
-        private Vector3 _currentTargetPosition;
-        private Vector3 _startTrajectoryPosition;
-        private Vector3 _middleTrajectoryPosition;
+        private bool _isMoveUp;
         private float _speedOfMove = 20;
         private float _speedOfRotation = 20;
         private float _hight = 0.5f;
-        private bool _isMoveUp;
 
-        internal void StartFly(Vector3 targetPosition)
+        internal void StartFly(Vector3 targetPosition, GameObject target)
         {
-            _currentTargetPosition = targetPosition;
-            _startTrajectoryPosition = transform.position;
-            _isMoveUp = true;
-
-            _fly = StartCoroutine(Fly());
+            _fly = StartCoroutine(Fly(targetPosition, target));
         }
 
         private void OnTriggerEnter(Collider other)
         {
-            if (_currentTarget != null)
+            if (other.includeLayers == _layerMask)
             {
-                if (other.gameObject == _currentTarget.gameObject)
-                {
-                    _currentTarget.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
-                    StopFly();
-                    gameObject.SetActive(false);
-                }
+                other.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
+                StopFly();
+                gameObject.SetActive(false);
             }
         }
 
-        private IEnumerator Fly()
+        private IEnumerator Fly(Vector3 targetPosition, GameObject target)
         {
-            while (true)
-            {
-                if (_currentTarget == null || _startTrajectoryPosition == null || _currentTarget.position == null)
-                {
-                    StopFly();
-                    gameObject.SetActive(false);
-                    yield break;
-                }
+            Vector3 startPosition = transform.position;
 
-                CalculateDistane(_startTrajectoryPosition, _currentTarget.position);
-                SetMiddleTrajectoryPosition();
-                CheckIsMoveUp();
-                CalculateTargetPosition();
-                SetArrowPosition();
-                SetArrowRotation();
+            while (transform.position != targetPosition)
+            {
+                CalculateDistane(startPosition, targetPosition);
+                SetMiddleTrajectoryPosition(startPosition, targetPosition, out Vector3 middlePosition);
+                CheckIsMoveUp(startPosition, targetPosition);
+                CalculateTargetPosition(middlePosition, targetPosition, out Vector3 currentTargetPosition);
+                SetArrowPosition(currentTargetPosition);
+                SetArrowRotation(currentTargetPosition);
 
                 yield return null;
             }
+
+            StopFly();
+            gameObject.SetActive(false);
         }
 
         private float CalculateDistane(Vector3 start, Vector3 finish)
@@ -67,39 +55,39 @@ namespace Assets.Scripts.Enemy
             return Vector3.Distance(start, finish);
         }
 
-        private void SetMiddleTrajectoryPosition()
+        private void SetMiddleTrajectoryPosition(Vector3 startPosition, Vector3 targetPosition, out Vector3 middlePosition)
         {
-            _middleTrajectoryPosition = new Vector3((_startTrajectoryPosition.x + _currentTarget.position.x) / 2, _startTrajectoryPosition.y + _hight, (_startTrajectoryPosition.z + _currentTarget.position.z) / 2);
+            middlePosition = new Vector3((startPosition.x + targetPosition.x) / 2, startPosition.y + _hight, (startPosition.z + targetPosition.z) / 2);
         }
 
-        private void CheckIsMoveUp()
+        private void CheckIsMoveUp(Vector3 startPosition, Vector3 targetPosition)
         {
-            if (CalculateDistane(transform.position, _currentTarget.position) < (CalculateDistane(_startTrajectoryPosition, _currentTarget.position) / 1.9f))
+            if (CalculateDistane(transform.position, targetPosition) < (CalculateDistane(startPosition, targetPosition) / 1.9f))
             {
                 _isMoveUp = false;
             }
         }
 
-        private void CalculateTargetPosition()
+        private void CalculateTargetPosition(Vector3 middlePosition, Vector3 targetPosition, out Vector3 currentTargetPosition)
         {
             if (_isMoveUp)
             {
-                _currentTargetPosition = _middleTrajectoryPosition;
+                currentTargetPosition = middlePosition;
             }
             else
             {
-                _currentTargetPosition = _currentTarget.transform.position;
+                currentTargetPosition = targetPosition;
             }
         }
 
-        private void SetArrowPosition()
+        private void SetArrowPosition(Vector3 targetPosition)
         {
-            transform.position = Vector3.MoveTowards(transform.position, _currentTargetPosition, _speedOfMove * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition, _speedOfMove * Time.deltaTime);
         }
 
-        private void SetArrowRotation()
+        private void SetArrowRotation(Vector3 targetPosition)
         {
-            Vector3 forward = new Vector3(transform.position.x - _currentTargetPosition.x, transform.position.y - _currentTargetPosition.y, transform.position.z - _currentTargetPosition.z) * -1;
+            Vector3 forward = new Vector3(transform.position.x - targetPosition.x, transform.position.y - targetPosition.y, transform.position.z - targetPosition.z) * -1;
 
             if (_isMoveUp = true & forward ! != Vector3.zero)
             {
@@ -114,7 +102,6 @@ namespace Assets.Scripts.Enemy
         private void StopFly()
         {
             StopCoroutine(_fly);
-            _fly = null;
         }
     }
 }

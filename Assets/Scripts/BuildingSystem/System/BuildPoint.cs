@@ -15,16 +15,18 @@ namespace Assets.Scripts.BuildingSystem
 
         private bool _isOccupied;
         private int speedOfRotateVisualObject = 200;
-        
+        private int _currentPlayerCoins;
+
 
         public Transform SpotToPlaceBuilding => _spotToPlaceBuilding;
         public int BuildingPointIndex => _buildingPointIndex;
         public bool IsOccupied => _isOccupied;
         public int CostToBuild => _costToBuild;
+       // public int CurrentPlayerCoins => _currentPlayerCoins;
 
 
-        public Action<Transform> PlayerWentIn;
-        public Action PlayerWentOut; 
+        public Action<Transform,PlayerWallet> PlayerWentIn;
+        public Action<PlayerWallet> PlayerWentOut; 
 
 
         private void Update()
@@ -53,7 +55,9 @@ namespace Assets.Scripts.BuildingSystem
             {
                 if (_isOccupied == false) // тут взять денеги у игрока 
                 {
-                    PlayerWentIn?.Invoke(transform);   //и передать сюда
+                   // _currentPlayerCoins = player.Wallet.Coins;
+                    PlayerWentIn?.Invoke(transform, player.Wallet);   //и передать сюда
+                    Debug.Log("Сейчас монет вот сколько - " + player.Wallet.Coins);
                 }
             }
         }
@@ -71,7 +75,9 @@ namespace Assets.Scripts.BuildingSystem
         {
             if (other != null && other.gameObject.TryGetComponent(out Player player))
             {
-                PlayerWentOut?.Invoke(); 
+               // _currentPlayerCoins = player.Wallet.Coins;
+                PlayerWentOut?.Invoke(player.Wallet);
+                
             }
         }
 

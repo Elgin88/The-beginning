@@ -1,3 +1,5 @@
+using Assets.Scripts.Constants;
+using Assets.Scripts.PlayerComponents;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +13,8 @@ namespace Assets.Scripts.BuildingSystem
         [SerializeField] private List<Building> _buildings;
 
         private Transform _currentPlayersTransform;
-        // сделать переменную для денег игрока
-        private int _buildButtonIndex = 1;
+        private PlayerWallet _currentPlayersWallet;
+        private int _currentCostToBuild;
         private bool _canBuild;
 
         private void OnEnable()
@@ -27,22 +29,23 @@ namespace Assets.Scripts.BuildingSystem
             _buildingUI.BuildButtonClicked -= Build;
         }
        
-        private void Build()   //тут сравнивнить деньги с _buildingUI.BuidingCost
+        private void Build(PlayerWallet wallet)   //тут сравнивнить деньги с _buildingUI.BuidingCost
         {
             _canBuild = false;
-            
+ 
             for (int i = 0; i < _buildPoints.Count; i++)
             {
                 if (_buildPoints[i].SpotToPlaceBuilding != null && _buildPoints[i].IsOccupied == false && _currentPlayersTransform == _buildPoints[i].transform)
                 {
                     for (int j = 0; j < _buildings.Count; j++)
                     {
-                        if (_buildPoints[i].BuildingPointIndex == _buildings[j].IndexOfBuilding)
+                        if (_buildPoints[i].BuildingPointIndex == _buildings[j].IndexOfBuilding && _buildPoints[i].CostToBuild <= wallet.Coins)
                         {
-                            Instantiate(_buildings[j], _buildPoints[i].SpotToPlaceBuilding);
-                            _buildPoints[i].TakeSpot();
-                            _buildPoints[i].TryToDeActiveIconOfBuildPoint();
-                            _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
+                                Instantiate(_buildings[j], _buildPoints[i].SpotToPlaceBuilding);
+                                _buildPoints[i].TakeSpot();
+                                _buildPoints[i].TryToDeActiveIconOfBuildPoint();
+                                _buildingUI.ToggleButton(BuildingUiHash.BuildButtonIndex, wallet, _currentCostToBuild, _canBuild);
+                                wallet.SpendCoins(_buildPoints[i].CostToBuild);
                         }
                     }
                 }
@@ -67,25 +70,29 @@ namespace Assets.Scripts.BuildingSystem
             }
         }
 
-        private void OnPlayerWentIn(Transform spotOfPlayer)  // тут получить деньги от игрока
+        private void OnPlayerWentIn(Transform spotOfPlayer, PlayerWallet wallet)  // тут получить деньги от игрока
         {
             _currentPlayersTransform = spotOfPlayer;
+            
             _canBuild = true;
 
             for (int i = 0; i < _buildPoints.Count; i++)
             {
                 if (_buildPoints[i].transform == spotOfPlayer)
                 {
-                    _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
-                    _buildingUI.SetButtonText(_buildPoints[i].CostToBuild);     
+                    _currentCostToBuild = _buildPoints[i].CostToBuild;
+
+                    _currentPlayersWallet = wallet;
+                    _buildingUI.ToggleButton(BuildingUiHash.BuildButtonIndex, _currentPlayersWallet, _currentCostToBuild, _canBuild);    
                 }
             }
         }
 
-        private void OnPlayerWentOut() 
+        private void OnPlayerWentOut(PlayerWallet wallet) 
         {
             _canBuild = false;
-            _buildingUI.ToggleButton(_buildButtonIndex, _canBuild);
+            _currentPlayersWallet = wallet;
+            _buildingUI.ToggleButton(BuildingUiHash.BuildButtonIndex, _currentPlayersWallet, _currentCostToBuild, _canBuild);
         }
     }
 }
