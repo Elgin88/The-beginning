@@ -614,7 +614,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!1001 &878301823
+--- !u!1001 &827371497
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -624,15 +624,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2364937444342173813, guid: 2d156909b95bb724ba110d33774d6048, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 15.900131
+      value: 32.202652
       objectReference: {fileID: 0}
     - target: {fileID: 2364937444342173813, guid: 2d156909b95bb724ba110d33774d6048, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.6114159
+      value: -0.0000009536743
       objectReference: {fileID: 0}
     - target: {fileID: 2364937444342173813, guid: 2d156909b95bb724ba110d33774d6048, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.797955
+      value: 11.015433
       objectReference: {fileID: 0}
     - target: {fileID: 2364937444342173813, guid: 2d156909b95bb724ba110d33774d6048, type: 3}
       propertyPath: m_LocalRotation.w
@@ -773,7 +773,7 @@ AudioSource:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1205226592}
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 8800451822824833356, guid: 375e1e04bb62d924c99433a5d210ccaf, type: 2}
   m_audioClip: {fileID: 8300000, guid: f6908e7286957ba4fb355caa916e783d, type: 3}
@@ -1533,5 +1533,5 @@ SceneRoots:
   - {fileID: 1611684019}
   - {fileID: 620524729}
   - {fileID: 1233258346}
-  - {fileID: 878301823}
   - {fileID: 1205226594}
+  - {fileID: 827371497}
