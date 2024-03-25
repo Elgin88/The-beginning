@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
-using Assets.Scripts.PlayerUnits;
+using Assets.Scripts.Input;
 using Zenject;
 
 namespace Assets.Scripts.Installers
@@ -9,7 +9,7 @@ namespace Assets.Scripts.Installers
     internal class PlayerSceneInstaller : MonoInstaller
     {
         [SerializeField] private Player _playerPrefab;
-        [SerializeField] private PlayerInput _playerInput;
+        [SerializeField] private DesktopInput _desktopInput;
         [SerializeField] private PlayerData _playerConfig;
         [SerializeField] private Mark _mark;
 
@@ -31,7 +31,8 @@ namespace Assets.Scripts.Installers
             Container.Bind<PlayerMovement>().FromComponentOn(player.gameObject).AsSingle().NonLazy();
             
             Container.Bind<PlayerAttacker>().FromNew().AsSingle().NonLazy();
-            PlayerInput input = Container.InstantiatePrefabForComponent<PlayerInput>(_playerInput);
+
+            DesktopInput input = Container.InstantiatePrefabForComponent<DesktopInput>(_desktopInput);
 
             input.transform.parent = player.transform;
         }
