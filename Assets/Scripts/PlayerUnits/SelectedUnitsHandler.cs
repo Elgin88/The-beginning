@@ -50,7 +50,7 @@ namespace Assets.Scripts.PlayerUnits
         {
             if (_selectedUnits.Count > 0)
             {
-                _ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                _ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
 
                 if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
                 {

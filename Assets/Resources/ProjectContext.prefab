@@ -75,7 +75,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerPrefab: {fileID: 246054152294843149, guid: 393504f7d3743e24faa618876404812d, type: 3}
-  _playerInput: {fileID: 7767014089020145184, guid: ba64e974c8fe44847a99348e16c3f64c, type: 3}
+  _desktopInput: {fileID: 7767014089020145184, guid: ba64e974c8fe44847a99348e16c3f64c, type: 3}
   _playerConfig: {fileID: 11400000, guid: ded69eba618df4c4a80ed4d2e11e7ef6, type: 2}
-  _playerAnimator: {fileID: 8132696797318835197, guid: 393504f7d3743e24faa618876404812d, type: 3}
   _mark: {fileID: 302326569377911993, guid: 5cf3f317b2bbb084a918f05a985077b2, type: 3}

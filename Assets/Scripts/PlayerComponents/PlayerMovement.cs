@@ -5,12 +5,13 @@ namespace Assets.Scripts.PlayerComponents
 {
     internal class PlayerMovement : MonoBehaviour
     {
+        [SerializeField] private float _moveSpeed;
+        [SerializeField] private float _attackMoveSpeed;
+
         private PlayerAnimator _animator;
         private NavMeshAgent _navMeshAgent;
 
-        private float _attackMoveSpeed = 1;
         private bool _isAttacking;
-        private float _moveSpeed = 6;
 
         private void Start()
         {
