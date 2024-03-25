@@ -16,8 +16,9 @@ namespace Assets.Scripts.EnemyNamespace
         [SerializeField] private NavMeshAgent NavMeshAgent;
 
         private bool _isDead;
+        private float _currentSpeed;
 
-        protected float CurrentSpeed;
+        internal float CurrentSpeed => _currentSpeed;
 
         public bool IsPlayerObject => false;
 
@@ -48,7 +49,7 @@ namespace Assets.Scripts.EnemyNamespace
 
         private void Awake()
         {
-            CurrentSpeed = NavMeshAgent.speed;
+            _currentSpeed = NavMeshAgent.speed;
         }
     }
 }
