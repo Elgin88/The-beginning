@@ -2549,6 +2549,7 @@ MonoBehaviour:
   _maxAngle: 180
   _range: 20
   _rayCount: 21
+  _rayCountInFrame: 10
 --- !u!114 &8314578972581342070
 MonoBehaviour:
   m_ObjectHideFlags: 0
