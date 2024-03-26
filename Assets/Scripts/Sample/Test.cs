@@ -1,10 +1,9 @@
 ﻿using UnityEngine;
 using Assets.Scripts.GameLogic.Damageable;
-using Assets.Scripts.Movement;
 
 namespace Assets.Scripts.Sample
 {
-    internal class Test : MonoBehaviour, IDamageable, IMoveable
+    internal class Test : MonoBehaviour, IDamageable
     {
         [SerializeField] private float _health;
 

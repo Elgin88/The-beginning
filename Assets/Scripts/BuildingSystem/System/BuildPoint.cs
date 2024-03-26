@@ -1,6 +1,5 @@
 using UnityEngine;
 using Assets.Scripts.PlayerComponents;
-using System.Collections.Generic;
 using System;
 
 
@@ -15,15 +14,11 @@ namespace Assets.Scripts.BuildingSystem
 
         private bool _isOccupied;
         private int speedOfRotateVisualObject = 200;
-        private int _currentPlayerCoins;
-
 
         public Transform SpotToPlaceBuilding => _spotToPlaceBuilding;
         public int BuildingPointIndex => _buildingPointIndex;
         public bool IsOccupied => _isOccupied;
         public int CostToBuild => _costToBuild;
-       // public int CurrentPlayerCoins => _currentPlayerCoins;
-
 
         public Action<Transform,PlayerWallet> PlayerWentIn;
         public Action<PlayerWallet> PlayerWentOut; 
@@ -53,10 +48,9 @@ namespace Assets.Scripts.BuildingSystem
         {
             if (other != null && other.gameObject.TryGetComponent(out Player player))
             {
-                if (_isOccupied == false) // тут взять денеги у игрока 
+                if (_isOccupied == false) 
                 {
-                   // _currentPlayerCoins = player.Wallet.Coins;
-                    PlayerWentIn?.Invoke(transform, player.Wallet);   //и передать сюда
+                    PlayerWentIn?.Invoke(transform, player.Wallet);   
                     Debug.Log("Сейчас монет вот сколько - " + player.Wallet.Coins);
                 }
             }
