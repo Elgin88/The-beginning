@@ -63,6 +63,11 @@ namespace Assets.Scripts.EnemyNamespace
 
         private void OnEnable()
         {
+            if (_mainBuilding == null)
+            {
+                _mainBuilding = FindObjectOfType<MainBuilding>();
+            }
+
             if (_mainBuilding != null)
             {
                 _startTarget = _mainBuilding.gameObject;
