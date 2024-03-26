@@ -38,7 +38,6 @@ namespace Assets.Scripts.UnitStateMachine
             _transitionAttack.StartCheckTransition();
             _enemyAnimation.StartPlayAttack();
             _rigidbody.isKinematic = false;
-            _enemy.SetRotationToTarget(_enemyNextTargetFinder.CurrentTargetPosition);
         }
 
         internal override void StopState()

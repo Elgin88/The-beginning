@@ -708,9 +708,9 @@ MonoBehaviour:
   _layersForEnemyVision:
     serializedVersion: 2
     m_Bits: 2056
-  _visionAngle: 180
-  _visionRange: 30
-  _visionRayCount: 10
+  _maxAngle: 180
+  _range: 20
+  _rayCount: 21
 --- !u!114 &7954706898335332759
 MonoBehaviour:
   m_ObjectHideFlags: 0
