@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/DevelopmentBuildScenes/StudyLevel.unity
     guid: 4f8ed0f3ba3feaa4f80cf7c93dde93cd
   - enabled: 0
-    path: Assets/Scenes/AlekseyScenes/AlekseySceneForTests.unity
+    path: Assets/Scenes/ElginScenes/ElginSceneForTests.unity
     guid: 79ea0a3602ba2c347ad260690eb984f9
   m_configObjects: {}
