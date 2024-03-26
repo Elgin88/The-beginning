@@ -20,14 +20,14 @@ namespace Assets.Scripts.EnemyNamespace
         private Dictionary<Vector3, GameObject> _firstPositionAndTarget;
         private Coroutine _vision;
         private float _stepOfRotationY;
-        private float _currentDistanceToNearestPositionAndTarget;
+        private float _distanceToNearestPositionAndTarget;
         private float _startDistanceToNearestPositionAndTarget = 100;
         private float _currentRayNumer;
         private float _currentRayInFrame;
 
         internal Dictionary<Vector3, GameObject> CurrentPositionAndTarget => _currentPositionAndTarget;
 
-        internal float DistanceToNearestPositionAndTarget => _currentDistanceToNearestPositionAndTarget;
+        internal float DistanceToNearestPositionAndTarget => _distanceToNearestPositionAndTarget;
 
         private void Awake()
         {
@@ -36,7 +36,7 @@ namespace Assets.Scripts.EnemyNamespace
             _firstPositionAndTarget = new Dictionary<Vector3, GameObject>();
 
             _stepOfRotationY = _maxAngle / _rayCount;
-            _currentDistanceToNearestPositionAndTarget = _startDistanceToNearestPositionAndTarget;
+            _distanceToNearestPositionAndTarget = _startDistanceToNearestPositionAndTarget;
         }
 
         private void Start()
@@ -62,42 +62,44 @@ namespace Assets.Scripts.EnemyNamespace
                 _currentRayInFrame = 0;
 
                 _positionsAndTargets.Clear();
-                _currentDistanceToNearestPositionAndTarget = 1000;
+                _distanceToNearestPositionAndTarget = 1000;
 
                 for (int i = 0; i < _rayCount; i++)
                 {
-                    Debug.Log("Начало For");
+                    //Debug.Log("Начало For");
+
+                    if (_currentRayInFrame > _rayCountInFrame)
+                    {
+                        //Debug.Log("Выход из кадра");
+                        yield return null;
+                    }
 
                     SetEnemyRayPointRotation(_currentRayNumer);
                     SetDataRaycastHit();
                     _currentRayNumer++;
                     _currentRayInFrame++;
 
-                    if (_currentRayInFrame > _rayCountInFrame)
-                    {
-                        Debug.Log("Выход из кадра");
-                        yield return null;
-                    }
-
-                    Debug.Log("Завершение For");
+                    //Debug.Log("Завершение For");
                 }
-                Debug.Log("Завершение While");
+                //Debug.Log("Завершение While");
                 yield return null;
             }
-            Debug.Log("Завершение Vision");
+            //Debug.Log("Завершение Vision");
             StopVision();
         }
 
         private void SetEnemyRayPointRotation(float currentRayNumber)
         {
-            _enemyRayPoint.transform.localRotation = Quaternion.Euler(_enemyRayPoint.transform.localRotation.x, - 90 + (180 - _maxAngle)/2 + _stepOfRotationY * currentRayNumber, _enemyRayPoint.transform.localRotation.z);
+            _enemyRayPoint.transform.localRotation = Quaternion.Euler(_enemyRayPoint.transform.localRotation.x,
+                _enemyRayPoint.transform.localRotation.y - _maxAngle / 2,
+                _enemyRayPoint.transform.localRotation.z);
         }
 
         private void SetDataRaycastHit()
         {
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _range, _layersForEnemyVision);
 
-            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _range, Color.yellow, 0.1f);
+            //Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _range, Color.yellow, 0.1f);
 
             if (raycastHit.collider != null)
             {
@@ -130,7 +132,7 @@ namespace Assets.Scripts.EnemyNamespace
                     {
                         _currentPositionAndTarget.Clear();
                         _currentPositionAndTarget.Add(item.Key, item.Value);
-                        _currentDistanceToNearestPositionAndTarget = Vector3.Distance(transform.position, item.Key);
+                        _distanceToNearestPositionAndTarget = Vector3.Distance(transform.position, item.Key);
                     }
                 }
             }

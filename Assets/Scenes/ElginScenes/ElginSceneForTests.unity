@@ -1871,7 +1871,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4588992870866705208, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
       propertyPath: _rayCount
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4588992870866705208, guid: 27d6b7249ada844a99a360ebf69cff0b, type: 3}
       propertyPath: _rayCountInFrame
