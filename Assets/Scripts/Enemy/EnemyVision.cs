@@ -13,6 +13,7 @@ namespace Assets.Scripts.EnemyNamespace
         [SerializeField] private float _maxAngle;
         [SerializeField] private float _range;
         [SerializeField] private float _rayCount;
+        [SerializeField] private float _rayCountInFrame;
 
         private Dictionary<Vector3, GameObject> _currentPositionAndTarget;
         private Dictionary<Vector3, GameObject> _positionsAndTargets;
@@ -21,6 +22,8 @@ namespace Assets.Scripts.EnemyNamespace
         private float _stepOfRotationY;
         private float _currentDistanceToNearestPositionAndTarget;
         private float _startDistanceToNearestPositionAndTarget = 100;
+        private float _currentRayNumer;
+        private float _currentRayInFrame;
 
         internal Dictionary<Vector3, GameObject> CurrentPositionAndTarget => _currentPositionAndTarget;
 
@@ -53,26 +56,39 @@ namespace Assets.Scripts.EnemyNamespace
 
         private IEnumerator Vision()
         {
-            while (true)
+            while (_positionsAndTargets.Count == 0)
             {
-                int currentRayNumber = 0;
+                _currentRayNumer = 0;
+                _currentRayInFrame = 0;
 
                 _positionsAndTargets.Clear();
                 _currentDistanceToNearestPositionAndTarget = 1000;
 
-                while (currentRayNumber <= _rayCount)
+                for (int i = 0; i < _rayCount; i++)
                 {
-                    SetEnemyRayPointRotation(currentRayNumber);
+                    Debug.Log("Начало For");
+
+                    SetEnemyRayPointRotation(_currentRayNumer);
                     SetDataRaycastHit();
+                    _currentRayNumer++;
+                    _currentRayInFrame++;
 
-                    currentRayNumber++;
+                    if (_currentRayInFrame > _rayCountInFrame)
+                    {
+                        Debug.Log("Выход из кадра");
+                        yield return null;
+                    }
+
+                    Debug.Log("Завершение For");
                 }
-
+                Debug.Log("Завершение While");
                 yield return null;
             }
+            Debug.Log("Завершение Vision");
+            StopVision();
         }
 
-        private void SetEnemyRayPointRotation(int currentRayNumber)
+        private void SetEnemyRayPointRotation(float currentRayNumber)
         {
             _enemyRayPoint.transform.localRotation = Quaternion.Euler(_enemyRayPoint.transform.localRotation.x, - 90 + (180 - _maxAngle)/2 + _stepOfRotationY * currentRayNumber, _enemyRayPoint.transform.localRotation.z);
         }
@@ -81,7 +97,7 @@ namespace Assets.Scripts.EnemyNamespace
         {
             Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, out RaycastHit raycastHit, _range, _layersForEnemyVision);
 
-            //Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _range, Color.yellow, 0.1f);
+            Debug.DrawRay(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward * _range, Color.yellow, 0.1f);
 
             if (raycastHit.collider != null)
             {
