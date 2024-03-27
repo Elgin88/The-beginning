@@ -16,16 +16,6 @@ namespace Assets.Scripts.PlayerUnits
             _handler.Init(_pool.MeleePool);
         }
 
-        private void Update()
-        {
-            if (UnityEngine.Input.GetKeyDown(KeyCode.Space))
-            {
-               Unit unit = _pool.GetUnit();
-               unit.transform.position = new Vector3(transform.position.x, transform.position.y, transform.position.z + 1);
-               unit.transform.position = _spotOfRespawnUnits.transform.position;
-            }
-        }
-
         public void Spawn()  
         {
             Unit unit = _pool.GetUnit();

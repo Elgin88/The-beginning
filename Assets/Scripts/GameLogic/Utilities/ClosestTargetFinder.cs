@@ -28,11 +28,13 @@ namespace Assets.Scripts.GameLogic
                 if (hitColliders[0].TryGetComponent<IDamageable>(out IDamageable enemy))
                 {
                     target = enemy;
+
                     return true;
                 }
             }
 
             target = null;
+
             return false;
         }
     }

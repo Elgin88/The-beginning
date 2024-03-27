@@ -3473,7 +3473,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _damage: 10
-  _attackSpeed: 3
+  _attackSpeed: 1
   _layerMask:
     serializedVersion: 2
     m_Bits: 64

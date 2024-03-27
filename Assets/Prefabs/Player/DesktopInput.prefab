@@ -45,3 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _selectedUnitsHandler: {fileID: 1470356526268399190, guid: 29a60e6834f05c542b0c33311fe6f5bf, type: 3}
+  _joystick: {fileID: 0}
+  _ground:
+    serializedVersion: 2
+    m_Bits: 131072

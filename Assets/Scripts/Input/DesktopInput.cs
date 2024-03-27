@@ -2,17 +2,19 @@
 using Zenject;
 using Assets.Scripts.PlayerUnits;
 using Assets.Scripts.PlayerComponents;
+using Assets.Scripts.GameLogic.Utilities;
 
-namespace Assets.Scripts.Input
+namespace Assets.Scripts.PlayerInput
 {
     internal class DesktopInput : MonoBehaviour
     {
         [SerializeField] private SelectedUnitsHandler _selectedUnitsHandler;
-        [SerializeField] private Joystick _joystick;
+        [SerializeField] private LayerMask _ground;
 
         private InputActions _inputActions;
         private PlayerMovement _playerMover;
         private PlayerAttacker _playerAttacker;
+        private WorldPointFinder _worldPointFinder;
 
         private Vector2 _moveDirection;
 
@@ -22,6 +24,8 @@ namespace Assets.Scripts.Input
             _inputActions.Enable();
 
             Cursor.visible = true;
+
+            _worldPointFinder = new WorldPointFinder(_ground);
 
             _inputActions.Player.Attack.performed += ctx => OnAttackInput();
             _inputActions.Player.ChangeWeapon.performed += ctx => OnChangeWeaponInput();
@@ -57,7 +61,7 @@ namespace Assets.Scripts.Input
 
         private void OnMoveUnits()
         {
-            _selectedUnitsHandler.MoveUnits();
+            _selectedUnitsHandler.MoveUnits(_worldPointFinder.GetPosition(Input.mousePosition));
         }
 
         [Inject]

@@ -10,10 +10,6 @@ namespace Assets.Scripts.PlayerUnits
         private List<Selectable> _units = new List<Selectable>();
         private List<Selectable> _selectedUnits = new List<Selectable>();
 
-        private Ray _ray;
-        private float _rayDistance = 40f;
-        private Vector3 _mousePosition;
-
         private ArmyFormation _armyFormation = new ArmyFormation();
 
         private void OnDisable()
@@ -46,20 +42,11 @@ namespace Assets.Scripts.PlayerUnits
             _selectedUnits.Remove(unit);
         }
 
-        public void MoveUnits()
+        public void MoveUnits(Vector3 position)
         {
             if (_selectedUnits.Count > 0)
             {
-                _ray = Camera.main.ScreenPointToRay(UnityEngine.Input.mousePosition);
-
-                if (Physics.Raycast(_ray, out RaycastHit hit, _rayDistance, _groundMask))
-                {
-                    _mousePosition = hit.point;
-                }
-
-                _mousePosition = new Vector3(_mousePosition.x, _mousePosition.y + 1, _mousePosition.z);
-
-                Vector3[] formation = _armyFormation.GetFormationDestination(_mousePosition, _selectedUnits.Count);
+                Vector3[] formation = _armyFormation.GetFormationDestination(position, _selectedUnits.Count);
 
                 for (int i = 0; i < _selectedUnits.Count; i++)
                 {

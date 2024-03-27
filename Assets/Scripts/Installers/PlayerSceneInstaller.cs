@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using Assets.Scripts.PlayerComponents;
 using Assets.Scripts.PlayerComponents.Weapons;
-using Assets.Scripts.Input;
+using Assets.Scripts.PlayerInput;
 using Zenject;
 
 namespace Assets.Scripts.Installers
