@@ -7,11 +7,6 @@ namespace Assets.Scripts.EnemyNamespace
     {
         [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
 
-        internal override void InitMainBuilding(MainBuilding mainBuilding)
-        {
-            _enemyNextTargetFinder.InitMainBuilding(mainBuilding);
-        }
-
         internal override void SetPosition(Vector3 position)
         {
             transform.position = position;

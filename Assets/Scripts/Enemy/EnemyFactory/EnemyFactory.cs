@@ -97,7 +97,6 @@ namespace Assets.Scripts.EnemyNamespace
                 {
                     if (enemy.isActiveAndEnabled == false)
                     {
-                        enemy.InitMainBuilding(_mainBuilding);
                         enemy.SetPosition(_currentSpawnPoint.transform.position);
                         enemy.gameObject.SetActive(true);
 
@@ -115,7 +114,6 @@ namespace Assets.Scripts.EnemyNamespace
                 {
                     if (enemy.isActiveAndEnabled == false)
                     {
-                        enemy.InitMainBuilding(_mainBuilding);
                         enemy.SetPosition(_currentSpawnPoint.transform.position);
                         enemy.gameObject.SetActive(true);
 

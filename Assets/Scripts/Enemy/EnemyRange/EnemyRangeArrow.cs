@@ -15,31 +15,31 @@ namespace Assets.Scripts.EnemyNamespace
         private float _speedOfRotation = 20;
         private float _hight = 0.5f;
 
-        internal void StartFly(Vector3 targetPosition, GameObject target)
+        internal void StartFly(GameObject target)
         {
-            _fly = StartCoroutine(Fly(targetPosition, target));
+            _fly = StartCoroutine(Fly(target));
         }
 
-        private void OnTriggerEnter(Collider other)
+        private void OnTriggerEnter(Collider collider)
         {
-            if (other.includeLayers == _layerMask)
+            if (collider.includeLayers == _layerMask)
             {
-                other.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
+                collider.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
                 StopFly();
                 gameObject.SetActive(false);
             }
         }
 
-        private IEnumerator Fly(Vector3 targetPosition, GameObject target)
+        private IEnumerator Fly(GameObject target)
         {
             Vector3 startPosition = transform.position;
 
-            while (transform.position != targetPosition)
+            while (transform.position != target.transform.position)
             {
-                CalculateDistane(startPosition, targetPosition);
-                SetMiddleTrajectoryPosition(startPosition, targetPosition, out Vector3 middlePosition);
-                CheckIsMoveUp(startPosition, targetPosition);
-                CalculateTargetPosition(middlePosition, targetPosition, out Vector3 currentTargetPosition);
+                CalculateDistane(startPosition, target.transform.position);
+                SetMiddleTrajectoryPosition(startPosition, target.transform.position, out Vector3 middlePosition);
+                CheckIsMoveUp(startPosition, target.transform.position);
+                CalculateTargetPosition(middlePosition, target.transform.position, out Vector3 currentTargetPosition);
                 SetArrowPosition(currentTargetPosition);
                 SetArrowRotation(currentTargetPosition);
 

@@ -29,7 +29,7 @@ namespace Assets.Scripts.UnitStateMachine
                 {
                     NextState = null;
                 }
-                else if (_transitionMove.IsMinDistanceToPlayerObject())
+                else if (_transitionMove.CheckIsMinDistanceToPlayerObject())
                 {
                     NextState = _stateAttack;
                 }
