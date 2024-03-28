@@ -404,7 +404,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2056
   _range: 20
-  _delayVision: 0.2
+  _delayVision: 0.3
 --- !u!114 &7954706898335332759
 MonoBehaviour:
   m_ObjectHideFlags: 0

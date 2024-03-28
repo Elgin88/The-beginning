@@ -24,6 +24,8 @@ namespace Assets.Scripts.EnemyNamespace
         {
             if (collider.includeLayers == _layerMask)
             {
+                Debug.Log(collider.name);
+
                 collider.GetComponent<IDamageable>().TakeDamage(_enemyRangeWoodArcher.GetComponent<IEnemy>().Damage);
                 StopFly();
                 gameObject.SetActive(false);
@@ -89,11 +91,11 @@ namespace Assets.Scripts.EnemyNamespace
         {
             Vector3 forward = new Vector3(transform.position.x - targetPosition.x, transform.position.y - targetPosition.y, transform.position.z - targetPosition.z) * -1;
 
-            if (_isMoveUp = true & forward ! != Vector3.zero)
+            if (_isMoveUp = true & forward != Vector3.zero)
             {
                 transform.rotation = Quaternion.LookRotation(forward);
             }
-            else if (_isMoveUp = false & forward! != Vector3.zero)
+            else if (_isMoveUp = false & forward!= Vector3.zero)
             {
                 transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.LookRotation(forward), _speedOfRotation * Time.deltaTime);
             }

@@ -46,7 +46,7 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            if (Physics.Raycast(_enemyRayPoint.transform.position, _enemyRayPoint.transform.forward, _minDistanteToTarget, _layerMask))
+            if (Vector3.Distance(transform.position, _enemyNextTargetFinder.CurrentTarget.gameObject.transform.position) < _minDistanteToTarget)
             {
                 isMinDistance = true;
             }
