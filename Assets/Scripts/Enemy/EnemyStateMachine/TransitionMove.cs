@@ -46,10 +46,10 @@ namespace Assets.Scripts.UnitStateMachine
         {
             bool isMinDistance = false;
 
-            if (Vector3.Distance(transform.position, _enemyNextTargetFinder.CurrentTarget.gameObject.transform.position) < _minDistanteToTarget)
-            {
-                isMinDistance = true;
-            }
+            //if (Vector3.Distance(transform.position, _enemyNextTargetFinder.CurrentTarget.gameObject.transform.position) < _minDistanteToTarget)
+            //{
+            //    isMinDistance = true;
+            //}
 
             return isMinDistance;
         }
