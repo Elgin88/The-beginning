@@ -23,7 +23,7 @@ namespace Assets.Scripts.PlayerInput
 
         private WorldPointFinder _worldPointFinder;
 
-        private float _doubleTapThreshold = 0.3f;
+        private float _doubleTapThreshold = 0.5f;
         private float _lastTapTime;
 
         private void OnEnable()
