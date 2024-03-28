@@ -12,6 +12,7 @@ namespace Assets.Scripts.Installers
         [SerializeField] private DesktopInput _desktopInput;
         [SerializeField] private PlayerData _playerConfig;
         [SerializeField] private Mark _mark;
+        [SerializeField] private GameObject _container;
 
         public override void InstallBindings()
         {

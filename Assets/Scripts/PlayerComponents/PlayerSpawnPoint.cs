@@ -7,15 +7,11 @@ namespace Assets.Scripts.PlayerComponents
     {
         private Player _player;
 
-        private void Start ()
-        {
-            _player.transform.position = transform.position;
-        }
-
         [Inject]
         private void Construct(Player player)
         {
             _player = player;
+            _player.transform.position = transform.position;
         }
     }
 }

@@ -8,6 +8,7 @@ namespace Assets.Scripts.GameLogic
     {
         private float _radius;
         private LayerMask _layerMask;
+        private Collider[] _hitColliders;
 
         public ClosestTargetFinder(float radius, LayerMask layerMask)
         {
@@ -17,15 +18,15 @@ namespace Assets.Scripts.GameLogic
 
         public bool TryFindTarget(Vector3 currentPosition, out IDamageable target)
         {
-            Collider[] hitColliders = Physics.OverlapSphere(currentPosition, _radius, _layerMask);
+            _hitColliders = Physics.OverlapSphere(currentPosition, _radius, _layerMask);
 
-            if (hitColliders.Length > 0)
+            if (_hitColliders.Length > 0)
             {
-                Array.Sort(hitColliders, (Collider x, Collider y)
+                Array.Sort(_hitColliders, (Collider x, Collider y)
                     => Vector3.Distance(currentPosition, x.transform.position)
                     .CompareTo(Vector3.Distance(currentPosition, y.transform.position)));
 
-                if (hitColliders[0].TryGetComponent<IDamageable>(out IDamageable enemy))
+                if (_hitColliders[0].TryGetComponent<IDamageable>(out IDamageable enemy))
                 {
                     target = enemy;
 
