@@ -11,6 +11,7 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private EnemyRayPoint _enemyRayPoint;
         [SerializeField] private EnemyVision _enemyVision;
         [SerializeField] private StateIdle _stateIdle;
+        [SerializeField] private LayerMask _layerMask;
 
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
         private float _minDistanceToTargetForRangeEnemy = 8f;
@@ -27,29 +28,21 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override IEnumerator CheckTransitionIE()
         {
-            while (true)
+            NextState = null;
+
+            while (CheckIsMinDistanceToPlayerObject() == false)
             {
-                NextState = null;
-
-                if (IsMinDistanceToPlayerObject() || _enemyNextTargetFinder.CurrentTarget == null)
-                {
-                    NextState = _stateIdle;
-                }
-
                 yield return null;
             }
+
+            NextState = _stateIdle;
         }
 
-        internal bool IsMinDistanceToPlayerObject()
+        internal bool CheckIsMinDistanceToPlayerObject()
         {
-            bool isMinDistance = false;
+            Debug.DrawRay(_enemyNextTargetFinder.transform.position, _enemyNextTargetFinder.transform.forward * _minDistanteToTarget, Color.red, 0.1f);
 
-            if (_enemyVision.DistanceToNearestPositionAndTarget < _minDistanteToTarget)
-            {
-                isMinDistance = true;
-            }
-
-            return isMinDistance;
+            return Physics.Raycast(_enemyNextTargetFinder.transform.position, _enemyNextTargetFinder.transform.forward, _minDistanteToTarget, _layerMask);
         }
 
         internal override void StartCheckTransition()
@@ -79,7 +72,6 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 _minDistanteToTarget = _minDistanceToTargetForRangeEnemy;
             }
-
         }
     }
 }

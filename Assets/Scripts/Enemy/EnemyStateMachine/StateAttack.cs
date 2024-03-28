@@ -46,7 +46,6 @@ namespace Assets.Scripts.UnitStateMachine
             _attack = null;
             _transitionAttack.StopCheckTransition();
             _enemyAnimation.StopPlayAttack();
-            _rigidbody.isKinematic = true;
         }
 
         private void Start()
@@ -77,7 +76,7 @@ namespace Assets.Scripts.UnitStateMachine
 
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTargetPosition);
+                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform.position);
                 }
             }
 

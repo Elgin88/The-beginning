@@ -7,24 +7,18 @@ namespace Assets.Scripts.UnitStateMachine
 
     internal class StateIdle : State
     {
+        [SerializeField] private EnemyVision _enemyVision;
         [SerializeField] private EnemyNextTargetFinder _enemyNextTargetFinder;
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private TransitionIdle _transitionIdle;
         [SerializeField] private Rigidbody _rigidboy;
         [SerializeField] private Enemy _enemy;
 
-        private void OnEnable()
-        {
-            if (_enemyNextTargetFinder != null)
-            {
-                _enemy.SetRotationToTarget(_enemyNextTargetFinder.CurrentTargetPosition);
-            }
-        }
-
         internal override void StartState()
         {
             _transitionIdle.StartCheckTransition();
             _enemyAnimation.StartPlayIdle();
+            _enemyVision.StartVision();
             _rigidboy.isKinematic = false;
         }
 
@@ -32,7 +26,6 @@ namespace Assets.Scripts.UnitStateMachine
         {
             _transitionIdle.StopCheckTransition();
             _enemyAnimation.StopPlayIdle();
-            _rigidboy.isKinematic = true;
         }
 
         internal override State TryGetNextState()
