@@ -46,7 +46,6 @@ namespace Assets.Scripts.UnitStateMachine
             _attack = null;
             _transitionAttack.StopCheckTransition();
             _enemyAnimation.StopPlayAttack();
-            _rigidbody.isKinematic = true;
         }
 
         private void Start()
