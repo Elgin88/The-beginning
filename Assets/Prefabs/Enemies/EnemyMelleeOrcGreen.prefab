@@ -2516,6 +2516,7 @@ MonoBehaviour:
   _transitionMove: {fileID: -4093611054570065152}
   _navMeshAgent: {fileID: 529700466918893106}
   _enemyVision: {fileID: 4588992870866705208}
+  _rigidbody: {fileID: 608824489198612735}
 --- !u!114 &5430675260899835263
 MonoBehaviour:
   m_ObjectHideFlags: 0

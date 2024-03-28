@@ -13,6 +13,7 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private TransitionMove _transitionMove;
         [SerializeField] private NavMeshAgent _navMeshAgent;
         [SerializeField] private EnemyVision _enemyVision;
+        [SerializeField] private Rigidbody _rigidbody;
 
         private Coroutine _move;
 
@@ -22,6 +23,7 @@ namespace Assets.Scripts.UnitStateMachine
             _transitionMove.StartCheckTransition();
             _enemyAnimation.StartPlayRun();
             _enemyVision.StartVision();
+            _rigidbody.isKinematic = true;
         }
 
         internal override void StopState()

@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 
 namespace Assets.Scripts.UnitStateMachine
@@ -7,9 +6,9 @@ namespace Assets.Scripts.UnitStateMachine
     {
         [SerializeField] private StateMove _stateMove;
 
-        private Coroutine _startTrySetNextState;
         private State _currentState;
         private State _startState;
+        private State _nextState;
 
         private void Awake()
         {
@@ -20,48 +19,29 @@ namespace Assets.Scripts.UnitStateMachine
         private void Start()
         {
             StartCurrentState();
-            StartTrySetNextState();
         }
 
         private void StartCurrentState()
         {
-            if (_currentState != null)
-            {
-                _currentState.StartState();
-            }
+            _currentState.StartState();
         }
 
         private void StopCurrentState()
         {
             _currentState.StopState();
-            _currentState = null;
         }
 
-
-        private void StartTrySetNextState()
+        private void Update()
         {
-            if (_startTrySetNextState == null)
+            _nextState = _currentState.TryGetNextState();
+
+            if (_nextState != null)
             {
-                _startTrySetNextState = StartCoroutine(TrySetNextState());
-            }
-        }
+                StopCurrentState();
 
-        private IEnumerator TrySetNextState()
-        {
-            while (true)
-            {
-                State nextState = _currentState.TryGetNextState();
+                _currentState = _nextState;
 
-                if (nextState != null)
-                {
-                    StopCurrentState();
-
-                    _currentState = nextState;
-
-                    StartCurrentState();
-                }
-
-                yield return null;
+                StartCurrentState();
             }
         }
     }

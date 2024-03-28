@@ -16,7 +16,6 @@ namespace Assets.Scripts.UnitStateMachine
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
         private float _minDistanceToTargetForRangeEnemy = 8f;
         private float _minDistanteToTarget;
-        private bool _isMinDistance;
 
         protected override Coroutine CheckTransition { get; set; }
 
@@ -29,13 +28,10 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override IEnumerator CheckTransitionIE()
         {
-            _isMinDistance = false;
             NextState = null;
 
-            while (_isMinDistance == false)
+            while (CheckIsMinDistanceToPlayerObject() == false)
             {
-                _isMinDistance = CheckIsMinDistanceToPlayerObject();
-
                 yield return null;
             }
 
@@ -44,14 +40,8 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal bool CheckIsMinDistanceToPlayerObject()
         {
-            bool isMinDistance = false;
 
-            //if (Vector3.Distance(transform.position, _enemyNextTargetFinder.CurrentTarget.gameObject.transform.position) < _minDistanteToTarget)
-            //{
-            //    isMinDistance = true;
-            //}
-
-            return isMinDistance;
+            return Physics.Raycast(_enemyNextTargetFinder.transform.position, _enemyNextTargetFinder.transform.forward, _minDistanteToTarget, _layerMask);
         }
 
         internal override void StartCheckTransition()

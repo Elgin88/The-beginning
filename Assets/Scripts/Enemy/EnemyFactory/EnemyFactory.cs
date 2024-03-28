@@ -1,13 +1,10 @@
-using System.Collections;
 using System.Collections.Generic;
-using Assets.Scripts.BuildingSystem.Buildings;
 using UnityEngine;
 
 namespace Assets.Scripts.EnemyNamespace
 {
     internal class EnemyFactory: MonoBehaviour
     {
-        [SerializeField] private MainBuilding _mainBuilding;
         [SerializeField] private float _delayBetweenWaves;
         [SerializeField] private float _maxRangeOfSpawn;
         [SerializeField] private float _enemyCountInWave;
@@ -16,31 +13,22 @@ namespace Assets.Scripts.EnemyNamespace
         [SerializeField] private EnemySpawnPoint[] _spawnPoints;
 
         private EnemySpawnPoint _currentSpawnPoint;
-        private WaitForSeconds _delayBetweenWavesWFS;
-        private Coroutine _createEnemy;
         private Vector3 _enemyPosition;
         private float _minRangeOfSpawn => _maxRangeOfSpawn - 0.5f;
+        private float _currentDelayBetweenWaves;
 
-        private void Awake()
+        private void Update()
         {
-            _delayBetweenWavesWFS = new WaitForSeconds(_delayBetweenWaves);
-            _createEnemy = StartCoroutine(CreateEnemy());
-        }
+            _currentDelayBetweenWaves += Time.deltaTime;
 
-        private IEnumerator CreateEnemy()
-        {
-            bool isWork = true;
-
-            while (isWork)
+            if (_currentDelayBetweenWaves > _delayBetweenWaves)
             {
                 ChooseSpawnPoint();
                 CalculateEnemyPosition();
                 EnableRandomEnemy();
 
-                yield return _delayBetweenWavesWFS;
+                _currentDelayBetweenWaves = 0;
             }
-
-            StopCoroutine(_createEnemy);
         }
 
         private void ChooseSpawnPoint()
@@ -122,7 +110,5 @@ namespace Assets.Scripts.EnemyNamespace
                 }
             }
         }
-
-
     }
 }
