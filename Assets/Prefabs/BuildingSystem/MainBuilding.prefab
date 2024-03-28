@@ -97,6 +97,7 @@ GameObject:
   - component: {fileID: 2438288472602304133}
   - component: {fileID: 1327219704511746936}
   - component: {fileID: 7855970553960401613}
+  - component: {fileID: 2308016168629507532}
   m_Layer: 3
   m_Name: MainBuilding
   m_TagString: Untagged
@@ -233,8 +234,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba17c1020db7bd646a054359acdce012, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 500
   IndexOfBuilding: 0
+  Strength: 500
+--- !u!95 &2308016168629507532
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4475065055934021614}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &6358333314762270872
 GameObject:
   m_ObjectHideFlags: 0

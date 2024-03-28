@@ -126,6 +126,7 @@ GameObject:
   - component: {fileID: 3170479111709309622}
   - component: {fileID: 4708322271614425958}
   - component: {fileID: -5791194583978422223}
+  - component: {fileID: 2482931808722549246}
   m_Layer: 3
   m_Name: Tower
   m_TagString: Untagged
@@ -141,7 +142,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 757757806888675700}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5, y: -0.5, z: -0.5, w: 0.5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.15, y: 0.3, z: 0.15}
   m_ConstrainProportionsScale: 0
@@ -152,7 +153,7 @@ Transform:
   - {fileID: 2522557848243954804}
   - {fileID: 1521374842954376477}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 180, y: 90, z: 90}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!64 &3170479111709309622
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -214,8 +215,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b94da915bbf7c2346999191feca3c203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Strength: 70
   IndexOfBuilding: 1
+  Strength: 70
+--- !u!95 &2482931808722549246
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 757757806888675700}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4271530245574187072
 GameObject:
   m_ObjectHideFlags: 0

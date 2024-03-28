@@ -29,7 +29,7 @@ TagManager:
   - PlayerCollisionOnly
   - Tower
   - Ground
-  - 
+  - Unwalkable
   - 
   - 
   - 

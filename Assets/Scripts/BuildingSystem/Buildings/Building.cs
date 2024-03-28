@@ -6,6 +6,7 @@ using Assets.Scripts.PlayerComponents;
 namespace Assets.Scripts.BuildingSystem
 {
     [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(Animator))]
 
     internal abstract class Building : MonoBehaviour, IDamageable
     {
