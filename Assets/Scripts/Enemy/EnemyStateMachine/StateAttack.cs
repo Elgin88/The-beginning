@@ -77,7 +77,7 @@ namespace Assets.Scripts.UnitStateMachine
 
                 if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTargetPosition);
+                    _enemyRange.EnableArrow(_enemyNextTargetFinder.CurrentTarget.transform.position);
                 }
             }
 

@@ -11,10 +11,12 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private EnemyRayPoint _enemyRayPoint;
         [SerializeField] private EnemyVision _enemyVision;
         [SerializeField] private StateIdle _stateIdle;
+        [SerializeField] private LayerMask _layerMask;
 
         private float _minDistanceToTargetForMelleeEnemy = 1.5f;
         private float _minDistanceToTargetForRangeEnemy = 8f;
         private float _minDistanteToTarget;
+        private bool _isMinDistance;
 
         protected override Coroutine CheckTransition { get; set; }
 
@@ -27,27 +29,27 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal override IEnumerator CheckTransitionIE()
         {
-            while (true)
-            {
-                NextState = null;
+            _isMinDistance = false;
+            NextState = null;
 
-                if (IsMinDistanceToPlayerObject() || _enemyNextTargetFinder.CurrentTarget == null)
-                {
-                    NextState = _stateIdle;
-                }
+            while (_isMinDistance == false)
+            {
+                _isMinDistance = CheckIsMinDistanceToPlayerObject();
 
                 yield return null;
             }
+
+            NextState = _stateIdle;
         }
 
-        internal bool IsMinDistanceToPlayerObject()
+        internal bool CheckIsMinDistanceToPlayerObject()
         {
             bool isMinDistance = false;
 
-            if (_enemyVision.DistanceToNearestPositionAndTarget < _minDistanteToTarget)
-            {
-                isMinDistance = true;
-            }
+            //if (Vector3.Distance(transform.position, _enemyNextTargetFinder.CurrentTarget.gameObject.transform.position) < _minDistanteToTarget)
+            //{
+            //    isMinDistance = true;
+            //}
 
             return isMinDistance;
         }
@@ -79,7 +81,6 @@ namespace Assets.Scripts.UnitStateMachine
             {
                 _minDistanteToTarget = _minDistanceToTargetForRangeEnemy;
             }
-
         }
     }
 }
