@@ -16,7 +16,10 @@ namespace Assets.Scripts.EnemyNamespace
 
         private void Awake()
         {
-            _currentTarget = _mainBuilding.gameObject;
+            if (_mainBuilding != null)
+            {
+                _currentTarget = _mainBuilding.gameObject;
+            }
         }
 
         private void Update()

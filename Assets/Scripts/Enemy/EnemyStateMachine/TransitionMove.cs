@@ -40,6 +40,7 @@ namespace Assets.Scripts.UnitStateMachine
 
         internal bool CheckIsMinDistanceToPlayerObject()
         {
+            Debug.DrawRay(_enemyNextTargetFinder.transform.position, _enemyNextTargetFinder.transform.forward * _minDistanteToTarget, Color.red, 0.1f);
 
             return Physics.Raycast(_enemyNextTargetFinder.transform.position, _enemyNextTargetFinder.transform.forward, _minDistanteToTarget, _layerMask);
         }

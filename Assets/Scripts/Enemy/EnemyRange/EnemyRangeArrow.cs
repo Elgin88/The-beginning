@@ -35,13 +35,14 @@ namespace Assets.Scripts.EnemyNamespace
         private IEnumerator Fly(GameObject target)
         {
             Vector3 startPosition = transform.position;
+            Vector3 targetPosition = target.transform.position;
 
-            while (transform.position != target.transform.position)
+            while (transform.position != targetPosition)
             {
-                CalculateDistane(startPosition, target.transform.position);
-                SetMiddleTrajectoryPosition(startPosition, target.transform.position, out Vector3 middlePosition);
-                CheckIsMoveUp(startPosition, target.transform.position);
-                CalculateTargetPosition(middlePosition, target.transform.position, out Vector3 currentTargetPosition);
+                CalculateDistane(startPosition, targetPosition);
+                SetMiddleTrajectoryPosition(startPosition, targetPosition, out Vector3 middlePosition);
+                CheckIsMoveUp(startPosition, targetPosition);
+                CalculateTargetPosition(middlePosition, targetPosition, out Vector3 currentTargetPosition);
                 SetArrowPosition(currentTargetPosition);
                 SetArrowRotation(currentTargetPosition);
 
