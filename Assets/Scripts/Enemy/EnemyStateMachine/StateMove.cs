@@ -12,6 +12,8 @@ namespace Assets.Scripts.UnitStateMachine
         [SerializeField] private EnemyAnimation _enemyAnimation;
         [SerializeField] private TransitionMove _transitionMove;
         [SerializeField] private NavMeshAgent _navMeshAgent;
+        [SerializeField] private EnemyVision _enemyVision;
+        [SerializeField] private Rigidbody _rigidbody;
 
         private Coroutine _move;
 
@@ -20,6 +22,8 @@ namespace Assets.Scripts.UnitStateMachine
             _move = StartCoroutine(Move());
             _transitionMove.StartCheckTransition();
             _enemyAnimation.StartPlayRun();
+            _enemyVision.StartVision();
+            _rigidbody.isKinematic = true;
         }
 
         internal override void StopState()
@@ -52,9 +56,9 @@ namespace Assets.Scripts.UnitStateMachine
         {
             while (true)
             {
-                if (_enemyNextTargetFinder != null)
+                if (_enemyNextTargetFinder.CurrentTarget != null)
                 {
-                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTargetPosition);
+                    _navMeshAgent.SetDestination(_enemyNextTargetFinder.CurrentTarget.transform.position);
                 }
 
                 yield return null;

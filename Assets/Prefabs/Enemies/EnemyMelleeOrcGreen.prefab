@@ -2515,6 +2515,8 @@ MonoBehaviour:
   _enemyAnimation: {fileID: 5430675260899835263}
   _transitionMove: {fileID: -4093611054570065152}
   _navMeshAgent: {fileID: 529700466918893106}
+  _enemyVision: {fileID: 4588992870866705208}
+  _rigidbody: {fileID: 608824489198612735}
 --- !u!114 &5430675260899835263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2541,15 +2543,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af40434959ab4e47ae97907e2ce8468, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _enemyNextTargetFinder: {fileID: 8314578972581342070}
-  _enemyRayPoint: {fileID: 3760915708570732159}
   _layersForEnemyVision:
     serializedVersion: 2
     m_Bits: 2056
-  _maxAngle: 180
   _range: 20
-  _rayCount: 21
-  _rayCountInFrame: 10
+  _delayVision: 0.3
 --- !u!114 &8314578972581342070
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2594,6 +2592,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca9d20ba3d6da49d88f6b9c4ff433b71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _enemyVision: {fileID: 4588992870866705208}
   _enemyNextTargetFinder: {fileID: 8314578972581342070}
   _enemyAnimation: {fileID: 5430675260899835263}
   _transitionIdle: {fileID: 8576810530071468875}
@@ -2615,6 +2614,9 @@ MonoBehaviour:
   _enemyRayPoint: {fileID: 3760915708570732159}
   _enemyVision: {fileID: 4588992870866705208}
   _stateIdle: {fileID: 7679217566705177323}
+  _layerMask:
+    serializedVersion: 2
+    m_Bits: 2056
 --- !u!114 &8576810530071468875
 MonoBehaviour:
   m_ObjectHideFlags: 0

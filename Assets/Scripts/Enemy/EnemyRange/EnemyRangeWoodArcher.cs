@@ -19,13 +19,8 @@ internal class EnemyRangeWoodArcher : EnemyRange
         {
             _currentArrow.gameObject.SetActive(true);
             _currentArrow.transform.position = _spawnPoint.transform.position;
-            _currentArrow.StartFly(_enemyNextTargetFinder.CurrentTargetPosition, _enemyNextTargetFinder.CurrentTarget);
+            _currentArrow.StartFly(_enemyNextTargetFinder.CurrentTarget);
         }
-    }
-
-    internal override void InitMainBuilding(MainBuilding mainBuilding)
-    {
-        _enemyNextTargetFinder.InitMainBuilding(mainBuilding);
     }
 
     internal void SetEnemyRangeArrow()

@@ -45,8 +45,6 @@ namespace Assets.Scripts.EnemyNamespace
 
         internal abstract void SetRotationToTarget(Vector3 targetPosition);
 
-        internal abstract void InitMainBuilding(MainBuilding mainBuilding);
-
         private void Awake()
         {
             _currentSpeed = NavMeshAgent.speed;
